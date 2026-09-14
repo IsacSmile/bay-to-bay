@@ -27,7 +27,7 @@ export const RouteCard: React.FC<RouteCardProps> = ({ data }) => {
       </div>
 
       {/* 01-07 Vertical Timeline Stepper */}
-      <div className="relative pl-1 mb-4 lg:mb-5 xl:mb-6 space-y-2.5 sm:space-y-3 xl:space-y-3.5">
+      <div className="relative pl-1 mb-4 lg:mb-5 xl:mb-6 space-y-3.5 sm:space-y-4 xl:space-y-4.5">
         {data.stops.map((stop, index) => {
           const isFirst = stop.isStart || index === 0;
           const isLast = stop.isEnd || index === data.stops.length - 1;
@@ -37,7 +37,7 @@ export const RouteCard: React.FC<RouteCardProps> = ({ data }) => {
               {/* Vertical Connecting Line */}
               {index < data.stops.length - 1 && (
                 <div
-                  className="absolute left-[13px] top-[24px] bottom-[-14px] w-[2px] bg-sky-200 group-hover:bg-brand-blue transition-colors"
+                  className="absolute left-[13px] top-[24px] bottom-[-18px] sm:bottom-[-20px] w-[2px] bg-sky-200 group-hover:bg-brand-blue transition-colors"
                   aria-hidden="true"
                 />
               )}

@@ -21,7 +21,7 @@ export const AnnouncementBar: React.FC<AnnouncementBarProps> = ({
         ];
 
   return (
-    <div className="relative bg-[#07203b] py-2 sm:py-2.5 px-3 sm:px-4 text-center select-none overflow-hidden z-40 text-white border-b border-[#0D2942]/20">
+    <div className="relative bg-[#07203b] py-2 sm:py-2.5 px-3 sm:px-4 text-center select-none overflow-hidden z-40 text-white">
       {/* Desktop Centered Single Line (Dynamically rendered with unified separators) */}
       <div className="hidden sm:flex max-w-[1350px] mx-auto items-center justify-center gap-3 whitespace-nowrap text-xs">
         {displayItems.map((item, idx) => (

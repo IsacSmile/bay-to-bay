@@ -6,6 +6,7 @@
   html {
     scroll-behavior: smooth;
     font-family: var(--font-plus-jakarta), "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+    touch-action: manipulation;
   }
 
   body {
@@ -14,6 +15,7 @@
     font-family: var(--font-plus-jakarta), "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    touch-action: manipulation;
   }
 
   h1, h2, h3, h4, h5, h6 {

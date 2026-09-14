@@ -1,9 +1,7 @@
 import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
-import { FeatureGrid } from "@/components/sections/FeatureGrid";
-import { RouteCoverage } from "@/components/sections/RouteCoverage";
-import { TargetServices } from "@/components/sections/TargetServices";
+import { ServiceHighlights } from "@/components/sections/ServiceHighlights";
 import { QuoteCTA } from "@/components/sections/QuoteCTA";
 import { Footer } from "@/components/Footer";
 import { getAnnouncementData, getContactData } from "@/lib/prisma";
@@ -29,14 +27,8 @@ export default async function HomePage() {
         <Hero />
       </div>
 
-      {/* Feature Grid: Delivery Built Around Northern Ontario */}
-      <FeatureGrid />
-
-      {/* Route Coverage: Highway 11 Corridor Diagram */}
-      <RouteCoverage />
-
-      {/* Target Audiences: Businesses Served */}
-      <TargetServices />
+      {/* Service Highlights Bar */}
+      <ServiceHighlights />
 
       {/* Quote Call-to-Action */}
       <QuoteCTA phone={contact.phone} />
