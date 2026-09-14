@@ -1,0 +1,52 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-plus-jakarta), "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  }
+
+  body {
+    background-color: #F6F9FC;
+    color: #12263A;
+    font-family: var(--font-plus-jakarta), "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-space-grotesk), "Space Grotesk", var(--font-plus-jakarta), "Plus Jakarta Sans", sans-serif;
+  }
+}
+
+/* Custom scrollbar utility */
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* Subtle vehicle headlight breathing animation */
+@keyframes headlightGlow {
+  0%, 100% {
+    opacity: 0.25;
+    transform: translateY(-50%) scale(0.98);
+  }
+  35% {
+    opacity: 0.40;
+    transform: translateY(-50%) scale(1.03);
+  }
+  65% {
+    opacity: 0.30;
+    transform: translateY(-50%) scale(1.01);
+  }
+  85% {
+    opacity: 0.45;
+    transform: translateY(-50%) scale(1.04);
+  }
+}
+

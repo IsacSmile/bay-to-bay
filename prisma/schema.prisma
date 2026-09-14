@@ -1,0 +1,64 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model SiteSettings {
+  id                String   @id @default("default")
+  siteName          String   @default("Bay to Bay Express Inc.")
+  announcementItems String[] @default(["NORTHERN ONTARIO ROUTES", "NORTH BAY TO HEARST", "TWICE-WEEKLY SERVICE OPTIONS"])
+  updatedAt         DateTime @updatedAt
+}
+
+model ContactDetails {
+  id        String   @id @default("default")
+  phone     String   @default("705-978-3001")
+  email     String?  @default("info@baytobayexpress.ca")
+  updatedAt DateTime @updatedAt
+}
+
+model HeroContent {
+  id                 String   @id @default("default")
+  eyebrowLabel       String   @default("NORTHERN ONTARIO COURIER SERVICE")
+  pillBadge          String   @default("HIGHWAY 11 CORRIDOR")
+  headingLine1       String   @default("Reliable.")
+  headingLine2       String   @default("Dedicated.")
+  headingLine3Accent String   @default("Delivered.")
+  subtext            String   @default("Small goods delivery across Northern Ontario.")
+  description        String   @default("Dedicated and scheduled delivery solutions connecting North Bay, Kirkland Lake, Timmins, Cochrane, Kapuskasing, Hearst, and Longlac.")
+  disclaimer         String?  @default("*Timing subject to route and location conditions.")
+  featurePills       Json     @default("[{\"icon\":\"clock\",\"label\":\"12-hour options*\"},{\"icon\":\"truck\",\"label\":\"Twice-weekly routes\"},{\"icon\":\"package\",\"label\":\"Small goods specialists\"}]")
+  updatedAt          DateTime @updatedAt
+}
+
+model HeroRoute {
+  id         String          @id @default("default")
+  label      String          @default("SPECIAL ROUTE")
+  title      String          @default("North Bay → Hearst")
+  duration   String          @default("12h")
+  footerLead String          @default("Scheduled with reliability.")
+  footerDesc String          @default("Ask about your route, recurring pickup, or dedicated run.")
+  stops      HeroRouteStop[]
+  updatedAt  DateTime        @updatedAt
+}
+
+model HeroRouteStop {
+  id         String    @id @default(uuid())
+  routeId    String
+  route      HeroRoute @relation(fields: [routeId], references: [id], onDelete: Cascade)
+  stopNumber String
+  name       String
+  isStart    Boolean   @default(false)
+  isEnd      Boolean   @default(false)
+  order      Int       @default(0)
+}
+
+model ThemeSettings {
+  id              String   @id @default("default")
+  snowfallEnabled Boolean  @default(true)
+  updatedAt       DateTime @updatedAt
+}
