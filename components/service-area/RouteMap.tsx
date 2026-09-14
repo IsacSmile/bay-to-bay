@@ -76,33 +76,38 @@ export const RouteMap: React.FC<RouteMapProps> = ({
       // Step 1: Draw route path on scroll into view
       gsap.to(path, {
         strokeDashoffset: 0,
-        duration: 2.2,
+        duration: 2.0,
         ease: "power2.out",
         scrollTrigger: {
           trigger: container,
-          start: "top 75%",
+          start: "top 90%",
           once: true,
         },
-        onComplete: () => {
-          // Step 2: Animated Delivery Van loop along the exact single path
-          const vanTl = gsap.timeline({ repeat: -1 });
+      });
 
-          vanTl
-            .set(van, { opacity: 0 })
-            .to(van, { opacity: 1, duration: 0.4 })
-            .to(van, {
-              motionPath: {
-                path: path,
-                align: path,
-                autoRotate: true,
-                alignOrigin: [0.5, 0.5],
-              },
-              duration: 11,
-              ease: "sine.inOut",
-            })
-            .to(van, { opacity: 0, duration: 0.4 });
+      // Step 2: Animated Delivery Van loop starts concurrently on scroll
+      const vanTl = gsap.timeline({
+        repeat: -1,
+        scrollTrigger: {
+          trigger: container,
+          start: "top 90%",
+          once: true,
         },
       });
+
+      vanTl
+        .set(van, { opacity: 1 })
+        .to(van, {
+          motionPath: {
+            path: path,
+            align: path,
+            autoRotate: true,
+            alignOrigin: [0.5, 0.5],
+          },
+          duration: 11,
+          ease: "sine.inOut",
+        })
+        .to(van, { opacity: 0, duration: 0.4 });
     }, container);
 
     return () => ctx.revert();
@@ -127,13 +132,13 @@ export const RouteMap: React.FC<RouteMapProps> = ({
       <div className="absolute inset-0 bg-gradient-to-t from-[#04101D]/60 via-transparent to-[#04101D]/30 pointer-events-none z-10" />
 
       {/* Top-Left Badge */}
-      <div className="absolute top-3.5 left-3.5 sm:top-5 sm:left-5 z-20 inline-flex items-center gap-2 bg-[#071A2E]/85 backdrop-blur-md border border-white/20 px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-semibold text-white shadow-lg">
-        <span className="w-2 h-2 rounded-full bg-brand-orange animate-pulse shadow-xs shadow-brand-orange shrink-0" />
+      <div className="absolute top-3 left-3 sm:top-5 sm:left-5 z-20 inline-flex items-center gap-1.5 sm:gap-2 bg-[#071A2E]/85 backdrop-blur-md border border-white/20 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-semibold text-white shadow-lg">
+        <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-brand-orange animate-pulse shadow-xs shadow-brand-orange shrink-0" />
         <span>{badgeText}</span>
       </div>
 
-      {/* Bottom-Left Route Range Pill */}
-      <div className="absolute bottom-3.5 left-3.5 sm:bottom-5 sm:left-5 z-20 inline-flex items-center gap-2 bg-white/95 backdrop-blur-md border border-white px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-extrabold text-[#071A2E] shadow-xl">
+      {/* Bottom-Right Route Range Pill */}
+      <div className="absolute bottom-3 right-3 sm:bottom-5 sm:right-5 z-20 inline-flex items-center gap-1.5 sm:gap-2 bg-white/95 backdrop-blur-md border border-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-sm font-extrabold text-[#071A2E] shadow-xl">
         <span>{firstStop?.name || "North Bay"}</span>
         <span className="text-brand-blue font-black mx-0.5">→</span>
         <span>{lastStop?.name || "Longlac"}</span>
@@ -228,10 +233,13 @@ export const RouteMap: React.FC<RouteMapProps> = ({
           // Even stops (North Bay, Kirkland Lake, Cochrane, Hearst) render label to the RIGHT (flex-row).
           const isLeftLabel = idx === 2 || idx === 4 || idx === 6;
 
+          // For Stop 01 (North Bay), hide text on mobile (sm:) to prevent overlap with the bottom route pill badge
+          const isNorthBay = idx === 0;
+
           return (
             <div
               key={stop.id}
-              className={`absolute -translate-x-1/2 -translate-y-1/2 flex items-center gap-1.5 sm:gap-2 group/pin ${
+              className={`absolute -translate-x-1/2 -translate-y-1/2 flex items-center gap-1 sm:gap-2 group/pin ${
                 isLeftLabel ? "flex-row-reverse" : "flex-row"
               }`}
               style={{ left: `${x}%`, top: `${y}%` }}
@@ -243,7 +251,7 @@ export const RouteMap: React.FC<RouteMapProps> = ({
 
               {/* Stop Name Label */}
               <span
-                className={`text-[9px] sm:text-[11px] md:text-xs font-extrabold tracking-tight text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.95)] whitespace-nowrap bg-[#071A2E]/60 backdrop-blur-xs px-1.5 py-0.5 rounded-md border border-white/10 ${
+                className={`text-[9px] sm:text-[11px] md:text-xs font-extrabold tracking-tight text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.95)] whitespace-nowrap bg-[#071A2E]/70 backdrop-blur-xs px-1.5 py-0.5 rounded-md border border-white/10 ${
                   isLeftLabel ? "mr-0.5 sm:mr-1" : "ml-0.5 sm:ml-1"
                 }`}
               >
