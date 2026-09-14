@@ -22,7 +22,7 @@ export async function Hero() {
   const phoneTelLink = `tel:${contactData.phone.replace(/[^\d+]/g, "")}`;
 
   return (
-    <section className="relative w-full min-h-[calc(100dvh-34px)] sm:min-h-[700px] lg:min-h-[calc(100vh-34px)] lg:h-auto xl:min-h-[740px] bg-[#04101D] text-white flex items-center lg:items-end overflow-hidden pt-20 sm:pt-24 lg:pt-28 xl:pt-32 pb-10 sm:pb-12 lg:pb-0">
+    <section className="relative w-full min-h-[calc(100dvh-34px)] sm:min-h-[700px] lg:min-h-[calc(100vh-34px)] lg:h-auto xl:min-h-[740px] bg-[#04101D] text-white flex items-start lg:items-end overflow-hidden pt-[116px] sm:pt-32 lg:pt-32 xl:pt-36 pb-12 sm:pb-14 lg:pb-0">
       {/* 1. Base Background Image & Stacked Color Overlays */}
       <div className="absolute inset-0 z-0 select-none pointer-events-none overflow-hidden">
         
