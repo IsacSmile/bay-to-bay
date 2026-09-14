@@ -145,19 +145,19 @@ export const DEFAULT_SERVICE_AREA: ServiceAreaData = {
 
 export const DEFAULT_ROUTE: RouteCardData = {
   label: "SPECIAL ROUTE",
-  title: "North Bay → Hearst",
+  title: "North Bay → Longlac",
   duration: "12h",
   footerLead: "Scheduled with reliability.",
   footerDesc:
     "Ask about your route, recurring pickup, or dedicated run.",
   stops: [
-    { id: "1", stopNumber: "01", name: "North Bay", isStart: true, isEnd: false, order: 1, xPercent: 51.5, yPercent: 75.5 },
-    { id: "2", stopNumber: "02", name: "Kirkland Lake", isStart: false, isEnd: false, order: 2, xPercent: 58.0, yPercent: 62.5 },
-    { id: "3", stopNumber: "03", name: "Timmins", isStart: false, isEnd: false, order: 3, xPercent: 64.0, yPercent: 51.0 },
-    { id: "4", stopNumber: "04", name: "Cochrane", isStart: false, isEnd: false, order: 4, xPercent: 70.8, yPercent: 41.5 },
-    { id: "5", stopNumber: "05", name: "Kapuskasing", isStart: false, isEnd: false, order: 5, xPercent: 77.0, yPercent: 32.5 },
-    { id: "6", stopNumber: "06", name: "Hearst", isStart: false, isEnd: false, order: 6, xPercent: 84.8, yPercent: 21.5 },
-    { id: "7", stopNumber: "07", name: "Longlac", isStart: false, isEnd: true, order: 7, xPercent: 89.5, yPercent: 50.5 },
+    { id: "1", stopNumber: "01", name: "North Bay", isStart: true, isEnd: false, order: 1, xPercent: 24, yPercent: 88 },
+    { id: "2", stopNumber: "02", name: "Kirkland Lake", isStart: false, isEnd: false, order: 2, xPercent: 35, yPercent: 78 },
+    { id: "3", stopNumber: "03", name: "Timmins", isStart: false, isEnd: false, order: 3, xPercent: 46, yPercent: 68 },
+    { id: "4", stopNumber: "04", name: "Cochrane", isStart: false, isEnd: false, order: 4, xPercent: 55, yPercent: 58 },
+    { id: "5", stopNumber: "05", name: "Kapuskasing", isStart: false, isEnd: false, order: 5, xPercent: 65, yPercent: 46 },
+    { id: "6", stopNumber: "06", name: "Hearst", isStart: false, isEnd: false, order: 6, xPercent: 74, yPercent: 35 },
+    { id: "7", stopNumber: "07", name: "Longlac", isStart: false, isEnd: true, order: 7, xPercent: 85, yPercent: 26 },
   ],
 };
 

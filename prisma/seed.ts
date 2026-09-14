@@ -104,13 +104,13 @@ async function main() {
   });
 
   const stops = [
-    { stopNumber: "01", name: "North Bay", isStart: true, isEnd: false, order: 1, xPercent: 51.5, yPercent: 75.5 },
-    { stopNumber: "02", name: "Kirkland Lake", isStart: false, isEnd: false, order: 2, xPercent: 58.0, yPercent: 62.5 },
-    { stopNumber: "03", name: "Timmins", isStart: false, isEnd: false, order: 3, xPercent: 64.0, yPercent: 51.0 },
-    { stopNumber: "04", name: "Cochrane", isStart: false, isEnd: false, order: 4, xPercent: 70.8, yPercent: 41.5 },
-    { stopNumber: "05", name: "Kapuskasing", isStart: false, isEnd: false, order: 5, xPercent: 77.0, yPercent: 32.5 },
-    { stopNumber: "06", name: "Hearst", isStart: false, isEnd: false, order: 6, xPercent: 84.8, yPercent: 21.5 },
-    { stopNumber: "07", name: "Longlac", isStart: false, isEnd: true, order: 7, xPercent: 89.5, yPercent: 50.5 },
+    { stopNumber: "01", name: "North Bay", isStart: true, isEnd: false, order: 1, xPercent: 24, yPercent: 88 },
+    { stopNumber: "02", name: "Kirkland Lake", isStart: false, isEnd: false, order: 2, xPercent: 35, yPercent: 78 },
+    { stopNumber: "03", name: "Timmins", isStart: false, isEnd: false, order: 3, xPercent: 46, yPercent: 68 },
+    { stopNumber: "04", name: "Cochrane", isStart: false, isEnd: false, order: 4, xPercent: 55, yPercent: 58 },
+    { stopNumber: "05", name: "Kapuskasing", isStart: false, isEnd: false, order: 5, xPercent: 65, yPercent: 46 },
+    { stopNumber: "06", name: "Hearst", isStart: false, isEnd: false, order: 6, xPercent: 74, yPercent: 35 },
+    { stopNumber: "07", name: "Longlac", isStart: false, isEnd: true, order: 7, xPercent: 85, yPercent: 26 },
   ];
 
   for (const stop of stops) {

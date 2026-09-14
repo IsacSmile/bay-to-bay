@@ -24,7 +24,7 @@ export async function ServiceArea() {
             </div>
 
             {/* H2 Headline: Two-Tone Styling */}
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-4xl xl:text-[42px] font-black text-[#071A2E] tracking-tight leading-[1.15]">
+            <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl xl:text-[54px] 2xl:text-[60px] font-black text-[#071A2E] tracking-tight leading-[1.08]">
               {serviceAreaContent.headingPrimary}{" "}
               <span className="text-[#25A8E8] block lg:inline">
                 {serviceAreaContent.headingAccent}
