@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { Phone, Mail, MapPin, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/Button";
 
 interface FooterProps {
   phone?: string;
@@ -115,13 +116,15 @@ export const Footer: React.FC<FooterProps> = ({
             <p className="text-xs text-slate-300 leading-relaxed mb-4">
               Twice-weekly scheduled express delivery corridor operating across Highway 11 in Northern Ontario.
             </p>
-            <a
+            <Button
+              variant="ghost"
+              size="sm"
               href="#quote"
-              className="inline-flex items-center gap-2 text-xs font-bold text-brand-bright hover:underline"
+              rightIcon={<ArrowRight className="w-3.5 h-3.5" />}
+              className="text-brand-bright hover:text-white text-xs font-bold"
             >
-              <span>Book a run</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </a>
+              Book a run
+            </Button>
           </div>
 
         </div>

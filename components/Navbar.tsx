@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { Phone, ArrowUpRight, Menu, X } from "lucide-react";
+import { Button } from "@/components/ui/Button";
 
 interface NavbarProps {
   phone?: string;
@@ -28,7 +29,7 @@ export const Navbar: React.FC<NavbarProps> = ({ phone = "705-978-3001" }) => {
   const telLink = `tel:${phone.replace(/[^\d+]/g, "")}`;
 
   return (
-    <header className="w-full sticky top-2.5 sm:top-3.5 z-50 px-3 sm:px-6 lg:px-8 pt-2.5 sm:pt-3.5 h-[68px] sm:h-[72px]">
+    <header className="w-full px-3 sm:px-6 lg:px-8 pt-2.5 sm:pt-3.5">
       <div className="max-w-[1350px] mx-auto bg-white border border-slate-200/90 shadow-[0_8px_30px_rgba(7,26,46,0.1)] relative z-50 transition-all duration-300 rounded-[28px]">
         <div className="px-5 sm:px-8 h-[58px] flex items-center justify-between">
           {/* Brand Logo */}
@@ -77,19 +78,23 @@ export const Navbar: React.FC<NavbarProps> = ({ phone = "705-978-3001" }) => {
               <span>{phone}</span>
             </a>
 
-            <a
+            <Button
+              variant="primary"
+              size="sm"
               href="#quote"
-              className="hidden sm:inline-flex items-center justify-center gap-2 bg-brand-blue hover:bg-brand-blue-hover text-white text-xs font-extrabold px-5 py-2.5 rounded-full shadow-md transition-all duration-200 hover:shadow-lg uppercase tracking-wider"
+              rightIcon={<ArrowUpRight className="w-3.5 h-3.5" />}
+              className="hidden sm:inline-flex text-xs font-extrabold px-5 py-2.5"
             >
-              <span>Request a quote</span>
-              <ArrowUpRight className="w-3.5 h-3.5" />
-            </a>
+              Request a quote
+            </Button>
 
             {/* Compact Mobile Menu Toggle Button */}
-            <button
+            <Button
               type="button"
+              variant="ghost"
+              size="sm"
               onClick={toggleMenu}
-              className="md:hidden text-[#071A2E] p-2 hover:bg-slate-100 rounded-full transition-colors"
+              className="md:hidden text-[#071A2E] hover:text-[#071A2E] p-2 hover:bg-slate-100 rounded-full transition-colors min-h-0 border-0"
               aria-label="Toggle navigation menu"
               aria-expanded={isMenuOpen}
             >
@@ -98,7 +103,7 @@ export const Navbar: React.FC<NavbarProps> = ({ phone = "705-978-3001" }) => {
               ) : (
                 <Menu className="w-5 h-5 text-[#071A2E]" />
               )}
-            </button>
+            </Button>
           </div>
         </div>
 
@@ -150,14 +155,17 @@ export const Navbar: React.FC<NavbarProps> = ({ phone = "705-978-3001" }) => {
                 <span>{phone}</span>
               </a>
 
-              <a
+              <Button
+                variant="primary"
+                size="md"
                 href="#quote"
+                fullWidth
+                rightIcon={<ArrowUpRight className="w-4 h-4" />}
                 onClick={closeMenu}
-                className="inline-flex items-center justify-center gap-2 bg-brand-blue hover:bg-brand-blue-hover text-white text-sm font-extrabold w-full py-3.5 rounded-full shadow-md text-center uppercase tracking-wider"
+                className="w-full py-3.5"
               >
-                <span>Request a quote</span>
-                <ArrowUpRight className="w-4 h-4" />
-              </a>
+                Request a quote
+              </Button>
             </div>
           </div>
         </div>

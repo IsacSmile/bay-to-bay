@@ -1,5 +1,6 @@
 import React from "react";
 import { ArrowRight, Phone } from "lucide-react";
+import { Button } from "@/components/ui/Button";
 
 interface QuoteCTAProps {
   phone?: string;
@@ -22,7 +23,7 @@ export const QuoteCTA: React.FC<QuoteCTAProps> = ({ phone = "705-978-3001" }) =>
             <span className="text-xs font-extrabold tracking-widest text-brand-bright uppercase block mb-3">
               Get Started Today
             </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight font-display">
               Need a reliable delivery partner in Northern Ontario?
             </h2>
             <p className="text-base sm:text-lg text-slate-300 mt-4 leading-relaxed max-w-2xl">
@@ -31,21 +32,25 @@ export const QuoteCTA: React.FC<QuoteCTAProps> = ({ phone = "705-978-3001" }) =>
 
             {/* CTAs */}
             <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-              <a
-                href={`mailto:info@baytobayexpress.ca?subject=Quote%20Request%20-%20Bay%20to%20Bay`}
-                className="inline-flex items-center justify-center gap-2 bg-brand-blue hover:bg-brand-blue-hover text-white text-base font-bold px-8 py-4 rounded-btn shadow-lg transition-all duration-200 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-brand-bright"
+              <Button
+                variant="primary"
+                size="md"
+                href="mailto:info@baytobayexpress.ca?subject=Quote%20Request%20-%20Bay%20to%20Bay"
+                rightIcon={<ArrowRight className="w-5 h-5" />}
+                className="px-8 py-4"
               >
-                <span>Request a quote</span>
-                <ArrowRight className="w-5 h-5" />
-              </a>
+                Request a quote
+              </Button>
 
-              <a
+              <Button
+                variant="secondary"
+                size="md"
                 href={telLink}
-                className="inline-flex items-center justify-center gap-2.5 bg-white/10 hover:bg-white/15 border border-white/20 text-white text-base font-bold px-8 py-4 rounded-btn transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/40"
+                leftIcon={<Phone className="w-5 h-5 text-brand-bright" />}
+                className="px-8 py-4"
               >
-                <Phone className="w-5 h-5 text-brand-bright" />
-                <span>Call Bay to Bay ({phone})</span>
-              </a>
+                Call Bay to Bay ({phone})
+              </Button>
             </div>
           </div>
 

@@ -8,9 +8,9 @@ interface RouteCardProps {
 
 export const RouteCard: React.FC<RouteCardProps> = ({ data }) => {
   return (
-    <div className="bg-white rounded-[24px] shadow-floating border border-slate-200/80 p-5 sm:p-6 text-slate-800 transition-all duration-200 w-full max-w-[382px] lg:max-w-[445px] mx-auto lg:ml-auto lg:mr-0">
+    <div className="bg-white rounded-[24px] shadow-floating border border-slate-200/80 p-5 sm:p-5 lg:p-5 xl:p-6 text-slate-800 transition-all duration-200 w-full max-w-[382px] lg:max-w-[390px] xl:max-w-[445px] mx-auto lg:ml-auto lg:mr-0">
       {/* Top Header Badge Row */}
-      <div className="flex items-start justify-between gap-3 mb-5 pb-4 border-b border-slate-100">
+      <div className="flex items-start justify-between gap-3 mb-4 lg:mb-5 pb-3.5 lg:pb-4 border-b border-slate-100">
         <div>
           <span className="text-[11px] font-extrabold tracking-widest text-brand-blue uppercase block mb-1">
             {data.label || "SPECIAL ROUTE"}
@@ -27,7 +27,7 @@ export const RouteCard: React.FC<RouteCardProps> = ({ data }) => {
       </div>
 
       {/* 01-07 Vertical Timeline Stepper */}
-      <div className="relative pl-1 mb-6 space-y-3.5">
+      <div className="relative pl-1 mb-4 lg:mb-5 xl:mb-6 space-y-2.5 sm:space-y-3 xl:space-y-3.5">
         {data.stops.map((stop, index) => {
           const isFirst = stop.isStart || index === 0;
           const isLast = stop.isEnd || index === data.stops.length - 1;
@@ -84,7 +84,7 @@ export const RouteCard: React.FC<RouteCardProps> = ({ data }) => {
       </div>
 
       {/* Footer Callout */}
-      <div className="bg-slate-50 border border-slate-200/80 rounded-btn p-3.5 text-xs text-slate-600 leading-relaxed font-medium">
+      <div className="bg-slate-50 border border-slate-200/80 rounded-btn p-3 lg:p-3 xl:p-3.5 text-xs text-slate-600 leading-relaxed font-medium">
         <span className="font-extrabold text-[#071A2E] block mb-0.5">{data.footerLead || "Scheduled with reliability."}</span>
         <span>{data.footerDesc || "Ask about your route, recurring pickup, or dedicated run."}</span>
       </div>

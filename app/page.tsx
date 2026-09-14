@@ -14,17 +14,18 @@ export default async function HomePage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#F6F9FC]">
-      {/* Dark Hero Container with Transparent AnnouncementBar & Floating Navbar Overlay */}
-      <div className="relative w-full bg-[#04101D]">
-        {/* Top Announcement Bar */}
-        <AnnouncementBar items={announcement.items} />
+      {/* Top Announcement Bar */}
+      <AnnouncementBar items={announcement.items} />
 
-        {/* Main Navbar Overlay */}
-        <div className="relative z-50 -mb-[68px] sm:-mb-[72px] h-[68px] sm:h-[72px]">
+      {/* Sticky Main Header */}
+      <div className="sticky top-0 z-50 -mb-[68px] sm:-mb-[72px] pointer-events-none">
+        <div className="pointer-events-auto">
           <Navbar phone={contact.phone} />
         </div>
+      </div>
 
-        {/* Hero Section */}
+      {/* Hero Section */}
+      <div className="relative w-full bg-[#04101D]">
         <Hero />
       </div>
 
