@@ -22,7 +22,7 @@ export async function Hero() {
   const phoneTelLink = `tel:${contactData.phone.replace(/[^\d+]/g, "")}`;
 
   return (
-    <section className="relative w-full min-h-[calc(100dvh-34px)] sm:min-h-[700px] lg:min-h-[calc(100vh-34px)] lg:h-auto xl:min-h-[740px] bg-[#04101D] text-white flex items-end overflow-hidden pt-20 sm:pt-24 lg:pt-28 xl:pt-32 pb-0">
+    <section className="relative w-full min-h-[calc(100dvh-34px)] sm:min-h-[700px] lg:min-h-[calc(100vh-34px)] lg:h-auto xl:min-h-[740px] bg-[#04101D] text-white flex items-center lg:items-end overflow-hidden pt-20 sm:pt-24 lg:pt-28 xl:pt-32 pb-10 sm:pb-12 lg:pb-0">
       {/* 1. Base Background Image & Stacked Color Overlays */}
       <div className="absolute inset-0 z-0 select-none pointer-events-none overflow-hidden">
         
@@ -106,8 +106,8 @@ export async function Hero() {
       <div className="relative z-20 max-w-[1350px] mx-auto px-4 sm:px-6 lg:px-8 w-full pt-0 pb-0 lg:pb-8 xl:pb-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-end">
           
-          {/* Left Side: Eyebrow, H1 Headline, Subhead, Body & CTAs (Pulled up slightly from 100vh bottom on mobile) */}
-          <div className="lg:col-span-7 flex flex-col justify-end min-h-[calc(100dvh-7.5rem)] lg:min-h-0 pb-7 sm:pb-8 lg:pb-0">
+          {/* Left Side: Eyebrow, H1 Headline, Subhead, Body & CTAs */}
+          <div className="lg:col-span-7 flex flex-col justify-center">
             
             {/* Small Eyebrow Badges: Single Lightweight Unit (Tier 2) */}
             <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-3.5 sm:mb-4 lg:mb-4 xl:mb-5">
