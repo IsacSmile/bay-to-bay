@@ -55,6 +55,20 @@ model HeroRouteStop {
   isStart    Boolean   @default(false)
   isEnd      Boolean   @default(false)
   order      Int       @default(0)
+  xPercent   Float?    @default(0)
+  yPercent   Float?    @default(0)
+}
+
+model ServiceAreaContent {
+  id              String   @id @default("default")
+  eyebrow         String   @default("SERVICE AREA")
+  headingPrimary  String   @default("Connecting Northern Ontario.")
+  headingAccent   String   @default("Delivering what matters.")
+  description     String   @default("Our route knowledge is regional by design. We connect communities across Northern Ontario with small-goods transportation, scheduled service, and delivery arrangements that work for local businesses.")
+  cardTitle       String   @default("Local knowledge. Regional reach.")
+  cardDescription String   @default("North Bay to Hearst, with key stops in between.")
+  badgeText       String   @default("Scheduled regional route")
+  updatedAt       DateTime @updatedAt
 }
 
 model ThemeSettings {

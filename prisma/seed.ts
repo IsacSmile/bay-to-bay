@@ -104,13 +104,13 @@ async function main() {
   });
 
   const stops = [
-    { stopNumber: "01", name: "North Bay", isStart: true, isEnd: false, order: 1 },
-    { stopNumber: "02", name: "Kirkland Lake", isStart: false, isEnd: false, order: 2 },
-    { stopNumber: "03", name: "Timmins", isStart: false, isEnd: false, order: 3 },
-    { stopNumber: "04", name: "Cochrane", isStart: false, isEnd: false, order: 4 },
-    { stopNumber: "05", name: "Kapuskasing", isStart: false, isEnd: false, order: 5 },
-    { stopNumber: "06", name: "Hearst", isStart: false, isEnd: false, order: 6 },
-    { stopNumber: "07", name: "Longlac", isStart: false, isEnd: true, order: 7 },
+    { stopNumber: "01", name: "North Bay", isStart: true, isEnd: false, order: 1, xPercent: 51.5, yPercent: 75.5 },
+    { stopNumber: "02", name: "Kirkland Lake", isStart: false, isEnd: false, order: 2, xPercent: 58.0, yPercent: 62.5 },
+    { stopNumber: "03", name: "Timmins", isStart: false, isEnd: false, order: 3, xPercent: 64.0, yPercent: 51.0 },
+    { stopNumber: "04", name: "Cochrane", isStart: false, isEnd: false, order: 4, xPercent: 70.8, yPercent: 41.5 },
+    { stopNumber: "05", name: "Kapuskasing", isStart: false, isEnd: false, order: 5, xPercent: 77.0, yPercent: 32.5 },
+    { stopNumber: "06", name: "Hearst", isStart: false, isEnd: false, order: 6, xPercent: 84.8, yPercent: 21.5 },
+    { stopNumber: "07", name: "Longlac", isStart: false, isEnd: true, order: 7, xPercent: 89.5, yPercent: 50.5 },
   ];
 
   for (const stop of stops) {
@@ -122,9 +122,37 @@ async function main() {
         isStart: stop.isStart,
         isEnd: stop.isEnd,
         order: stop.order,
+        xPercent: stop.xPercent,
+        yPercent: stop.yPercent,
       },
     });
   }
+
+  // Service Area Content
+  await prisma.serviceAreaContent.upsert({
+    where: { id: "default" },
+    update: {
+      eyebrow: "SERVICE AREA",
+      headingPrimary: "Connecting Northern Ontario.",
+      headingAccent: "Delivering what matters.",
+      description:
+        "Our route knowledge is regional by design. We connect communities across Northern Ontario with small-goods transportation, scheduled service, and delivery arrangements that work for local businesses.",
+      cardTitle: "Local knowledge. Regional reach.",
+      cardDescription: "North Bay to Hearst, with key stops in between.",
+      badgeText: "Scheduled regional route",
+    },
+    create: {
+      id: "default",
+      eyebrow: "SERVICE AREA",
+      headingPrimary: "Connecting Northern Ontario.",
+      headingAccent: "Delivering what matters.",
+      description:
+        "Our route knowledge is regional by design. We connect communities across Northern Ontario with small-goods transportation, scheduled service, and delivery arrangements that work for local businesses.",
+      cardTitle: "Local knowledge. Regional reach.",
+      cardDescription: "North Bay to Hearst, with key stops in between.",
+      badgeText: "Scheduled regional route",
+    },
+  });
 
   // Theme Settings
   await prisma.themeSettings.upsert({

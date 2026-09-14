@@ -57,6 +57,8 @@ export interface RouteStopItem {
   isStart?: boolean;
   isEnd?: boolean;
   order: number;
+  xPercent?: number | null;
+  yPercent?: number | null;
 }
 
 export interface RouteCardData {
@@ -120,6 +122,27 @@ export const DEFAULT_HERO: HeroData = {
   ],
 };
 
+export interface ServiceAreaData {
+  eyebrow: string;
+  headingPrimary: string;
+  headingAccent: string;
+  description: string;
+  cardTitle: string;
+  cardDescription: string;
+  badgeText: string;
+}
+
+export const DEFAULT_SERVICE_AREA: ServiceAreaData = {
+  eyebrow: "SERVICE AREA",
+  headingPrimary: "Connecting Northern Ontario.",
+  headingAccent: "Delivering what matters.",
+  description:
+    "Our route knowledge is regional by design. We connect communities across Northern Ontario with small-goods transportation, scheduled service, and delivery arrangements that work for local businesses.",
+  cardTitle: "Local knowledge. Regional reach.",
+  cardDescription: "North Bay to Hearst, with key stops in between.",
+  badgeText: "Scheduled regional route",
+};
+
 export const DEFAULT_ROUTE: RouteCardData = {
   label: "SPECIAL ROUTE",
   title: "North Bay → Hearst",
@@ -128,13 +151,13 @@ export const DEFAULT_ROUTE: RouteCardData = {
   footerDesc:
     "Ask about your route, recurring pickup, or dedicated run.",
   stops: [
-    { id: "1", stopNumber: "01", name: "North Bay", isStart: true, isEnd: false, order: 1 },
-    { id: "2", stopNumber: "02", name: "Kirkland Lake", isStart: false, isEnd: false, order: 2 },
-    { id: "3", stopNumber: "03", name: "Timmins", isStart: false, isEnd: false, order: 3 },
-    { id: "4", stopNumber: "04", name: "Cochrane", isStart: false, isEnd: false, order: 4 },
-    { id: "5", stopNumber: "05", name: "Kapuskasing", isStart: false, isEnd: false, order: 5 },
-    { id: "6", stopNumber: "06", name: "Hearst", isStart: false, isEnd: false, order: 6 },
-    { id: "7", stopNumber: "07", name: "Longlac", isStart: false, isEnd: true, order: 7 },
+    { id: "1", stopNumber: "01", name: "North Bay", isStart: true, isEnd: false, order: 1, xPercent: 51.5, yPercent: 75.5 },
+    { id: "2", stopNumber: "02", name: "Kirkland Lake", isStart: false, isEnd: false, order: 2, xPercent: 58.0, yPercent: 62.5 },
+    { id: "3", stopNumber: "03", name: "Timmins", isStart: false, isEnd: false, order: 3, xPercent: 64.0, yPercent: 51.0 },
+    { id: "4", stopNumber: "04", name: "Cochrane", isStart: false, isEnd: false, order: 4, xPercent: 70.8, yPercent: 41.5 },
+    { id: "5", stopNumber: "05", name: "Kapuskasing", isStart: false, isEnd: false, order: 5, xPercent: 77.0, yPercent: 32.5 },
+    { id: "6", stopNumber: "06", name: "Hearst", isStart: false, isEnd: false, order: 6, xPercent: 84.8, yPercent: 21.5 },
+    { id: "7", stopNumber: "07", name: "Longlac", isStart: false, isEnd: true, order: 7, xPercent: 89.5, yPercent: 50.5 },
   ],
 };
 
@@ -227,13 +250,15 @@ export async function getHeroRouteData(): Promise<RouteCardData> {
         duration: route.duration,
         footerLead: route.footerLead,
         footerDesc: route.footerDesc,
-        stops: route.stops.map((s: { id: string; stopNumber: string; name: string; isStart: boolean; isEnd: boolean; order: number }) => ({
+        stops: route.stops.map((s: { id: string; stopNumber: string; name: string; isStart: boolean; isEnd: boolean; order: number; xPercent?: number | null; yPercent?: number | null }) => ({
           id: s.id,
           stopNumber: s.stopNumber,
           name: s.name,
           isStart: s.isStart,
           isEnd: s.isEnd,
           order: s.order,
+          xPercent: s.xPercent ?? null,
+          yPercent: s.yPercent ?? null,
         })),
       };
     }
@@ -241,6 +266,32 @@ export async function getHeroRouteData(): Promise<RouteCardData> {
     console.warn("Failed to fetch route data from DB, using fallback defaults.", error);
   }
   return DEFAULT_ROUTE;
+}
+
+export async function getServiceAreaData(): Promise<ServiceAreaData> {
+  if (!isDatabaseConfigured()) return DEFAULT_SERVICE_AREA;
+
+  try {
+    const data = await withTimeout(
+      prisma.serviceAreaContent.findUnique({
+        where: { id: "default" },
+      })
+    );
+    if (data) {
+      return {
+        eyebrow: data.eyebrow || DEFAULT_SERVICE_AREA.eyebrow,
+        headingPrimary: data.headingPrimary || DEFAULT_SERVICE_AREA.headingPrimary,
+        headingAccent: data.headingAccent || DEFAULT_SERVICE_AREA.headingAccent,
+        description: data.description || DEFAULT_SERVICE_AREA.description,
+        cardTitle: data.cardTitle || DEFAULT_SERVICE_AREA.cardTitle,
+        cardDescription: data.cardDescription || DEFAULT_SERVICE_AREA.cardDescription,
+        badgeText: data.badgeText || DEFAULT_SERVICE_AREA.badgeText,
+      };
+    }
+  } catch (error) {
+    console.warn("Failed to fetch service area content from DB, using fallback defaults.", error);
+  }
+  return DEFAULT_SERVICE_AREA;
 }
 
 export interface ThemeSettingsData {
