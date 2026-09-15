@@ -145,7 +145,7 @@ export const DEFAULT_SERVICE_AREA: ServiceAreaData = {
 
 export const DEFAULT_ROUTE: RouteCardData = {
   label: "SPECIAL ROUTE",
-  title: "North Bay → Longlac",
+  title: "North Bay → Hearst",
   duration: "12h",
   footerLead: "Scheduled with reliability.",
   footerDesc:
@@ -156,8 +156,8 @@ export const DEFAULT_ROUTE: RouteCardData = {
     { id: "3", stopNumber: "03", name: "Timmins", isStart: false, isEnd: false, order: 3, xPercent: 46, yPercent: 68 },
     { id: "4", stopNumber: "04", name: "Cochrane", isStart: false, isEnd: false, order: 4, xPercent: 55, yPercent: 58 },
     { id: "5", stopNumber: "05", name: "Kapuskasing", isStart: false, isEnd: false, order: 5, xPercent: 65, yPercent: 46 },
-    { id: "6", stopNumber: "06", name: "Hearst", isStart: false, isEnd: false, order: 6, xPercent: 74, yPercent: 35 },
-    { id: "7", stopNumber: "07", name: "Longlac", isStart: false, isEnd: true, order: 7, xPercent: 85, yPercent: 26 },
+    { id: "6", stopNumber: "06", name: "Hearst", isStart: false, isEnd: true, order: 6, xPercent: 74, yPercent: 35 },
+    { id: "7", stopNumber: "07", name: "Longlac", isStart: false, isEnd: false, order: 7, xPercent: 85, yPercent: 26 },
   ],
 };
 
@@ -524,3 +524,52 @@ export async function getServicesData(): Promise<ServiceItemData[]> {
   }
   return DEFAULT_SERVICES_ITEMS;
 }
+
+// Business Solutions Types & Data
+export interface BusinessSolutionsData {
+  eyebrow: string;
+  headingPrimary: string;
+  headingAccent: string;
+  description: string;
+  briefText: string;
+  ctaText: string;
+}
+
+export const DEFAULT_BUSINESS_SOLUTIONS: BusinessSolutionsData = {
+  eyebrow: "BUSINESS SOLUTIONS",
+  headingPrimary: "More than a delivery.",
+  headingAccent: "A logistics partner.",
+  description:
+    "Businesses need transportation they can count on. We provide scheduled and dedicated delivery solutions designed to help Northern Ontario businesses move small goods efficiently between communities.",
+  briefText:
+    "Choose a recurring route, direct run, or a custom arrangement that fits your locations.",
+  ctaText: "Discuss your business needs",
+};
+
+export async function getBusinessSolutionsData(): Promise<BusinessSolutionsData> {
+  if (!isDatabaseConfigured()) return DEFAULT_BUSINESS_SOLUTIONS;
+
+  try {
+    const data = await withTimeout(
+      prisma.businessSolutionsContent.findUnique({
+        where: { id: "default" },
+      })
+    );
+    if (data) {
+      return {
+        eyebrow: data.eyebrow || DEFAULT_BUSINESS_SOLUTIONS.eyebrow,
+        headingPrimary: data.headingPrimary || DEFAULT_BUSINESS_SOLUTIONS.headingPrimary,
+        headingAccent: data.headingAccent || DEFAULT_BUSINESS_SOLUTIONS.headingAccent,
+        description: data.description || DEFAULT_BUSINESS_SOLUTIONS.description,
+        briefText: data.briefText || DEFAULT_BUSINESS_SOLUTIONS.briefText,
+        ctaText: data.ctaText || DEFAULT_BUSINESS_SOLUTIONS.ctaText,
+      };
+    }
+  } catch (error) {
+    console.warn("Failed to fetch business solutions content from DB, using fallback defaults.", error);
+  }
+  return DEFAULT_BUSINESS_SOLUTIONS;
+}
+
+
+

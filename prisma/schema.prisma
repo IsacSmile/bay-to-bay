@@ -96,3 +96,15 @@ model ServiceItem {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
+
+model BusinessSolutionsContent {
+  id             String   @id @default("default")
+  eyebrow        String   @default("BUSINESS SOLUTIONS")
+  headingPrimary String   @default("More than a delivery.")
+  headingAccent  String   @default("A logistics partner.")
+  description    String   @default("Businesses need transportation they can count on. We provide scheduled and dedicated delivery solutions designed to help Northern Ontario businesses move small goods efficiently between communities.")
+  briefText      String   @default("Choose a recurring route, direct run, or a custom arrangement that fits your locations.")
+  ctaText        String   @default("Discuss your business needs")
+  updatedAt      DateTime @updatedAt
+}
+

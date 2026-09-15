@@ -109,8 +109,8 @@ async function main() {
     { stopNumber: "03", name: "Timmins", isStart: false, isEnd: false, order: 3, xPercent: 46, yPercent: 68 },
     { stopNumber: "04", name: "Cochrane", isStart: false, isEnd: false, order: 4, xPercent: 55, yPercent: 58 },
     { stopNumber: "05", name: "Kapuskasing", isStart: false, isEnd: false, order: 5, xPercent: 65, yPercent: 46 },
-    { stopNumber: "06", name: "Hearst", isStart: false, isEnd: false, order: 6, xPercent: 74, yPercent: 35 },
-    { stopNumber: "07", name: "Longlac", isStart: false, isEnd: true, order: 7, xPercent: 85, yPercent: 26 },
+    { stopNumber: "06", name: "Hearst", isStart: false, isEnd: true, order: 6, xPercent: 74, yPercent: 35 },
+    { stopNumber: "07", name: "Longlac", isStart: false, isEnd: false, order: 7, xPercent: 85, yPercent: 26 },
   ];
 
   for (const stop of stops) {
@@ -278,7 +278,34 @@ async function main() {
     });
   }
 
+  // Business Solutions Content
+  await (prisma as any).businessSolutionsContent.upsert({
+    where: { id: "default" },
+    update: {
+      eyebrow: "BUSINESS SOLUTIONS",
+      headingPrimary: "More than a delivery.",
+      headingAccent: "A logistics partner.",
+      description:
+        "Businesses need transportation they can count on. We provide scheduled and dedicated delivery solutions designed to help Northern Ontario businesses move small goods efficiently between communities.",
+      briefText:
+        "Choose a recurring route, direct run, or a custom arrangement that fits your locations.",
+      ctaText: "Discuss your business needs",
+    },
+    create: {
+      id: "default",
+      eyebrow: "BUSINESS SOLUTIONS",
+      headingPrimary: "More than a delivery.",
+      headingAccent: "A logistics partner.",
+      description:
+        "Businesses need transportation they can count on. We provide scheduled and dedicated delivery solutions designed to help Northern Ontario businesses move small goods efficiently between communities.",
+      briefText:
+        "Choose a recurring route, direct run, or a custom arrangement that fits your locations.",
+      ctaText: "Discuss your business needs",
+    },
+  });
+
   console.log("Seeding finished successfully!");
+
 }
 
 main()

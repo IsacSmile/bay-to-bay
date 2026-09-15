@@ -4,6 +4,7 @@ import { Hero } from "@/components/Hero";
 import { ServiceHighlights } from "@/components/sections/ServiceHighlights";
 import { ServiceArea } from "@/components/ServiceArea";
 import { ServicesGrid } from "@/components/services/ServicesGrid";
+import { BusinessSolutions } from "@/components/BusinessSolutions";
 import { QuoteCTA } from "@/components/sections/QuoteCTA";
 import { Footer } from "@/components/Footer";
 import { getAnnouncementData, getContactData } from "@/lib/prisma";
@@ -38,8 +39,12 @@ export default async function HomePage() {
       {/* Delivery Solutions — Services Grid */}
       <ServicesGrid />
 
+      {/* Business Solutions */}
+      <BusinessSolutions />
+
       {/* Quote Call-to-Action */}
       <QuoteCTA phone={contact.phone} />
+
 
       {/* Footer */}
       <Footer phone={contact.phone} email={contact.email || undefined} />
