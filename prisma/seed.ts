@@ -659,6 +659,32 @@ async function main() {
     });
   }
 
+  // 13. Quote CTA Content
+  await (prisma as any).quoteCtaContent.upsert({
+    where: { id: "default" },
+    update: {
+      eyebrow: "LET'S MOVE YOUR BUSINESS FORWARD",
+      heading: "Your route starts here.",
+      description:
+        "Call or email Bay to Bay Express to discuss a delivery, recurring route, or pharmacy supply shipment.",
+      phoneText: "705-978-3001",
+      emailLabel: "Email us",
+      emailAddress: "info@baytobayexpress.ca",
+      brandLogoText: "Bay to Bay EXPRESS INC.",
+    },
+    create: {
+      id: "default",
+      eyebrow: "LET'S MOVE YOUR BUSINESS FORWARD",
+      heading: "Your route starts here.",
+      description:
+        "Call or email Bay to Bay Express to discuss a delivery, recurring route, or pharmacy supply shipment.",
+      phoneText: "705-978-3001",
+      emailLabel: "Email us",
+      emailAddress: "info@baytobayexpress.ca",
+      brandLogoText: "Bay to Bay EXPRESS INC.",
+    },
+  });
+
   console.log("Seeding finished successfully!");
 }
 

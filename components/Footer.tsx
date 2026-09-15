@@ -1,24 +1,29 @@
 import React from "react";
 import Image from "next/image";
-import { Phone, Mail, MapPin, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/Button";
+import { Phone, Mail } from "lucide-react";
+import { SnowfallEffect } from "@/components/hero/SnowfallEffect";
 
 interface FooterProps {
   phone?: string;
   email?: string;
+  snowfallEnabled?: boolean;
 }
 
 export const Footer: React.FC<FooterProps> = ({
   phone = "705-978-3001",
   email = "info@baytobayexpress.ca",
+  snowfallEnabled = true,
 }) => {
   const telLink = `tel:${phone.replace(/[^\d+]/g, "")}`;
 
   return (
-    <footer id="contact" className="bg-[#071A2E] text-slate-400 text-sm border-t border-[#0D2942]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-16">
+    <footer id="contact" className="relative bg-[#071A2E] text-slate-400 text-sm border-t border-[#0D2942] overflow-hidden">
+      {/* Snowfall Canvas Animation */}
+      <SnowfallEffect enabled={snowfallEnabled} />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-16">
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-12 pb-12 border-b border-[#0D2942]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12 pb-12 border-b border-[#0D2942]">
           
           {/* Brand Info (2 cols) */}
           <div className="lg:col-span-2 space-y-4">
@@ -106,25 +111,6 @@ export const Footer: React.FC<FooterProps> = ({
               <li>Hearst Destination</li>
               <li>Longlac Terminal</li>
             </ul>
-          </div>
-
-          {/* Contact Details */}
-          <div>
-            <h4 className="font-extrabold text-white uppercase text-xs tracking-widest mb-4">
-              Coverage
-            </h4>
-            <p className="text-xs text-slate-300 leading-relaxed mb-4">
-              Twice-weekly scheduled express delivery corridor operating across Highway 11 in Northern Ontario.
-            </p>
-            <Button
-              variant="ghost"
-              size="sm"
-              href="#quote"
-              rightIcon={<ArrowRight className="w-3.5 h-3.5" />}
-              className="text-brand-bright hover:text-white text-xs font-bold"
-            >
-              Book a run
-            </Button>
           </div>
 
         </div>

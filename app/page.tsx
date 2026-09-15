@@ -21,6 +21,8 @@ import {
   getAboutTagPillsData,
   getFaqContentData,
   getFaqItemsData,
+  getQuoteCtaData,
+  getSnowfallEnabled,
 } from "@/lib/prisma";
 
 export default async function HomePage() {
@@ -31,6 +33,8 @@ export default async function HomePage() {
   const aboutTags = await getAboutTagPillsData();
   const faqContent = await getFaqContentData();
   const faqItems = await getFaqItemsData();
+  const quoteCtaContent = await getQuoteCtaData();
+  const snowfallEnabled = await getSnowfallEnabled();
 
   return (
     <div className="min-h-screen flex flex-col bg-[#F6F9FC]">
@@ -80,13 +84,10 @@ export default async function HomePage() {
       <FAQ content={faqContent} items={faqItems} />
 
       {/* Quote Call-to-Action */}
-      <QuoteCTA phone={contact.phone} />
-
-
-
+      <QuoteCTA content={quoteCtaContent} phone={contact.phone} email={contact.email || undefined} />
 
       {/* Footer */}
-      <Footer phone={contact.phone} email={contact.email || undefined} />
+      <Footer phone={contact.phone} email={contact.email || undefined} snowfallEnabled={snowfallEnabled} />
     </div>
   );
 }

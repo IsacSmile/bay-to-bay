@@ -19,6 +19,7 @@ import {
   LayoutDashboard,
   Info,
   HelpCircle,
+  Megaphone,
   LogOut,
 } from "lucide-react";
 interface AdminLayoutProps {
@@ -110,6 +111,11 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       label: "How It Works",
       href: "/admin/how-it-works",
       icon: ListOrdered,
+    },
+    {
+      label: "CTA Banner",
+      href: "/admin/quote-cta",
+      icon: Megaphone,
     },
   ];
 

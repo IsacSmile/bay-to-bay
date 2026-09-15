@@ -1138,6 +1138,55 @@ export async function getFaqItemsData(): Promise<FaqItemData[]> {
   return DEFAULT_FAQ_ITEMS;
 }
 
+// Quote CTA Banner Types & Data
+export interface QuoteCtaData {
+  eyebrow: string;
+  heading: string;
+  description: string;
+  phoneText: string;
+  emailLabel: string;
+  emailAddress: string;
+  brandLogoText: string;
+}
+
+export const DEFAULT_QUOTE_CTA: QuoteCtaData = {
+  eyebrow: "LET'S MOVE YOUR BUSINESS FORWARD",
+  heading: "Your route starts here.",
+  description:
+    "Call or email Bay to Bay Express to discuss a delivery, recurring route, or pharmacy supply shipment.",
+  phoneText: "705-978-3001",
+  emailLabel: "Email us",
+  emailAddress: "info@baytobayexpress.ca",
+  brandLogoText: "Bay to Bay EXPRESS INC.",
+};
+
+export async function getQuoteCtaData(): Promise<QuoteCtaData> {
+  if (!isDatabaseConfigured()) return DEFAULT_QUOTE_CTA;
+
+  try {
+    const data = await withTimeout<any>(
+      (prisma as any).quoteCtaContent.findUnique({
+        where: { id: "default" },
+      })
+    );
+    if (data) {
+      return {
+        eyebrow: data.eyebrow || DEFAULT_QUOTE_CTA.eyebrow,
+        heading: data.heading || DEFAULT_QUOTE_CTA.heading,
+        description: data.description || DEFAULT_QUOTE_CTA.description,
+        phoneText: data.phoneText || DEFAULT_QUOTE_CTA.phoneText,
+        emailLabel: data.emailLabel || DEFAULT_QUOTE_CTA.emailLabel,
+        emailAddress: data.emailAddress || DEFAULT_QUOTE_CTA.emailAddress,
+        brandLogoText: data.brandLogoText || DEFAULT_QUOTE_CTA.brandLogoText,
+      };
+    }
+  } catch (error) {
+    console.warn("Failed to fetch Quote CTA content from DB, using fallback defaults.", error);
+  }
+  return DEFAULT_QUOTE_CTA;
+}
+
+
 
 
 

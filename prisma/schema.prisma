@@ -234,3 +234,16 @@ model FaqItem {
   updatedAt DateTime @updatedAt
 }
 
+model QuoteCtaContent {
+  id            String   @id @default("default")
+  eyebrow       String   @default("LET'S MOVE YOUR BUSINESS FORWARD")
+  heading       String   @default("Your route starts here.")
+  description   String   @default("Call or email Bay to Bay Express to discuss a delivery, recurring route, or pharmacy supply shipment.")
+  phoneText     String   @default("705-978-3001")
+  emailLabel    String   @default("Email us")
+  emailAddress  String   @default("info@baytobayexpress.ca")
+  brandLogoText String   @default("Bay to Bay EXPRESS INC.")
+  updatedAt     DateTime @updatedAt
+}
+
+
