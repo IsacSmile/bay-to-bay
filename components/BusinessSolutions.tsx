@@ -64,7 +64,7 @@ export async function BusinessSolutions() {
             <EyebrowLabel text={content.eyebrow} />
 
             {/* H2 Heading: Two-Tone */}
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-black text-[#071A2E] tracking-tight leading-[1.1] mb-3 sm:mb-4">
+            <h2 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-[62px] xl:text-[68px] font-black text-[#071A2E] tracking-tight leading-[1.05] mb-4">
               {content.headingPrimary}{" "}
               <span className="text-brand-blue block sm:inline">{content.headingAccent}</span>
             </h2>

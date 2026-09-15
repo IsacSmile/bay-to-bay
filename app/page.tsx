@@ -5,6 +5,8 @@ import { ServiceHighlights } from "@/components/sections/ServiceHighlights";
 import { ServiceArea } from "@/components/ServiceArea";
 import { ServicesGrid } from "@/components/services/ServicesGrid";
 import { BusinessSolutions } from "@/components/BusinessSolutions";
+import { WhoWeServe } from "@/components/WhoWeServe";
+import { WhyUs } from "@/components/WhyUs";
 import { QuoteCTA } from "@/components/sections/QuoteCTA";
 import { Footer } from "@/components/Footer";
 import { getAnnouncementData, getContactData } from "@/lib/prisma";
@@ -42,8 +44,16 @@ export default async function HomePage() {
       {/* Business Solutions */}
       <BusinessSolutions />
 
+      {/* Who We Serve */}
+      <WhoWeServe />
+
+      {/* Why Bay to Bay */}
+      <WhyUs />
+
       {/* Quote Call-to-Action */}
       <QuoteCTA phone={contact.phone} />
+
+
 
 
       {/* Footer */}

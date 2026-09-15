@@ -571,5 +571,210 @@ export async function getBusinessSolutionsData(): Promise<BusinessSolutionsData>
   return DEFAULT_BUSINESS_SOLUTIONS;
 }
 
+// Who We Serve Types & Data
+export interface WhoWeServeSectionData {
+  eyebrow: string;
+  headingPrimary: string;
+  headingAccent: string;
+  description: string;
+  ctaText: string;
+}
+
+export interface IndustryTagItem {
+  id: string;
+  label: string;
+  icon: string;
+  order: number;
+}
+
+export const DEFAULT_WHO_WE_SERVE_SECTION: WhoWeServeSectionData = {
+  eyebrow: "WHO WE SERVE",
+  headingPrimary: "Built for",
+  headingAccent: "Northern Ontario businesses.",
+  description:
+    "Need a recurring delivery route? Let's talk through the pickup, destination, frequency, and service requirements.",
+  ctaText: "Request a business quote",
+};
+
+export const DEFAULT_INDUSTRY_TAGS: IndustryTagItem[] = [
+  { id: "1", label: "Healthcare Organizations", icon: "activity", order: 1 },
+  { id: "2", label: "Pharmacies", icon: "pill", order: 2 },
+  { id: "3", label: "Medical Clinics", icon: "shield-check", order: 3 },
+  { id: "4", label: "Law Firms", icon: "file-text", order: 4 },
+  { id: "5", label: "Financial Businesses", icon: "landmark", order: 5 },
+  { id: "6", label: "Retailers", icon: "store", order: 6 },
+  { id: "7", label: "Construction Companies", icon: "building", order: 7 },
+  { id: "8", label: "Manufacturers", icon: "package", order: 8 },
+  { id: "9", label: "Contractors", icon: "truck", order: 9 },
+  { id: "10", label: "Government Organizations", icon: "globe", order: 10 },
+  { id: "11", label: "Non-Profit Organizations", icon: "heart-handshake", order: 11 },
+  { id: "12", label: "Small Businesses", icon: "building-2", order: 12 },
+  { id: "13", label: "E-Commerce Businesses", icon: "sparkles", order: 13 },
+];
+
+export async function getWhoWeServeSectionData(): Promise<WhoWeServeSectionData> {
+  if (!isDatabaseConfigured()) return DEFAULT_WHO_WE_SERVE_SECTION;
+
+  try {
+    const data = await withTimeout(
+      prisma.whoWeServeContent.findUnique({
+        where: { id: "default" },
+      })
+    );
+    if (data) {
+      return {
+        eyebrow: data.eyebrow || DEFAULT_WHO_WE_SERVE_SECTION.eyebrow,
+        headingPrimary: data.headingPrimary || DEFAULT_WHO_WE_SERVE_SECTION.headingPrimary,
+        headingAccent: data.headingAccent || DEFAULT_WHO_WE_SERVE_SECTION.headingAccent,
+        description: data.description || DEFAULT_WHO_WE_SERVE_SECTION.description,
+        ctaText: data.ctaText || DEFAULT_WHO_WE_SERVE_SECTION.ctaText,
+      };
+    }
+  } catch (error) {
+    console.warn("Failed to fetch who we serve section content from DB, using fallback defaults.", error);
+  }
+  return DEFAULT_WHO_WE_SERVE_SECTION;
+}
+
+export async function getIndustryTagsData(): Promise<IndustryTagItem[]> {
+  if (!isDatabaseConfigured()) return DEFAULT_INDUSTRY_TAGS;
+
+  try {
+    const tags = await withTimeout(
+      prisma.industryTag.findMany({
+        orderBy: { order: "asc" },
+      })
+    );
+    if (tags && tags.length > 0) {
+      return tags.map((t) => ({
+        id: t.id,
+        label: t.label,
+        icon: t.icon,
+        order: t.order,
+      }));
+    }
+  } catch (error) {
+    console.warn("Failed to fetch industry tags from DB, using fallback defaults.", error);
+  }
+  return DEFAULT_INDUSTRY_TAGS;
+}
+
+// Why Us Types & Data
+export interface WhyUsSectionData {
+  eyebrow: string;
+  headingPrimary: string;
+  headingAccent: string;
+  tagline: string;
+}
+
+export interface ReasonItemData {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+  order: number;
+}
+
+export const DEFAULT_WHY_US_SECTION: WhyUsSectionData = {
+  eyebrow: "WHY BAY TO BAY",
+  headingPrimary: "A clearer way to",
+  headingAccent: "move what matters.",
+  tagline: "REGIONAL FOCUS · LOCAL KNOWLEDGE",
+};
+
+export const DEFAULT_REASON_ITEMS: ReasonItemData[] = [
+  {
+    id: "1",
+    title: "Northern Ontario focus",
+    description: "We understand the communities and transportation needs of Northern Ontario.",
+    icon: "building-2",
+    order: 1,
+  },
+  {
+    id: "2",
+    title: "Reliable service",
+    description: "Professional delivery with clear communication and dependable scheduling.",
+    icon: "shield-check",
+    order: 2,
+  },
+  {
+    id: "3",
+    title: "Dedicated delivery",
+    description: "Direct delivery solutions for businesses that need consistency.",
+    icon: "truck",
+    order: 3,
+  },
+  {
+    id: "4",
+    title: "Twice-weekly service",
+    description: "Scheduled route options designed for recurring business needs.",
+    icon: "calendar",
+    order: 4,
+  },
+  {
+    id: "5",
+    title: "Small goods focus",
+    description: "Specialized around parcels, documents, supplies, and other small shipments.",
+    icon: "package",
+    order: 5,
+  },
+  {
+    id: "6",
+    title: "Flexible solutions",
+    description: "One-time, recurring, and customized delivery options.",
+    icon: "sparkles",
+    order: 6,
+  },
+];
+
+export async function getWhyUsSectionData(): Promise<WhyUsSectionData> {
+  if (!isDatabaseConfigured()) return DEFAULT_WHY_US_SECTION;
+
+  try {
+    const data = await withTimeout(
+      prisma.whyUsContent.findUnique({
+        where: { id: "default" },
+      })
+    );
+    if (data) {
+      return {
+        eyebrow: data.eyebrow || DEFAULT_WHY_US_SECTION.eyebrow,
+        headingPrimary: data.headingPrimary || DEFAULT_WHY_US_SECTION.headingPrimary,
+        headingAccent: data.headingAccent || DEFAULT_WHY_US_SECTION.headingAccent,
+        tagline: data.tagline || DEFAULT_WHY_US_SECTION.tagline,
+      };
+    }
+  } catch (error) {
+    console.warn("Failed to fetch why us section content from DB, using fallback defaults.", error);
+  }
+  return DEFAULT_WHY_US_SECTION;
+}
+
+export async function getReasonItemsData(): Promise<ReasonItemData[]> {
+  if (!isDatabaseConfigured()) return DEFAULT_REASON_ITEMS;
+
+  try {
+    const items = await withTimeout<any[]>(
+      (prisma as any).reasonItem.findMany({
+        orderBy: { order: "asc" },
+      })
+    );
+    if (items && items.length > 0) {
+      return items.map((i: any) => ({
+        id: i.id,
+        title: i.title,
+        description: i.description,
+        icon: i.icon || "package",
+        order: i.order,
+      }));
+    }
+  } catch (error) {
+    console.warn("Failed to fetch reason items from DB, using fallback defaults.", error);
+  }
+  return DEFAULT_REASON_ITEMS;
+}
+
+
+
 
 

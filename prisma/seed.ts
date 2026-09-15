@@ -304,7 +304,122 @@ async function main() {
     },
   });
 
+  // Who We Serve Content
+  await (prisma as any).whoWeServeContent.upsert({
+    where: { id: "default" },
+    update: {
+      eyebrow: "WHO WE SERVE",
+      headingPrimary: "Built for",
+      headingAccent: "Northern Ontario businesses.",
+      description:
+        "Need a recurring delivery route? Let's talk through the pickup, destination, frequency, and service requirements.",
+      ctaText: "Request a business quote",
+    },
+    create: {
+      id: "default",
+      eyebrow: "WHO WE SERVE",
+      headingPrimary: "Built for",
+      headingAccent: "Northern Ontario businesses.",
+      description:
+        "Need a recurring delivery route? Let's talk through the pickup, destination, frequency, and service requirements.",
+      ctaText: "Request a business quote",
+    },
+  });
+
+  // Industry Tags (Delete and re-seed defaults)
+  await (prisma as any).industryTag.deleteMany({});
+
+  const defaultIndustryTags = [
+    { label: "Healthcare Organizations", icon: "activity", order: 1 },
+    { label: "Pharmacies", icon: "pill", order: 2 },
+    { label: "Medical Clinics", icon: "shield-check", order: 3 },
+    { label: "Law Firms", icon: "file-text", order: 4 },
+    { label: "Financial Businesses", icon: "landmark", order: 5 },
+    { label: "Retailers", icon: "store", order: 6 },
+    { label: "Construction Companies", icon: "building", order: 7 },
+    { label: "Manufacturers", icon: "package", order: 8 },
+    { label: "Contractors", icon: "truck", order: 9 },
+    { label: "Government Organizations", icon: "globe", order: 10 },
+    { label: "Non-Profit Organizations", icon: "heart-handshake", order: 11 },
+    { label: "Small Businesses", icon: "building-2", order: 12 },
+    { label: "E-Commerce Businesses", icon: "sparkles", order: 13 },
+  ];
+
+  for (const tag of defaultIndustryTags) {
+    await (prisma as any).industryTag.create({
+      data: tag,
+    });
+  }
+
+  // Why Us Content
+  await (prisma as any).whyUsContent.upsert({
+    where: { id: "default" },
+    update: {
+      eyebrow: "WHY BAY TO BAY",
+      headingPrimary: "A clearer way to",
+      headingAccent: "move what matters.",
+      tagline: "REGIONAL FOCUS · LOCAL KNOWLEDGE",
+    },
+    create: {
+      id: "default",
+      eyebrow: "WHY BAY TO BAY",
+      headingPrimary: "A clearer way to",
+      headingAccent: "move what matters.",
+      tagline: "REGIONAL FOCUS · LOCAL KNOWLEDGE",
+    },
+  });
+
+  // Reason Items (Delete and re-seed defaults)
+  await (prisma as any).reasonItem.deleteMany({});
+
+  const defaultReasons = [
+    {
+      title: "Northern Ontario focus",
+      description: "We understand the communities and transportation needs of Northern Ontario.",
+      icon: "building-2",
+      order: 1,
+    },
+    {
+      title: "Reliable service",
+      description: "Professional delivery with clear communication and dependable scheduling.",
+      icon: "shield-check",
+      order: 2,
+    },
+    {
+      title: "Dedicated delivery",
+      description: "Direct delivery solutions for businesses that need consistency.",
+      icon: "truck",
+      order: 3,
+    },
+    {
+      title: "Twice-weekly service",
+      description: "Scheduled route options designed for recurring business needs.",
+      icon: "calendar",
+      order: 4,
+    },
+    {
+      title: "Small goods focus",
+      description: "Specialized around parcels, documents, supplies, and other small shipments.",
+      icon: "package",
+      order: 5,
+    },
+    {
+      title: "Flexible solutions",
+      description: "One-time, recurring, and customized delivery options.",
+      icon: "sparkles",
+      order: 6,
+    },
+  ];
+
+  for (const item of defaultReasons) {
+    await (prisma as any).reasonItem.create({
+      data: item,
+    });
+  }
+
   console.log("Seeding finished successfully!");
+
+
 
 }
 
