@@ -26,8 +26,8 @@ const variantStyles: Record<ButtonVariant, string> = {
 };
 
 const sizeStyles: Record<ButtonSize, string> = {
-  sm: "px-4.5 py-2 text-xs sm:text-sm min-h-[42px]",
-  md: "px-6 py-2.5 text-sm sm:text-base min-h-[48px]",
+  sm: "px-5 py-2.5 text-xs sm:text-sm min-h-[44px]",
+  md: "px-6 py-3 text-sm sm:text-base min-h-[48px]",
   lg: "px-7 sm:px-8 py-3.5 text-base sm:text-[17px] min-h-[54px]",
 };
 
@@ -57,13 +57,13 @@ export const Button: React.FC<ButtonProps> = ({
   const renderContent = () => (
     <>
       {leftIcon && (
-        <span className="inline-flex shrink-0 items-center justify-center p-1 rounded-full bg-white/15 group-hover:bg-white/25 transition-all duration-300">
+        <span className="inline-flex shrink-0 items-center justify-center w-6.5 h-6.5 sm:w-7.5 sm:h-7.5 rounded-full bg-white/15 group-hover:bg-white/25 transition-all duration-300 -ml-1">
           {leftIcon}
         </span>
       )}
-      {children && <span className="relative z-10">{children}</span>}
+      {children && <span className="relative z-10 whitespace-nowrap">{children}</span>}
       {rightIcon && (
-        <span className="inline-flex shrink-0 items-center justify-center p-1 rounded-full bg-white/15 group-hover:bg-white/25 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300">
+        <span className="inline-flex shrink-0 items-center justify-center w-6.5 h-6.5 sm:w-7.5 sm:h-7.5 rounded-full bg-white/15 group-hover:bg-white/25 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300 -mr-1">
           {rightIcon}
         </span>
       )}

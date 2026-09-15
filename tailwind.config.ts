@@ -63,6 +63,11 @@ const config: Config = {
       maxWidth: {
         "7xl": "1350px",
       },
+      spacing: {
+        "4.5": "1.125rem",
+        "6.5": "1.625rem",
+        "7.5": "1.875rem",
+      },
     },
   },
   plugins: [],

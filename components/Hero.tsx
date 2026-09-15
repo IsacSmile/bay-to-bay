@@ -154,8 +154,8 @@ export async function Hero() {
                 variant="primary"
                 size="sm"
                 href="#quote"
-                rightIcon={<ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />}
-                className="sm:px-6 sm:py-2.5 sm:text-sm lg:px-6 lg:py-3 lg:text-base xl:px-8 xl:py-3.5 xl:min-h-[52px]"
+                rightIcon={<ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />}
+                className="px-5 py-2.5 sm:px-6 sm:py-3 text-xs sm:text-sm lg:px-6 lg:py-3 lg:text-base xl:px-8 xl:py-3.5 xl:min-h-[52px]"
               >
                 Request a quote
               </Button>
@@ -164,8 +164,8 @@ export async function Hero() {
                 variant="secondary"
                 size="sm"
                 href={phoneTelLink}
-                leftIcon={<Phone className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-brand-bright" />}
-                className="sm:px-6 sm:py-2.5 sm:text-sm lg:px-6 lg:py-3 lg:text-base xl:px-8 xl:py-3.5 xl:min-h-[52px]"
+                leftIcon={<Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-brand-bright" />}
+                className="px-5 py-2.5 sm:px-6 sm:py-3 text-xs sm:text-sm lg:px-6 lg:py-3 lg:text-base xl:px-8 xl:py-3.5 xl:min-h-[52px]"
               >
                 Call us
               </Button>
