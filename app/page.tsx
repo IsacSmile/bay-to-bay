@@ -7,6 +7,7 @@ import { ServicesGrid } from "@/components/services/ServicesGrid";
 import { BusinessSolutions } from "@/components/BusinessSolutions";
 import { WhoWeServe } from "@/components/WhoWeServe";
 import { WhyUs } from "@/components/WhyUs";
+import { HowItWorks } from "@/components/HowItWorks";
 import { QuoteCTA } from "@/components/sections/QuoteCTA";
 import { Footer } from "@/components/Footer";
 import { getAnnouncementData, getContactData } from "@/lib/prisma";
@@ -49,6 +50,9 @@ export default async function HomePage() {
 
       {/* Why Bay to Bay */}
       <WhyUs />
+
+      {/* How It Works */}
+      <HowItWorks />
 
       {/* Quote Call-to-Action */}
       <QuoteCTA phone={contact.phone} />

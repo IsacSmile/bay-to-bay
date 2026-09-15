@@ -417,10 +417,58 @@ async function main() {
     });
   }
 
+  // 9. How It Works Content & Steps
+  await (prisma as any).howItWorksContent.upsert({
+    where: { id: "default" },
+    update: {
+      eyebrow: "HOW IT WORKS",
+      headingPrimary: "Simple.",
+      headingAccent: "Reliable. Delivered.",
+      description: "A straightforward process from first conversation to final drop-off.",
+      ctaText: "Start your delivery →",
+    },
+    create: {
+      id: "default",
+      eyebrow: "HOW IT WORKS",
+      headingPrimary: "Simple.",
+      headingAccent: "Reliable. Delivered.",
+      description: "A straightforward process from first conversation to final drop-off.",
+      ctaText: "Start your delivery →",
+    },
+  });
+
+  await (prisma as any).howItWorksStep.deleteMany({});
+
+  const defaultSteps = [
+    {
+      title: "Request a quote",
+      description: "Tell us what you need delivered.",
+      order: 1,
+    },
+    {
+      title: "Schedule",
+      description: "We confirm the pickup, delivery, and service requirements.",
+      order: 2,
+    },
+    {
+      title: "Pickup",
+      description: "Your shipment is collected according to the agreed schedule.",
+      order: 3,
+    },
+    {
+      title: "Delivery",
+      description: "Your goods are delivered to the destination.",
+      order: 4,
+    },
+  ];
+
+  for (const step of defaultSteps) {
+    await (prisma as any).howItWorksStep.create({
+      data: step,
+    });
+  }
+
   console.log("Seeding finished successfully!");
-
-
-
 }
 
 main()
@@ -431,3 +479,4 @@ main()
   .finally(async () => {
     await prisma.$disconnect();
   });
+

@@ -146,5 +146,25 @@ model ReasonItem {
   updatedAt   DateTime @updatedAt
 }
 
+model HowItWorksContent {
+  id             String   @id @default("default")
+  eyebrow        String   @default("HOW IT WORKS")
+  headingPrimary String   @default("Simple.")
+  headingAccent  String   @default("Reliable. Delivered.")
+  description    String   @default("A straightforward process from first conversation to final drop-off.")
+  ctaText        String   @default("Start your delivery →")
+  updatedAt      DateTime @updatedAt
+}
+
+model HowItWorksStep {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+
 
 

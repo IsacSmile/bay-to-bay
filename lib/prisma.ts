@@ -774,6 +774,105 @@ export async function getReasonItemsData(): Promise<ReasonItemData[]> {
   return DEFAULT_REASON_ITEMS;
 }
 
+// Types & Data for How It Works Section
+export interface HowItWorksSectionData {
+  eyebrow: string;
+  headingPrimary: string;
+  headingAccent: string;
+  description: string;
+  ctaText: string;
+}
+
+export interface HowItWorksStepData {
+  id: string;
+  title: string;
+  description: string;
+  order: number;
+}
+
+export const DEFAULT_HOW_IT_WORKS_SECTION: HowItWorksSectionData = {
+  eyebrow: "HOW IT WORKS",
+  headingPrimary: "Simple.",
+  headingAccent: "Reliable. Delivered.",
+  description: "A straightforward process from first conversation to final drop-off.",
+  ctaText: "Start your delivery →",
+};
+
+export const DEFAULT_HOW_IT_WORKS_STEPS: HowItWorksStepData[] = [
+  {
+    id: "1",
+    title: "Request a quote",
+    description: "Tell us what you need delivered.",
+    order: 1,
+  },
+  {
+    id: "2",
+    title: "Schedule",
+    description: "We confirm the pickup, delivery, and service requirements.",
+    order: 2,
+  },
+  {
+    id: "3",
+    title: "Pickup",
+    description: "Your shipment is collected according to the agreed schedule.",
+    order: 3,
+  },
+  {
+    id: "4",
+    title: "Delivery",
+    description: "Your goods are delivered to the destination.",
+    order: 4,
+  },
+];
+
+export async function getHowItWorksSectionData(): Promise<HowItWorksSectionData> {
+  if (!isDatabaseConfigured()) return DEFAULT_HOW_IT_WORKS_SECTION;
+
+  try {
+    const data = await withTimeout<any>(
+      (prisma as any).howItWorksContent.findUnique({
+        where: { id: "default" },
+      })
+    );
+    if (data) {
+      return {
+        eyebrow: data.eyebrow || DEFAULT_HOW_IT_WORKS_SECTION.eyebrow,
+        headingPrimary: data.headingPrimary || DEFAULT_HOW_IT_WORKS_SECTION.headingPrimary,
+        headingAccent: data.headingAccent || DEFAULT_HOW_IT_WORKS_SECTION.headingAccent,
+        description: data.description || DEFAULT_HOW_IT_WORKS_SECTION.description,
+        ctaText: data.ctaText || DEFAULT_HOW_IT_WORKS_SECTION.ctaText,
+      };
+    }
+  } catch (error) {
+    console.warn("Failed to fetch how it works section content from DB, using fallback defaults.", error);
+  }
+  return DEFAULT_HOW_IT_WORKS_SECTION;
+}
+
+export async function getHowItWorksStepsData(): Promise<HowItWorksStepData[]> {
+  if (!isDatabaseConfigured()) return DEFAULT_HOW_IT_WORKS_STEPS;
+
+  try {
+    const items = await withTimeout<any[]>(
+      (prisma as any).howItWorksStep.findMany({
+        orderBy: { order: "asc" },
+      })
+    );
+    if (items && items.length > 0) {
+      return items.map((i: any) => ({
+        id: i.id,
+        title: i.title,
+        description: i.description,
+        order: i.order,
+      }));
+    }
+  } catch (error) {
+    console.warn("Failed to fetch how it works steps from DB, using fallback defaults.", error);
+  }
+  return DEFAULT_HOW_IT_WORKS_STEPS;
+}
+
+
 
 
 
