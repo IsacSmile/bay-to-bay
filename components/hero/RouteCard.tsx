@@ -45,10 +45,10 @@ export const RouteCard: React.FC<RouteCardProps> = ({ data }) => {
               <div className="flex items-center gap-3.5 z-10">
                 {/* Blue Circular Number Node */}
                 <div
-                  className={`w-7 h-7 rounded-full flex items-center justify-center text-[11px] font-extrabold transition-transform duration-200 group-hover:scale-110 ${
+                  className={`w-7 h-7 rounded-full flex items-center justify-center text-[11px] font-extrabold transition-all duration-200 group-hover:scale-110 ${
                     isFirst || isLast
                       ? "bg-brand-blue text-white shadow-md shadow-brand-blue/30"
-                      : "bg-white border-2 border-sky-200 text-brand-blue"
+                      : "bg-white border-2 border-sky-200 text-brand-blue group-hover:bg-brand-blue group-hover:border-brand-blue group-hover:text-white group-hover:shadow-md group-hover:shadow-brand-blue/30"
                   }`}
                 >
                   {stop.stopNumber}

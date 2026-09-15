@@ -64,10 +64,10 @@ export const RouteCoverage: React.FC = () => {
                   >
                     {/* Node Marker Circle */}
                     <div
-                      className={`w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold shrink-0 transition-transform duration-200 group-hover:scale-110 ${
+                      className={`w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold shrink-0 transition-all duration-200 group-hover:scale-110 ${
                         isFirst || isLast
                           ? "bg-brand-blue text-white shadow-md shadow-brand-blue/30 ring-4 ring-sky-100"
-                          : "bg-white border-2 border-brand-blue text-brand-blue shadow-sm"
+                          : "bg-white border-2 border-brand-blue text-brand-blue shadow-sm group-hover:bg-brand-blue group-hover:border-brand-blue group-hover:text-white group-hover:shadow-md group-hover:shadow-brand-blue/30"
                       }`}
                     >
                       {isFirst ? "01" : isLast ? `0${index + 1}` : `0${index + 1}`}
