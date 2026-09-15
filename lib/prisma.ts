@@ -872,6 +872,54 @@ export async function getHowItWorksStepsData(): Promise<HowItWorksStepData[]> {
   return DEFAULT_HOW_IT_WORKS_STEPS;
 }
 
+// Types & Data for Quote Form Section
+export interface QuoteFormSectionData {
+  eyebrow: string;
+  headingPrimary: string;
+  headingAccent: string;
+  description: string;
+  serviceNoteLead: string;
+  serviceNoteText: string;
+  disclaimer: string;
+}
+
+export const DEFAULT_QUOTE_FORM_SECTION: QuoteFormSectionData = {
+  eyebrow: "REQUEST A QUOTE",
+  headingPrimary: "Tell us the route.",
+  headingAccent: "We'll help plan the run.",
+  description: "Share a few details about your pickup, delivery, and shipment. We'll contact you to discuss the right service arrangement.",
+  serviceNoteLead: "Service note:",
+  serviceNoteText: "12-hour options and medical/pharmacy supply delivery are subject to route, pickup time, shipment, handling, and service requirements.",
+  disclaimer: "No price calculator is shown. We'll review the route and shipment details with you directly.",
+};
+
+export async function getQuoteFormSectionData(): Promise<QuoteFormSectionData> {
+  if (!isDatabaseConfigured()) return DEFAULT_QUOTE_FORM_SECTION;
+
+  try {
+    const data = await withTimeout<any>(
+      (prisma as any).quoteFormContent.findUnique({
+        where: { id: "default" },
+      })
+    );
+    if (data) {
+      return {
+        eyebrow: data.eyebrow || DEFAULT_QUOTE_FORM_SECTION.eyebrow,
+        headingPrimary: data.headingPrimary || DEFAULT_QUOTE_FORM_SECTION.headingPrimary,
+        headingAccent: data.headingAccent || DEFAULT_QUOTE_FORM_SECTION.headingAccent,
+        description: data.description || DEFAULT_QUOTE_FORM_SECTION.description,
+        serviceNoteLead: data.serviceNoteLead || DEFAULT_QUOTE_FORM_SECTION.serviceNoteLead,
+        serviceNoteText: data.serviceNoteText || DEFAULT_QUOTE_FORM_SECTION.serviceNoteText,
+        disclaimer: data.disclaimer || DEFAULT_QUOTE_FORM_SECTION.disclaimer,
+      };
+    }
+  } catch (error) {
+    console.warn("Failed to fetch quote form content from DB, using fallback defaults.", error);
+  }
+  return DEFAULT_QUOTE_FORM_SECTION;
+}
+
+
 
 
 

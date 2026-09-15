@@ -253,45 +253,26 @@ export default function AdminIndustriesPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F6F9FC] text-slate-800 p-4 sm:p-8">
-      <div className="max-w-6xl mx-auto space-y-8">
+    <div className="min-h-screen bg-[#F6F9FC] text-slate-800 p-3 sm:p-5">
+      <div className="max-w-6xl mx-auto space-y-4">
         
-        {/* Top Admin Navigation Tabs */}
-        <div className="flex items-center gap-2 border-b border-slate-200 pb-3">
-          <Link
-            href="/admin/services"
-            className="px-4 py-2 rounded-xl text-xs font-bold text-slate-600 hover:text-brand-blue hover:bg-white transition-colors"
-          >
-            Services Grid
-          </Link>
-          <Link
-            href="/admin/industries"
-            className="px-4 py-2 rounded-xl text-xs font-extrabold bg-brand-blue text-white shadow-xs"
-          >
-            Who We Serve (Industries)
-          </Link>
-        </div>
-
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white px-4 py-3.5 sm:px-5 rounded-xl border border-slate-200/60 shadow-2xs">
           <div>
-            <span className="text-xs font-black tracking-widest text-brand-blue uppercase block mb-1">
-              ADMIN CONTROL PANEL
-            </span>
-            <h1 className="text-2xl sm:text-3xl font-black text-[#071A2E]">
-              Who We Serve — Industry Tags Management
+            <h1 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight">
+              Who We Serve (Industry Tags)
             </h1>
-            <p className="text-xs sm:text-sm text-slate-500 mt-1">
-              Manage the Who We Serve section header, paragraph copy, CTA button text, and industry tag items.
+            <p className="text-xs text-slate-500 mt-0.5">
+              Manage section copy and industry tag badges
             </p>
           </div>
 
           <button
             onClick={openCreateForm}
-            className="inline-flex items-center gap-2 bg-brand-blue hover:bg-[#0878D1] text-white font-extrabold px-4 py-2.5 rounded-xl text-sm shadow-sm transition-colors shrink-0"
+            className="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white font-semibold px-3.5 py-2 rounded-lg text-xs transition-colors shrink-0 cursor-pointer shadow-2xs"
           >
-            <Plus className="w-4 h-4" />
-            <span>Add New Industry Tag</span>
+            <Plus className="w-3.5 h-3.5" />
+            <span>Add Industry Tag</span>
           </button>
         </div>
 
@@ -431,11 +412,11 @@ export default function AdminIndustriesPage() {
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="border-b border-slate-200 text-[10px] font-black uppercase text-slate-400 tracking-wider">
-                    <th className="py-3 px-3 w-16">Order</th>
-                    <th className="py-3 px-3">Industry Tag Label</th>
-                    <th className="py-3 px-3 w-36">Icon</th>
-                    <th className="py-3 px-3 w-36 text-right">Actions</th>
+                  <tr className="border-b border-slate-200/70 text-[10px] font-black uppercase text-slate-400 tracking-wider">
+                    <th className="py-3.5 px-4 w-20">Pos</th>
+                    <th className="py-3.5 px-4">Industry Tag Label</th>
+                    <th className="py-3.5 px-4 w-36">Icon</th>
+                    <th className="py-3.5 px-4 w-24 text-right">Actions</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100 text-xs">
@@ -443,27 +424,27 @@ export default function AdminIndustriesPage() {
                     const IconComp = AVAILABLE_ICONS.find((i) => i.value === tag.icon)?.icon || Building2;
 
                     return (
-                      <tr key={tag.id} className="hover:bg-slate-50/80 transition-colors">
-                        {/* Reorder & Order Number */}
-                        <td className="py-3 px-3 font-bold text-slate-700">
-                          <div className="flex items-center gap-1">
-                            <span className="w-5 text-center font-extrabold text-[#071A2E]">
-                              {String(tag.order || index + 1).padStart(2, "0")}
+                      <tr key={tag.id} className="group hover:bg-slate-50/60 transition-colors duration-150">
+                        {/* Reorder & Order Position */}
+                        <td className="py-3.5 px-4">
+                          <div className="flex items-center gap-1.5">
+                            <span className="w-6 h-6 rounded-md bg-slate-100 text-slate-500 text-[11px] font-bold flex items-center justify-center border border-slate-200/60">
+                              #{tag.order || index + 1}
                             </span>
-                            <div className="flex flex-col gap-0.5">
+                            <div className="flex flex-col gap-0.5 opacity-40 group-hover:opacity-100 transition-opacity">
                               <button
                                 onClick={() => handleReorder(index, "up")}
                                 disabled={index === 0}
-                                className="p-0.5 text-slate-400 hover:text-brand-blue disabled:opacity-30 disabled:hover:text-slate-400"
-                                title="Move up"
+                                className="p-0.5 text-slate-400 hover:text-brand-blue disabled:opacity-20 cursor-pointer"
+                                title="Move Up"
                               >
                                 <MoveUp className="w-3 h-3" />
                               </button>
                               <button
                                 onClick={() => handleReorder(index, "down")}
                                 disabled={index === tags.length - 1}
-                                className="p-0.5 text-slate-400 hover:text-brand-blue disabled:opacity-30 disabled:hover:text-slate-400"
-                                title="Move down"
+                                className="p-0.5 text-slate-400 hover:text-brand-blue disabled:opacity-20 cursor-pointer"
+                                title="Move Down"
                               >
                                 <MoveDown className="w-3 h-3" />
                               </button>
@@ -472,34 +453,38 @@ export default function AdminIndustriesPage() {
                         </td>
 
                         {/* Label */}
-                        <td className="py-3 px-3 font-extrabold text-[#071A2E] text-sm">
+                        <td className="py-3.5 px-4 font-bold text-slate-900 text-sm">
                           {tag.label}
                         </td>
 
                         {/* Icon */}
-                        <td className="py-3 px-3">
-                          <div className="inline-flex items-center gap-1.5 bg-[#E5F3FA] text-brand-blue font-bold px-2.5 py-1 rounded-lg border border-[#CDE6F5]">
-                            <IconComp className="w-3.5 h-3.5" />
-                            <span className="text-[11px] capitalize">{tag.icon}</span>
+                        <td className="py-3.5 px-4">
+                          <div className="inline-flex items-center gap-2 text-slate-700 font-semibold text-xs">
+                            <div className="w-8 h-8 rounded-lg bg-sky-50 text-brand-blue border border-sky-100 flex items-center justify-center shrink-0">
+                              <IconComp className="w-4 h-4" />
+                            </div>
+                            <span className="capitalize text-slate-600 text-xs">{tag.icon}</span>
                           </div>
                         </td>
 
                         {/* Actions */}
-                        <td className="py-3 px-3 text-right space-x-1">
-                          <button
-                            onClick={() => openEditForm(tag)}
-                            className="p-1.5 rounded-lg text-slate-600 hover:text-brand-blue hover:bg-sky-50 transition-colors"
-                            title="Edit Tag"
-                          >
-                            <Edit2 className="w-4 h-4" />
-                          </button>
-                          <button
-                            onClick={() => setDeleteTarget(tag)}
-                            className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors"
-                            title="Delete Tag"
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </button>
+                        <td className="py-3.5 px-4 text-right">
+                          <div className="inline-flex items-center gap-1">
+                            <button
+                              onClick={() => openEditForm(tag)}
+                              className="p-1.5 rounded-lg text-slate-400 hover:text-brand-blue hover:bg-sky-50 transition-colors cursor-pointer"
+                              title="Edit Tag"
+                            >
+                              <Edit2 className="w-4 h-4" />
+                            </button>
+                            <button
+                              onClick={() => setDeleteTarget(tag)}
+                              className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer"
+                              title="Delete Tag"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </button>
+                          </div>
                         </td>
                       </tr>
                     );
@@ -549,7 +534,7 @@ export default function AdminIndustriesPage() {
                     <select
                       value={formData.icon}
                       onChange={(e) => setFormData({ ...formData, icon: e.target.value })}
-                      className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm font-medium focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue outline-hidden"
+                      className="w-full appearance-none bg-no-repeat bg-[right_0.75rem_center] bg-[length:1rem_1rem] bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%2364748b%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22m6%209%206%206%206-6%22%2F%3E%3C%2Fsvg%3E')] px-3 py-2 pr-9 rounded-xl border border-slate-200 text-sm font-medium text-slate-800 bg-white focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue outline-hidden transition-all cursor-pointer shadow-2xs"
                     >
                       {AVAILABLE_ICONS.map((opt) => (
                         <option key={opt.value} value={opt.value}>

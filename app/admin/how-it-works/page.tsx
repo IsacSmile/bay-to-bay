@@ -222,57 +222,28 @@ export default function AdminHowItWorksPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F6F9FC] text-slate-800 p-4 sm:p-8">
-      <div className="max-w-6xl mx-auto space-y-8">
+    <div className="min-h-screen bg-[#F6F9FC] text-slate-800 p-3 sm:p-5">
+      <div className="max-w-6xl mx-auto space-y-4">
         
-        {/* Top Admin Navigation Tabs */}
-        <div className="flex flex-wrap items-center gap-2 border-b border-slate-200 pb-3">
-          <Link
-            href="/admin/services"
-            className="px-4 py-2 rounded-xl text-xs font-bold text-slate-600 hover:text-brand-blue hover:bg-white transition-colors"
-          >
-            Services Grid
-          </Link>
-          <Link
-            href="/admin/industries"
-            className="px-4 py-2 rounded-xl text-xs font-bold text-slate-600 hover:text-brand-blue hover:bg-white transition-colors"
-          >
-            Who We Serve (Industries)
-          </Link>
-          <Link
-            href="/admin/why-us"
-            className="px-4 py-2 rounded-xl text-xs font-bold text-slate-600 hover:text-brand-blue hover:bg-white transition-colors"
-          >
-            Why Us (Reasons)
-          </Link>
-          <Link
-            href="/admin/how-it-works"
-            className="px-4 py-2 rounded-xl text-xs font-extrabold bg-brand-blue text-white shadow-xs"
-          >
-            How It Works (Steps)
-          </Link>
-        </div>
+
 
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white px-4 py-3.5 sm:px-5 rounded-xl border border-slate-200/60 shadow-2xs">
           <div>
-            <span className="text-xs font-black tracking-widest text-brand-blue uppercase block mb-1">
-              ADMIN CONTROL PANEL
-            </span>
-            <h1 className="text-2xl sm:text-3xl font-black text-[#071A2E]">
-              How It Works — Step Sequence Management
+            <h1 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight">
+              How It Works (Steps)
             </h1>
-            <p className="text-xs sm:text-sm text-slate-500 mt-1">
-              Manage section headlines, description text, CTA link, and ordered dispatch sequence steps.
+            <p className="text-xs text-slate-500 mt-0.5">
+              Manage dispatch process steps and order sequence
             </p>
           </div>
 
           <button
             onClick={openCreateForm}
-            className="inline-flex items-center gap-2 bg-brand-blue hover:bg-[#0878D1] text-white font-extrabold px-4 py-2.5 rounded-xl text-sm shadow-sm transition-colors shrink-0"
+            className="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white font-semibold px-3.5 py-2 rounded-lg text-xs transition-colors shrink-0 cursor-pointer shadow-2xs"
           >
-            <Plus className="w-4 h-4" />
-            <span>Add New Step</span>
+            <Plus className="w-3.5 h-3.5" />
+            <span>Add Step</span>
           </button>
         </div>
 

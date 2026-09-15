@@ -165,6 +165,38 @@ model HowItWorksStep {
   updatedAt   DateTime @updatedAt
 }
 
+model QuoteFormContent {
+  id               String   @id @default("default")
+  eyebrow          String   @default("REQUEST A QUOTE")
+  headingPrimary   String   @default("Tell us the route.")
+  headingAccent    String   @default("We'll help plan the run.")
+  description      String   @default("Share a few details about your pickup, delivery, and shipment. We'll contact you to discuss the right service arrangement.")
+  serviceNoteLead  String   @default("Service note:")
+  serviceNoteText  String   @default("12-hour options and medical/pharmacy supply delivery are subject to route, pickup time, shipment, handling, and service requirements.")
+  disclaimer       String   @default("No price calculator is shown. We'll review the route and shipment details with you directly.")
+  updatedAt        DateTime @updatedAt
+}
+
+model QuoteRequest {
+  id               String   @id @default(uuid())
+  fullName         String
+  companyName      String?
+  phone            String
+  email            String
+  pickupLocation   String
+  deliveryLocation String
+  preferredDate    String
+  frequency        String   @default("One time")
+  packageCount     String?
+  approxWeight     String?
+  typeOfGoods      String?
+  additionalInfo   String?
+  status           String   @default("new")
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+
 
 
 

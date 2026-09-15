@@ -138,6 +138,14 @@ export const Footer: React.FC<FooterProps> = ({
             <span className="hover:text-slate-300 transition-colors">Privacy Policy</span>
             <span className="hover:text-slate-300 transition-colors">Terms of Service</span>
             <span className="hover:text-slate-300 transition-colors">Accessibility</span>
+            <a
+              href="/admin/quotes"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-slate-500 hover:text-brand-bright font-bold transition-colors border-l border-slate-700 pl-4"
+            >
+              Admin Panel
+            </a>
           </div>
         </div>
 

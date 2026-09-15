@@ -468,6 +468,68 @@ async function main() {
     });
   }
 
+  // 10. Quote Form Content & Sample Quote Submissions
+  await (prisma as any).quoteFormContent.upsert({
+    where: { id: "default" },
+    update: {
+      eyebrow: "REQUEST A QUOTE",
+      headingPrimary: "Tell us the route.",
+      headingAccent: "We'll help plan the run.",
+      description: "Share a few details about your pickup, delivery, and shipment. We'll contact you to discuss the right service arrangement.",
+      serviceNoteLead: "Service note:",
+      serviceNoteText: "12-hour options and medical/pharmacy supply delivery are subject to route, pickup time, shipment, handling, and service requirements.",
+      disclaimer: "No price calculator is shown. We'll review the route and shipment details with you directly.",
+    },
+    create: {
+      id: "default",
+      eyebrow: "REQUEST A QUOTE",
+      headingPrimary: "Tell us the route.",
+      headingAccent: "We'll help plan the run.",
+      description: "Share a few details about your pickup, delivery, and shipment. We'll contact you to discuss the right service arrangement.",
+      serviceNoteLead: "Service note:",
+      serviceNoteText: "12-hour options and medical/pharmacy supply delivery are subject to route, pickup time, shipment, handling, and service requirements.",
+      disclaimer: "No price calculator is shown. We'll review the route and shipment details with you directly.",
+    },
+  });
+
+  const countQuotes = await (prisma as any).quoteRequest.count();
+  if (countQuotes === 0) {
+    await (prisma as any).quoteRequest.createMany({
+      data: [
+        {
+          fullName: "Sarah Jenkins",
+          companyName: "Northern Health Logistics",
+          phone: "705-978-3001",
+          email: "sjenkins@nhlogistics.ca",
+          pickupLocation: "North Bay Regional Hospital",
+          deliveryLocation: "Timmins District Hospital",
+          preferredDate: "2026-09-20",
+          frequency: "Twice weekly",
+          packageCount: "4 boxes",
+          approxWeight: "35 kg",
+          typeOfGoods: "Medical Supplies & Diagnostic Samples",
+          additionalInfo: "Requires temperature-controlled storage during transit.",
+          status: "new",
+        },
+        {
+          fullName: "Marc Tremblay",
+          companyName: "Hearst Mining Equipment",
+          phone: "705-372-1144",
+          email: "mtremblay@hearstmining.ca",
+          pickupLocation: "Kirkland Lake Branch",
+          deliveryLocation: "Hearst Highway 11 Yard",
+          preferredDate: "2026-09-22",
+          frequency: "One time",
+          packageCount: "2 pallets",
+          approxWeight: "120 kg",
+          typeOfGoods: "Replacement Machinery Parts",
+          additionalInfo: "Tailgate drop-off needed at Hearst yard.",
+          status: "contacted",
+        },
+      ],
+    });
+  }
+
   console.log("Seeding finished successfully!");
 }
 

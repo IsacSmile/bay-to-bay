@@ -8,13 +8,15 @@ import { BusinessSolutions } from "@/components/BusinessSolutions";
 import { WhoWeServe } from "@/components/WhoWeServe";
 import { WhyUs } from "@/components/WhyUs";
 import { HowItWorks } from "@/components/HowItWorks";
+import { QuoteForm } from "@/components/QuoteForm";
 import { QuoteCTA } from "@/components/sections/QuoteCTA";
 import { Footer } from "@/components/Footer";
-import { getAnnouncementData, getContactData } from "@/lib/prisma";
+import { getAnnouncementData, getContactData, getQuoteFormSectionData } from "@/lib/prisma";
 
 export default async function HomePage() {
   const announcement = await getAnnouncementData();
   const contact = await getContactData();
+  const quoteContent = await getQuoteFormSectionData();
 
   return (
     <div className="min-h-screen flex flex-col bg-[#F6F9FC]">
@@ -53,6 +55,9 @@ export default async function HomePage() {
 
       {/* How It Works */}
       <HowItWorks />
+
+      {/* Quote Request Form */}
+      <QuoteForm content={quoteContent} contact={contact} />
 
       {/* Quote Call-to-Action */}
       <QuoteCTA phone={contact.phone} />
