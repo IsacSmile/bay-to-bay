@@ -3,6 +3,7 @@ import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { ServiceHighlights } from "@/components/sections/ServiceHighlights";
 import { ServiceArea } from "@/components/ServiceArea";
+import { ServicesGrid } from "@/components/services/ServicesGrid";
 import { QuoteCTA } from "@/components/sections/QuoteCTA";
 import { Footer } from "@/components/Footer";
 import { getAnnouncementData, getContactData } from "@/lib/prisma";
@@ -33,6 +34,9 @@ export default async function HomePage() {
 
       {/* Service Area — Animated Route Map */}
       <ServiceArea />
+
+      {/* Delivery Solutions — Services Grid */}
+      <ServicesGrid />
 
       {/* Quote Call-to-Action */}
       <QuoteCTA phone={contact.phone} />

@@ -358,3 +358,169 @@ export async function getSnowfallEnabled(): Promise<boolean> {
   const theme = await getThemeSettings();
   return theme.snowfallEnabled;
 }
+
+// Services Section Types & Data
+export interface ServicesSectionData {
+  eyebrow: string;
+  headingPrimary: string;
+  headingAccent: string;
+  description: string;
+}
+
+export interface ServiceItemData {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+  order: number;
+  isPriority: boolean;
+}
+
+export const DEFAULT_SERVICES_SECTION: ServicesSectionData = {
+  eyebrow: "DELIVERY SOLUTIONS",
+  headingPrimary: "Built around the way",
+  headingAccent: "your business moves.",
+  description:
+    "From pharmacy supplies to legal documents, our focus is simple: dependable small-goods delivery that fits the route, the schedule, and the shipment requirements.",
+};
+
+export const DEFAULT_SERVICES_ITEMS: ServiceItemData[] = [
+  {
+    id: "1",
+    title: "Medical & Pharmacy Supply Delivery",
+    description:
+      "Move pharmacy supplies, medical items, and small healthcare shipments where they need to go—subject to route and handling requirements.",
+    icon: "activity",
+    order: 1,
+    isPriority: true,
+  },
+  {
+    id: "2",
+    title: "Small Goods Delivery",
+    description:
+      "Focused transportation for parcels, supplies, retail items, and other manageable small shipments.",
+    icon: "package",
+    order: 2,
+    isPriority: false,
+  },
+  {
+    id: "3",
+    title: "Dedicated Delivery Services",
+    description:
+      "A direct delivery solution designed around your shipment, route, and preferred timing.",
+    icon: "truck",
+    order: 3,
+    isPriority: false,
+  },
+  {
+    id: "4",
+    title: "Scheduled Route Delivery",
+    description:
+      "Twice-weekly service options connecting key Northern Ontario communities on a dependable schedule.",
+    icon: "calendar",
+    order: 4,
+    isPriority: false,
+  },
+  {
+    id: "5",
+    title: "Recurring Business Deliveries",
+    description:
+      "Set up weekly, twice-weekly, monthly, or customized recurring pickups and drop-offs.",
+    icon: "repeat",
+    order: 5,
+    isPriority: false,
+  },
+  {
+    id: "6",
+    title: "Legal & Business Documents",
+    description:
+      "Professional movement of documents and small business materials between locations.",
+    icon: "file-text",
+    order: 6,
+    isPriority: false,
+  },
+  {
+    id: "7",
+    title: "Retail & Small-Goods Delivery",
+    description:
+      "Help your retail operation keep stock and small orders moving across the route.",
+    icon: "store",
+    order: 7,
+    isPriority: false,
+  },
+  {
+    id: "8",
+    title: "Business-to-Business Delivery",
+    description:
+      "Reliable regional transportation built around the way Northern Ontario businesses operate.",
+    icon: "building-2",
+    order: 8,
+    isPriority: false,
+  },
+  {
+    id: "9",
+    title: "Secure Business Transfers",
+    description:
+      "Discuss secure document, deposit, or small-goods transfers where the shipment and service requirements fit.",
+    icon: "shield-check",
+    order: 9,
+    isPriority: false,
+  },
+  {
+    id: "10",
+    title: "Custom & Special Shipment Requests",
+    description:
+      "Tailored transport arrangements for unique cargo size, handling, or timing constraints.",
+    icon: "sparkles",
+    order: 10,
+    isPriority: false,
+  },
+];
+
+export async function getServicesSectionData(): Promise<ServicesSectionData> {
+  if (!isDatabaseConfigured()) return DEFAULT_SERVICES_SECTION;
+
+  try {
+    const data = await withTimeout(
+      prisma.servicesSectionContent.findUnique({
+        where: { id: "default" },
+      })
+    );
+    if (data) {
+      return {
+        eyebrow: data.eyebrow || DEFAULT_SERVICES_SECTION.eyebrow,
+        headingPrimary: data.headingPrimary || DEFAULT_SERVICES_SECTION.headingPrimary,
+        headingAccent: data.headingAccent || DEFAULT_SERVICES_SECTION.headingAccent,
+        description: data.description || DEFAULT_SERVICES_SECTION.description,
+      };
+    }
+  } catch (error) {
+    console.warn("Failed to fetch services section content from DB, using defaults.", error);
+  }
+  return DEFAULT_SERVICES_SECTION;
+}
+
+export async function getServicesData(): Promise<ServiceItemData[]> {
+  if (!isDatabaseConfigured()) return DEFAULT_SERVICES_ITEMS;
+
+  try {
+    const services = await withTimeout(
+      prisma.serviceItem.findMany({
+        orderBy: { order: "asc" },
+      })
+    );
+    if (services && services.length > 0) {
+      return services.map((s) => ({
+        id: s.id,
+        title: s.title,
+        description: s.description,
+        icon: s.icon,
+        order: s.order,
+        isPriority: s.isPriority,
+      }));
+    }
+  } catch (error) {
+    console.warn("Failed to fetch service items from DB, using fallback defaults.", error);
+  }
+  return DEFAULT_SERVICES_ITEMS;
+}

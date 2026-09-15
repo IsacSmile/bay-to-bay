@@ -166,6 +166,118 @@ async function main() {
     },
   });
 
+  // Services Section Content
+  await prisma.servicesSectionContent.upsert({
+    where: { id: "default" },
+    update: {
+      eyebrow: "DELIVERY SOLUTIONS",
+      headingPrimary: "Built around the way",
+      headingAccent: "your business moves.",
+      description:
+        "From pharmacy supplies to legal documents, our focus is simple: dependable small-goods delivery that fits the route, the schedule, and the shipment requirements.",
+    },
+    create: {
+      id: "default",
+      eyebrow: "DELIVERY SOLUTIONS",
+      headingPrimary: "Built around the way",
+      headingAccent: "your business moves.",
+      description:
+        "From pharmacy supplies to legal documents, our focus is simple: dependable small-goods delivery that fits the route, the schedule, and the shipment requirements.",
+    },
+  });
+
+  // Service Items (Delete and re-seed defaults)
+  await prisma.serviceItem.deleteMany({});
+
+  const defaultServices = [
+    {
+      title: "Medical & Pharmacy Supply Delivery",
+      description:
+        "Move pharmacy supplies, medical items, and small healthcare shipments where they need to go—subject to route and handling requirements.",
+      icon: "activity",
+      order: 1,
+      isPriority: true,
+    },
+    {
+      title: "Small Goods Delivery",
+      description:
+        "Focused transportation for parcels, supplies, retail items, and other manageable small shipments.",
+      icon: "package",
+      order: 2,
+      isPriority: false,
+    },
+    {
+      title: "Dedicated Delivery Services",
+      description:
+        "A direct delivery solution designed around your shipment, route, and preferred timing.",
+      icon: "truck",
+      order: 3,
+      isPriority: false,
+    },
+    {
+      title: "Scheduled Route Delivery",
+      description:
+        "Twice-weekly service options connecting key Northern Ontario communities on a dependable schedule.",
+      icon: "calendar",
+      order: 4,
+      isPriority: false,
+    },
+    {
+      title: "Recurring Business Deliveries",
+      description:
+        "Set up weekly, twice-weekly, monthly, or customized recurring pickups and drop-offs.",
+      icon: "repeat",
+      order: 5,
+      isPriority: false,
+    },
+    {
+      title: "Legal & Business Documents",
+      description:
+        "Professional movement of documents and small business materials between locations.",
+      icon: "file-text",
+      order: 6,
+      isPriority: false,
+    },
+    {
+      title: "Retail & Small-Goods Delivery",
+      description:
+        "Help your retail operation keep stock and small orders moving across the route.",
+      icon: "store",
+      order: 7,
+      isPriority: false,
+    },
+    {
+      title: "Business-to-Business Delivery",
+      description:
+        "Reliable regional transportation built around the way Northern Ontario businesses operate.",
+      icon: "building-2",
+      order: 8,
+      isPriority: false,
+    },
+    {
+      title: "Secure Business Transfers",
+      description:
+        "Discuss secure document, deposit, or small-goods transfers where the shipment and service requirements fit.",
+      icon: "shield-check",
+      order: 9,
+      isPriority: false,
+    },
+    {
+      title: "Custom & Special Shipment Requests",
+      description:
+        "Tailored transport arrangements for unique cargo size, handling, or timing constraints.",
+      icon: "sparkles",
+      order: 10,
+      isPriority: false,
+    },
+  ];
+
+  for (const item of defaultServices) {
+    await prisma.serviceItem.create({
+      data: item,
+    });
+  }
+
   console.log("Seeding finished successfully!");
 }
 
