@@ -31,12 +31,12 @@ async function main() {
     where: { id: "default" },
     update: {
       phone: "705-978-3001",
-      email: "info@baytobayexpress.ca",
+      email: "baytobayexpress@gmail.com",
     },
     create: {
       id: "default",
       phone: "705-978-3001",
-      email: "info@baytobayexpress.ca",
+      email: "baytobayexpress@gmail.com",
     },
   });
 
@@ -669,7 +669,7 @@ async function main() {
         "Call or email Bay to Bay Express to discuss a delivery, recurring route, or pharmacy supply shipment.",
       phoneText: "705-978-3001",
       emailLabel: "Email us",
-      emailAddress: "info@baytobayexpress.ca",
+      emailAddress: "baytobayexpress@gmail.com",
       brandLogoText: "Bay to Bay EXPRESS INC.",
     },
     create: {
@@ -680,7 +680,7 @@ async function main() {
         "Call or email Bay to Bay Express to discuss a delivery, recurring route, or pharmacy supply shipment.",
       phoneText: "705-978-3001",
       emailLabel: "Email us",
-      emailAddress: "info@baytobayexpress.ca",
+      emailAddress: "baytobayexpress@gmail.com",
       brandLogoText: "Bay to Bay EXPRESS INC.",
     },
   });

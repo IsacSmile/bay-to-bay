@@ -11,7 +11,7 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = ({
   phone = "705-978-3001",
-  email = "info@baytobayexpress.ca",
+  email = "baytobayexpress@gmail.com",
   snowfallEnabled = true,
 }) => {
   const telLink = `tel:${phone.replace(/[^\d+]/g, "")}`;
@@ -30,7 +30,7 @@ export const Footer: React.FC<FooterProps> = ({
             <a href="/" className="flex items-center gap-3 shrink-0">
               <Image
                 src="/bay-to-bay-logo.webp"
-                alt="Bay to Bay Express Inc."
+                alt="Bay to Bay Express Inc. Northern Ontario Courier & Small Goods Delivery"
                 width={40}
                 height={40}
                 className="h-9 w-9 object-contain"

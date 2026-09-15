@@ -17,7 +17,7 @@ model SiteSettings {
 model ContactDetails {
   id        String   @id @default("default")
   phone     String   @default("705-978-3001")
-  email     String?  @default("info@baytobayexpress.ca")
+  email     String?  @default("baytobayexpress@gmail.com")
   updatedAt DateTime @updatedAt
 }
 
@@ -241,7 +241,7 @@ model QuoteCtaContent {
   description   String   @default("Call or email Bay to Bay Express to discuss a delivery, recurring route, or pharmacy supply shipment.")
   phoneText     String   @default("705-978-3001")
   emailLabel    String   @default("Email us")
-  emailAddress  String   @default("info@baytobayexpress.ca")
+  emailAddress  String   @default("baytobayexpress@gmail.com")
   brandLogoText String   @default("Bay to Bay EXPRESS INC.")
   updatedAt     DateTime @updatedAt
 }

@@ -13,6 +13,7 @@ import { About } from "@/components/About";
 import { FAQ } from "@/components/FAQ";
 import { QuoteCTA } from "@/components/sections/QuoteCTA";
 import { Footer } from "@/components/Footer";
+import { JsonLd } from "@/components/JsonLd";
 import {
   getAnnouncementData,
   getContactData,
@@ -38,6 +39,9 @@ export default async function HomePage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#F6F9FC]">
+      {/* Search Engine JSON-LD Structured Data */}
+      <JsonLd />
+
       {/* Top Announcement Bar */}
       <AnnouncementBar items={announcement.items} />
 

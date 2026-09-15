@@ -102,7 +102,7 @@ export const DEFAULT_ANNOUNCEMENT: AnnouncementData = {
 
 export const DEFAULT_CONTACT: ContactData = {
   phone: "705-978-3001",
-  email: "info@baytobayexpress.ca",
+  email: "baytobayexpress@gmail.com",
 };
 
 export const DEFAULT_HERO: HeroData = {
@@ -1156,7 +1156,7 @@ export const DEFAULT_QUOTE_CTA: QuoteCtaData = {
     "Call or email Bay to Bay Express to discuss a delivery, recurring route, or pharmacy supply shipment.",
   phoneText: "705-978-3001",
   emailLabel: "Email us",
-  emailAddress: "info@baytobayexpress.ca",
+  emailAddress: "baytobayexpress@gmail.com",
   brandLogoText: "Bay to Bay EXPRESS INC.",
 };
 

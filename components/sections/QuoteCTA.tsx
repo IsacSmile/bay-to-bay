@@ -13,7 +13,7 @@ export interface QuoteCTAProps {
 export const QuoteCTA: React.FC<QuoteCTAProps> = ({ content, phone, email }) => {
   const data: QuoteCtaData = content || DEFAULT_QUOTE_CTA;
   const activePhone = phone || data.phoneText || "705-978-3001";
-  const activeEmail = email || data.emailAddress || "info@baytobayexpress.ca";
+  const activeEmail = email || data.emailAddress || "baytobayexpress@gmail.com";
   const telLink = `tel:${activePhone.replace(/[^\d+]/g, "")}`;
   const mailtoLink = `mailto:${activeEmail}`;
 
@@ -87,7 +87,7 @@ export const QuoteCTA: React.FC<QuoteCTAProps> = ({ content, phone, email }) => 
             <div className="flex items-center gap-2.5 pl-1 sm:pl-0">
               <Image
                 src="/bay-to-bay-logo.webp"
-                alt="Bay to Bay Express Inc."
+                alt="Bay to Bay Express Inc. Northern Ontario Courier Service"
                 width={32}
                 height={32}
                 className="h-8 w-8 object-contain shrink-0"

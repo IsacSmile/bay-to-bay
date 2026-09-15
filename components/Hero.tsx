@@ -67,7 +67,7 @@ export async function Hero() {
           {/* 1.1 Desktop Background Photo with brightness(0.85) saturate(1.05) filter */}
           <Image
             src="/hero-bg.jpg"
-            alt="Delivery van in dusk Northern Ontario winter landscape"
+            alt="Northern Ontario courier delivery van on Highway 11 corridor connecting North Bay, Timmins, Kirkland Lake, Cochrane, Kapuskasing, Hearst, and Longlac"
             fill
             priority
             sizes="100vw"

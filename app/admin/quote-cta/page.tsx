@@ -21,7 +21,7 @@ export default function AdminQuoteCtaPage() {
       "Call or email Bay to Bay Express to discuss a delivery, recurring route, or pharmacy supply shipment.",
     phoneText: "705-978-3001",
     emailLabel: "Email us",
-    emailAddress: "info@baytobayexpress.ca",
+    emailAddress: "baytobayexpress@gmail.com",
     brandLogoText: "Bay to Bay EXPRESS INC.",
   });
 
@@ -48,7 +48,7 @@ export default function AdminQuoteCtaPage() {
               "Call or email Bay to Bay Express to discuss a delivery, recurring route, or pharmacy supply shipment.",
             phoneText: data.phoneText || "705-978-3001",
             emailLabel: data.emailLabel || "Email us",
-            emailAddress: data.emailAddress || "info@baytobayexpress.ca",
+            emailAddress: data.emailAddress || "baytobayexpress@gmail.com",
             brandLogoText: data.brandLogoText || "Bay to Bay EXPRESS INC.",
           });
         }

@@ -121,7 +121,7 @@ export const RouteMap: React.FC<RouteMapProps> = ({
       {/* Background Image */}
       <Image
         src="/bay-to-bay-route.webp"
-        alt="Northern Ontario Highway 11 Service Area Route Map"
+        alt="Northern Ontario courier service area map connecting North Bay, Kirkland Lake, Timmins, Cochrane, Kapuskasing, Hearst, and Longlac"
         fill
         priority
         sizes="(max-width: 1024px) 100vw, 55vw"

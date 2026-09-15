@@ -51,7 +51,7 @@ export const Navbar: React.FC<NavbarProps> = ({ phone = "705-978-3001" }) => {
           >
             <Image
               src="/bay-to-bay-logo.webp"
-              alt="Bay to Bay Express Inc."
+              alt="Bay to Bay Express Inc. - Northern Ontario Courier Service"
               width={36}
               height={36}
               priority

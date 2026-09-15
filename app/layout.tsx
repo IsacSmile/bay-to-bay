@@ -17,20 +17,81 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
+  maximumScale: 5,
 };
 
 export const metadata: Metadata = {
-  title: "Bay to Bay Express Inc. | Northern Ontario Courier Service",
+  metadataBase: new URL("https://baytobayexpress.com"),
+  title: {
+    default: "Northern Ontario Courier & Delivery Services | Bay to Bay Express",
+    template: "%s | Bay to Bay Express Inc.",
+  },
   description:
-    "Dedicated and scheduled courier delivery solutions connecting North Bay, Kirkland Lake, Timmins, Cochrane, Kapuskasing, Hearst, and Longlac.",
+    "Leading Northern Ontario courier providing small goods delivery, dedicated delivery, and scheduled routes connecting North Bay, Kirkland Lake, Timmins, Cochrane, Kapuskasing, Hearst, and Longlac. Medical & business courier solutions.",
   keywords: [
-    "Northern Ontario Courier",
-    "North Bay to Hearst",
-    "Highway 11 Courier",
-    "Small goods delivery",
+    "Northern Ontario courier",
+    "North Bay courier",
+    "Timmins courier",
+    "Kirkland Lake delivery service",
+    "Cochrane courier",
+    "Kapuskasing courier",
+    "Hearst courier",
+    "Longlac courier",
+    "Northern Ontario delivery service",
+    "Small goods delivery Northern Ontario",
+    "Dedicated delivery Northern Ontario",
+    "Business courier Northern Ontario",
+    "Scheduled delivery Northern Ontario",
+    "Medical courier Northern Ontario",
+    "Highway 11 courier corridor",
+    "Bay to Bay Express Inc.",
   ],
+  authors: [{ name: "Bay to Bay Express Inc.", url: "https://baytobayexpress.com" }],
+  creator: "Bay to Bay Express Inc.",
+  publisher: "Bay to Bay Express Inc.",
+  formatDetection: {
+    telephone: true,
+    email: true,
+    address: true,
+  },
+  alternates: {
+    canonical: "https://baytobayexpress.com",
+  },
+  openGraph: {
+    title: "Northern Ontario Courier & Delivery Services | Bay to Bay Express",
+    description:
+      "Dedicated and scheduled small goods courier connecting North Bay, Kirkland Lake, Timmins, Cochrane, Kapuskasing, Hearst, and Longlac.",
+    url: "https://baytobayexpress.com",
+    siteName: "Bay to Bay Express Inc.",
+    locale: "en_CA",
+    type: "website",
+    images: [
+      {
+        url: "/bay-to-bay-logo.webp",
+        width: 1200,
+        height: 630,
+        alt: "Bay to Bay Express Inc. Northern Ontario Courier Service",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Northern Ontario Courier Services | Bay to Bay Express",
+    description:
+      "Scheduled & dedicated small goods delivery connecting North Bay, Kirkland Lake, Timmins, Cochrane, Kapuskasing, Hearst & Longlac.",
+    images: ["/bay-to-bay-logo.webp"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 };
 
 export default function RootLayout({

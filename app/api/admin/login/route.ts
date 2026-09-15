@@ -6,7 +6,7 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { email, password } = body;
 
-    const expectedEmail = process.env.ADMIN_EMAIL || "admin@baytobayexpress.ca";
+    const expectedEmail = process.env.ADMIN_EMAIL || "admin@baytobayexpress.com";
     const expectedPassword = process.env.ADMIN_PASSWORD || "BayToBayAdmin2026!";
 
     if (!email || !password) {
