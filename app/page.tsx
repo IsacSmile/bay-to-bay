@@ -9,14 +9,28 @@ import { WhoWeServe } from "@/components/WhoWeServe";
 import { WhyUs } from "@/components/WhyUs";
 import { HowItWorks } from "@/components/HowItWorks";
 import { QuoteForm } from "@/components/QuoteForm";
+import { About } from "@/components/About";
+import { FAQ } from "@/components/FAQ";
 import { QuoteCTA } from "@/components/sections/QuoteCTA";
 import { Footer } from "@/components/Footer";
-import { getAnnouncementData, getContactData, getQuoteFormSectionData } from "@/lib/prisma";
+import {
+  getAnnouncementData,
+  getContactData,
+  getQuoteFormSectionData,
+  getAboutContentData,
+  getAboutTagPillsData,
+  getFaqContentData,
+  getFaqItemsData,
+} from "@/lib/prisma";
 
 export default async function HomePage() {
   const announcement = await getAnnouncementData();
   const contact = await getContactData();
   const quoteContent = await getQuoteFormSectionData();
+  const aboutContent = await getAboutContentData();
+  const aboutTags = await getAboutTagPillsData();
+  const faqContent = await getFaqContentData();
+  const faqItems = await getFaqItemsData();
 
   return (
     <div className="min-h-screen flex flex-col bg-[#F6F9FC]">
@@ -58,6 +72,12 @@ export default async function HomePage() {
 
       {/* Quote Request Form */}
       <QuoteForm content={quoteContent} contact={contact} />
+
+      {/* About Section */}
+      <About content={aboutContent} tagPills={aboutTags} />
+
+      {/* FAQ Section */}
+      <FAQ content={faqContent} items={faqItems} />
 
       {/* Quote Call-to-Action */}
       <QuoteCTA phone={contact.phone} />

@@ -919,6 +919,227 @@ export async function getQuoteFormSectionData(): Promise<QuoteFormSectionData> {
   return DEFAULT_QUOTE_FORM_SECTION;
 }
 
+// About Section Types & Data
+export interface AboutContentData {
+  eyebrow: string;
+  headingPrimary: string;
+  headingAccent: string;
+  description: string;
+  quoteText: string;
+  quoteDescription: string;
+  attribution: string;
+}
+
+export interface AboutTagPillItem {
+  id: string;
+  label: string;
+  order: number;
+}
+
+export const DEFAULT_ABOUT_CONTENT: AboutContentData = {
+  eyebrow: "ABOUT BAY TO BAY",
+  headingPrimary: "Local routes.",
+  headingAccent: "Professional service.",
+  description:
+    "Bay to Bay Express Inc. is a Northern Ontario delivery and logistics company focused on reliable small-goods transportation and dedicated business delivery solutions. We connect communities across Northern Ontario through scheduled, recurring, and customized delivery services designed around the needs of local businesses and organizations.",
+  quoteText: "Reliable. Dedicated. Delivered.",
+  quoteDescription:
+    "A clear promise about how we approach scheduled, dedicated, and small-goods delivery across Northern Ontario.",
+  attribution: "BAY TO BAY EXPRESS INC.",
+};
+
+export const DEFAULT_ABOUT_TAG_PILLS: AboutTagPillItem[] = [
+  { id: "1", label: "Local", order: 1 },
+  { id: "2", label: "Professional", order: 2 },
+  { id: "3", label: "Reliable", order: 3 },
+  { id: "4", label: "Flexible", order: 4 },
+  { id: "5", label: "Business-focused", order: 5 },
+];
+
+export async function getAboutContentData(): Promise<AboutContentData> {
+  if (!isDatabaseConfigured()) return DEFAULT_ABOUT_CONTENT;
+
+  try {
+    const data = await withTimeout<any>(
+      (prisma as any).aboutContent.findUnique({
+        where: { id: "default" },
+      })
+    );
+    if (data) {
+      return {
+        eyebrow: data.eyebrow || DEFAULT_ABOUT_CONTENT.eyebrow,
+        headingPrimary: data.headingPrimary || DEFAULT_ABOUT_CONTENT.headingPrimary,
+        headingAccent: data.headingAccent || DEFAULT_ABOUT_CONTENT.headingAccent,
+        description: data.description || DEFAULT_ABOUT_CONTENT.description,
+        quoteText: data.quoteText || DEFAULT_ABOUT_CONTENT.quoteText,
+        quoteDescription: data.quoteDescription || DEFAULT_ABOUT_CONTENT.quoteDescription,
+        attribution: data.attribution || DEFAULT_ABOUT_CONTENT.attribution,
+      };
+    }
+  } catch (error) {
+    console.warn("Failed to fetch about content from DB, using fallback defaults.", error);
+  }
+  return DEFAULT_ABOUT_CONTENT;
+}
+
+export async function getAboutTagPillsData(): Promise<AboutTagPillItem[]> {
+  if (!isDatabaseConfigured()) return DEFAULT_ABOUT_TAG_PILLS;
+
+  try {
+    const tags = await withTimeout<any[]>(
+      (prisma as any).aboutTagPill.findMany({
+        orderBy: { order: "asc" },
+      })
+    );
+    if (tags && tags.length > 0) {
+      return tags.map((t) => ({
+        id: t.id,
+        label: t.label,
+        order: t.order,
+      }));
+    }
+  } catch (error) {
+    console.warn("Failed to fetch about tag pills from DB, using fallback defaults.", error);
+  }
+  return DEFAULT_ABOUT_TAG_PILLS;
+}
+
+// FAQ Section Types & Data
+export interface FaqContentData {
+  eyebrow: string;
+  headingPrimary: string;
+  headingAccent: string;
+  description: string;
+}
+
+export interface FaqItemData {
+  id: string;
+  question: string;
+  answer: string;
+  order: number;
+}
+
+export const DEFAULT_FAQ_CONTENT: FaqContentData = {
+  eyebrow: "COMMON QUESTIONS",
+  headingPrimary: "Good to know",
+  headingAccent: "before you book.",
+  description: "Clear details help us plan the right route and service arrangement for your shipment.",
+};
+
+export const DEFAULT_FAQ_ITEMS: FaqItemData[] = [
+  {
+    id: "1",
+    question: "What areas do you serve?",
+    answer:
+      "We currently focus on North Bay, Kirkland Lake, Timmins, Cochrane, Kapuskasing, Hearst and Longlac.",
+    order: 1,
+  },
+  {
+    id: "2",
+    question: "How often do you operate your routes?",
+    answer:
+      "Dedicated scheduled services are available twice weekly on applicable routes.",
+    order: 2,
+  },
+  {
+    id: "3",
+    question: "Do you provide small-goods delivery?",
+    answer:
+      "Yes. Small goods and business shipments are a primary focus of our service.",
+    order: 3,
+  },
+  {
+    id: "4",
+    question: "Do you provide recurring deliveries?",
+    answer:
+      "Yes. Businesses can discuss weekly, twice-weekly or customized recurring delivery arrangements.",
+    order: 4,
+  },
+  {
+    id: "5",
+    question: "Do you provide 12-hour delivery?",
+    answer:
+      "12-hour delivery options may be available depending on the route, pickup time, shipment and service requirements.",
+    order: 5,
+  },
+  {
+    id: "6",
+    question: "Do you provide dedicated deliveries?",
+    answer:
+      "Yes. Dedicated delivery solutions are available depending on the shipment and route.",
+    order: 6,
+  },
+  {
+    id: "7",
+    question: "How do I request a quote?",
+    answer:
+      "Complete the online quote form or contact Bay to Bay Express directly at 705-978-3001 or baytobayexpress@gmail.com.",
+    order: 7,
+  },
+  {
+    id: "8",
+    question: "Do you deliver medical or pharmacy supplies?",
+    answer:
+      "Medical and pharmacy-related deliveries may be available subject to shipment requirements, applicable regulations, handling requirements and service arrangements.",
+    order: 8,
+  },
+  {
+    id: "9",
+    question: "Can businesses establish recurring delivery services?",
+    answer:
+      "Yes. Contact us to discuss your route, frequency and delivery requirements.",
+    order: 9,
+  },
+];
+
+export async function getFaqContentData(): Promise<FaqContentData> {
+  if (!isDatabaseConfigured()) return DEFAULT_FAQ_CONTENT;
+
+  try {
+    const data = await withTimeout<any>(
+      (prisma as any).faqContent.findUnique({
+        where: { id: "default" },
+      })
+    );
+    if (data) {
+      return {
+        eyebrow: data.eyebrow || DEFAULT_FAQ_CONTENT.eyebrow,
+        headingPrimary: data.headingPrimary || DEFAULT_FAQ_CONTENT.headingPrimary,
+        headingAccent: data.headingAccent || DEFAULT_FAQ_CONTENT.headingAccent,
+        description: data.description || DEFAULT_FAQ_CONTENT.description,
+      };
+    }
+  } catch (error) {
+    console.warn("Failed to fetch FAQ content from DB, using fallback defaults.", error);
+  }
+  return DEFAULT_FAQ_CONTENT;
+}
+
+export async function getFaqItemsData(): Promise<FaqItemData[]> {
+  if (!isDatabaseConfigured()) return DEFAULT_FAQ_ITEMS;
+
+  try {
+    const items = await withTimeout<any[]>(
+      (prisma as any).faqItem.findMany({
+        orderBy: { order: "asc" },
+      })
+    );
+    if (items && items.length > 0) {
+      return items.map((i) => ({
+        id: i.id,
+        question: i.question,
+        answer: i.answer,
+        order: i.order,
+      }));
+    }
+  } catch (error) {
+    console.warn("Failed to fetch FAQ items from DB, using fallback defaults.", error);
+  }
+  return DEFAULT_FAQ_ITEMS;
+}
+
+
+
 
 
 

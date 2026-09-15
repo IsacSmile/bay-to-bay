@@ -530,6 +530,135 @@ async function main() {
     });
   }
 
+  // 11. About Section Content & Tag Pills
+  await (prisma as any).aboutContent.upsert({
+    where: { id: "default" },
+    update: {
+      eyebrow: "ABOUT BAY TO BAY",
+      headingPrimary: "Local routes.",
+      headingAccent: "Professional service.",
+      description:
+        "Bay to Bay Express Inc. is a Northern Ontario delivery and logistics company focused on reliable small-goods transportation and dedicated business delivery solutions. We connect communities across Northern Ontario through scheduled, recurring, and customized delivery services designed around the needs of local businesses and organizations.",
+      quoteText: "Reliable. Dedicated. Delivered.",
+      quoteDescription:
+        "A clear promise about how we approach scheduled, dedicated, and small-goods delivery across Northern Ontario.",
+      attribution: "BAY TO BAY EXPRESS INC.",
+    },
+    create: {
+      id: "default",
+      eyebrow: "ABOUT BAY TO BAY",
+      headingPrimary: "Local routes.",
+      headingAccent: "Professional service.",
+      description:
+        "Bay to Bay Express Inc. is a Northern Ontario delivery and logistics company focused on reliable small-goods transportation and dedicated business delivery solutions. We connect communities across Northern Ontario through scheduled, recurring, and customized delivery services designed around the needs of local businesses and organizations.",
+      quoteText: "Reliable. Dedicated. Delivered.",
+      quoteDescription:
+        "A clear promise about how we approach scheduled, dedicated, and small-goods delivery across Northern Ontario.",
+      attribution: "BAY TO BAY EXPRESS INC.",
+    },
+  });
+
+  await (prisma as any).aboutTagPill.deleteMany({});
+
+  const defaultAboutTags = [
+    { label: "Local", order: 1 },
+    { label: "Professional", order: 2 },
+    { label: "Reliable", order: 3 },
+    { label: "Flexible", order: 4 },
+    { label: "Business-focused", order: 5 },
+  ];
+
+  for (const tag of defaultAboutTags) {
+    await (prisma as any).aboutTagPill.create({
+      data: tag,
+    });
+  }
+
+  // 12. FAQ Section Content & Items
+  await (prisma as any).faqContent.upsert({
+    where: { id: "default" },
+    update: {
+      eyebrow: "COMMON QUESTIONS",
+      headingPrimary: "Good to know",
+      headingAccent: "before you book.",
+      description:
+        "Clear details help us plan the right route and service arrangement for your shipment.",
+    },
+    create: {
+      id: "default",
+      eyebrow: "COMMON QUESTIONS",
+      headingPrimary: "Good to know",
+      headingAccent: "before you book.",
+      description:
+        "Clear details help us plan the right route and service arrangement for your shipment.",
+    },
+  });
+
+  await (prisma as any).faqItem.deleteMany({});
+
+  const defaultFaqItems = [
+    {
+      question: "What areas do you serve?",
+      answer:
+        "We currently focus on North Bay, Kirkland Lake, Timmins, Cochrane, Kapuskasing, Hearst and Longlac.",
+      order: 1,
+    },
+    {
+      question: "How often do you operate your routes?",
+      answer:
+        "Dedicated scheduled services are available twice weekly on applicable routes.",
+      order: 2,
+    },
+    {
+      question: "Do you provide small-goods delivery?",
+      answer:
+        "Yes. Small goods and business shipments are a primary focus of our service.",
+      order: 3,
+    },
+    {
+      question: "Do you provide recurring deliveries?",
+      answer:
+        "Yes. Businesses can discuss weekly, twice-weekly or customized recurring delivery arrangements.",
+      order: 4,
+    },
+    {
+      question: "Do you provide 12-hour delivery?",
+      answer:
+        "12-hour delivery options may be available depending on the route, pickup time, shipment and service requirements.",
+      order: 5,
+    },
+    {
+      question: "Do you provide dedicated deliveries?",
+      answer:
+        "Yes. Dedicated delivery solutions are available depending on the shipment and route.",
+      order: 6,
+    },
+    {
+      question: "How do I request a quote?",
+      answer:
+        "Complete the online quote form or contact Bay to Bay Express directly at 705-978-3001 or baytobayexpress@gmail.com.",
+      order: 7,
+    },
+    {
+      question: "Do you deliver medical or pharmacy supplies?",
+      answer:
+        "Medical and pharmacy-related deliveries may be available subject to shipment requirements, applicable regulations, handling requirements and service arrangements.",
+      order: 8,
+    },
+    {
+      question: "Can businesses establish recurring delivery services?",
+      answer:
+        "Yes. Contact us to discuss your route, frequency and delivery requirements.",
+      order: 9,
+    },
+  ];
+
+  for (const item of defaultFaqItems) {
+    await (prisma as any).faqItem.create({
+      data: item,
+    });
+  }
+
   console.log("Seeding finished successfully!");
 }
 

@@ -196,7 +196,41 @@ model QuoteRequest {
   updatedAt        DateTime @updatedAt
 }
 
+model AboutContent {
+  id               String   @id @default("default")
+  eyebrow          String   @default("ABOUT BAY TO BAY")
+  headingPrimary   String   @default("Local routes.")
+  headingAccent    String   @default("Professional service.")
+  description      String   @default("Bay to Bay Express Inc. is a Northern Ontario delivery and logistics company focused on reliable small-goods transportation and dedicated business delivery solutions. We connect communities across Northern Ontario through scheduled, recurring, and customized delivery services designed around the needs of local businesses and organizations.")
+  quoteText        String   @default("Reliable. Dedicated. Delivered.")
+  quoteDescription String   @default("A clear promise about how we approach scheduled, dedicated, and small-goods delivery across Northern Ontario.")
+  attribution      String   @default("BAY TO BAY EXPRESS INC.")
+  updatedAt        DateTime @updatedAt
+}
 
+model AboutTagPill {
+  id        String   @id @default(uuid())
+  label     String
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
 
+model FaqContent {
+  id             String   @id @default("default")
+  eyebrow        String   @default("COMMON QUESTIONS")
+  headingPrimary String   @default("Good to know")
+  headingAccent  String   @default("before you book.")
+  description    String   @default("Clear details help us plan the right route and service arrangement for your shipment.")
+  updatedAt      DateTime @updatedAt
+}
 
+model FaqItem {
+  id        String   @id @default(uuid())
+  question  String
+  answer    String
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
 

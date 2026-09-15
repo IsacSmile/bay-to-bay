@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
 import {
   Plus,
   Trash2,
@@ -12,28 +11,14 @@ import {
   X,
   RefreshCw,
   HelpCircle,
-  Building2,
-  ShieldCheck,
-  Truck,
-  CalendarDays,
-  Package,
-  Sparkles,
-  MapPin,
-  Compass,
-  Sliders,
-  Activity,
-  FileText,
-  Store,
-  Landmark,
   Layers,
 } from "lucide-react";
 import { SkeletonTableRow } from "@/components/ui/Skeleton";
 
-interface ReasonItem {
+interface FaqItem {
   id: string;
-  title: string;
-  description: string;
-  icon?: string;
+  question: string;
+  answer: string;
   order: number;
 }
 
@@ -41,51 +26,35 @@ interface SectionContent {
   eyebrow: string;
   headingPrimary: string;
   headingAccent: string;
-  tagline: string;
+  description: string;
 }
 
-const AVAILABLE_ICONS = [
-  { value: "building-2", label: "Northern Ontario focus (Building)", icon: Building2 },
-  { value: "shield-check", label: "Reliable service (ShieldCheck)", icon: ShieldCheck },
-  { value: "truck", label: "Dedicated delivery (Truck)", icon: Truck },
-  { value: "calendar", label: "Twice-weekly service (Calendar)", icon: CalendarDays },
-  { value: "package", label: "Small goods focus (Package)", icon: Package },
-  { value: "sliders", label: "Flexible solutions (Sliders)", icon: Sliders },
-  { value: "map-pin", label: "Location / Pin (MapPin)", icon: MapPin },
-  { value: "compass", label: "Compass / Navigation (Compass)", icon: Compass },
-  { value: "sparkles", label: "Custom / Special (Sparkles)", icon: Sparkles },
-  { value: "activity", label: "Healthcare / Priority (Activity)", icon: Activity },
-  { value: "file-text", label: "Legal / Docs (FileText)", icon: FileText },
-  { value: "store", label: "Retail / Business (Store)", icon: Store },
-  { value: "landmark", label: "Institutional (Landmark)", icon: Landmark },
-];
-
-export default function AdminWhyUsPage() {
-  const [reasons, setReasons] = useState<ReasonItem[]>([]);
+export default function AdminFaqPage() {
+  const [items, setItems] = useState<FaqItem[]>([]);
   const [sectionContent, setSectionContent] = useState<SectionContent>({
-    eyebrow: "WHY BAY TO BAY",
-    headingPrimary: "A clearer way to",
-    headingAccent: "move what matters.",
-    tagline: "REGIONAL FOCUS · LOCAL KNOWLEDGE",
+    eyebrow: "COMMON QUESTIONS",
+    headingPrimary: "Good to know",
+    headingAccent: "before you book.",
+    description:
+      "Clear details help us plan the right route and service arrangement for your shipment.",
   });
 
   const [loading, setLoading] = useState(true);
   const [savingSection, setSavingSection] = useState(false);
-  const [savingReason, setSavingReason] = useState(false);
+  const [savingItem, setSavingItem] = useState(false);
   const [message, setMessage] = useState<{ text: string; type: "success" | "error" } | null>(null);
 
-  // Form State for Add / Edit Item
+  // Form state for Add / Edit FAQ item
   const [editingId, setEditingId] = useState<string | null>(null);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [formData, setFormData] = useState({
-    title: "",
-    description: "",
-    icon: "building-2",
+    question: "",
+    answer: "",
     order: 1,
   });
 
-  // Delete Confirmation Dialog State
-  const [deleteTarget, setDeleteTarget] = useState<ReasonItem | null>(null);
+  // Delete modal state
+  const [deleteTarget, setDeleteTarget] = useState<FaqItem | null>(null);
 
   useEffect(() => {
     fetchData();
@@ -94,15 +63,10 @@ export default function AdminWhyUsPage() {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const [reasonsRes, sectionRes] = await Promise.all([
-        fetch("/api/admin/why-us"),
-        fetch("/api/admin/why-us/section"),
+      const [sectionRes, itemsRes] = await Promise.all([
+        fetch("/api/admin/faq/section"),
+        fetch("/api/admin/faq/items"),
       ]);
-
-      if (reasonsRes.ok) {
-        const reasonsData = await reasonsRes.json();
-        setReasons(reasonsData);
-      }
 
       if (sectionRes.ok) {
         const sectionData = await sectionRes.json();
@@ -110,9 +74,16 @@ export default function AdminWhyUsPage() {
           setSectionContent(sectionData);
         }
       }
+
+      if (itemsRes.ok) {
+        const itemsData = await itemsRes.json();
+        if (Array.isArray(itemsData)) {
+          setItems(itemsData);
+        }
+      }
     } catch (error) {
-      console.error("Error fetching admin data:", error);
-      showMessage("Failed to load why us data.", "error");
+      console.error("Error fetching admin FAQ data:", error);
+      showMessage("Failed to load FAQ data.", "error");
     } finally {
       setLoading(false);
     }
@@ -127,14 +98,14 @@ export default function AdminWhyUsPage() {
     e.preventDefault();
     setSavingSection(true);
     try {
-      const res = await fetch("/api/admin/why-us/section", {
+      const res = await fetch("/api/admin/faq/section", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(sectionContent),
       });
 
       if (res.ok) {
-        showMessage("Why Us section content updated successfully!", "success");
+        showMessage("FAQ section content updated successfully!", "success");
       } else {
         showMessage("Failed to update section content.", "error");
       }
@@ -149,20 +120,18 @@ export default function AdminWhyUsPage() {
   const openCreateForm = () => {
     setEditingId(null);
     setFormData({
-      title: "",
-      description: "",
-      icon: "building-2",
-      order: reasons.length + 1,
+      question: "",
+      answer: "",
+      order: items.length + 1,
     });
     setIsFormOpen(true);
   };
 
-  const openEditForm = (item: ReasonItem) => {
+  const openEditForm = (item: FaqItem) => {
     setEditingId(item.id);
     setFormData({
-      title: item.title,
-      description: item.description,
-      icon: item.icon || "package",
+      question: item.question,
+      answer: item.answer,
       order: item.order,
     });
     setIsFormOpen(true);
@@ -170,13 +139,13 @@ export default function AdminWhyUsPage() {
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSavingReason(true);
+    setSavingItem(true);
 
     try {
       const method = editingId ? "PUT" : "POST";
       const bodyData = editingId ? { id: editingId, ...formData } : formData;
 
-      const res = await fetch("/api/admin/why-us", {
+      const res = await fetch("/api/admin/faq/items", {
         method,
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(bodyData),
@@ -184,51 +153,51 @@ export default function AdminWhyUsPage() {
 
       if (res.ok) {
         showMessage(
-          editingId ? "Reason item updated successfully!" : "New reason item created!",
+          editingId ? "FAQ item updated successfully!" : "New FAQ item created!",
           "success"
         );
         setIsFormOpen(false);
         fetchData();
       } else {
         const err = await res.json();
-        showMessage(err.error || "Failed to save reason item.", "error");
+        showMessage(err.error || "Failed to save FAQ item.", "error");
       }
     } catch (error) {
       console.error(error);
-      showMessage("An error occurred while saving reason item.", "error");
+      showMessage("An error occurred while saving FAQ item.", "error");
     } finally {
-      setSavingReason(false);
+      setSavingItem(false);
     }
   };
 
   const handleReorder = async (index: number, direction: "up" | "down") => {
     const targetIndex = direction === "up" ? index - 1 : index + 1;
-    if (targetIndex < 0 || targetIndex >= reasons.length) return;
+    if (targetIndex < 0 || targetIndex >= items.length) return;
 
-    const newReasons = [...reasons];
-    const temp = newReasons[index];
-    newReasons[index] = newReasons[targetIndex];
-    newReasons[targetIndex] = temp;
+    const newItems = [...items];
+    const temp = newItems[index];
+    newItems[index] = newItems[targetIndex];
+    newItems[targetIndex] = temp;
 
-    const itemsWithUpdatedOrder = newReasons.map((item, idx) => ({
+    const itemsWithUpdatedOrder = newItems.map((item, idx) => ({
       ...item,
       order: idx + 1,
     }));
 
-    setReasons(itemsWithUpdatedOrder);
+    setItems(itemsWithUpdatedOrder);
 
     try {
-      await fetch("/api/admin/why-us", {
+      await fetch("/api/admin/faq/items", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           items: itemsWithUpdatedOrder.map((s) => ({ id: s.id, order: s.order })),
         }),
       });
-      showMessage("Reason item order updated!", "success");
+      showMessage("FAQ item order updated!", "success");
     } catch (error) {
       console.error(error);
-      showMessage("Failed to reorder reason items.", "error");
+      showMessage("Failed to reorder FAQ items.", "error");
     }
   };
 
@@ -236,20 +205,20 @@ export default function AdminWhyUsPage() {
     if (!deleteTarget) return;
 
     try {
-      const res = await fetch(`/api/admin/why-us?id=${deleteTarget.id}`, {
+      const res = await fetch(`/api/admin/faq/items?id=${deleteTarget.id}`, {
         method: "DELETE",
       });
 
       if (res.ok) {
-        showMessage(`Reason item "${deleteTarget.title}" deleted successfully.`, "success");
+        showMessage(`FAQ item deleted successfully.`, "success");
         setDeleteTarget(null);
         fetchData();
       } else {
-        showMessage("Failed to delete reason item.", "error");
+        showMessage("Failed to delete FAQ item.", "error");
       }
     } catch (error) {
       console.error(error);
-      showMessage("An error occurred while deleting reason item.", "error");
+      showMessage("An error occurred while deleting FAQ item.", "error");
     }
   };
 
@@ -257,16 +226,15 @@ export default function AdminWhyUsPage() {
     <div className="min-h-screen bg-[#F6F9FC] text-slate-800 p-3 sm:p-5">
       <div className="max-w-6xl mx-auto space-y-4">
         
-
-
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white px-4 py-3.5 sm:px-5 rounded-xl border border-slate-200/60 shadow-2xs">
           <div>
-            <h1 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight">
-              Why Us (Reasons)
+            <h1 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight flex items-center gap-2">
+              <HelpCircle className="w-5 h-5 text-brand-blue" />
+              <span>FAQ Section Management</span>
             </h1>
             <p className="text-xs text-slate-500 mt-0.5">
-              Manage Why Bay to Bay value propositions and reason cards
+              Manage FAQ section copy and accordion question/answer items
             </p>
           </div>
 
@@ -275,11 +243,11 @@ export default function AdminWhyUsPage() {
             className="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white font-semibold px-3.5 py-2 rounded-lg text-xs transition-colors shrink-0 cursor-pointer shadow-2xs"
           >
             <Plus className="w-3.5 h-3.5" />
-            <span>Add Reason Item</span>
+            <span>Add FAQ Question</span>
           </button>
         </div>
 
-        {/* Feedback Alert Message */}
+        {/* Feedback Alert */}
         {message && (
           <div
             className={`p-4 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-between shadow-xs ${
@@ -291,22 +259,22 @@ export default function AdminWhyUsPage() {
             <span>{message.text}</span>
             <button
               onClick={() => setMessage(null)}
-              className="text-slate-400 hover:text-slate-600"
+              className="text-slate-400 hover:text-slate-600 cursor-pointer"
             >
               <X className="w-4 h-4" />
             </button>
           </div>
         )}
 
-        {/* 1. Section Header Content Form */}
+        {/* 1. Section Content Form */}
         <div className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
           <h2 className="text-lg font-black text-[#071A2E] mb-4 flex items-center gap-2">
             <Edit2 className="w-4 h-4 text-brand-blue" />
-            <span>Section Header & Regional Tagline</span>
+            <span>Section Header Copy</span>
           </h2>
 
           <form onSubmit={handleSaveSection} className="space-y-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div>
                 <label className="block text-xs font-bold text-slate-600 uppercase mb-1">
                   Eyebrow Label
@@ -323,23 +291,7 @@ export default function AdminWhyUsPage() {
 
               <div>
                 <label className="block text-xs font-bold text-slate-600 uppercase mb-1">
-                  Regional Focus Tagline
-                </label>
-                <input
-                  type="text"
-                  value={sectionContent.tagline}
-                  onChange={(e) =>
-                    setSectionContent({ ...sectionContent, tagline: e.target.value })
-                  }
-                  className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm font-medium focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue outline-hidden"
-                />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-xs font-bold text-slate-600 uppercase mb-1">
-                  Heading (Primary Navy)
+                  Heading (Primary Dark)
                 </label>
                 <input
                   type="text"
@@ -366,25 +318,39 @@ export default function AdminWhyUsPage() {
               </div>
             </div>
 
-            <div className="flex justify-end">
+            <div>
+              <label className="block text-xs font-bold text-slate-600 uppercase mb-1">
+                Description Paragraph
+              </label>
+              <textarea
+                rows={2}
+                value={sectionContent.description}
+                onChange={(e) =>
+                  setSectionContent({ ...sectionContent, description: e.target.value })
+                }
+                className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm font-medium focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue outline-hidden"
+              />
+            </div>
+
+            <div className="flex justify-end pt-2">
               <button
                 type="submit"
                 disabled={savingSection}
-                className="inline-flex items-center gap-2 bg-[#071A2E] hover:bg-[#04101D] text-white font-bold px-4 py-2 rounded-xl text-xs transition-colors"
+                className="inline-flex items-center gap-2 bg-[#071A2E] hover:bg-[#04101D] text-white font-bold px-4 py-2 rounded-xl text-xs transition-colors cursor-pointer"
               >
                 {savingSection ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Check className="w-3.5 h-3.5" />}
-                <span>Save Section Content</span>
+                <span>Save Section Copy</span>
               </button>
             </div>
           </form>
         </div>
 
-        {/* 2. Reason Items Table */}
+        {/* 2. FAQ Items Table */}
         <div className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-black text-[#071A2E] flex items-center gap-2">
-              <HelpCircle className="w-4 h-4 text-brand-blue" />
-              <span>Reason Items ({reasons.length})</span>
+              <Layers className="w-4 h-4 text-brand-blue" />
+              <span>FAQ Items ({items.length})</span>
             </h2>
           </div>
 
@@ -392,10 +358,10 @@ export default function AdminWhyUsPage() {
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="border-b border-slate-200 text-[10px] font-black uppercase text-slate-400 tracking-wider">
-                    <th className="py-3 px-3 w-16">Auto-No.</th>
-                    <th className="py-3 px-3">Title & Description</th>
-                    <th className="py-3 px-3 w-36 text-right">Actions</th>
+                  <tr className="border-b border-slate-200/70 text-[10px] font-black uppercase text-slate-400 tracking-wider">
+                    <th className="py-3.5 px-4 w-20">Pos</th>
+                    <th className="py-3.5 px-4">Question & Answer</th>
+                    <th className="py-3.5 px-4 w-24 text-right">Actions</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100 text-xs">
@@ -405,96 +371,81 @@ export default function AdminWhyUsPage() {
                 </tbody>
               </table>
             </div>
-          ) : reasons.length === 0 ? (
+          ) : items.length === 0 ? (
             <div className="py-12 text-center text-slate-400 font-medium text-sm border-2 border-dashed border-slate-200 rounded-xl">
-              No reason items found. Click &quot;Add New Reason Item&quot; to create your first item.
+              No FAQ items found. Click &quot;Add FAQ Question&quot; to create your first item.
             </div>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="border-b border-slate-200 text-[10px] font-black uppercase text-slate-400 tracking-wider">
-                    <th className="py-3 px-3 w-16">Auto-No.</th>
-                    <th className="py-3 px-3">Title & Description</th>
-                    <th className="py-3 px-3 w-36 text-right">Actions</th>
+                  <tr className="border-b border-slate-200/70 text-[10px] font-black uppercase text-slate-400 tracking-wider">
+                    <th className="py-3.5 px-4 w-20">Pos</th>
+                    <th className="py-3.5 px-4">Question & Answer</th>
+                    <th className="py-3.5 px-4 w-24 text-right">Actions</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100 text-xs">
-                  {reasons.map((item, index) => {
-                    const autoNumber = String(index + 1).padStart(2, "0");
-
-                    return (
-                      <tr key={item.id} className="hover:bg-slate-50/80 transition-colors">
-                        {/* Auto-Number & Order Controls */}
-                        <td className="py-3 px-3 font-bold text-slate-700">
-                          <div className="flex items-center gap-1.5">
-                            <span className="w-7 py-0.5 rounded bg-brand-blue/10 text-brand-blue text-center font-black text-xs">
-                              {autoNumber}
-                            </span>
-                            <div className="flex flex-col gap-0.5">
-                              <button
-                                onClick={() => handleReorder(index, "up")}
-                                disabled={index === 0}
-                                className="p-0.5 text-slate-400 hover:text-brand-blue disabled:opacity-30 disabled:hover:text-slate-400"
-                                title="Move up"
-                              >
-                                <MoveUp className="w-3 h-3" />
-                              </button>
-                              <button
-                                onClick={() => handleReorder(index, "down")}
-                                disabled={index === reasons.length - 1}
-                                className="p-0.5 text-slate-400 hover:text-brand-blue disabled:opacity-30 disabled:hover:text-slate-400"
-                                title="Move down"
-                              >
-                                <MoveDown className="w-3 h-3" />
-                              </button>
-                            </div>
+                  {items.map((item, index) => (
+                    <tr key={item.id} className="group hover:bg-slate-50/60 transition-colors duration-150">
+                      {/* Pos & Reorder */}
+                      <td className="py-3.5 px-4 align-top">
+                        <div className="flex items-center gap-1.5 pt-0.5">
+                          <span className="w-6 h-6 rounded-md bg-slate-100 text-slate-500 text-[11px] font-bold flex items-center justify-center border border-slate-200/60">
+                            #{item.order || index + 1}
+                          </span>
+                          <div className="flex flex-col gap-0.5 opacity-40 group-hover:opacity-100 transition-opacity">
+                            <button
+                              onClick={() => handleReorder(index, "up")}
+                              disabled={index === 0}
+                              className="p-0.5 text-slate-400 hover:text-brand-blue disabled:opacity-20 cursor-pointer"
+                              title="Move Up"
+                            >
+                              <MoveUp className="w-3 h-3" />
+                            </button>
+                            <button
+                              onClick={() => handleReorder(index, "down")}
+                              disabled={index === items.length - 1}
+                              className="p-0.5 text-slate-400 hover:text-brand-blue disabled:opacity-20 cursor-pointer"
+                              title="Move Down"
+                            >
+                              <MoveDown className="w-3 h-3" />
+                            </button>
                           </div>
-                        </td>
+                        </div>
+                      </td>
 
-                        {/* Icon & Title & Description */}
-                        <td className="py-3 px-3">
-                          <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 rounded-full bg-[#E5F3FA] border border-[#CDE6F5] flex items-center justify-center text-brand-blue shrink-0">
-                              {(() => {
-                                const found = AVAILABLE_ICONS.find(
-                                  (i) => i.value === (item.icon || "package").toLowerCase()
-                                );
-                                const IconComp = found ? found.icon : Package;
-                                return <IconComp className="w-4 h-4 stroke-[2]" />;
-                              })()}
-                            </div>
-                            <div>
-                              <div className="font-extrabold text-[#071A2E] text-sm">
-                                {item.title}
-                              </div>
-                              <div className="text-slate-500 font-normal line-clamp-1 mt-0.5 max-w-lg">
-                                {item.description}
-                              </div>
-                            </div>
-                          </div>
-                        </td>
+                      {/* Question & Answer */}
+                      <td className="py-3.5 px-4 space-y-1">
+                        <span className="font-extrabold text-slate-900 text-sm block">
+                          {item.question}
+                        </span>
+                        <p className="text-slate-500 text-xs line-clamp-2 font-normal">
+                          {item.answer}
+                        </p>
+                      </td>
 
-                        {/* Actions */}
-                        <td className="py-3 px-3 text-right space-x-1">
+                      {/* Actions */}
+                      <td className="py-3.5 px-4 text-right align-top">
+                        <div className="inline-flex items-center gap-1 pt-0.5">
                           <button
                             onClick={() => openEditForm(item)}
-                            className="p-1.5 rounded-lg text-slate-600 hover:text-brand-blue hover:bg-sky-50 transition-colors"
-                            title="Edit Item"
+                            className="p-1.5 rounded-lg text-slate-400 hover:text-brand-blue hover:bg-sky-50 transition-colors cursor-pointer"
+                            title="Edit FAQ Item"
                           >
                             <Edit2 className="w-4 h-4" />
                           </button>
                           <button
                             onClick={() => setDeleteTarget(item)}
-                            className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors"
-                            title="Delete Item"
+                            className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer"
+                            title="Delete FAQ Item"
                           >
                             <Trash2 className="w-4 h-4" />
                           </button>
-                        </td>
-                      </tr>
-                    );
-                  })}
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
@@ -504,14 +455,14 @@ export default function AdminWhyUsPage() {
         {/* Add / Edit Form Modal */}
         {isFormOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs">
-            <div className="bg-white rounded-2xl max-w-lg w-full p-6 border border-slate-200 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
+            <div className="bg-white rounded-2xl max-w-lg w-full p-6 border border-slate-200 shadow-2xl space-y-4">
               <div className="flex items-center justify-between pb-3 border-b border-slate-100">
                 <h3 className="text-lg font-black text-[#071A2E]">
-                  {editingId ? "Edit Reason Item" : "Add New Reason Item"}
+                  {editingId ? "Edit FAQ Item" : "Add New FAQ Item"}
                 </h3>
                 <button
                   onClick={() => setIsFormOpen(false)}
-                  className="p-1 rounded-lg text-slate-400 hover:text-slate-600"
+                  className="p-1 rounded-lg text-slate-400 hover:text-slate-600 cursor-pointer"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -520,45 +471,28 @@ export default function AdminWhyUsPage() {
               <form onSubmit={handleFormSubmit} className="space-y-4">
                 <div>
                   <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
-                    Card Icon *
-                  </label>
-                  <select
-                    value={formData.icon}
-                    onChange={(e) => setFormData({ ...formData, icon: e.target.value })}
-                    className="w-full px-3 py-2.5 rounded-xl border border-slate-200 text-sm font-medium focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue outline-hidden bg-white"
-                  >
-                    {AVAILABLE_ICONS.map((iconOpt) => (
-                      <option key={iconOpt.value} value={iconOpt.value}>
-                        {iconOpt.label}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
-                    Reason Title *
+                    Question *
                   </label>
                   <input
                     type="text"
                     required
-                    value={formData.title}
-                    onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                    placeholder="e.g. Northern Ontario focus"
+                    value={formData.question}
+                    onChange={(e) => setFormData({ ...formData, question: e.target.value })}
+                    placeholder="e.g. What areas do you serve?"
                     className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm font-medium focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue outline-hidden"
                   />
                 </div>
 
                 <div>
                   <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
-                    Description *
+                    Answer Content *
                   </label>
                   <textarea
-                    rows={3}
                     required
-                    value={formData.description}
-                    onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                    placeholder="Provide a short 1-2 sentence description..."
+                    rows={4}
+                    value={formData.answer}
+                    onChange={(e) => setFormData({ ...formData, answer: e.target.value })}
+                    placeholder="Provide clear, helpful answer text..."
                     className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm font-medium focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue outline-hidden"
                   />
                 </div>
@@ -582,17 +516,17 @@ export default function AdminWhyUsPage() {
                   <button
                     type="button"
                     onClick={() => setIsFormOpen(false)}
-                    className="px-4 py-2 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-100"
+                    className="px-4 py-2 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-100 cursor-pointer"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    disabled={savingReason}
-                    className="inline-flex items-center gap-2 bg-brand-blue hover:bg-[#0878D1] text-white font-extrabold px-4 py-2 rounded-xl text-xs shadow-sm transition-colors"
+                    disabled={savingItem}
+                    className="inline-flex items-center gap-2 bg-brand-blue hover:bg-[#0878D1] text-white font-extrabold px-4 py-2 rounded-xl text-xs shadow-sm transition-colors cursor-pointer"
                   >
-                    {savingReason ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Check className="w-3.5 h-3.5" />}
-                    <span>{editingId ? "Save Changes" : "Create Reason Item"}</span>
+                    {savingItem ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Check className="w-3.5 h-3.5" />}
+                    <span>{editingId ? "Save Changes" : "Create FAQ Item"}</span>
                   </button>
                 </div>
               </form>
@@ -600,24 +534,24 @@ export default function AdminWhyUsPage() {
           </div>
         )}
 
-        {/* Delete Confirmation Modal */}
+        {/* Delete Modal */}
         {deleteTarget && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs">
             <div className="bg-white rounded-2xl max-w-sm w-full p-6 border border-slate-200 shadow-2xl space-y-4">
               <h3 className="text-lg font-black text-[#071A2E]">Confirm Deletion</h3>
               <p className="text-xs text-slate-600">
-                Are you sure you want to delete the reason item &quot;{deleteTarget.title}&quot;? This action cannot be undone.
+                Are you sure you want to delete the FAQ question &quot;{deleteTarget.question}&quot;? This action cannot be undone.
               </p>
               <div className="flex items-center justify-end gap-3 pt-3">
                 <button
                   onClick={() => setDeleteTarget(null)}
-                  className="px-4 py-2 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-100"
+                  className="px-4 py-2 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-100 cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={handleDeleteConfirm}
-                  className="bg-rose-600 hover:bg-rose-700 text-white font-extrabold px-4 py-2 rounded-xl text-xs shadow-sm transition-colors"
+                  className="bg-rose-600 hover:bg-rose-700 text-white font-extrabold px-4 py-2 rounded-xl text-xs shadow-sm transition-colors cursor-pointer"
                 >
                   Delete Item
                 </button>
@@ -625,6 +559,7 @@ export default function AdminWhyUsPage() {
             </div>
           </div>
         )}
+
       </div>
     </div>
   );
