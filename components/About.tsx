@@ -43,7 +43,7 @@ export const About: React.FC<AboutProps> = ({ content, tagPills = [] }) => {
   };
 
   return (
-    <section className="w-full bg-white text-slate-900 py-14 sm:py-20 lg:py-24 border-t border-slate-100/80">
+    <section id="about" className="w-full bg-white text-slate-900 py-14 sm:py-20 lg:py-24 border-t border-slate-100/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
           

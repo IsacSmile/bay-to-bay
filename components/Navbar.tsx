@@ -8,8 +8,10 @@ import {
   Menu,
   X,
   Package,
-  Route as RouteIcon,
+  MapPin,
+  Building2,
   Info,
+  HelpCircle,
   Mail,
   ChevronRight,
 } from "lucide-react";
@@ -42,7 +44,7 @@ export const Navbar: React.FC<NavbarProps> = ({ phone = "705-978-3001" }) => {
     <header className="w-full px-3 sm:px-6 lg:px-8 pt-2.5 sm:pt-3.5 relative">
       {/* Top Navbar Card */}
       <div className="max-w-[1350px] mx-auto relative z-50 bg-white border border-slate-200/90 shadow-[0_8px_30px_rgba(7,26,46,0.1)] transition-all duration-300 rounded-[28px]">
-        <div className="px-5 sm:px-8 h-[58px] flex items-center justify-between">
+        <div className="px-4 sm:px-8 h-[58px] flex items-center justify-between">
           {/* Brand Logo */}
           <a
             href="/"
@@ -68,26 +70,32 @@ export const Navbar: React.FC<NavbarProps> = ({ phone = "705-978-3001" }) => {
           </a>
 
           {/* Navigation Links (Desktop) */}
-          <nav className="hidden md:flex items-center gap-7 text-xs font-bold uppercase tracking-widest text-slate-700">
+          <nav className="hidden md:flex items-center gap-4 lg:gap-6 xl:gap-7 text-[11px] lg:text-xs font-bold uppercase tracking-wider lg:tracking-widest text-slate-700">
             <a href="#services" className="hover:text-brand-blue transition-colors py-1">
               Services
             </a>
-            <a href="#routes" className="hover:text-brand-blue transition-colors py-1">
-              Routes
+            <a href="#service-areas" className="hover:text-brand-blue transition-colors py-1 whitespace-nowrap">
+              Service Area
+            </a>
+            <a href="#business-solutions" className="hover:text-brand-blue transition-colors py-1 whitespace-nowrap">
+              Business Solutions
             </a>
             <a href="#about" className="hover:text-brand-blue transition-colors py-1">
               About
             </a>
-            <a href="#contact" className="hover:text-brand-blue transition-colors py-1">
+            <a href="#faq" className="hover:text-brand-blue transition-colors py-1">
+              FAQ
+            </a>
+            <a href="#quote" className="hover:text-brand-blue transition-colors py-1">
               Contact
             </a>
           </nav>
 
           {/* Right Actions */}
-          <div className="flex items-center gap-4 sm:gap-5">
+          <div className="flex items-center gap-3 sm:gap-5">
             <a
               href={telLink}
-              className="hidden lg:flex items-center gap-2 text-xs sm:text-sm font-bold text-[#071A2E] hover:text-brand-blue transition-colors py-1"
+              className="hidden xl:flex items-center gap-2 text-xs sm:text-sm font-bold text-[#071A2E] hover:text-brand-blue transition-colors py-1"
             >
               <Phone className="w-3.5 h-3.5 text-brand-blue" />
               <span>{phone}</span>
@@ -98,7 +106,7 @@ export const Navbar: React.FC<NavbarProps> = ({ phone = "705-978-3001" }) => {
               size="sm"
               href="#quote"
               rightIcon={<ArrowUpRight className="w-3.5 h-3.5" />}
-              className="hidden sm:inline-flex text-xs font-extrabold px-5 py-2.5"
+              className="hidden sm:inline-flex text-xs font-extrabold px-4 sm:px-5 py-2.5"
             >
               Request a quote
             </Button>
@@ -127,63 +135,103 @@ export const Navbar: React.FC<NavbarProps> = ({ phone = "705-978-3001" }) => {
             : "opacity-0 scale-95 -translate-y-3 pointer-events-none"
         }`}
       >
-        <div className="flex flex-col space-y-2.5 max-w-[1350px] mx-auto">
+        <div className="flex flex-col space-y-2 max-w-[1350px] mx-auto">
           {/* Services Tile */}
           <a
             href="#services"
             onClick={closeMenu}
-            className="bg-white/[0.06] hover:bg-white/[0.12] border border-white/10 rounded-2xl p-3.5 flex items-center justify-between transition-all duration-200 group"
+            className="bg-white/[0.06] hover:bg-white/[0.12] border border-white/10 rounded-2xl p-3 flex items-center justify-between transition-all duration-200 group"
           >
-            <div className="flex items-center gap-3.5">
-              <div className="w-9 h-9 rounded-xl bg-[#25A8E8]/15 border border-[#25A8E8]/30 flex items-center justify-center text-[#25A8E8] shrink-0">
-                <Package className="w-4.5 h-4.5" />
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-xl bg-[#25A8E8]/15 border border-[#25A8E8]/30 flex items-center justify-center text-[#25A8E8] shrink-0">
+                <Package className="w-4 h-4" />
               </div>
               <div>
                 <div className="text-sm font-extrabold text-white tracking-wide">Services</div>
                 <div className="text-[11px] text-slate-300 font-normal">
-                  Express courier & small goods
+                  Delivery solutions &amp; small goods
                 </div>
               </div>
             </div>
             <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-[#25A8E8] group-hover:translate-x-0.5 transition-all" />
           </a>
 
-          {/* Routes Tile */}
+          {/* Service Area Tile */}
           <a
-            href="#routes"
+            href="#service-areas"
             onClick={closeMenu}
-            className="bg-white/[0.06] hover:bg-white/[0.12] border border-white/10 rounded-2xl p-3.5 flex items-center justify-between transition-all duration-200 group"
+            className="bg-white/[0.06] hover:bg-white/[0.12] border border-white/10 rounded-2xl p-3 flex items-center justify-between transition-all duration-200 group"
           >
-            <div className="flex items-center gap-3.5">
-              <div className="w-9 h-9 rounded-xl bg-[#25A8E8]/15 border border-[#25A8E8]/30 flex items-center justify-center text-[#25A8E8] shrink-0">
-                <RouteIcon className="w-4.5 h-4.5" />
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-xl bg-[#25A8E8]/15 border border-[#25A8E8]/30 flex items-center justify-center text-[#25A8E8] shrink-0">
+                <MapPin className="w-4 h-4" />
               </div>
               <div>
-                <div className="text-sm font-extrabold text-white tracking-wide">Routes</div>
+                <div className="text-sm font-extrabold text-white tracking-wide">Service Area</div>
                 <div className="text-[11px] text-slate-300 font-normal">
                   North Bay → Hearst corridor
                 </div>
               </div>
             </div>
-            <span className="text-[10px] font-black uppercase tracking-wider bg-[#25A8E8]/20 text-[#25A8E8] px-2.5 py-1 rounded-full border border-[#25A8E8]/30">
+            <span className="text-[10px] font-black uppercase tracking-wider bg-[#25A8E8]/20 text-[#25A8E8] px-2 py-0.5 rounded-full border border-[#25A8E8]/30">
               Hwy 11
             </span>
+          </a>
+
+          {/* Business Solutions Tile */}
+          <a
+            href="#business-solutions"
+            onClick={closeMenu}
+            className="bg-white/[0.06] hover:bg-white/[0.12] border border-white/10 rounded-2xl p-3 flex items-center justify-between transition-all duration-200 group"
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-xl bg-[#25A8E8]/15 border border-[#25A8E8]/30 flex items-center justify-center text-[#25A8E8] shrink-0">
+                <Building2 className="w-4 h-4" />
+              </div>
+              <div>
+                <div className="text-sm font-extrabold text-white tracking-wide">Business Solutions</div>
+                <div className="text-[11px] text-slate-300 font-normal">
+                  Logistics partner for Northern Ontario
+                </div>
+              </div>
+            </div>
+            <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-[#25A8E8] group-hover:translate-x-0.5 transition-all" />
           </a>
 
           {/* About Tile */}
           <a
             href="#about"
             onClick={closeMenu}
-            className="bg-white/[0.06] hover:bg-white/[0.12] border border-white/10 rounded-2xl p-3.5 flex items-center justify-between transition-all duration-200 group"
+            className="bg-white/[0.06] hover:bg-white/[0.12] border border-white/10 rounded-2xl p-3 flex items-center justify-between transition-all duration-200 group"
           >
-            <div className="flex items-center gap-3.5">
-              <div className="w-9 h-9 rounded-xl bg-[#25A8E8]/15 border border-[#25A8E8]/30 flex items-center justify-center text-[#25A8E8] shrink-0">
-                <Info className="w-4.5 h-4.5" />
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-xl bg-[#25A8E8]/15 border border-[#25A8E8]/30 flex items-center justify-center text-[#25A8E8] shrink-0">
+                <Info className="w-4 h-4" />
               </div>
               <div>
                 <div className="text-sm font-extrabold text-white tracking-wide">About</div>
                 <div className="text-[11px] text-slate-300 font-normal">
-                  Dedicated regional logistics carrier
+                  About Bay to Bay Express
+                </div>
+              </div>
+            </div>
+            <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-[#25A8E8] group-hover:translate-x-0.5 transition-all" />
+          </a>
+
+          {/* FAQ Tile */}
+          <a
+            href="#faq"
+            onClick={closeMenu}
+            className="bg-white/[0.06] hover:bg-white/[0.12] border border-white/10 rounded-2xl p-3 flex items-center justify-between transition-all duration-200 group"
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-xl bg-[#25A8E8]/15 border border-[#25A8E8]/30 flex items-center justify-center text-[#25A8E8] shrink-0">
+                <HelpCircle className="w-4 h-4" />
+              </div>
+              <div>
+                <div className="text-sm font-extrabold text-white tracking-wide">FAQ</div>
+                <div className="text-[11px] text-slate-300 font-normal">
+                  Common questions &amp; answers
                 </div>
               </div>
             </div>
@@ -192,13 +240,13 @@ export const Navbar: React.FC<NavbarProps> = ({ phone = "705-978-3001" }) => {
 
           {/* Contact Tile */}
           <a
-            href="#contact"
+            href="#quote"
             onClick={closeMenu}
-            className="bg-white/[0.06] hover:bg-white/[0.12] border border-white/10 rounded-2xl p-3.5 flex items-center justify-between transition-all duration-200 group"
+            className="bg-white/[0.06] hover:bg-white/[0.12] border border-white/10 rounded-2xl p-3 flex items-center justify-between transition-all duration-200 group"
           >
-            <div className="flex items-center gap-3.5">
-              <div className="w-9 h-9 rounded-xl bg-[#25A8E8]/15 border border-[#25A8E8]/30 flex items-center justify-center text-[#25A8E8] shrink-0">
-                <Mail className="w-4.5 h-4.5" />
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-xl bg-[#25A8E8]/15 border border-[#25A8E8]/30 flex items-center justify-center text-[#25A8E8] shrink-0">
+                <Mail className="w-4 h-4" />
               </div>
               <div>
                 <div className="text-sm font-extrabold text-white tracking-wide">Contact</div>
@@ -211,12 +259,12 @@ export const Navbar: React.FC<NavbarProps> = ({ phone = "705-978-3001" }) => {
           </a>
 
           {/* Divider & Actions */}
-          <div className="pt-3 border-t border-white/10 flex flex-col gap-2.5">
+          <div className="pt-2 border-t border-white/10 flex flex-col gap-2">
             {/* Phone Quick Link */}
             <a
               href={telLink}
               onClick={closeMenu}
-              className="bg-white/[0.06] hover:bg-white/[0.12] border border-white/10 rounded-2xl py-3 px-4 flex items-center justify-between transition-all"
+              className="bg-white/[0.06] hover:bg-white/[0.12] border border-white/10 rounded-2xl py-2.5 px-4 flex items-center justify-between transition-all"
             >
               <div className="flex items-center gap-3">
                 <Phone className="w-4 h-4 text-[#25A8E8]" />
@@ -233,7 +281,7 @@ export const Navbar: React.FC<NavbarProps> = ({ phone = "705-978-3001" }) => {
               fullWidth
               rightIcon={<ArrowUpRight className="w-4 h-4" />}
               onClick={closeMenu}
-              className="w-full py-3.5 text-sm font-bold shadow-lg shadow-[#0878D1]/25"
+              className="w-full py-3 text-sm font-bold shadow-lg shadow-[#0878D1]/25"
             >
               Request a quote
             </Button>
@@ -252,5 +300,3 @@ export const Navbar: React.FC<NavbarProps> = ({ phone = "705-978-3001" }) => {
     </header>
   );
 };
-
-

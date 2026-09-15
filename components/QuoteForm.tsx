@@ -224,7 +224,7 @@ export const QuoteForm: React.FC<QuoteFormProps> = ({ content, contact }) => {
 
   return (
     <section
-      id="quote-form"
+      id="quote"
       className="w-full bg-[#EBF5FB]/60 py-16 sm:py-20 lg:py-24 border-b border-slate-200/60"
     >
       <div className="max-w-[1350px] mx-auto px-4 sm:px-6 lg:px-8">
