@@ -64,7 +64,7 @@ export async function BusinessSolutions() {
             {/* CTA Button */}
             <div>
               <Button
-                href="#quote-form"
+                href="#quote"
                 variant="primary"
                 size="lg"
                 rightIcon={<ArrowUpRight className="w-5 h-5" aria-hidden="true" />}

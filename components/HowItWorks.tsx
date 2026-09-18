@@ -41,7 +41,7 @@ export async function HowItWorks() {
             {/* CTA Link */}
             <div>
               <a
-                href="#quote-form"
+                href="#quote"
                 className="inline-flex items-center gap-2 text-brand-blue font-extrabold text-sm sm:text-base hover:text-[#0878D1] transition-colors group"
               >
                 <span>{content.ctaText}</span>

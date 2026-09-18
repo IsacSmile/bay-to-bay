@@ -136,7 +136,7 @@ export const ServiceAreaInteractive: React.FC<ServiceAreaInteractiveProps> = ({
 
           {/* CTA Link */}
           <a
-            href="#quote-form"
+            href="#quote"
             className="mt-6 sm:mt-7 inline-flex items-center gap-2 text-sm sm:text-base font-extrabold text-brand-blue hover:text-[#0878D1] transition-colors group"
           >
             <span>Ask about a custom run in this region</span>

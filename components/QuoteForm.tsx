@@ -225,8 +225,9 @@ export const QuoteForm: React.FC<QuoteFormProps> = ({ content, contact }) => {
   return (
     <section
       id="quote"
-      className="w-full bg-[#EBF5FB]/60 py-16 sm:py-20 lg:py-24 border-b border-slate-200/60"
+      className="w-full bg-[#EBF5FB]/60 py-16 sm:py-20 lg:py-24 border-b border-slate-200/60 relative"
     >
+      <div id="quote-form" className="absolute -top-24 left-0" aria-hidden="true" />
       <div className="max-w-[1350px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           
