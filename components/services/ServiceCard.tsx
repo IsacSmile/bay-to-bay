@@ -33,13 +33,11 @@ const ICON_MAP: Record<string, LucideIcon> = {
 interface ServiceCardProps {
   service: ServiceItemData;
   index: number;
-  routeLabel?: string;
 }
 
 export const ServiceCard: React.FC<ServiceCardProps> = ({
   service,
   index,
-  routeLabel = "NORTH BAY → LONGLAC",
 }) => {
   const IconComponent = ICON_MAP[service.icon] || Package;
   const cardNumber = String(index + 1).padStart(2, "0");
@@ -60,9 +58,9 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
             {cardNumber}
           </div>
 
-          {/* Route Label */}
+          {/* Service Tag */}
           <span className="text-[10px] font-extrabold tracking-widest uppercase text-slate-400">
-            {routeLabel}
+            BAY TO BAY SERVICE
           </span>
         </div>
 

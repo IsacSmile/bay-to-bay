@@ -268,6 +268,90 @@ export async function getHeroRouteData(): Promise<RouteCardData> {
   return DEFAULT_ROUTE;
 }
 
+export interface RegionItemData {
+  id: string;
+  name: string;
+  slug: string;
+  status: "active" | "coming_soon" | string;
+  description: string | null;
+  order: number;
+  stops: RouteStopItem[];
+}
+
+export const DEFAULT_REGIONS: RegionItemData[] = [
+  {
+    id: "reg-northern-ontario",
+    name: "Northern Ontario",
+    slug: "northern-ontario",
+    status: "active",
+    order: 1,
+    description:
+      "Our dedicated special route: North Bay to Hearst, including North Bay and Longlac, guaranteed 12-hour delivery, twice weekly.",
+    stops: [
+      { id: "1", stopNumber: "01", name: "North Bay", isStart: true, isEnd: false, order: 1, xPercent: 24, yPercent: 88 },
+      { id: "2", stopNumber: "02", name: "Kirkland Lake", isStart: false, isEnd: false, order: 2, xPercent: 35, yPercent: 78 },
+      { id: "3", stopNumber: "03", name: "Timmins", isStart: false, isEnd: false, order: 3, xPercent: 46, yPercent: 68 },
+      { id: "4", stopNumber: "04", name: "Cochrane", isStart: false, isEnd: false, order: 4, xPercent: 55, yPercent: 58 },
+      { id: "5", stopNumber: "05", name: "Kapuskasing", isStart: false, isEnd: false, order: 5, xPercent: 65, yPercent: 46 },
+      { id: "6", stopNumber: "06", name: "Hearst", isStart: false, isEnd: true, order: 6, xPercent: 74, yPercent: 35 },
+      { id: "7", stopNumber: "07", name: "Longlac", isStart: false, isEnd: false, order: 7, xPercent: 85, yPercent: 26 },
+    ],
+  },
+  {
+    id: "reg-gta",
+    name: "GTA & Surrounding Areas",
+    slug: "gta-surrounding-areas",
+    status: "coming_soon",
+    order: 2,
+    description:
+      "Details coming soon. Express regional courier services expanding across Greater Toronto & Surrounding Areas.",
+    stops: [],
+  },
+];
+
+export async function getRegionsData(): Promise<RegionItemData[]> {
+  if (!isDatabaseConfigured()) return DEFAULT_REGIONS;
+
+  try {
+    const regions = await withTimeout(
+      (prisma as any).region.findMany({
+        orderBy: { order: "asc" },
+        include: {
+          stops: {
+            orderBy: { order: "asc" },
+          },
+        },
+      })
+    );
+
+    if (Array.isArray(regions) && regions.length > 0) {
+      return (regions as any[]).map((r) => ({
+        id: r.id,
+        name: r.name,
+        slug: r.slug,
+        status: r.status,
+        description: r.description,
+        order: r.order,
+        stops: Array.isArray(r.stops)
+          ? r.stops.map((s: any) => ({
+              id: s.id,
+              stopNumber: s.stopNumber,
+              name: s.name,
+              isStart: s.isStart,
+              isEnd: s.isEnd,
+              order: s.order,
+              xPercent: s.xPercent ?? null,
+              yPercent: s.yPercent ?? null,
+            }))
+          : [],
+      }));
+    }
+  } catch (error) {
+    console.warn("Failed to fetch regions from DB, using fallback defaults.", error);
+  }
+  return DEFAULT_REGIONS;
+}
+
 export async function getServiceAreaData(): Promise<ServiceAreaData> {
   if (!isDatabaseConfigured()) return DEFAULT_SERVICE_AREA;
 

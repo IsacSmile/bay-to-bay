@@ -93,9 +93,14 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       icon: HelpCircle,
     },
     {
-      label: "Services Grid",
-      href: "/admin/services",
+      label: "Service Regions",
+      href: "/admin/regions",
       icon: Truck,
+    },
+    {
+      label: "Our Services",
+      href: "/admin/services",
+      icon: ListOrdered,
     },
     {
       label: "Who We Serve",

@@ -11,15 +11,6 @@ import { StepItem } from "@/components/how-it-works/StepItem";
 export async function HowItWorks() {
   const content = await getHowItWorksSectionData();
   const steps = await getHowItWorksStepsData();
-  const routeData = await getHeroRouteData();
-
-  // Dynamic route stops calculation for start and end stop names
-  const sortedStops = [...routeData.stops].sort((a, b) => a.order - b.order);
-  const firstStop = sortedStops.find((s) => s.isStart) || sortedStops[0];
-  const lastStop = sortedStops.find((s) => s.isEnd) || sortedStops[sortedStops.length - 1];
-
-  const firstStopName = firstStop?.name?.toUpperCase() || "NORTH BAY";
-  const lastStopName = lastStop?.name?.toUpperCase() || "HEARST";
 
   const totalStepsFormatted = String(steps.length || 4).padStart(2, "0");
 
@@ -62,19 +53,14 @@ export async function HowItWorks() {
           {/* Right Column: Steps Panel (~60-65%) */}
           <div className="lg:col-span-7 w-full pt-2 lg:pt-0">
             {/* Steps Panel Header Row */}
-            <div className="flex flex-wrap items-center justify-between gap-y-2 gap-x-4 border-b border-slate-200/90 pb-3.5 mb-2 sm:mb-4 text-[11px] sm:text-xs">
+            <div className="flex items-center justify-between border-b border-slate-200/90 pb-3.5 mb-2 sm:mb-4 text-[11px] sm:text-xs">
               {/* Left: Dispatch Sequence Label */}
               <span className="font-extrabold tracking-widest text-slate-400 uppercase">
-                DISPATCH SEQUENCE
-              </span>
-
-              {/* Center: Dynamic Route Stop Range */}
-              <span className="font-extrabold tracking-wider text-[#071A2E] uppercase">
-                {firstStopName} <span className="text-slate-300 font-normal mx-1">—</span> {lastStopName}
+                SERVICE PROCESS
               </span>
 
               {/* Right: Dynamic Step Counter */}
-              <span className="font-extrabold tracking-widest text-slate-400 uppercase">
+              <span className="font-extrabold tracking-widest text-brand-blue uppercase bg-sky-50 px-2.5 py-1 rounded-md border border-sky-100">
                 01 / {totalStepsFormatted}
               </span>
             </div>

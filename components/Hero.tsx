@@ -144,7 +144,9 @@ export async function Hero() {
                 )}
               </p>
               <p className="text-sm sm:text-base lg:text-sm xl:text-base 2xl:text-[17px] text-[#D9EDF5] font-normal leading-relaxed">
-                {heroData.description || "Dedicated and scheduled delivery solutions connecting North Bay, Kirkland Lake, Timmins, Cochrane, Kapuskasing, Hearst, and Longlac."}
+                {heroData.description && !heroData.description.includes("Kirkland Lake")
+                  ? heroData.description
+                  : "Dedicated and scheduled courier solutions connecting commercial hubs across Northern Ontario and expanding regions."}
               </p>
             </div>
 

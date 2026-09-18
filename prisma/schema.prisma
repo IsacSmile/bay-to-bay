@@ -46,10 +46,24 @@ model HeroRoute {
   updatedAt  DateTime        @updatedAt
 }
 
+model Region {
+  id          String          @id @default(uuid())
+  name        String
+  slug        String          @unique
+  status      String          @default("active") // active | coming_soon
+  description String?
+  order       Int             @default(0)
+  stops       HeroRouteStop[]
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+}
+
 model HeroRouteStop {
   id         String    @id @default(uuid())
   routeId    String
   route      HeroRoute @relation(fields: [routeId], references: [id], onDelete: Cascade)
+  regionId   String?
+  region     Region?   @relation(fields: [regionId], references: [id], onDelete: Cascade)
   stopNumber String
   name       String
   isStart    Boolean   @default(false)

@@ -78,6 +78,47 @@ async function main() {
     },
   });
 
+  // Regions Seeding
+  const northernRegion = await (prisma as any).region.upsert({
+    where: { slug: "northern-ontario" },
+    update: {
+      name: "Northern Ontario",
+      status: "active",
+      order: 1,
+      description:
+        "Our dedicated special route connecting North Bay to Hearst, including key Highway 11 corridor stops with guaranteed 12-hour delivery options twice weekly.",
+    },
+    create: {
+      id: "reg-northern-ontario",
+      name: "Northern Ontario",
+      slug: "northern-ontario",
+      status: "active",
+      order: 1,
+      description:
+        "Our dedicated special route connecting North Bay to Hearst, including key Highway 11 corridor stops with guaranteed 12-hour delivery options twice weekly.",
+    },
+  });
+
+  await (prisma as any).region.upsert({
+    where: { slug: "gta-surrounding-areas" },
+    update: {
+      name: "GTA & Surrounding Areas",
+      status: "coming_soon",
+      order: 2,
+      description:
+        "Details coming soon. Express regional courier services expanding across Greater Toronto & Surrounding Areas.",
+    },
+    create: {
+      id: "reg-gta",
+      name: "GTA & Surrounding Areas",
+      slug: "gta-surrounding-areas",
+      status: "coming_soon",
+      order: 2,
+      description:
+        "Details coming soon. Express regional courier services expanding across Greater Toronto & Surrounding Areas.",
+    },
+  });
+
   // Hero Route & Stops
   await prisma.heroRoute.upsert({
     where: { id: "default" },
@@ -114,9 +155,10 @@ async function main() {
   ];
 
   for (const stop of stops) {
-    await prisma.heroRouteStop.create({
+    await (prisma as any).heroRouteStop.create({
       data: {
         routeId: "default",
+        regionId: northernRegion.id,
         stopNumber: stop.stopNumber,
         name: stop.name,
         isStart: stop.isStart,
@@ -133,23 +175,23 @@ async function main() {
     where: { id: "default" },
     update: {
       eyebrow: "SERVICE AREA",
-      headingPrimary: "Connecting Northern Ontario.",
+      headingPrimary: "Connecting Regional Hubs.",
       headingAccent: "Delivering what matters.",
       description:
-        "Our route knowledge is regional by design. We connect communities across Northern Ontario with small-goods transportation, scheduled service, and delivery arrangements that work for local businesses.",
+        "Our route knowledge is regional by design. We connect communities across Northern Ontario and expanding regions with small-goods transportation, scheduled service, and delivery arrangements built for local businesses.",
       cardTitle: "Local knowledge. Regional reach.",
-      cardDescription: "North Bay to Hearst, with key stops in between.",
+      cardDescription: "North Bay to Hearst, with key Highway 11 corridor stops.",
       badgeText: "Scheduled regional route",
     },
     create: {
       id: "default",
       eyebrow: "SERVICE AREA",
-      headingPrimary: "Connecting Northern Ontario.",
+      headingPrimary: "Connecting Regional Hubs.",
       headingAccent: "Delivering what matters.",
       description:
-        "Our route knowledge is regional by design. We connect communities across Northern Ontario with small-goods transportation, scheduled service, and delivery arrangements that work for local businesses.",
+        "Our route knowledge is regional by design. We connect communities across Northern Ontario and expanding regions with small-goods transportation, scheduled service, and delivery arrangements built for local businesses.",
       cardTitle: "Local knowledge. Regional reach.",
-      cardDescription: "North Bay to Hearst, with key stops in between.",
+      cardDescription: "North Bay to Hearst, with key Highway 11 corridor stops.",
       badgeText: "Scheduled regional route",
     },
   });
@@ -170,104 +212,96 @@ async function main() {
   await prisma.servicesSectionContent.upsert({
     where: { id: "default" },
     update: {
-      eyebrow: "DELIVERY SOLUTIONS",
+      eyebrow: "OUR SERVICES",
       headingPrimary: "Built around the way",
       headingAccent: "your business moves.",
       description:
-        "From pharmacy supplies to legal documents, our focus is simple: dependable small-goods delivery that fits the route, the schedule, and the shipment requirements.",
+        "From pharmacy supplies to legal documents, our focus is simple: dependable small-goods delivery that fits the route, the schedule, and your specific shipment requirements.",
     },
     create: {
       id: "default",
-      eyebrow: "DELIVERY SOLUTIONS",
+      eyebrow: "OUR SERVICES",
       headingPrimary: "Built around the way",
       headingAccent: "your business moves.",
       description:
-        "From pharmacy supplies to legal documents, our focus is simple: dependable small-goods delivery that fits the route, the schedule, and the shipment requirements.",
+        "From pharmacy supplies to legal documents, our focus is simple: dependable small-goods delivery that fits the route, the schedule, and your specific shipment requirements.",
     },
   });
 
-  // Service Items (Delete and re-seed defaults)
+  // Service Items (Delete and re-seed defaults with 9 non-redundant items)
   await prisma.serviceItem.deleteMany({});
 
   const defaultServices = [
     {
       title: "Medical & Pharmacy Supply Delivery",
       description:
-        "Move pharmacy supplies, medical items, and small healthcare shipments where they need to go—subject to route and handling requirements.",
+        "Move pharmacy supplies, medical items, and healthcare shipments safely—subject to route and handling requirements.",
       icon: "activity",
       order: 1,
       isPriority: true,
     },
     {
-      title: "Small Goods Delivery",
+      title: "Small Goods & Package Delivery",
       description:
-        "Focused transportation for parcels, supplies, retail items, and other manageable small shipments.",
+        "Specialized transportation for parcels, retail inventory, equipment parts, and manageable small shipments.",
       icon: "package",
       order: 2,
       isPriority: false,
     },
     {
-      title: "Dedicated Delivery Services",
+      title: "Dedicated Route & Direct Runs",
       description:
-        "A direct delivery solution designed around your shipment, route, and preferred timing.",
+        "Exclusive direct delivery solutions designed around your specific shipment, route, and preferred timing.",
       icon: "truck",
       order: 3,
       isPriority: false,
     },
     {
-      title: "Scheduled Route Delivery",
+      title: "Scheduled Regional Courier",
       description:
-        "Twice-weekly service options connecting key Northern Ontario communities on a dependable schedule.",
+        "Dependable recurring routes connecting regional hubs and business corridors on a predictable schedule.",
       icon: "calendar",
       order: 4,
       isPriority: false,
     },
     {
-      title: "Recurring Business Deliveries",
+      title: "Recurring Commercial Pickups",
       description:
-        "Set up weekly, twice-weekly, monthly, or customized recurring pickups and drop-offs.",
+        "Establish customized weekly, twice-weekly, or monthly automated pickup and drop-off logistics.",
       icon: "repeat",
       order: 5,
       isPriority: false,
     },
     {
-      title: "Legal & Business Documents",
+      title: "Legal & Confidential Documents",
       description:
-        "Professional movement of documents and small business materials between locations.",
+        "Time-sensitive, confidential movement of legal contracts, financial paperwork, and administrative materials.",
       icon: "file-text",
       order: 6,
       isPriority: false,
     },
     {
-      title: "Retail & Small-Goods Delivery",
+      title: "Retail & B2B Logistics",
       description:
-        "Help your retail operation keep stock and small orders moving across the route.",
+        "Help retail and commercial operations maintain inventory flow between branches, suppliers, and buyers.",
       icon: "store",
       order: 7,
       isPriority: false,
     },
     {
-      title: "Business-to-Business Delivery",
+      title: "Secure & Sensitive Transfers",
       description:
-        "Reliable regional transportation built around the way Northern Ontario businesses operate.",
-      icon: "building-2",
+        "High-priority transfer options for sensitive, high-value, or specialized small goods requiring care.",
+      icon: "shield-check",
       order: 8,
       isPriority: false,
     },
     {
-      title: "Secure Business Transfers",
+      title: "Custom Logistics Solutions",
       description:
-        "Discuss secure document, deposit, or small-goods transfers where the shipment and service requirements fit.",
-      icon: "shield-check",
-      order: 9,
-      isPriority: false,
-    },
-    {
-      title: "Custom & Special Shipment Requests",
-      description:
-        "Tailored transport arrangements for unique cargo size, handling, or timing constraints.",
+        "Tailored transport arrangements built for unique shipment sizes, tight timing, or custom routing requirements.",
       icon: "sparkles",
-      order: 10,
+      order: 9,
       isPriority: false,
     },
   ];

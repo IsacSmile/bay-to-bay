@@ -2,25 +2,12 @@ import React from "react";
 import {
   getServicesSectionData,
   getServicesData,
-  getHeroRouteData,
 } from "@/lib/prisma";
-import { RouteSummaryBar } from "@/components/services/RouteSummaryBar";
 import { ServiceCard } from "@/components/services/ServiceCard";
 
 export async function ServicesGrid() {
   const sectionContent = await getServicesSectionData();
   const services = await getServicesData();
-  const routeData = await getHeroRouteData();
-
-  const sortedStops = [...routeData.stops].sort((a, b) => a.order - b.order);
-  const startStopName =
-    sortedStops.find((s) => s.isStart)?.name || sortedStops[0]?.name || "NORTH BAY";
-  const endStopName =
-    sortedStops.find((s) => s.isEnd)?.name ||
-    sortedStops[sortedStops.length - 1]?.name ||
-    "LONGLAC";
-
-  const dynamicRouteLabel = `${startStopName.toUpperCase()} → ${endStopName.toUpperCase()}`;
 
   return (
     <section
@@ -30,7 +17,7 @@ export async function ServicesGrid() {
       <div className="max-w-[1350px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header Block */}
         <div className="max-w-3xl mb-10 sm:mb-12">
-          {/* Eyebrow Label: Short horizontal line + DELIVERY SOLUTIONS */}
+          {/* Eyebrow Label: Short horizontal line + OUR SERVICES */}
           <div className="inline-flex items-center gap-2.5 mb-3.5 sm:mb-4">
             <span
               className="w-6 h-[2px] bg-brand-blue rounded-full"
@@ -55,11 +42,6 @@ export async function ServicesGrid() {
           </p>
         </div>
 
-        {/* Route Summary Corridor Bar */}
-        <div className="mb-10 sm:mb-12">
-          <RouteSummaryBar stops={routeData.stops} />
-        </div>
-
         {/* Service Cards Responsive Grid (1 col mobile, 2 col tablet md:, 3 col desktop lg:) */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-6 lg:gap-7">
           {services.map((service, index) => (
@@ -67,7 +49,6 @@ export async function ServicesGrid() {
               key={service.id || index}
               service={service}
               index={index}
-              routeLabel={dynamicRouteLabel}
             />
           ))}
         </div>

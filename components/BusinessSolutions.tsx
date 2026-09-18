@@ -1,25 +1,12 @@
 import React from "react";
 import Image from "next/image";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
-import { getBusinessSolutionsData, getHeroRouteData } from "@/lib/prisma";
+import { ArrowUpRight } from "lucide-react";
+import { getBusinessSolutionsData } from "@/lib/prisma";
 import { EyebrowLabel } from "@/components/ui/EyebrowLabel";
 import { Button } from "@/components/ui/Button";
-import { FeatureGrid } from "@/components/business-solutions/FeatureGrid";
 
 export async function BusinessSolutions() {
   const content = await getBusinessSolutionsData();
-  const routeData = await getHeroRouteData();
-
-  // Sort stops to get true start and end stop names dynamically
-  const sortedStops = [...routeData.stops].sort((a, b) => a.order - b.order);
-  const startStopName =
-    sortedStops.find((s) => s.isStart)?.name || sortedStops[0]?.name || "NORTH BAY";
-  const endStopName =
-    sortedStops.find((s) => s.isEnd)?.name ||
-    sortedStops[sortedStops.length - 1]?.name ||
-    "HEARST";
-
-  const dynamicRouteLabel = `${startStopName.toUpperCase()} → ${endStopName.toUpperCase()}`;
 
   return (
     <section
@@ -70,43 +57,9 @@ export async function BusinessSolutions() {
             </h2>
 
             {/* Supporting Paragraph */}
-            <p className="text-slate-600 text-sm sm:text-base lg:text-[17px] leading-relaxed mb-6 sm:mb-7 max-w-2xl">
+            <p className="text-slate-600 text-sm sm:text-base lg:text-[17px] leading-relaxed mb-6 sm:mb-8 max-w-2xl">
               {content.description}
             </p>
-
-            {/* Dispatch Brief Bar */}
-            <a
-              href="#quote-form"
-              className="group relative block w-full bg-white hover:bg-slate-50/90 border border-slate-200/90 hover:border-slate-300 py-3.5 sm:py-4 pl-5 sm:pl-6 pr-4 sm:pr-5 mb-6 sm:mb-8 transition-all duration-200 rounded-xl shadow-xs overflow-hidden"
-            >
-              {/* Vertical Orange Left Border Accent */}
-              <div
-                className="absolute left-0 top-0 bottom-0 w-[4px] bg-amber-500"
-                aria-hidden="true"
-              />
-
-              <div className="flex items-center justify-between gap-3 sm:gap-4">
-                <div className="min-w-0 flex-1">
-                  <div className="text-[11px] sm:text-xs font-black tracking-widest text-brand-blue uppercase flex flex-wrap items-center gap-x-2 gap-y-0.5">
-                    <span>DISPATCH BRIEF</span>
-                    <span className="text-slate-300 font-normal text-[10px]" aria-hidden="true">•</span>
-                    <span>{dynamicRouteLabel}</span>
-                  </div>
-                  <p className="text-xs sm:text-[13.5px] text-slate-600 mt-1 leading-normal line-clamp-2 sm:line-clamp-1">
-                    {content.briefText}
-                  </p>
-                </div>
-                <ArrowRight
-                  className="w-4 h-4 sm:w-5 sm:h-5 text-brand-blue shrink-0 group-hover:translate-x-1 transition-transform duration-200"
-                  aria-hidden="true"
-                />
-              </div>
-            </a>
-
-            {/* Feature Grid (5 items) */}
-            <div className="w-full mb-8 sm:mb-9">
-              <FeatureGrid />
-            </div>
 
             {/* CTA Button */}
             <div>
