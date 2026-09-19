@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Space_Grotesk, Plus_Jakarta_Sans } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -105,9 +106,21 @@ export default function RootLayout({
       lang="en"
       className={`scroll-smooth ${spaceGrotesk.variable} ${plusJakartaSans.variable}`}
     >
+      <head>
+        <Script id="microsoft-clarity" strategy="afterInteractive">
+          {`
+            (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "ykpmq17fdf");
+          `}
+        </Script>
+      </head>
       <body className="min-h-screen bg-[#F6F9FC] text-[#12263A] antialiased flex flex-col font-sans">
         {children}
       </body>
     </html>
   );
 }
+
