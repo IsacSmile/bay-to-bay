@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { ArrowRight, Plus, FileText, Package, Truck, Trees } from "lucide-react";
 import { getHeroData } from "@/lib/prisma";
+import { SnowfallEffect } from "@/components/hero/SnowfallEffect";
 
 export async function Hero() {
   const heroData = await getHeroData();
@@ -11,6 +12,9 @@ export async function Hero() {
       {/* 1. Main Hero Container with Scrim & Photo */}
       <section className="relative w-full min-h-[580px] sm:min-h-[640px] lg:min-h-[680px] flex items-center pt-28 sm:pt-32 lg:pt-36 pb-20 sm:pb-24 overflow-hidden">
         
+        {/* Animated Snowfall Effect Overlay */}
+        <SnowfallEffect />
+
         {/* Background Photo */}
         <div className="absolute inset-0 z-0 select-none pointer-events-none">
           <Image
