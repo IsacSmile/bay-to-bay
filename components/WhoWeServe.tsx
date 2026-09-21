@@ -4,6 +4,7 @@ import { getWhoWeServeSectionData, getIndustryTagsData } from "@/lib/prisma";
 import { EyebrowLabel } from "@/components/ui/EyebrowLabel";
 import { Button } from "@/components/ui/Button";
 import { IndustryTag } from "@/components/who-we-serve/IndustryTag";
+import { SnowfallEffect } from "@/components/hero/SnowfallEffect";
 
 export async function WhoWeServe() {
   const content = await getWhoWeServeSectionData();
@@ -19,6 +20,9 @@ export async function WhoWeServe() {
       id="who-we-serve"
       className="relative w-full bg-[#04101D] text-white py-16 sm:py-20 lg:py-24 border-b border-white/5 overflow-hidden"
     >
+      {/* Animated Snowfall Effect Overlay */}
+      <SnowfallEffect />
+
 
       {/* Decorative Ambient Top-Right Faint Arc Pattern */}
       <div
