@@ -1,7 +1,11 @@
 import React from "react";
-import { Clock, Calendar, CheckCircle2 } from "lucide-react";
+import { Clock } from "lucide-react";
 import { RouteCardData } from "@/lib/prisma";
 
+/**
+ * ARCHIVED COMPONENT - Previous Hero floating route card.
+ * Removed from live component tree as part of clean Hero redesign removal.
+ */
 interface RouteCardProps {
   data: RouteCardData;
 }

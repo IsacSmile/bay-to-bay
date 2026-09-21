@@ -1,15 +1,13 @@
 import React from "react";
 import { ArrowUpRight } from "lucide-react";
-import { getWhoWeServeSectionData, getIndustryTagsData, getSnowfallEnabled } from "@/lib/prisma";
+import { getWhoWeServeSectionData, getIndustryTagsData } from "@/lib/prisma";
 import { EyebrowLabel } from "@/components/ui/EyebrowLabel";
 import { Button } from "@/components/ui/Button";
 import { IndustryTag } from "@/components/who-we-serve/IndustryTag";
-import { SnowfallEffect } from "@/components/hero/SnowfallEffect";
 
 export async function WhoWeServe() {
   const content = await getWhoWeServeSectionData();
   const tags = await getIndustryTagsData();
-  const snowfallEnabled = await getSnowfallEnabled();
 
   // Split tags into 2 columns for top-to-bottom filling layout on desktop (matching 7 / 6 reference split)
   const half = Math.ceil(tags.length / 2);
@@ -21,8 +19,6 @@ export async function WhoWeServe() {
       id="who-we-serve"
       className="relative w-full bg-[#04101D] text-white py-16 sm:py-20 lg:py-24 border-b border-white/5 overflow-hidden"
     >
-      {/* Canvas Snowfall Animation */}
-      <SnowfallEffect enabled={snowfallEnabled} />
 
       {/* Decorative Ambient Top-Right Faint Arc Pattern */}
       <div

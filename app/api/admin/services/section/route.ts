@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
-import { prisma } from "@/lib/prisma";
+import { prisma, DEFAULT_SERVICES_SECTION } from "@/lib/prisma";
 
 // GET /api/admin/services/section - Fetch section header content
 export async function GET() {
@@ -8,38 +8,63 @@ export async function GET() {
     const data = await prisma.servicesSectionContent.findUnique({
       where: { id: "default" },
     });
-    return NextResponse.json(data || {});
+    if (!data) {
+      return NextResponse.json(DEFAULT_SERVICES_SECTION);
+    }
+    const raw = data as unknown as Record<string, unknown>;
+    return NextResponse.json({
+      eyebrow: data.eyebrow || DEFAULT_SERVICES_SECTION.eyebrow,
+      headingPrimary: data.headingPrimary || DEFAULT_SERVICES_SECTION.headingPrimary,
+      headingAccent: data.headingAccent ?? DEFAULT_SERVICES_SECTION.headingAccent,
+      description: data.description || DEFAULT_SERVICES_SECTION.description,
+      ctaHeading: (raw.ctaHeading as string) || DEFAULT_SERVICES_SECTION.ctaHeading,
+      ctaSubtext: (raw.ctaSubtext as string) || DEFAULT_SERVICES_SECTION.ctaSubtext,
+      ctaButtonText: (raw.ctaButtonText as string) || DEFAULT_SERVICES_SECTION.ctaButtonText,
+    });
   } catch (error) {
-    console.error("Failed to fetch section content:", error);
-    return NextResponse.json(
-      { error: "Failed to fetch section content" },
-      { status: 500 }
-    );
+    console.warn("Failed to fetch section content from DB, returning default section content.", error);
+    return NextResponse.json(DEFAULT_SERVICES_SECTION);
   }
 }
 
-// PUT /api/admin/services/section - Update section header content
+// PUT /api/admin/services/section - Update section header content & bottom CTA banner
 export async function PUT(req: Request) {
   try {
     const body = await req.json();
-    const { eyebrow, headingPrimary, headingAccent, description } = body;
+    const {
+      eyebrow,
+      headingPrimary,
+      headingAccent,
+      description,
+      ctaHeading,
+      ctaSubtext,
+      ctaButtonText,
+    } = body;
 
-    const updated = await prisma.servicesSectionContent.upsert({
+    const updated = await (prisma.servicesSectionContent as any).upsert({
       where: { id: "default" },
       update: {
         ...(eyebrow !== undefined && { eyebrow }),
         ...(headingPrimary !== undefined && { headingPrimary }),
         ...(headingAccent !== undefined && { headingAccent }),
         ...(description !== undefined && { description }),
+        ...(ctaHeading !== undefined && { ctaHeading }),
+        ...(ctaSubtext !== undefined && { ctaSubtext }),
+        ...(ctaButtonText !== undefined && { ctaButtonText }),
       },
       create: {
         id: "default",
-        eyebrow: eyebrow || "DELIVERY SOLUTIONS",
-        headingPrimary: headingPrimary || "Built around the way",
-        headingAccent: headingAccent || "your business moves.",
+        eyebrow: eyebrow || "OUR SERVICES",
+        headingPrimary: headingPrimary || "Delivery services for",
+        headingAccent: headingAccent || "your business",
         description:
           description ||
-          "From pharmacy supplies to legal documents, our focus is simple: dependable small-goods delivery that fits the route, the schedule, and the shipment requirements.",
+          "Reliable, flexible courier solutions to keep your business moving.",
+        ctaHeading: ctaHeading || "Need regular deliveries?",
+        ctaSubtext:
+          ctaSubtext ||
+          "Let's talk about a delivery solution that works for your business.",
+        ctaButtonText: ctaButtonText || "Discuss Your Route",
       },
     });
 

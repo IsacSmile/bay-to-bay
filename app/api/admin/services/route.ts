@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
-import { prisma } from "@/lib/prisma";
+import { prisma, DEFAULT_SERVICES_ITEMS } from "@/lib/prisma";
 
 // GET /api/admin/services - List all service items ordered by `order: asc`
 export async function GET() {
@@ -8,13 +8,13 @@ export async function GET() {
     const services = await prisma.serviceItem.findMany({
       orderBy: { order: "asc" },
     });
-    return NextResponse.json(services);
+    if (services && services.length > 0) {
+      return NextResponse.json(services);
+    }
+    return NextResponse.json(DEFAULT_SERVICES_ITEMS);
   } catch (error) {
-    console.error("Failed to fetch services:", error);
-    return NextResponse.json(
-      { error: "Failed to fetch services" },
-      { status: 500 }
-    );
+    console.warn("Failed to fetch services from DB, returning fallback default services.", error);
+    return NextResponse.json(DEFAULT_SERVICES_ITEMS);
   }
 }
 
@@ -22,7 +22,7 @@ export async function GET() {
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { title, description, icon, order, isPriority } = body;
+    const { title, description, icon, imageUrl, order, isPriority } = body;
 
     if (!title || !description) {
       return NextResponse.json(
@@ -33,11 +33,12 @@ export async function POST(req: Request) {
 
     const count = await prisma.serviceItem.count();
 
-    const newService = await prisma.serviceItem.create({
+    const newService = await (prisma.serviceItem as any).create({
       data: {
         title,
         description,
         icon: icon || "package",
+        imageUrl: imageUrl || "",
         order: typeof order === "number" ? order : count + 1,
         isPriority: Boolean(isPriority),
       },
@@ -73,17 +74,32 @@ export async function PUT(req: Request) {
     }
 
     // Single item update
-    const { id, title, description, icon, order, isPriority } = body;
+    const { id, title, description, icon, imageUrl, order, isPriority } = body;
     if (!id) {
       return NextResponse.json({ error: "Service ID is required" }, { status: 400 });
     }
 
-    const updatedService = await prisma.serviceItem.update({
+    if (imageUrl !== undefined) {
+      const existing = await prisma.serviceItem.findUnique({ where: { id } });
+      if (
+        existing?.imageUrl &&
+        existing.imageUrl.startsWith("/api/images/") &&
+        existing.imageUrl !== imageUrl
+      ) {
+        const oldImageId = existing.imageUrl.split("/api/images/")[1];
+        if (oldImageId) {
+          await prisma.image.delete({ where: { id: oldImageId } }).catch(() => {});
+        }
+      }
+    }
+
+    const updatedService = await (prisma.serviceItem as any).update({
       where: { id },
       data: {
         ...(title !== undefined && { title }),
         ...(description !== undefined && { description }),
         ...(icon !== undefined && { icon }),
+        ...(imageUrl !== undefined && { imageUrl }),
         ...(order !== undefined && { order: Number(order) }),
         ...(isPriority !== undefined && { isPriority: Boolean(isPriority) }),
       },
@@ -108,6 +124,14 @@ export async function DELETE(req: Request) {
 
     if (!id) {
       return NextResponse.json({ error: "Service ID is required" }, { status: 400 });
+    }
+
+    const existing = await prisma.serviceItem.findUnique({ where: { id } });
+    if (existing?.imageUrl && existing.imageUrl.startsWith("/api/images/")) {
+      const imageId = existing.imageUrl.split("/api/images/")[1];
+      if (imageId) {
+        await prisma.image.delete({ where: { id: imageId } }).catch(() => {});
+      }
     }
 
     await prisma.serviceItem.delete({

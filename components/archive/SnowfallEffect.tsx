@@ -2,6 +2,10 @@
 
 import React, { useEffect, useRef } from "react";
 
+/**
+ * ARCHIVED COMPONENT - Preserved for potential future seasonal/theme reuse.
+ * Disconnected from live component tree as part of Hero Redesign & Clean Removal.
+ */
 interface SnowfallEffectProps {
   enabled?: boolean;
 }
@@ -62,14 +66,12 @@ export const SnowfallEffect: React.FC<SnowfallEffectProps> = ({
       flakes = [];
       const isMobile = window.innerWidth < 768;
 
-      // Total count across layers
       const farCount = isMobile ? 18 : 35;
       const midCount = isMobile ? 18 : 35;
       const nearCount = isMobile ? 10 : 20;
 
-      // Helper to generate a flake
       const createFlake = (layer: "far" | "mid" | "near"): Flake => {
-        const isCrystal = Math.random() < 0.42; // ~42% detailed snowflake stars, 58% dots
+        const isCrystal = Math.random() < 0.42;
         const color = SNOW_COLORS[Math.floor(Math.random() * SNOW_COLORS.length)];
 
         let radius = 2;
@@ -102,7 +104,7 @@ export const SnowfallEffect: React.FC<SnowfallEffectProps> = ({
           type: isCrystal ? "crystal" : "dot",
           color,
           rotation: Math.random() * Math.PI * 2,
-          rotationSpeed: (Math.random() * 0.015 - 0.0075),
+          rotationSpeed: Math.random() * 0.015 - 0.0075,
           layer,
         };
       };
@@ -121,11 +123,7 @@ export const SnowfallEffect: React.FC<SnowfallEffectProps> = ({
 
     window.addEventListener("resize", handleResize);
 
-    // Draw 6-spoke detailed crystalline star snowflake matching image reference
-    const drawSnowflakeCrystal = (
-      f: Flake,
-      renderOpacity: number
-    ) => {
+    const drawSnowflakeCrystal = (f: Flake, renderOpacity: number) => {
       ctx.save();
       ctx.translate(f.x, f.y);
       ctx.rotate(f.rotation);
@@ -137,19 +135,16 @@ export const SnowfallEffect: React.FC<SnowfallEffectProps> = ({
 
       const r = f.radius;
 
-      // 6 radial spokes
       for (let i = 0; i < 6; i++) {
         const angle = (i * Math.PI) / 3;
         const cos = Math.cos(angle);
         const sin = Math.sin(angle);
 
-        // Main line from center to tip
         ctx.beginPath();
         ctx.moveTo(0, 0);
         ctx.lineTo(cos * r, sin * r);
         ctx.stroke();
 
-        // Branch V ticks at 58% distance along arm
         const bDist = r * 0.58;
         const bLen = r * 0.32;
         const bx = cos * bDist;
@@ -166,7 +161,6 @@ export const SnowfallEffect: React.FC<SnowfallEffectProps> = ({
         ctx.stroke();
       }
 
-      // Center dot
       ctx.beginPath();
       ctx.arc(0, 0, Math.max(1.2, r * 0.18), 0, Math.PI * 2);
       ctx.fill();
@@ -174,11 +168,7 @@ export const SnowfallEffect: React.FC<SnowfallEffectProps> = ({
       ctx.restore();
     };
 
-    // Draw smooth circular dot particle
-    const drawSnowflakeDot = (
-      f: Flake,
-      renderOpacity: number
-    ) => {
+    const drawSnowflakeDot = (f: Flake, renderOpacity: number) => {
       ctx.save();
       ctx.beginPath();
       ctx.arc(f.x, f.y, f.radius, 0, Math.PI * 2);
@@ -199,37 +189,44 @@ export const SnowfallEffect: React.FC<SnowfallEffectProps> = ({
       ctx.restore();
     };
 
-    // Continuous 60fps animation loop using requestAnimationFrame
     const animate = () => {
       ctx.clearRect(0, 0, width, height);
 
       for (let i = 0; i < flakes.length; i++) {
         const flake = flakes[i];
 
-        // Update positions with sinusoidal drift & spin
         flake.step += flake.stepSize;
         flake.rotation += flake.rotationSpeed;
         flake.y += flake.speedY;
-        flake.x += Math.sin(flake.step) * (flake.layer === "near" ? 0.9 : flake.layer === "mid" ? 0.5 : 0.25) + flake.speedX;
+        flake.x +=
+          Math.sin(flake.step) *
+            (flake.layer === "near"
+              ? 0.9
+              : flake.layer === "mid"
+              ? 0.5
+              : 0.25) +
+          flake.speedX;
 
-        // Reset particle to top when reaching bottom
         if (flake.y > height + 20) {
           flake.y = -20;
           flake.x = Math.random() * width;
         }
 
-        // Horizontal wrap around screen edges
         if (flake.x > width + 20) {
           flake.x = -20;
         } else if (flake.x < -20) {
           flake.x = width + 20;
         }
 
-        // Soften opacity slightly over dense left text blocks
-        const isOverText = flake.x < width * 0.5 && flake.y > height * 0.15 && flake.y < height * 0.85;
-        const renderOpacity = (isOverText && flake.layer === "near") ? flake.opacity * 0.5 : flake.opacity;
+        const isOverText =
+          flake.x < width * 0.5 &&
+          flake.y > height * 0.15 &&
+          flake.y < height * 0.85;
+        const renderOpacity =
+          isOverText && flake.layer === "near"
+            ? flake.opacity * 0.5
+            : flake.opacity;
 
-        // Render crystal star vs smooth circular dot
         if (flake.type === "crystal") {
           drawSnowflakeCrystal(flake, renderOpacity);
         } else {
@@ -240,7 +237,6 @@ export const SnowfallEffect: React.FC<SnowfallEffectProps> = ({
       animFrameId = requestAnimationFrame(animate);
     };
 
-    // Start 60fps loop immediately
     animFrameId = requestAnimationFrame(animate);
 
     return () => {

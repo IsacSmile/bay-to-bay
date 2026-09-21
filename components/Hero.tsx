@@ -1,204 +1,236 @@
 import React from "react";
 import Image from "next/image";
-import { ArrowRight, Phone, Clock, Truck, Package } from "lucide-react";
-import {
-  getHeroData,
-  getHeroRouteData,
-  getContactData,
-  getThemeSettings,
-  hexToRgb,
-} from "@/lib/prisma";
-import { RouteCard } from "@/components/hero/RouteCard";
-import { SnowfallEffect } from "@/components/hero/SnowfallEffect";
-import { Button } from "@/components/ui/Button";
+import { ArrowRight, Plus, FileText, Package, Truck, Trees } from "lucide-react";
+import { getHeroData } from "@/lib/prisma";
 
 export async function Hero() {
   const heroData = await getHeroData();
-  const routeData = await getHeroRouteData();
-  const contactData = await getContactData();
-  const themeSettings = await getThemeSettings();
-  const { r, g, b } = hexToRgb(themeSettings.overlayColor);
-
-  const phoneTelLink = `tel:${contactData.phone.replace(/[^\d+]/g, "")}`;
 
   return (
-    <section className="relative w-full min-h-[calc(100dvh-34px)] sm:min-h-[700px] lg:min-h-[calc(100vh-34px)] lg:h-auto xl:min-h-[740px] bg-[#04101D] text-white flex items-start lg:items-end overflow-hidden pt-[116px] sm:pt-32 lg:pt-32 xl:pt-36 pb-12 sm:pb-14 lg:pb-0">
-      {/* 1. Base Background Image & Stacked Color Overlays */}
-      <div className="absolute inset-0 z-0 select-none pointer-events-none overflow-hidden">
+    <div className="relative w-full bg-[#071A2E]">
+      {/* 1. Main Hero Container with Scrim & Photo */}
+      <section className="relative w-full min-h-[580px] sm:min-h-[640px] lg:min-h-[680px] flex items-center pt-28 sm:pt-32 lg:pt-36 pb-20 sm:pb-24 overflow-hidden">
         
-        {/* =======================================================
-            1A. MOBILE BACKGROUND (Blurred Diffuse Treatment, < lg)
-            ======================================================= */}
-        <div className="block lg:hidden absolute inset-0 overflow-hidden">
-          {/* Scaled + heavily blurred background image (no sharp trees or van) */}
+        {/* Background Photo */}
+        <div className="absolute inset-0 z-0 select-none pointer-events-none">
           <Image
             src="/hero-bg.jpg"
-            alt="Northern Ontario winter courier landscape"
+            alt="Bay to Bay Express delivery van on Northern Ontario highway"
             fill
             priority
             sizes="100vw"
-            className="object-cover object-center scale-125"
-            style={{ filter: "blur(28px) brightness(0.80) saturate(1.1)" }}
+            className="object-cover object-[75%_center] lg:object-right"
           />
-
-          {/* Soft Diagonal Gradient Overlay (Top-left dark navy -> Bottom-right moody teal glow, dimmed 15-20%) */}
+          
+          {/* Lighter Directional Scrim for crisp text contrast */}
           <div
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(135deg, rgba(7, 31, 59, 0.96) 0%, rgba(14, 46, 76, 0.78) 45%, rgba(95, 160, 190, 0.26) 100%)",
-            }}
-          />
-
-          {/* Subtle Top & Bottom Framing Vignette */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(180deg, rgba(7, 31, 59, 0.4) 0%, transparent 20%, transparent 80%, rgba(7, 31, 59, 0.3) 100%)",
+                "linear-gradient(90deg, rgba(7, 26, 46, 0.94) 0%, rgba(7, 26, 46, 0.82) 40%, rgba(7, 26, 46, 0.40) 70%, rgba(7, 26, 46, 0.10) 100%)",
             }}
           />
         </div>
 
-        {/* =======================================================
-            1B. DESKTOP BACKGROUND (Sharp Photo + Directional Navy Gradient, >= lg)
-            ======================================================= */}
-        <div className="hidden lg:block absolute inset-0">
-          {/* 1.1 Desktop Background Photo with brightness(0.85) saturate(1.05) filter */}
-          <Image
-            src="/hero-bg.jpg"
-            alt="Northern Ontario courier delivery van on Highway 11 corridor connecting North Bay, Timmins, Kirkland Lake, Cochrane, Kapuskasing, Hearst, and Longlac"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-[82%_center]"
-            style={{ filter: "brightness(0.85) saturate(1.05)" }}
-          />
-          
-          {/* 1.2 Navy-tinted Gradient Overlay (Heavier left, fading right, theme-derived) */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background: `linear-gradient(100deg, rgba(${r}, ${g}, ${b}, 0.92) 0%, rgba(${r}, ${g}, ${b}, 0.75) 30%, rgba(${r}, ${g}, ${b}, 0.45) 60%, rgba(${r}, ${g}, ${b}, 0.25) 100%)`,
-            }}
-          />
-
-          {/* 1.3 Subtle Vertical Vignette Div (Darkens top & bottom edges) */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background: `linear-gradient(180deg, rgba(${r}, ${g}, ${b}, 0.35) 0%, rgba(${r}, ${g}, ${b}, 0) 20%, rgba(${r}, ${g}, ${b}, 0) 80%, rgba(${r}, ${g}, ${b}, 0.45) 100%)`,
-            }}
-          />
-
-          {/* 1.4 Subtle Vehicle Headlight Atmospheric Glow Animation (Slow 6s breathing bloom) */}
-          <div className="absolute right-[18%] top-[53%] -translate-y-1/2 w-[420px] h-[420px] pointer-events-none z-[1] select-none opacity-35 animate-[headlightGlow_6s_ease-in-out_infinite] mix-blend-screen">
-            <div className="w-full h-full rounded-full bg-[radial-gradient(ellipse_at_center,_rgba(240,248,255,0.75)_0%,_rgba(37,168,232,0.4)_30%,_rgba(8,120,209,0.15)_60%,_transparent_80%)] filter blur-3xl" />
-          </div>
-        </div>
-
-      </div>
-
-      {/* 2. Dynamic 3-Layer Snowfall Effect (Sits ABOVE overlays) */}
-      <SnowfallEffect enabled={themeSettings.snowfallEnabled} />
-
-      {/* 3. Hero Content Container */}
-      <div className="relative z-20 max-w-[1350px] mx-auto px-4 sm:px-6 lg:px-8 w-full pt-0 pb-0 lg:pb-8 xl:pb-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-end">
-          
-          {/* Left Side: Eyebrow, H1 Headline, Subhead, Body & CTAs */}
-          <div className="lg:col-span-7 flex flex-col justify-center">
+        {/* Hero Content Block */}
+        <div className="relative z-10 max-w-[1350px] mx-auto px-4 sm:px-6 lg:px-8 w-full">
+          <div className="max-w-2xl text-white">
             
-            {/* Small Eyebrow Badges: Single Lightweight Unit (Tier 2) */}
-            <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-3.5 sm:mb-4 lg:mb-4 xl:mb-5">
-              <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/15 px-3 py-1 rounded-full text-[11px] sm:text-xs font-semibold text-white tracking-wider uppercase">
-                <span className="w-2 h-2 rounded-full bg-brand-orange animate-pulse shadow-sm shadow-brand-orange shrink-0" />
-                <span>{heroData.eyebrowLabel || "Northern Ontario Courier Service"}</span>
-              </div>
-
-              {heroData.pillBadge && (
-                <span className="text-[11px] sm:text-xs font-bold text-brand-bright tracking-wider uppercase pl-0.5 sm:pl-0">
-                  {heroData.pillBadge}
-                </span>
-              )}
-            </div>
-
-            {/* H1 Main Headline with Responsive Scale across Laptop and Desktop (Tier 1) */}
-            <h1 className="font-display text-[clamp(2.75rem,10vw,3.6rem)] lg:text-[58px] xl:text-[72px] 2xl:text-[82px] font-black tracking-tight leading-[1.03] text-white">
-              <span className="block text-white">{heroData.headingLine1 || "Reliable."}</span>
-              <span className="block text-white">{heroData.headingLine2 || "Dedicated."}</span>
-              <span className="block text-[#25A8E8]">{heroData.headingLine3Accent || "Delivered."}</span>
+            {/* H1 Main Headline */}
+            <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl xl:text-[68px] font-black tracking-tight leading-[1.08] text-white">
+              <span className="block text-white">
+                {heroData.headingLine1 && heroData.headingLine1 !== "Reliable."
+                  ? heroData.headingLine1
+                  : "Small Goods Delivery"}
+              </span>
+              <span className="block text-[#25A8E8]">
+                {heroData.headingLine3Accent && heroData.headingLine3Accent !== "Delivered."
+                  ? heroData.headingLine3Accent
+                  : "Across Northern Ontario"}
+              </span>
             </h1>
 
-            {/* Supporting Subhead & Paragraph with Structured Vertical Rhythm */}
-            <div className="mt-3.5 sm:mt-4 lg:mt-4 xl:mt-5 space-y-1.5 sm:space-y-2 max-w-[580px]">
-              <p className="text-xl sm:text-2xl lg:text-xl xl:text-2xl 2xl:text-[26px] font-bold text-white/95 tracking-tight">
-                {heroData.subtext?.includes("Northern Ontario") ? (
-                  <>
-                    {heroData.subtext.split("Northern Ontario")[0]}
-                    <br className="block sm:hidden" />
-                    Northern Ontario{heroData.subtext.split("Northern Ontario")[1]}
-                  </>
-                ) : (
-                  heroData.subtext || "Small goods delivery across Northern Ontario."
-                )}
-              </p>
-              <p className="text-sm sm:text-base lg:text-sm xl:text-base 2xl:text-[17px] text-[#D9EDF5] font-normal leading-relaxed">
-                {heroData.description && !heroData.description.includes("Kirkland Lake")
-                  ? heroData.description
-                  : "Dedicated and scheduled courier solutions connecting commercial hubs across Northern Ontario and expanding regions."}
-              </p>
-            </div>
+            {/* Vibrant Green Underline Bar */}
+            <div className="w-20 sm:w-24 h-1.5 bg-[#10B981] rounded-full my-4 sm:my-5" />
 
-            {/* Universal CTA Buttons (Tier 1 Action: Sentence case, unified font family) */}
-            <div className="mt-5 sm:mt-6 lg:mt-6 xl:mt-8 flex flex-row flex-wrap items-center gap-3 sm:gap-4">
-              <Button
-                variant="primary"
-                size="sm"
+            {/* Subhead Tagline */}
+            <p className="text-xl sm:text-2xl font-bold text-white/95 tracking-tight mb-6 sm:mb-8">
+              {heroData.subtext && heroData.subtext.includes("Small goods")
+                ? "Reliable. Dedicated. Delivered."
+                : heroData.subtext || "Reliable. Dedicated. Delivered."}
+            </p>
+
+            {/* Primary & Secondary Call to Actions */}
+            <div className="flex flex-wrap items-center gap-3 sm:gap-4 mb-8 sm:mb-10">
+              <a
                 href="#quote"
-                rightIcon={<ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />}
-                className="px-5 py-2.5 sm:px-6 sm:py-3 text-xs sm:text-sm lg:px-6 lg:py-3 lg:text-base xl:px-8 xl:py-3.5 xl:min-h-[52px]"
+                className="bg-[#0088FF] hover:bg-[#0077EE] text-white font-extrabold text-sm sm:text-base px-6 sm:px-7 py-3.5 rounded-xl inline-flex items-center gap-2 shadow-lg shadow-blue-500/25 transition-all duration-200 transform hover:-translate-y-0.5"
               >
-                Request a quote
-              </Button>
+                <span>Request a Quote</span>
+                <ArrowRight className="w-4 h-4" />
+              </a>
 
-              <Button
-                variant="secondary"
-                size="sm"
-                href={phoneTelLink}
-                leftIcon={<Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-brand-bright" />}
-                className="px-5 py-2.5 sm:px-6 sm:py-3 text-xs sm:text-sm lg:px-6 lg:py-3 lg:text-base xl:px-8 xl:py-3.5 xl:min-h-[52px]"
+              <a
+                href="#service-areas"
+                className="border border-white/40 bg-slate-900/30 backdrop-blur-xs hover:bg-white/10 text-white font-extrabold text-sm sm:text-base px-6 sm:px-7 py-3.5 rounded-xl inline-flex items-center gap-2 transition-all duration-200"
               >
-                Call us
-              </Button>
+                <span>View Service Areas</span>
+                <ArrowRight className="w-4 h-4" />
+              </a>
             </div>
 
-            {/* Hero Feature Pills (Tier 3: Footnote-level metadata with breathing room & uniform sizing) */}
-            {heroData.featurePills && heroData.featurePills.length > 0 && (
-              <div className="mt-6 sm:mt-7 lg:mt-6 xl:mt-8 flex flex-wrap items-center gap-2 sm:gap-2.5">
-                {heroData.featurePills.map((pill, idx) => (
-                  <div
-                    key={idx}
-                    className="inline-flex items-center gap-1.5 bg-white/[0.05] hover:bg-white/[0.09] border border-white/10 px-2.5 py-1 rounded-full text-[11px] sm:text-xs font-medium text-slate-300 backdrop-blur-xs transition-colors select-none"
-                  >
-                    {pill.icon === "clock" && <Clock className="w-3 h-3 text-brand-bright/70 shrink-0" />}
-                    {pill.icon === "truck" && <Truck className="w-3 h-3 text-brand-bright/70 shrink-0" />}
-                    {pill.icon === "package" && <Package className="w-3 h-3 text-brand-bright/70 shrink-0" />}
-                    <span>{pill.label}</span>
-                  </div>
-                ))}
+            {/* Bottom Slogan Badge */}
+            <div className="inline-flex max-w-full items-center gap-2 text-[10px] xs:text-[11px] sm:text-xs xl:text-sm font-bold tracking-wider text-slate-300 uppercase bg-slate-900/40 px-3.5 py-1.5 rounded-full border border-white/10 backdrop-blur-xs shadow-xs">
+              <Trees className="w-4 h-4 text-[#10B981] shrink-0" />
+              <span className="whitespace-nowrap overflow-hidden text-ellipsis">SAME COMMUNITIES. A STRONGER NORTHERN ONTARIO.</span>
+            </div>
+
+          </div>
+        </div>
+
+        {/* Decorative Wavy Blue SVG Divider between Hero and Services Teaser Strip */}
+        <div className="absolute bottom-0 left-0 right-0 z-10 pointer-events-none overflow-hidden leading-none">
+          {/* Layer 1: Vibrant Cyan-Blue Accent Wave Curve (#25A8E8) */}
+          <svg
+            className="relative block w-full h-12 sm:h-16 lg:h-24 text-[#25A8E8]"
+            viewBox="0 0 1440 120"
+            fill="currentColor"
+            preserveAspectRatio="none"
+          >
+            <path d="M0,32 C240,96 480,0 720,48 C960,96 1200,16 1440,40 L1440,120 L0,120 Z" opacity="0.85" />
+          </svg>
+          {/* Layer 2: Light Background Surface Wave Curve (#F6F9FC) */}
+          <svg
+            className="relative block w-full h-10 sm:h-14 lg:h-20 text-[#F6F9FC] -mt-8 sm:-mt-10 lg:-mt-14"
+            viewBox="0 0 1440 120"
+            fill="currentColor"
+            preserveAspectRatio="none"
+          >
+            <path d="M0,48 C320,112 640,16 960,64 C1120,88 1320,32 1440,48 L1440,120 L0,120 Z" />
+          </svg>
+        </div>
+      </section>
+
+      {/* 2. Services Teaser Strip directly under Hero */}
+      <section className="relative z-20 w-full bg-[#F6F9FC] pt-2 pb-12 sm:pb-16 border-b border-slate-200/60">
+        <div className="max-w-[1350px] mx-auto px-4 sm:px-6 lg:px-8">
+          
+          {/* 4 Feature Teaser Cards Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 lg:gap-6">
+            
+            {/* Card 1: Medical & Pharmacy */}
+            <a
+              href="#services"
+              className="bg-white rounded-2xl p-3.5 sm:p-6 border border-slate-200/80 shadow-[0_4px_20px_rgba(7,26,46,0.04)] hover:shadow-[0_8px_30px_rgba(7,26,46,0.08)] hover:border-slate-300 transition-all duration-300 flex flex-row sm:flex-col items-center sm:items-start justify-between gap-3.5 sm:gap-0 group"
+            >
+              <div className="flex items-center sm:block gap-3.5 min-w-0">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#10B981] text-white flex items-center justify-center sm:mb-4 shadow-xs shrink-0 group-hover:scale-105 transition-transform">
+                  <Plus className="w-5 h-5 sm:w-6 sm:h-6 stroke-[3]" />
+                </div>
+                <div className="min-w-0">
+                  <h3 className="text-sm sm:text-lg font-extrabold text-[#071A2E] leading-snug sm:mb-2 group-hover:text-[#0088FF] transition-colors truncate sm:whitespace-normal">
+                    Medical & Pharmacy
+                  </h3>
+                  <p className="text-[11px] sm:text-xs lg:text-sm text-slate-500 font-normal leading-snug sm:leading-relaxed line-clamp-2 sm:line-clamp-none mt-0.5 sm:mt-0">
+                    Time-sensitive delivery for healthcare and pharmacy needs across Northern Ontario.
+                  </p>
+                </div>
               </div>
-            )}
+              <div className="shrink-0 sm:mt-6 sm:w-full sm:flex sm:justify-end">
+                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#E0F2FE] text-[#0284C7] flex items-center justify-center group-hover:bg-[#0088FF] group-hover:text-white transition-colors">
+                  <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                </div>
+              </div>
+            </a>
+
+            {/* Card 2: Documents */}
+            <a
+              href="#services"
+              className="bg-white rounded-2xl p-3.5 sm:p-6 border border-slate-200/80 shadow-[0_4px_20px_rgba(7,26,46,0.04)] hover:shadow-[0_8px_30px_rgba(7,26,46,0.08)] hover:border-slate-300 transition-all duration-300 flex flex-row sm:flex-col items-center sm:items-start justify-between gap-3.5 sm:gap-0 group"
+            >
+              <div className="flex items-center sm:block gap-3.5 min-w-0">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#0284C7] text-white flex items-center justify-center sm:mb-4 shadow-xs shrink-0 group-hover:scale-105 transition-transform">
+                  <FileText className="w-5 h-5 sm:w-6 sm:h-6" />
+                </div>
+                <div className="min-w-0">
+                  <h3 className="text-sm sm:text-lg font-extrabold text-[#071A2E] leading-snug sm:mb-2 group-hover:text-[#0088FF] transition-colors truncate sm:whitespace-normal">
+                    Documents
+                  </h3>
+                  <p className="text-[11px] sm:text-xs lg:text-sm text-slate-500 font-normal leading-snug sm:leading-relaxed line-clamp-2 sm:line-clamp-none mt-0.5 sm:mt-0">
+                    Secure, reliable delivery for important documents and paperwork.
+                  </p>
+                </div>
+              </div>
+              <div className="shrink-0 sm:mt-6 sm:w-full sm:flex sm:justify-end">
+                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#E0F2FE] text-[#0284C7] flex items-center justify-center group-hover:bg-[#0088FF] group-hover:text-white transition-colors">
+                  <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                </div>
+              </div>
+            </a>
+
+            {/* Card 3: Retail & Small Goods */}
+            <a
+              href="#services"
+              className="bg-white rounded-2xl p-3.5 sm:p-6 border border-slate-200/80 shadow-[0_4px_20px_rgba(7,26,46,0.04)] hover:shadow-[0_8px_30px_rgba(7,26,46,0.08)] hover:border-slate-300 transition-all duration-300 flex flex-row sm:flex-col items-center sm:items-start justify-between gap-3.5 sm:gap-0 group"
+            >
+              <div className="flex items-center sm:block gap-3.5 min-w-0">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#10B981] text-white flex items-center justify-center sm:mb-4 shadow-xs shrink-0 group-hover:scale-105 transition-transform">
+                  <Package className="w-5 h-5 sm:w-6 sm:h-6" />
+                </div>
+                <div className="min-w-0">
+                  <h3 className="text-sm sm:text-lg font-extrabold text-[#071A2E] leading-snug sm:mb-2 group-hover:text-[#0088FF] transition-colors truncate sm:whitespace-normal">
+                    Retail & Small Goods
+                  </h3>
+                  <p className="text-[11px] sm:text-xs lg:text-sm text-slate-500 font-normal leading-snug sm:leading-relaxed line-clamp-2 sm:line-clamp-none mt-0.5 sm:mt-0">
+                    Flexible delivery for businesses and individuals across the North.
+                  </p>
+                </div>
+              </div>
+              <div className="shrink-0 sm:mt-6 sm:w-full sm:flex sm:justify-end">
+                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#E0F2FE] text-[#0284C7] flex items-center justify-center group-hover:bg-[#0088FF] group-hover:text-white transition-colors">
+                  <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                </div>
+              </div>
+            </a>
+
+            {/* Card 4: Dedicated Delivery */}
+            <a
+              href="#services"
+              className="bg-white rounded-2xl p-3.5 sm:p-6 border border-slate-200/80 shadow-[0_4px_20px_rgba(7,26,46,0.04)] hover:shadow-[0_8px_30px_rgba(7,26,46,0.08)] hover:border-slate-300 transition-all duration-300 flex flex-row sm:flex-col items-center sm:items-start justify-between gap-3.5 sm:gap-0 group"
+            >
+              <div className="flex items-center sm:block gap-3.5 min-w-0">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#0284C7] text-white flex items-center justify-center sm:mb-4 shadow-xs shrink-0 group-hover:scale-105 transition-transform">
+                  <Truck className="w-5 h-5 sm:w-6 sm:h-6" />
+                </div>
+                <div className="min-w-0">
+                  <h3 className="text-sm sm:text-lg font-extrabold text-[#071A2E] leading-snug sm:mb-2 group-hover:text-[#0088FF] transition-colors truncate sm:whitespace-normal">
+                    Dedicated Delivery
+                  </h3>
+                  <p className="text-[11px] sm:text-xs lg:text-sm text-slate-500 font-normal leading-snug sm:leading-relaxed line-clamp-2 sm:line-clamp-none mt-0.5 sm:mt-0">
+                    Direct, dedicated service when it matters most.
+                  </p>
+                </div>
+              </div>
+              <div className="shrink-0 sm:mt-6 sm:w-full sm:flex sm:justify-end">
+                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#E0F2FE] text-[#0284C7] flex items-center justify-center group-hover:bg-[#0088FF] group-hover:text-white transition-colors">
+                  <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                </div>
+              </div>
+            </a>
 
           </div>
 
-          {/* Right Side: Premium Floating Route Card */}
-          <div className="lg:col-span-5 w-full flex justify-center lg:justify-end pt-6 lg:pt-0 pb-12 lg:pb-0">
-            <RouteCard data={routeData} />
+          {/* Footer Brand Slogan Bar */}
+          <div className="mt-10 pt-6 border-t border-slate-200/70 flex items-center justify-center gap-3 text-[11px] sm:text-xs font-black tracking-widest uppercase text-slate-500">
+            <span>NORTHERN PEOPLE</span>
+            <Trees className="w-4 h-4 text-[#10B981]" />
+            <span>STRONGER COMMUNITIES</span>
+            <Trees className="w-4 h-4 text-[#10B981]" />
+            <span>A BRIGHTER TOMORROW</span>
           </div>
 
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }

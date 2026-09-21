@@ -46,10 +46,10 @@ async function main() {
     update: {
       eyebrowLabel: "NORTHERN ONTARIO COURIER SERVICE",
       pillBadge: "HIGHWAY 11 CORRIDOR",
-      headingLine1: "Reliable.",
-      headingLine2: "Dedicated.",
-      headingLine3Accent: "Delivered.",
-      subtext: "Small goods delivery across Northern Ontario.",
+      headingLine1: "Small Goods Delivery",
+      headingLine2: "",
+      headingLine3Accent: "Across Northern Ontario",
+      subtext: "Reliable. Dedicated. Delivered.",
       description:
         "Dedicated and scheduled delivery solutions connecting North Bay, Kirkland Lake, Timmins, Cochrane, Kapuskasing, Hearst, and Longlac.",
       disclaimer: "*Timing subject to route and location conditions.",
@@ -63,10 +63,10 @@ async function main() {
       id: "default",
       eyebrowLabel: "NORTHERN ONTARIO COURIER SERVICE",
       pillBadge: "HIGHWAY 11 CORRIDOR",
-      headingLine1: "Reliable.",
-      headingLine2: "Dedicated.",
-      headingLine3Accent: "Delivered.",
-      subtext: "Small goods delivery across Northern Ontario.",
+      headingLine1: "Small Goods Delivery",
+      headingLine2: "",
+      headingLine3Accent: "Across Northern Ontario",
+      subtext: "Reliable. Dedicated. Delivered.",
       description:
         "Dedicated and scheduled delivery solutions connecting North Bay, Kirkland Lake, Timmins, Cochrane, Kapuskasing, Hearst, and Longlac.",
       disclaimer: "*Timing subject to route and location conditions.",
@@ -209,99 +209,69 @@ async function main() {
   });
 
   // Services Section Content
-  await prisma.servicesSectionContent.upsert({
+  await (prisma as any).servicesSectionContent.upsert({
     where: { id: "default" },
     update: {
       eyebrow: "OUR SERVICES",
-      headingPrimary: "Built around the way",
-      headingAccent: "your business moves.",
+      headingPrimary: "Delivery services for",
+      headingAccent: "your business",
       description:
-        "From pharmacy supplies to legal documents, our focus is simple: dependable small-goods delivery that fits the route, the schedule, and your specific shipment requirements.",
+        "Reliable, flexible courier solutions to keep your business moving.",
+      ctaHeading: "Need regular deliveries?",
+      ctaSubtext: "Let's talk about a delivery solution that works for your business.",
+      ctaButtonText: "Discuss Your Route",
     },
     create: {
       id: "default",
       eyebrow: "OUR SERVICES",
-      headingPrimary: "Built around the way",
-      headingAccent: "your business moves.",
+      headingPrimary: "Delivery services for",
+      headingAccent: "your business",
       description:
-        "From pharmacy supplies to legal documents, our focus is simple: dependable small-goods delivery that fits the route, the schedule, and your specific shipment requirements.",
+        "Reliable, flexible courier solutions to keep your business moving.",
+      ctaHeading: "Need regular deliveries?",
+      ctaSubtext: "Let's talk about a delivery solution that works for your business.",
+      ctaButtonText: "Discuss Your Route",
     },
   });
 
-  // Service Items (Delete and re-seed defaults with 9 non-redundant items)
+  // Service Items (Delete and re-seed defaults with image URLs)
   await prisma.serviceItem.deleteMany({});
 
   const defaultServices = [
     {
-      title: "Medical & Pharmacy Supply Delivery",
+      title: "Medical & Pharmacy",
       description:
-        "Move pharmacy supplies, medical items, and healthcare shipments safely—subject to route and handling requirements.",
+        "Time-sensitive delivery for clinics, pharmacies and healthcare providers. We get essential supplies where they need to be, safely and on time.",
       icon: "activity",
+      imageUrl: "/services/medical-pharmacy.jpg",
       order: 1,
       isPriority: true,
     },
     {
-      title: "Small Goods & Package Delivery",
+      title: "Documents & Legal Papers",
       description:
-        "Specialized transportation for parcels, retail inventory, equipment parts, and manageable small shipments.",
-      icon: "package",
+        "Secure, reliable delivery of important documents, contracts and legal paperwork across the region.",
+      icon: "file-text",
+      imageUrl: "/services/documents.jpg",
       order: 2,
       isPriority: false,
     },
     {
-      title: "Dedicated Route & Direct Runs",
+      title: "Retail & Small Goods",
       description:
-        "Exclusive direct delivery solutions designed around your specific shipment, route, and preferred timing.",
-      icon: "truck",
+        "Fast, dependable delivery for online orders, retail stock and small business supplies. From one parcel to regular runs, we've got you covered.",
+      icon: "store",
+      imageUrl: "/services/retail-goods.jpg",
       order: 3,
       isPriority: false,
     },
     {
-      title: "Scheduled Regional Courier",
+      title: "Dedicated & Scheduled Delivery",
       description:
-        "Dependable recurring routes connecting regional hubs and business corridors on a predictable schedule.",
-      icon: "calendar",
+        "Regular or on-demand runs for businesses that need a dependable delivery partner. A dedicated service tailored to your schedule and locations.",
+      icon: "truck",
+      imageUrl: "/services/delivery-van.jpg",
       order: 4,
-      isPriority: false,
-    },
-    {
-      title: "Recurring Commercial Pickups",
-      description:
-        "Establish customized weekly, twice-weekly, or monthly automated pickup and drop-off logistics.",
-      icon: "repeat",
-      order: 5,
-      isPriority: false,
-    },
-    {
-      title: "Legal & Confidential Documents",
-      description:
-        "Time-sensitive, confidential movement of legal contracts, financial paperwork, and administrative materials.",
-      icon: "file-text",
-      order: 6,
-      isPriority: false,
-    },
-    {
-      title: "Retail & B2B Logistics",
-      description:
-        "Help retail and commercial operations maintain inventory flow between branches, suppliers, and buyers.",
-      icon: "store",
-      order: 7,
-      isPriority: false,
-    },
-    {
-      title: "Secure & Sensitive Transfers",
-      description:
-        "High-priority transfer options for sensitive, high-value, or specialized small goods requiring care.",
-      icon: "shield-check",
-      order: 8,
-      isPriority: false,
-    },
-    {
-      title: "Custom Logistics Solutions",
-      description:
-        "Tailored transport arrangements built for unique shipment sizes, tight timing, or custom routing requirements.",
-      icon: "sparkles",
-      order: 9,
       isPriority: false,
     },
   ];

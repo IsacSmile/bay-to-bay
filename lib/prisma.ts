@@ -108,10 +108,10 @@ export const DEFAULT_CONTACT: ContactData = {
 export const DEFAULT_HERO: HeroData = {
   eyebrowLabel: "NORTHERN ONTARIO COURIER SERVICE",
   pillBadge: "HIGHWAY 11 CORRIDOR",
-  headingLine1: "Reliable.",
-  headingLine2: "Dedicated.",
-  headingLine3Accent: "Delivered.",
-  subtext: "Small goods delivery across Northern Ontario.",
+  headingLine1: "Small Goods Delivery",
+  headingLine2: "",
+  headingLine3Accent: "Across Northern Ontario",
+  subtext: "Reliable. Dedicated. Delivered.",
   description:
     "Dedicated and scheduled delivery solutions connecting North Bay, Kirkland Lake, Timmins, Cochrane, Kapuskasing, Hearst, and Longlac.",
   disclaimer: "*Timing subject to route and location conditions.",
@@ -449,114 +449,70 @@ export interface ServicesSectionData {
   headingPrimary: string;
   headingAccent: string;
   description: string;
+  ctaHeading: string;
+  ctaSubtext: string;
+  ctaButtonText: string;
 }
 
 export interface ServiceItemData {
   id: string;
   title: string;
   description: string;
+  imageUrl?: string;
   icon: string;
   order: number;
   isPriority: boolean;
 }
 
 export const DEFAULT_SERVICES_SECTION: ServicesSectionData = {
-  eyebrow: "DELIVERY SOLUTIONS",
-  headingPrimary: "Built around the way",
-  headingAccent: "your business moves.",
-  description:
-    "From pharmacy supplies to legal documents, our focus is simple: dependable small-goods delivery that fits the route, the schedule, and the shipment requirements.",
+  eyebrow: "OUR SERVICES",
+  headingPrimary: "Delivery services for your business",
+  headingAccent: "",
+  description: "Reliable, flexible courier solutions to keep your business moving.",
+  ctaHeading: "Need regular deliveries?",
+  ctaSubtext: "Let's talk about a delivery solution that works for your business.",
+  ctaButtonText: "Discuss Your Route",
 };
 
 export const DEFAULT_SERVICES_ITEMS: ServiceItemData[] = [
   {
     id: "1",
-    title: "Medical & Pharmacy Supply Delivery",
+    title: "Medical & Pharmacy",
     description:
-      "Move pharmacy supplies, medical items, and small healthcare shipments where they need to go—subject to route and handling requirements.",
+      "Time-sensitive delivery for clinics, pharmacies and healthcare providers. We get essential supplies where they need to be, safely and on time.",
+    imageUrl: "/services/medical-pharmacy.jpg",
     icon: "activity",
     order: 1,
     isPriority: true,
   },
   {
     id: "2",
-    title: "Small Goods Delivery",
+    title: "Documents & Legal Papers",
     description:
-      "Focused transportation for parcels, supplies, retail items, and other manageable small shipments.",
-    icon: "package",
+      "Secure, reliable delivery of important documents, contracts and legal paperwork across the region.",
+    imageUrl: "/services/documents.jpg",
+    icon: "file-text",
     order: 2,
     isPriority: false,
   },
   {
     id: "3",
-    title: "Dedicated Delivery Services",
+    title: "Retail & Small Goods",
     description:
-      "A direct delivery solution designed around your shipment, route, and preferred timing.",
-    icon: "truck",
+      "Fast, dependable delivery for online orders, retail stock and small business supplies. From one parcel to regular runs, we've got you covered.",
+    imageUrl: "/services/retail-goods.jpg",
+    icon: "package",
     order: 3,
     isPriority: false,
   },
   {
     id: "4",
-    title: "Scheduled Route Delivery",
+    title: "Dedicated & Scheduled Delivery",
     description:
-      "Twice-weekly service options connecting key Northern Ontario communities on a dependable schedule.",
-    icon: "calendar",
+      "Regular or on-demand runs for businesses that need a dependable delivery partner. A dedicated service tailored to your schedule and locations.",
+    imageUrl: "/services/delivery-van.jpg",
+    icon: "truck",
     order: 4,
-    isPriority: false,
-  },
-  {
-    id: "5",
-    title: "Recurring Business Deliveries",
-    description:
-      "Set up weekly, twice-weekly, monthly, or customized recurring pickups and drop-offs.",
-    icon: "repeat",
-    order: 5,
-    isPriority: false,
-  },
-  {
-    id: "6",
-    title: "Legal & Business Documents",
-    description:
-      "Professional movement of documents and small business materials between locations.",
-    icon: "file-text",
-    order: 6,
-    isPriority: false,
-  },
-  {
-    id: "7",
-    title: "Retail & Small-Goods Delivery",
-    description:
-      "Help your retail operation keep stock and small orders moving across the route.",
-    icon: "store",
-    order: 7,
-    isPriority: false,
-  },
-  {
-    id: "8",
-    title: "Business-to-Business Delivery",
-    description:
-      "Reliable regional transportation built around the way Northern Ontario businesses operate.",
-    icon: "building-2",
-    order: 8,
-    isPriority: false,
-  },
-  {
-    id: "9",
-    title: "Secure Business Transfers",
-    description:
-      "Discuss secure document, deposit, or small-goods transfers where the shipment and service requirements fit.",
-    icon: "shield-check",
-    order: 9,
-    isPriority: false,
-  },
-  {
-    id: "10",
-    title: "Custom & Special Shipment Requests",
-    description:
-      "Tailored transport arrangements for unique cargo size, handling, or timing constraints.",
-    icon: "sparkles",
-    order: 10,
     isPriority: false,
   },
 ];
@@ -571,11 +527,15 @@ export async function getServicesSectionData(): Promise<ServicesSectionData> {
       })
     );
     if (data) {
+      const raw = data as unknown as Record<string, unknown>;
       return {
         eyebrow: data.eyebrow || DEFAULT_SERVICES_SECTION.eyebrow,
         headingPrimary: data.headingPrimary || DEFAULT_SERVICES_SECTION.headingPrimary,
-        headingAccent: data.headingAccent || DEFAULT_SERVICES_SECTION.headingAccent,
+        headingAccent: data.headingAccent ?? DEFAULT_SERVICES_SECTION.headingAccent,
         description: data.description || DEFAULT_SERVICES_SECTION.description,
+        ctaHeading: (raw.ctaHeading as string) || DEFAULT_SERVICES_SECTION.ctaHeading,
+        ctaSubtext: (raw.ctaSubtext as string) || DEFAULT_SERVICES_SECTION.ctaSubtext,
+        ctaButtonText: (raw.ctaButtonText as string) || DEFAULT_SERVICES_SECTION.ctaButtonText,
       };
     }
   } catch (error) {
@@ -598,6 +558,7 @@ export async function getServicesData(): Promise<ServiceItemData[]> {
         id: s.id,
         title: s.title,
         description: s.description,
+        imageUrl: (s as any).imageUrl || DEFAULT_SERVICES_ITEMS.find((d) => d.id === s.id)?.imageUrl || undefined,
         icon: s.icon,
         order: s.order,
         isPriority: s.isPriority,

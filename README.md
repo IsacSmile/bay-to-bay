@@ -150,6 +150,11 @@ npm run start
 
 ---
 
+## Known Asset Notes
+* **Hero Background Photo (`public/hero-bg.jpg`)**: The current hero background image is a high-resolution photorealistic demonstration asset. Note that the decal text baked into the van in this placeholder ("Reliable. Local. Fast.") should be swapped for an official production photo (or photo without conflicting slogans) prior to final live launch. The hero image is admin-editable and can be uploaded/replaced at any time.
+
+---
+
 ## License and Support
 
 Copyright 2026 Bay to Bay Express Inc. All rights reserved. Proprietary software for Bay to Bay Express Inc. operations.

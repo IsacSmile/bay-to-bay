@@ -22,12 +22,14 @@ import {
   Star,
   RefreshCw,
 } from "lucide-react";
+import { ImageUploader } from "@/components/admin/ImageUploader";
 
 interface ServiceItem {
   id: string;
   title: string;
   description: string;
   icon: string;
+  imageUrl?: string;
   order: number;
   isPriority: boolean;
 }
@@ -37,6 +39,9 @@ interface SectionContent {
   headingPrimary: string;
   headingAccent: string;
   description: string;
+  ctaHeading?: string;
+  ctaSubtext?: string;
+  ctaButtonText?: string;
 }
 
 const AVAILABLE_ICONS = [
@@ -55,11 +60,14 @@ const AVAILABLE_ICONS = [
 export default function AdminServicesPage() {
   const [services, setServices] = useState<ServiceItem[]>([]);
   const [sectionContent, setSectionContent] = useState<SectionContent>({
-    eyebrow: "DELIVERY SOLUTIONS",
-    headingPrimary: "Built around the way",
-    headingAccent: "your business moves.",
+    eyebrow: "OUR SERVICES",
+    headingPrimary: "Delivery services for",
+    headingAccent: "your business",
     description:
-      "From pharmacy supplies to legal documents, our focus is simple: dependable small-goods delivery that fits the route, the schedule, and the shipment requirements.",
+      "Reliable, flexible courier solutions to keep your business moving.",
+    ctaHeading: "Need regular deliveries?",
+    ctaSubtext: "Let's talk about a delivery solution that works for your business.",
+    ctaButtonText: "Discuss Your Route",
   });
 
   const [loading, setLoading] = useState(true);
@@ -74,6 +82,7 @@ export default function AdminServicesPage() {
     title: "",
     description: "",
     icon: "package",
+    imageUrl: "",
     order: 1,
     isPriority: false,
   });
@@ -128,7 +137,7 @@ export default function AdminServicesPage() {
       });
 
       if (res.ok) {
-        showMessage("Section content updated successfully!", "success");
+        showMessage("Section content & CTA banner updated successfully!", "success");
       } else {
         showMessage("Failed to update section content.", "error");
       }
@@ -146,6 +155,7 @@ export default function AdminServicesPage() {
       title: "",
       description: "",
       icon: "package",
+      imageUrl: "",
       order: services.length + 1,
       isPriority: false,
     });
@@ -158,6 +168,7 @@ export default function AdminServicesPage() {
       title: service.title,
       description: service.description,
       icon: service.icon,
+      imageUrl: service.imageUrl || "",
       order: service.order,
       isPriority: service.isPriority,
     });
@@ -322,7 +333,7 @@ export default function AdminServicesPage() {
         <div className="bg-white p-4 sm:p-5 rounded-xl border border-slate-200/70 shadow-2xs">
           <h2 className="text-lg font-black text-[#071A2E] mb-4 flex items-center gap-2">
             <Edit2 className="w-4 h-4 text-brand-blue" />
-            <span>Section Header Content</span>
+            <span>Section Header Content & CTA Banner</span>
           </h2>
 
           <form onSubmit={handleSaveSection} className="space-y-4">
@@ -384,14 +395,67 @@ export default function AdminServicesPage() {
               />
             </div>
 
-            <div className="flex justify-end">
+            {/* Bottom CTA Banner Fields */}
+            <div className="pt-4 border-t border-slate-100 space-y-4">
+              <h3 className="text-xs font-black text-slate-400 uppercase tracking-wider">
+                Bottom CTA Banner Content
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div>
+                  <label className="block text-xs font-bold text-slate-600 uppercase mb-1">
+                    CTA Heading
+                  </label>
+                  <input
+                    type="text"
+                    value={sectionContent.ctaHeading || ""}
+                    onChange={(e) =>
+                      setSectionContent({ ...sectionContent, ctaHeading: e.target.value })
+                    }
+                    placeholder="Need regular deliveries?"
+                    className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm font-medium focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue outline-hidden"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-slate-600 uppercase mb-1">
+                    CTA Supporting Subtext
+                  </label>
+                  <input
+                    type="text"
+                    value={sectionContent.ctaSubtext || ""}
+                    onChange={(e) =>
+                      setSectionContent({ ...sectionContent, ctaSubtext: e.target.value })
+                    }
+                    placeholder="Let's talk about a delivery solution that works for your business."
+                    className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm font-medium focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue outline-hidden"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-slate-600 uppercase mb-1">
+                    CTA Button Label
+                  </label>
+                  <input
+                    type="text"
+                    value={sectionContent.ctaButtonText || ""}
+                    onChange={(e) =>
+                      setSectionContent({ ...sectionContent, ctaButtonText: e.target.value })
+                    }
+                    placeholder="Discuss Your Route"
+                    className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm font-medium focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue outline-hidden"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="flex justify-end pt-2">
               <button
                 type="submit"
                 disabled={savingSection}
-                className="inline-flex items-center gap-2 bg-[#071A2E] hover:bg-[#04101D] text-white font-bold px-4 py-2 rounded-xl text-xs transition-colors"
+                className="inline-flex items-center gap-2 bg-[#071A2E] hover:bg-[#04101D] text-white font-bold px-4 py-2 rounded-xl text-xs transition-colors cursor-pointer"
               >
                 {savingSection ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Check className="w-3.5 h-3.5" />}
-                <span>Save Section Header</span>
+                <span>Save Section & CTA Banner</span>
               </button>
             </div>
           </form>
@@ -420,7 +484,8 @@ export default function AdminServicesPage() {
               <table className="w-full text-left border-collapse">
                 <thead>
                   <tr className="border-b border-slate-200/70 text-[10px] font-black uppercase text-slate-400 tracking-wider">
-                    <th className="py-3.5 px-4 w-20">Pos</th>
+                    <th className="py-3.5 px-4 w-16">Pos</th>
+                    <th className="py-3.5 px-4 w-24">Photo</th>
                     <th className="py-3.5 px-4">Service Details</th>
                     <th className="py-3.5 px-4 w-28">Icon</th>
                     <th className="py-3.5 px-4 w-36">Priority Flag</th>
@@ -430,6 +495,15 @@ export default function AdminServicesPage() {
                 <tbody className="divide-y divide-slate-100 text-xs">
                   {services.map((service, index) => {
                     const IconComp = AVAILABLE_ICONS.find((i) => i.value === service.icon)?.icon || Package;
+                    const defaultImages = [
+                      "/services/medical-pharmacy.jpg",
+                      "/services/documents.jpg",
+                      "/services/retail-goods.jpg",
+                      "/services/delivery-van.jpg",
+                    ];
+                    const thumbUrl = service.imageUrl && service.imageUrl.trim() !== ""
+                      ? service.imageUrl
+                      : defaultImages[index % defaultImages.length];
 
                     return (
                       <tr
@@ -465,6 +539,17 @@ export default function AdminServicesPage() {
                           </div>
                         </td>
 
+                        {/* Photo Thumbnail */}
+                        <td className="py-3.5 px-4">
+                          <div className="w-16 h-12 rounded-lg overflow-hidden border border-slate-200 bg-slate-100 shrink-0">
+                            <img
+                              src={thumbUrl}
+                              alt={service.title}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                        </td>
+
                         {/* Title & Description */}
                         <td className="py-3.5 px-4">
                           <div className="font-bold text-slate-900 text-sm flex items-center gap-2">
@@ -475,7 +560,7 @@ export default function AdminServicesPage() {
                           </div>
                         </td>
 
-                        {/* Icon - Minimal Graphic Badge */}
+                        {/* Icon */}
                         <td className="py-3.5 px-4">
                           <div className="inline-flex items-center gap-2 text-slate-700 font-semibold text-xs">
                             <div className="w-8 h-8 rounded-lg bg-sky-50 text-brand-blue border border-sky-100 flex items-center justify-center shrink-0">
@@ -535,14 +620,14 @@ export default function AdminServicesPage() {
         {/* Add / Edit Form Modal */}
         {isFormOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs">
-            <div className="bg-white rounded-2xl max-w-lg w-full p-6 border border-slate-200 shadow-2xl space-y-4">
+            <div className="bg-white rounded-2xl max-w-lg w-full p-6 border border-slate-200 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
               <div className="flex items-center justify-between pb-3 border-b border-slate-100">
                 <h3 className="text-lg font-black text-[#071A2E]">
-                  {editingId ? "Edit Service Card" : "Add New Service Card"}
+                  {editingId ? "Edit Service Photo Card" : "Add New Service Photo Card"}
                 </h3>
                 <button
                   onClick={() => setIsFormOpen(false)}
-                  className="p-1 rounded-lg text-slate-400 hover:text-slate-600"
+                  className="p-1 rounded-lg text-slate-400 hover:text-slate-600 cursor-pointer"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -558,7 +643,7 @@ export default function AdminServicesPage() {
                     required
                     value={formData.title}
                     onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                    placeholder="e.g. Medical & Pharmacy Supply Delivery"
+                    placeholder="e.g. Medical & Pharmacy"
                     className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm font-medium focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue outline-hidden"
                   />
                 </div>
@@ -572,10 +657,18 @@ export default function AdminServicesPage() {
                     required
                     value={formData.description}
                     onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                    placeholder="Provide a concise 2-3 line summary of this delivery service..."
+                    placeholder="Provide a concise summary of this delivery service..."
                     className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm font-medium focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue outline-hidden"
                   />
                 </div>
+
+                {/* Service Card Photo Input */}
+                <ImageUploader
+                  value={formData.imageUrl}
+                  onChange={(url) => setFormData({ ...formData, imageUrl: url })}
+                  label="Card Photo (Neon DB Storage)"
+                />
+
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
@@ -617,10 +710,10 @@ export default function AdminServicesPage() {
                     id="isPriorityToggle"
                     checked={formData.isPriority}
                     onChange={(e) => setFormData({ ...formData, isPriority: e.target.checked })}
-                    className="w-4 h-4 rounded text-brand-blue focus:ring-brand-blue"
+                    className="w-4 h-4 rounded text-brand-blue focus:ring-brand-blue cursor-pointer"
                   />
                   <label htmlFor="isPriorityToggle" className="text-xs font-bold text-[#071A2E] cursor-pointer">
-                    Highlight as PRIORITY FOCUS service card (Light blue fill + accent border)
+                    Highlight as PRIORITY FOCUS service card
                   </label>
                 </div>
 
@@ -628,14 +721,14 @@ export default function AdminServicesPage() {
                   <button
                     type="button"
                     onClick={() => setIsFormOpen(false)}
-                    className="px-4 py-2 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-100"
+                    className="px-4 py-2 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-100 cursor-pointer"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
                     disabled={savingService}
-                    className="inline-flex items-center gap-2 bg-brand-blue hover:bg-[#0878D1] text-white font-extrabold px-4 py-2 rounded-xl text-xs shadow-sm transition-colors"
+                    className="inline-flex items-center gap-2 bg-brand-blue hover:bg-[#0878D1] text-white font-extrabold px-4 py-2 rounded-xl text-xs shadow-sm transition-colors cursor-pointer"
                   >
                     {savingService ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Check className="w-3.5 h-3.5" />}
                     <span>{editingId ? "Save Changes" : "Create Service"}</span>

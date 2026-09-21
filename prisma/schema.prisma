@@ -32,6 +32,7 @@ model HeroContent {
   description        String   @default("Dedicated and scheduled delivery solutions connecting North Bay, Kirkland Lake, Timmins, Cochrane, Kapuskasing, Hearst, and Longlac.")
   disclaimer         String?  @default("*Timing subject to route and location conditions.")
   featurePills       Json     @default("[{\"icon\":\"clock\",\"label\":\"12-hour options*\"},{\"icon\":\"truck\",\"label\":\"Twice-weekly routes\"},{\"icon\":\"package\",\"label\":\"Small goods specialists\"}]")
+  heroBgUrl          String?  @default("/hero-bg.jpg")
   updatedAt          DateTime @updatedAt
 }
 
@@ -93,10 +94,13 @@ model ThemeSettings {
 
 model ServicesSectionContent {
   id             String   @id @default("default")
-  eyebrow        String   @default("DELIVERY SOLUTIONS")
-  headingPrimary String   @default("Built around the way")
-  headingAccent  String   @default("your business moves.")
-  description    String   @default("From pharmacy supplies to legal documents, our focus is simple: dependable small-goods delivery that fits the route, the schedule, and the shipment requirements.")
+  eyebrow        String   @default("OUR SERVICES")
+  headingPrimary String   @default("Delivery services for your business")
+  headingAccent  String   @default("")
+  description    String   @default("Reliable, flexible courier solutions to keep your business moving.")
+  ctaHeading     String   @default("Need regular deliveries?")
+  ctaSubtext     String   @default("Let's talk about a delivery solution that works for your business.")
+  ctaButtonText  String   @default("Discuss Your Route")
   updatedAt      DateTime @updatedAt
 }
 
@@ -104,6 +108,7 @@ model ServiceItem {
   id          String   @id @default(uuid())
   title       String
   description String
+  imageUrl    String?  @default("")
   icon        String   @default("package")
   order       Int      @default(0)
   isPriority  Boolean  @default(false)
@@ -259,5 +264,15 @@ model QuoteCtaContent {
   brandLogoText String   @default("Bay to Bay EXPRESS INC.")
   updatedAt     DateTime @updatedAt
 }
+
+model Image {
+  id        String   @id @default(uuid())
+  filename  String
+  mimeType  String
+  data      Bytes
+  size      Int
+  createdAt DateTime @default(now())
+}
+
 
 

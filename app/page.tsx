@@ -23,7 +23,6 @@ import {
   getFaqContentData,
   getFaqItemsData,
   getQuoteCtaData,
-  getSnowfallEnabled,
 } from "@/lib/prisma";
 
 export default async function HomePage() {
@@ -35,7 +34,6 @@ export default async function HomePage() {
   const faqContent = await getFaqContentData();
   const faqItems = await getFaqItemsData();
   const quoteCtaContent = await getQuoteCtaData();
-  const snowfallEnabled = await getSnowfallEnabled();
 
   return (
     <div className="min-h-screen flex flex-col bg-[#F6F9FC]">
@@ -46,14 +44,10 @@ export default async function HomePage() {
       <AnnouncementBar items={announcement.items} />
 
       {/* Sticky Main Header */}
-      <div className="sticky top-0 z-50 -mb-[68px] sm:-mb-[72px] pointer-events-none">
-        <div className="pointer-events-auto">
-          <Navbar phone={contact.phone} />
-        </div>
-      </div>
+      <Navbar phone={contact.phone} />
 
       {/* Hero Section */}
-      <div className="relative w-full bg-[#04101D]">
+      <div className="relative w-full bg-[#071A2E]">
         <Hero />
       </div>
 
@@ -91,7 +85,7 @@ export default async function HomePage() {
       <QuoteCTA content={quoteCtaContent} phone={contact.phone} email={contact.email || undefined} />
 
       {/* Footer */}
-      <Footer phone={contact.phone} email={contact.email || undefined} snowfallEnabled={snowfallEnabled} />
+      <Footer phone={contact.phone} email={contact.email || undefined} />
     </div>
   );
 }

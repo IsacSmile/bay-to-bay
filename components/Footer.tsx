@@ -1,25 +1,21 @@
 import React from "react";
 import Image from "next/image";
 import { Phone, Mail } from "lucide-react";
-import { SnowfallEffect } from "@/components/hero/SnowfallEffect";
 
 interface FooterProps {
   phone?: string;
   email?: string;
-  snowfallEnabled?: boolean;
 }
 
 export const Footer: React.FC<FooterProps> = ({
   phone = "705-978-3001",
   email = "baytobayexpress@gmail.com",
-  snowfallEnabled = true,
 }) => {
   const telLink = `tel:${phone.replace(/[^\d+]/g, "")}`;
 
   return (
     <footer id="contact" className="relative bg-[#071A2E] text-slate-400 text-sm border-t border-[#0D2942] overflow-hidden">
-      {/* Canvas Snowfall Animation */}
-      <SnowfallEffect enabled={snowfallEnabled} />
+
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-16">
         

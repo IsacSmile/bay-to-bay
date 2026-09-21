@@ -3,7 +3,6 @@ import { ArrowRight } from "lucide-react";
 import {
   getHowItWorksSectionData,
   getHowItWorksStepsData,
-  getHeroRouteData,
 } from "@/lib/prisma";
 import { EyebrowLabel } from "@/components/ui/EyebrowLabel";
 import { StepItem } from "@/components/how-it-works/StepItem";
