@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Phone, Mail } from "lucide-react";
 import { EyebrowLabel } from "@/components/ui/EyebrowLabel";
 import { QuoteCtaData, DEFAULT_QUOTE_CTA } from "@/lib/prisma";
+import { SnowfallEffect } from "@/components/hero/SnowfallEffect";
 
 export interface QuoteCTAProps {
   content?: QuoteCtaData;
@@ -22,6 +23,9 @@ export const QuoteCTA: React.FC<QuoteCTAProps> = ({ content, phone, email }) => 
       id="quote-cta"
       className="w-full bg-[#05172A] text-white py-14 sm:py-16 lg:py-20 relative overflow-hidden border-t border-slate-800/80"
     >
+      {/* Animated Snowfall Effect Overlay */}
+      <SnowfallEffect />
+
       {/* Background Curved Vector Arc Pattern (matching reference image) */}
       <svg
         className="absolute inset-0 w-full h-full pointer-events-none opacity-25 z-0"
