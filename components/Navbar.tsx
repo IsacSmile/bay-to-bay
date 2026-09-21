@@ -22,9 +22,35 @@ interface NavbarProps {
 
 export const Navbar: React.FC<NavbarProps> = ({ phone = "705-978-3001" }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isRendered, setIsRendered] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
-  const toggleMenu = () => setIsMenuOpen((prev) => !prev);
-  const closeMenu = () => setIsMenuOpen(false);
+  const openMenu = () => {
+    setIsMenuOpen(true);
+    setIsRendered(true);
+    // Small delay to trigger CSS transition
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        setIsVisible(true);
+      });
+    });
+  };
+
+  const closeMenu = () => {
+    setIsVisible(false);
+    setIsMenuOpen(false);
+    setTimeout(() => {
+      setIsRendered(false);
+    }, 300);
+  };
+
+  const toggleMenu = () => {
+    if (isMenuOpen) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  };
 
   useEffect(() => {
     if (isMenuOpen) {
@@ -187,7 +213,7 @@ export const Navbar: React.FC<NavbarProps> = ({ phone = "705-978-3001" }) => {
           <button
             type="button"
             onClick={toggleMenu}
-            className="lg:hidden p-2.5 rounded-xl text-slate-700 hover:text-[#071A2E] hover:bg-slate-100 transition-colors"
+            className="lg:hidden p-2.5 rounded-xl text-slate-700 hover:text-[#071A2E] hover:bg-slate-100 transition-colors cursor-pointer"
             aria-label="Toggle navigation menu"
             aria-expanded={isMenuOpen}
           >
@@ -197,10 +223,25 @@ export const Navbar: React.FC<NavbarProps> = ({ phone = "705-978-3001" }) => {
 
       </div>
 
-      {/* Mobile Modal Overlay */}
-      {isMenuOpen && (
-        <div className="fixed inset-0 z-50 bg-[#040C1A]/90 backdrop-blur-md p-3 sm:p-4 flex flex-col items-center justify-start overflow-y-auto animate-in fade-in duration-200">
-          <div className="w-full max-w-md space-y-3 my-auto py-2">
+      {/* Smooth Mobile Modal Overlay */}
+      {isRendered && (
+        <div
+          onClick={(e) => {
+            if (e.target === e.currentTarget) closeMenu();
+          }}
+          className={`fixed inset-0 z-50 bg-[#040C1A]/90 p-3 sm:p-4 flex flex-col items-center justify-start overflow-y-auto transition-all duration-300 ease-out ${
+            isVisible
+              ? "opacity-100 backdrop-blur-md"
+              : "opacity-0 backdrop-blur-none pointer-events-none"
+          }`}
+        >
+          <div
+            className={`w-full max-w-md space-y-3 my-auto py-2 transition-all duration-300 ease-out transform ${
+              isVisible
+                ? "opacity-100 translate-y-0 scale-100"
+                : "opacity-0 -translate-y-4 scale-95"
+            }`}
+          >
             
             {/* Top White Pill Capsule Header */}
             <div className="w-full bg-[#F4F6F8] rounded-full px-5 py-3 flex items-center justify-between shadow-xl">
