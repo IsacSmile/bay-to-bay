@@ -30,6 +30,7 @@ export async function PUT(req: Request) {
       serviceNoteLead,
       serviceNoteText,
       disclaimer,
+      notificationEmail,
     } = body;
 
     const updated = await (prisma as any).quoteFormContent.upsert({
@@ -42,6 +43,7 @@ export async function PUT(req: Request) {
         ...(serviceNoteLead !== undefined && { serviceNoteLead }),
         ...(serviceNoteText !== undefined && { serviceNoteText }),
         ...(disclaimer !== undefined && { disclaimer }),
+        ...(notificationEmail !== undefined && { notificationEmail }),
       },
       create: {
         id: "default",
@@ -52,6 +54,7 @@ export async function PUT(req: Request) {
         serviceNoteLead: serviceNoteLead || "Service note:",
         serviceNoteText: serviceNoteText || "12-hour options and medical/pharmacy supply delivery are subject to route, pickup time, shipment, handling, and service requirements.",
         disclaimer: disclaimer || "No price calculator is shown. We'll review the route and shipment details with you directly.",
+        notificationEmail: notificationEmail || "i.faiz.dev@gmail.com",
       },
     });
 

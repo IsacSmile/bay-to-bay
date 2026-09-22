@@ -193,6 +193,7 @@ model QuoteFormContent {
   serviceNoteLead  String   @default("Service note:")
   serviceNoteText  String   @default("12-hour options and medical/pharmacy supply delivery are subject to route, pickup time, shipment, handling, and service requirements.")
   disclaimer       String   @default("No price calculator is shown. We'll review the route and shipment details with you directly.")
+  notificationEmail String  @default("i.faiz.dev@gmail.com")
   updatedAt        DateTime @updatedAt
 }
 

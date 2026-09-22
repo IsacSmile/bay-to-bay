@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { QuoteFormSchema } from "@/lib/schemas/quote";
+import { sendQuoteNotification } from "@/lib/email";
 
 // Simple in-memory rate-limiter map: IP -> array of timestamps
 const rateLimitMap = new Map<string, number[]>();
@@ -82,6 +83,13 @@ export async function POST(req: Request) {
         status: "new",
       },
     });
+
+    // 5. Best-effort Admin Email Notification (non-blocking, never fails customer response)
+    try {
+      await sendQuoteNotification(newQuote);
+    } catch (emailErr) {
+      console.error("[Quote API]: Non-fatal error in sendQuoteNotification:", emailErr);
+    }
 
     return NextResponse.json({ success: true, id: newQuote.id }, { status: 201 });
   } catch (error: any) {

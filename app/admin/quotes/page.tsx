@@ -122,6 +122,7 @@ interface SectionContent {
   serviceNoteLead: string;
   serviceNoteText: string;
   disclaimer: string;
+  notificationEmail: string;
 }
 
 export default function AdminQuotesPage() {
@@ -137,6 +138,7 @@ export default function AdminQuotesPage() {
       "12-hour options and medical/pharmacy supply delivery are subject to route, pickup time, shipment, handling, and service requirements.",
     disclaimer:
       "No price calculator is shown. We'll review the route and shipment details with you directly.",
+    notificationEmail: "i.faiz.dev@gmail.com",
   });
 
   const [loading, setLoading] = useState(true);
@@ -166,6 +168,20 @@ export default function AdminQuotesPage() {
   useEffect(() => {
     setCurrentPage(1);
   }, [searchTerm, statusFilter]);
+
+  // Automatically open quote detail modal if ?id={quoteId} is in URL
+  useEffect(() => {
+    if (quotes.length > 0 && typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const quoteId = params.get("id");
+      if (quoteId) {
+        const found = quotes.find((q) => q.id === quoteId);
+        if (found) {
+          setSelectedQuote(found);
+        }
+      }
+    }
+  }, [quotes]);
 
   const fetchData = async () => {
     setLoading(true);
@@ -934,6 +950,24 @@ export default function AdminQuotesPage() {
                   className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm font-medium focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue outline-hidden"
                 />
               </div>
+            </div>
+
+            <div>
+              <label className="block text-xs font-bold text-slate-600 uppercase mb-1">
+                Admin Notification Email Recipient (Resend Target)
+              </label>
+              <input
+                type="email"
+                value={sectionContent.notificationEmail || "i.faiz.dev@gmail.com"}
+                onChange={(e) =>
+                  setSectionContent({ ...sectionContent, notificationEmail: e.target.value })
+                }
+                placeholder="i.faiz.dev@gmail.com"
+                className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm font-medium focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue outline-hidden"
+              />
+              <p className="text-[11px] text-slate-500 mt-1">
+                Incoming quote submissions will trigger an instant admin alert email sent to this address.
+              </p>
             </div>
 
             <div className="flex justify-end">
