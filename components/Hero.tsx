@@ -142,11 +142,12 @@ export async function Hero({
         </div>
       </section>
 
-      {/* 2. Services Teaser Strip directly under Hero */}
-      <section
-        id="services-list"
-        className="relative z-20 w-full bg-[#F6F9FC] pt-2 pb-12 sm:pb-16 border-b border-slate-200/60 scroll-mt-20"
-      >
+      {/* 2. Services Teaser Strip directly under Hero - Homepage Only */}
+      {!isServicesPage && (
+        <section
+          id="services-list"
+          className="relative z-20 w-full bg-[#F6F9FC] pt-2 pb-12 sm:pb-16 border-b border-slate-200/60 scroll-mt-20"
+        >
         <div className="max-w-[1350px] mx-auto px-4 sm:px-6 lg:px-8">
           
           {/* 4 Feature Teaser Cards Grid */}
@@ -254,19 +255,18 @@ export async function Hero({
 
           </div>
 
-          {/* Footer Brand Slogan Bar - Shown on Homepage only */}
-          {!isServicesPage && (
-            <div className="mt-10 pt-6 border-t border-slate-200/70 flex items-center justify-center gap-3 text-[11px] sm:text-xs font-black tracking-widest uppercase text-slate-500">
-              <span>NORTHERN PEOPLE</span>
-              <Trees className="w-4 h-4 text-[#10B981]" />
-              <span>STRONGER COMMUNITIES</span>
-              <Trees className="w-4 h-4 text-[#10B981]" />
-              <span>A BRIGHTER TOMORROW</span>
-            </div>
-          )}
+          {/* Footer Brand Slogan Bar */}
+          <div className="mt-10 pt-6 border-t border-slate-200/70 flex items-center justify-center gap-3 text-[11px] sm:text-xs font-black tracking-widest uppercase text-slate-500">
+            <span>NORTHERN PEOPLE</span>
+            <Trees className="w-4 h-4 text-[#10B981]" />
+            <span>STRONGER COMMUNITIES</span>
+            <Trees className="w-4 h-4 text-[#10B981]" />
+            <span>A BRIGHTER TOMORROW</span>
+          </div>
 
         </div>
       </section>
+    )}
     </div>
   );
 }

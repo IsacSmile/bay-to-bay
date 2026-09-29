@@ -173,7 +173,7 @@ export default async function ServicesPage() {
       />
 
       {/* Detailed Services Sections Showcase */}
-      <section className="w-full py-16 sm:py-24">
+      <section id="services-list" className="w-full py-16 sm:py-24 scroll-mt-16">
         <div className="max-w-[1350px] mx-auto px-4 sm:px-6 lg:px-8">
           
           {/* Section Introduction */}
