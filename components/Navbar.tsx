@@ -77,6 +77,7 @@ export const Navbar: React.FC<NavbarProps> = ({ phone = "705-978-3001" }) => {
   const pathname = usePathname();
   const isServices = pathname === "/services";
   const isServiceAreas = pathname === "/service-areas" || pathname === "/services-areas";
+  const isAbout = pathname === "/about" || pathname === "/about-us";
   const isSubPage = pathname !== "/";
 
   const menuItems: MenuItem[] = [
@@ -104,7 +105,7 @@ export const Navbar: React.FC<NavbarProps> = ({ phone = "705-978-3001" }) => {
     {
       title: "About",
       subtitle: "About Bay to Bay Express",
-      href: isSubPage ? "/#about" : "#about",
+      href: "/about",
       icon: Info,
       hasArrow: true,
     },
@@ -201,12 +202,16 @@ export const Navbar: React.FC<NavbarProps> = ({ phone = "705-978-3001" }) => {
           >
             Service Areas
           </Link>
-          <a
-            href={isSubPage ? "/#about" : "#about"}
-            className="hover:text-[#0088FF] transition-colors py-1"
+          <Link
+            href="/about"
+            className={
+              isAbout
+                ? "text-[#0088FF] font-extrabold border-b-2 border-[#0088FF] pb-1"
+                : "hover:text-[#0088FF] transition-colors py-1"
+            }
           >
             About
-          </a>
+          </Link>
           <a
             href="#quote"
             className="hover:text-[#0088FF] transition-colors py-1"
