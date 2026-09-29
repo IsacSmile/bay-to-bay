@@ -388,7 +388,7 @@ export const ServiceAreasCoverage: React.FC<ServiceAreasCoverageProps> = ({
             
             {/* Office 1: North Bay */}
             <div className="bg-white rounded-3xl overflow-hidden border border-slate-200/90 shadow-sm flex flex-col">
-              <div className="relative aspect-[21/8] sm:aspect-[21/8] w-full overflow-hidden bg-slate-100">
+              <div className="relative h-56 sm:h-64 lg:h-72 w-full overflow-hidden bg-slate-100">
                 <Image
                   src="/offices/north-bay.jpg"
                   alt="Gateway of the North City of North Bay stone arch entrance"
@@ -432,7 +432,7 @@ export const ServiceAreasCoverage: React.FC<ServiceAreasCoverageProps> = ({
 
             {/* Office 2: Hearst */}
             <div className="bg-white rounded-3xl overflow-hidden border border-slate-200/90 shadow-sm flex flex-col">
-              <div className="relative aspect-[21/8] sm:aspect-[21/8] w-full overflow-hidden bg-slate-100">
+              <div className="relative h-56 sm:h-64 lg:h-72 w-full overflow-hidden bg-slate-100">
                 <Image
                   src="/offices/hearst.jpg"
                   alt="Town of Hearst office building in Northern Ontario"

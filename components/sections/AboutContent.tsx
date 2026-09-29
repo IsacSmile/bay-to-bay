@@ -63,7 +63,7 @@ export const AboutContent: React.FC<AboutContentProps> = ({
 
             {/* Right Image Column (Delivery Van along Lake) */}
             <div className="lg:col-span-6">
-              <div className="relative aspect-[16/10] sm:aspect-[16/10] w-full rounded-2xl sm:rounded-3xl overflow-hidden border border-slate-200/80 shadow-md bg-slate-100">
+              <div className="relative h-[300px] sm:h-[360px] lg:h-[420px] w-full rounded-2xl sm:rounded-3xl overflow-hidden border border-slate-200/80 shadow-md bg-slate-100">
                 <Image
                   src="/services/delivery-van.jpg"
                   alt="Bay to Bay Express delivery van along Northern Ontario lake"
@@ -156,7 +156,7 @@ export const AboutContent: React.FC<AboutContentProps> = ({
             
             {/* Office 1: North Bay */}
             <div className="bg-white rounded-3xl overflow-hidden border border-slate-200/90 shadow-sm flex flex-col">
-              <div className="relative aspect-[21/8] w-full overflow-hidden bg-slate-100">
+              <div className="relative h-56 sm:h-64 lg:h-72 w-full overflow-hidden bg-slate-100">
                 <Image
                   src="/offices/north-bay.jpg"
                   alt="Gateway of the North City of North Bay stone arch entrance"
@@ -200,7 +200,7 @@ export const AboutContent: React.FC<AboutContentProps> = ({
 
             {/* Office 2: Hearst */}
             <div className="bg-white rounded-3xl overflow-hidden border border-slate-200/90 shadow-sm flex flex-col">
-              <div className="relative aspect-[21/8] w-full overflow-hidden bg-slate-100">
+              <div className="relative h-56 sm:h-64 lg:h-72 w-full overflow-hidden bg-slate-100">
                 <Image
                   src="/offices/hearst.jpg"
                   alt="Town of Hearst office building in Northern Ontario"
