@@ -93,11 +93,6 @@ export const Footer: React.FC<FooterProps> = ({
                 </a>
               </li>
               <li>
-                <a href="#service-areas" className="hover:text-white transition-colors">
-                  Service Areas
-                </a>
-              </li>
-              <li>
                 <a href="#business-solutions" className="hover:text-white transition-colors">
                   Business Solutions
                 </a>

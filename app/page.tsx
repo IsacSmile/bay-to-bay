@@ -2,7 +2,6 @@ import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { ServiceHighlights } from "@/components/sections/ServiceHighlights";
-import { ServiceArea } from "@/components/ServiceArea";
 import { ServicesGrid } from "@/components/services/ServicesGrid";
 import { BusinessSolutions } from "@/components/BusinessSolutions";
 import { WhoWeServe } from "@/components/WhoWeServe";
@@ -53,9 +52,6 @@ export default async function HomePage() {
 
       {/* Service Highlights Bar */}
       <ServiceHighlights />
-
-      {/* Service Area — Animated Route Map */}
-      <ServiceArea />
 
       {/* Delivery Solutions — Services Grid */}
       <ServicesGrid />

@@ -50,7 +50,7 @@ export async function Hero() {
               <span className="block text-[#25A8E8]">
                 {heroData.headingLine3Accent && heroData.headingLine3Accent !== "Delivered."
                   ? heroData.headingLine3Accent
-                  : "Across Northern Ontario"}
+                  : "Across Northern Ontario & the GTA"}
               </span>
             </h1>
 
@@ -75,10 +75,10 @@ export async function Hero() {
               </a>
 
               <a
-                href="#service-areas"
+                href="#services"
                 className="border border-white/40 bg-slate-900/30 backdrop-blur-xs hover:bg-white/10 text-white font-extrabold text-sm sm:text-base px-6 sm:px-7 py-3.5 rounded-xl inline-flex items-center gap-2 transition-all duration-200"
               >
-                <span>View Service Areas</span>
+                <span>Explore Services</span>
                 <ArrowRight className="w-4 h-4" />
               </a>
             </div>

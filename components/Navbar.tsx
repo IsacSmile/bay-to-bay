@@ -6,7 +6,6 @@ import {
   X,
   ChevronRight,
   Package,
-  MapPin,
   Building2,
   Info,
   HelpCircle,
@@ -63,20 +62,22 @@ export const Navbar: React.FC<NavbarProps> = ({ phone = "705-978-3001" }) => {
     };
   }, [isMenuOpen]);
 
-  const menuItems = [
+  interface MenuItem {
+    title: string;
+    subtitle: string;
+    href: string;
+    icon: React.ElementType;
+    hasArrow?: boolean;
+    badge?: string;
+  }
+
+  const menuItems: MenuItem[] = [
     {
       title: "Services",
       subtitle: "Delivery solutions & small goods",
       href: "#services",
       icon: Package,
       hasArrow: true,
-    },
-    {
-      title: "Service Area",
-      subtitle: "North Bay → Hearst corridor",
-      href: "#service-areas",
-      icon: MapPin,
-      badge: "HWY 11",
     },
     {
       title: "Business Solutions",
@@ -166,12 +167,6 @@ export const Navbar: React.FC<NavbarProps> = ({ phone = "705-978-3001" }) => {
             className="hover:text-[#0088FF] transition-colors py-1"
           >
             Services
-          </a>
-          <a
-            href="#service-areas"
-            className="hover:text-[#0088FF] transition-colors py-1 whitespace-nowrap"
-          >
-            Service Areas
           </a>
           <a
             href="#about"
