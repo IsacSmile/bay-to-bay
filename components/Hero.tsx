@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Plus, FileText, Package, Truck, Trees } from "lucide-react";
+import { ArrowRight, Plus, FileText, Package, Truck, Trees, Home, ChevronRight } from "lucide-react";
 import { getHeroData } from "@/lib/prisma";
 import { SnowfallEffect } from "@/components/hero/SnowfallEffect";
 
@@ -59,6 +59,29 @@ export async function Hero({
                 <Trees className="w-4 h-4 text-[#10B981] shrink-0" />
                 <span className="whitespace-nowrap overflow-hidden text-ellipsis">SAME COMMUNITIES. A STRONGER NORTHERN ONTARIO.</span>
               </div>
+            )}
+
+            {/* Breadcrumb / Slug Navigation - Shown on Services Page Hero section top of heading */}
+            {isServicesPage && (
+              <nav aria-label="Breadcrumb" className="mb-5 sm:mb-6">
+                <ol className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-300 bg-slate-900/50 px-4 py-1.5 rounded-full border border-white/15 backdrop-blur-xs shadow-xs">
+                  <li className="inline-flex items-center">
+                    <Link
+                      href="/"
+                      className="text-slate-300 hover:text-white transition-colors inline-flex items-center gap-1.5 group"
+                    >
+                      <Home className="w-3.5 h-3.5 text-[#38BDF8] group-hover:text-white transition-colors" />
+                      <span>Home</span>
+                    </Link>
+                  </li>
+                  <li className="text-slate-400 select-none" aria-hidden="true">
+                    <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
+                  </li>
+                  <li className="text-[#38BDF8] font-bold" aria-current="page">
+                    Services
+                  </li>
+                </ol>
+              </nav>
             )}
 
             {/* H1 Main Headline */}
