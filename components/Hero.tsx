@@ -246,7 +246,7 @@ export async function Hero({
       </section>
 
       {/* 2. Services Teaser Strip directly under Hero - Homepage Only */}
-      {!isServicesPage && (
+      {!isServicesPage && !isServiceAreasPage && (
         <section
           id="services-list"
           className="relative z-20 w-full bg-[#F6F9FC] pt-2 pb-12 sm:pb-16 border-b border-slate-200/60 scroll-mt-20"
