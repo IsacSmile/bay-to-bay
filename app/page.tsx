@@ -6,7 +6,6 @@ import { TwiceWeeklyRoute } from "@/components/sections/TwiceWeeklyRoute";
 import { WhoWeServe } from "@/components/WhoWeServe";
 import { HowItWorks } from "@/components/HowItWorks";
 import { QuoteForm } from "@/components/QuoteForm";
-import { About } from "@/components/About";
 import { FAQ } from "@/components/FAQ";
 import { QuoteCTA } from "@/components/sections/QuoteCTA";
 import { Footer } from "@/components/Footer";
@@ -15,8 +14,6 @@ import {
   getAnnouncementData,
   getContactData,
   getQuoteFormSectionData,
-  getAboutContentData,
-  getAboutTagPillsData,
   getFaqContentData,
   getFaqItemsData,
   getQuoteCtaData,
@@ -26,8 +23,6 @@ export default async function HomePage() {
   const announcement = await getAnnouncementData();
   const contact = await getContactData();
   const quoteContent = await getQuoteFormSectionData();
-  const aboutContent = await getAboutContentData();
-  const aboutTags = await getAboutTagPillsData();
   const faqContent = await getFaqContentData();
   const faqItems = await getFaqItemsData();
   const quoteCtaContent = await getQuoteCtaData();
@@ -62,9 +57,6 @@ export default async function HomePage() {
 
       {/* Quote Request Form */}
       <QuoteForm content={quoteContent} contact={contact} />
-
-      {/* About Section */}
-      <About content={aboutContent} tagPills={aboutTags} />
 
       {/* FAQ Section */}
       <FAQ content={faqContent} items={faqItems} />
