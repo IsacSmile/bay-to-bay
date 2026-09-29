@@ -58,6 +58,42 @@ export const ServiceAreasCoverage: React.FC<ServiceAreasCoverageProps> = ({
   const [activeCommunity, setActiveCommunity] = useState<string | null>(null);
   const [zoomLevel, setZoomLevel] = useState<number>(1);
 
+  // Auto-scroll and auto-filter when navigated via hash (e.g. #gta-coverage or #northern-coverage)
+  React.useEffect(() => {
+    const handleHash = () => {
+      const hash = window.location.hash.toLowerCase();
+      if (
+        hash === "#gta" ||
+        hash === "#gta-coverage" ||
+        hash === "#southern" ||
+        hash === "#southern-coverage"
+      ) {
+        setFilter("gta");
+        setTimeout(() => {
+          const el = document.getElementById("gta-coverage");
+          if (el) {
+            el.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }, 120);
+      } else if (
+        hash === "#northern" ||
+        hash === "#northern-coverage"
+      ) {
+        setFilter("northern");
+        setTimeout(() => {
+          const el = document.getElementById("northern-coverage");
+          if (el) {
+            el.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }, 120);
+      }
+    };
+
+    handleHash();
+    window.addEventListener("hashchange", handleHash);
+    return () => window.removeEventListener("hashchange", handleHash);
+  }, []);
+
   const visibleMarkers = ALL_COMMUNITIES.filter((item) => {
     if (filter === "all") return true;
     return item.region === filter;
@@ -236,7 +272,10 @@ export const ServiceAreasCoverage: React.FC<ServiceAreasCoverageProps> = ({
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 mt-12 sm:mt-16">
             
             {/* Card 1: Northern Ontario */}
-            <div className="bg-white rounded-3xl overflow-hidden border border-slate-200/90 shadow-sm flex flex-col">
+            <div
+              id="northern-coverage"
+              className="bg-white rounded-3xl overflow-hidden border border-slate-200/90 shadow-sm flex flex-col scroll-mt-28 sm:scroll-mt-32"
+            >
               <div className="relative aspect-[16/9] sm:aspect-[21/9] w-full overflow-hidden">
                 <Image
                   src="/services/delivery-van.jpg"
@@ -289,7 +328,10 @@ export const ServiceAreasCoverage: React.FC<ServiceAreasCoverageProps> = ({
             </div>
 
             {/* Card 2: GTA & Surrounding Areas */}
-            <div className="bg-white rounded-3xl overflow-hidden border border-slate-200/90 shadow-sm flex flex-col">
+            <div
+              id="gta-coverage"
+              className="bg-white rounded-3xl overflow-hidden border border-slate-200/90 shadow-sm flex flex-col scroll-mt-28 sm:scroll-mt-32"
+            >
               <div className="relative aspect-[16/9] sm:aspect-[21/9] w-full overflow-hidden">
                 <Image
                   src="/gta-skyline.jpg"

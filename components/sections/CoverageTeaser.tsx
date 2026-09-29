@@ -31,7 +31,7 @@ export const CoverageTeaser: React.FC = () => {
           
           {/* Card 1: Northern Ontario */}
           <Link
-            href="/service-areas"
+            href="/service-areas#northern-coverage"
             className="group relative rounded-2xl sm:rounded-3xl overflow-hidden h-[380px] sm:h-[420px] lg:h-[450px] shadow-md border border-slate-200/80 block cursor-pointer transition-shadow hover:shadow-xl bg-slate-900"
           >
             <Image
@@ -69,7 +69,7 @@ export const CoverageTeaser: React.FC = () => {
 
           {/* Card 2: GTA & Surrounding Areas */}
           <Link
-            href="/service-areas"
+            href="/service-areas#gta-coverage"
             className="group relative rounded-2xl sm:rounded-3xl overflow-hidden h-[380px] sm:h-[420px] lg:h-[450px] shadow-md border border-slate-200/80 block cursor-pointer transition-shadow hover:shadow-xl bg-slate-900"
           >
             <Image
