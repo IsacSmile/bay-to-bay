@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Phone, Mail } from "lucide-react";
 import { SnowfallEffect } from "@/components/hero/SnowfallEffect";
 
@@ -19,8 +20,6 @@ export const Footer: React.FC<FooterProps> = ({
       {/* Animated Snowfall Effect Overlay */}
       <SnowfallEffect />
 
-
-
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-16">
         
         {/* Main Footer Grid */}
@@ -28,7 +27,7 @@ export const Footer: React.FC<FooterProps> = ({
           
           {/* Brand Info & Taglines (5 cols) */}
           <div className="lg:col-span-5 space-y-4">
-            <a href="/" className="flex items-center gap-3 shrink-0">
+            <Link href="/" className="flex items-center gap-3 shrink-0">
               <Image
                 src="/bay-to-bay-logo.webp"
                 alt="Bay to Bay Express Inc. Northern Ontario Courier & Small Goods Delivery"
@@ -44,7 +43,7 @@ export const Footer: React.FC<FooterProps> = ({
                   EXPRESS INC.
                 </div>
               </div>
-            </a>
+            </Link>
 
             {/* Tagline & Subhead */}
             <div className="space-y-1">
@@ -83,34 +82,34 @@ export const Footer: React.FC<FooterProps> = ({
             </h4>
             <ul className="space-y-2 text-slate-300 font-medium text-xs sm:text-sm">
               <li>
-                <a href="/" className="hover:text-white transition-colors">
+                <Link href="/" className="hover:text-white transition-colors">
                   Home
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/services" className="hover:text-white transition-colors">
+                <Link href="/services" className="hover:text-white transition-colors">
                   Services
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/service-areas" className="hover:text-white transition-colors">
+                <Link href="/service-areas" className="hover:text-white transition-colors">
                   Service Areas
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/#route" className="hover:text-white transition-colors">
+                <Link href="/#route" className="hover:text-white transition-colors">
                   Twice-Weekly Route
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/about" className="hover:text-white transition-colors">
+                <Link href="/about" className="hover:text-white transition-colors">
                   About
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/#faq" className="hover:text-white transition-colors">
+                <Link href="/#faq" className="hover:text-white transition-colors">
                   FAQ
-                </a>
+                </Link>
               </li>
               <li>
                 <a href="#quote" className="hover:text-white transition-colors">
@@ -122,22 +121,22 @@ export const Footer: React.FC<FooterProps> = ({
 
           {/* Service Areas (4 cols) */}
           <div className="lg:col-span-4">
-            <a
+            <Link
               href="/service-areas"
               className="inline-flex items-center gap-1.5 font-extrabold text-white uppercase text-xs tracking-widest mb-4 hover:text-[#0088FF] transition-colors group"
             >
               <span>Service Areas</span>
               <span className="transition-transform group-hover:translate-x-1">→</span>
-            </a>
+            </Link>
             <ul className="grid grid-cols-2 gap-2 text-slate-300 text-xs sm:text-sm font-normal">
-              <li><a href="/service-areas" className="hover:text-white transition-colors">North Bay</a></li>
-              <li><a href="/service-areas" className="hover:text-white transition-colors">Kirkland Lake</a></li>
-              <li><a href="/service-areas" className="hover:text-white transition-colors">Timmins</a></li>
-              <li><a href="/service-areas" className="hover:text-white transition-colors">Cochrane</a></li>
-              <li><a href="/service-areas" className="hover:text-white transition-colors">Kapuskasing</a></li>
-              <li><a href="/service-areas" className="hover:text-white transition-colors">Hearst</a></li>
-              <li><a href="/service-areas" className="hover:text-white transition-colors">Toronto / GTA</a></li>
-              <li><a href="/service-areas" className="hover:text-white transition-colors">Longlac</a></li>
+              <li><Link href="/service-areas#northern-coverage" className="hover:text-white transition-colors">North Bay</Link></li>
+              <li><Link href="/service-areas#northern-coverage" className="hover:text-white transition-colors">Kirkland Lake</Link></li>
+              <li><Link href="/service-areas#northern-coverage" className="hover:text-white transition-colors">Timmins</Link></li>
+              <li><Link href="/service-areas#northern-coverage" className="hover:text-white transition-colors">Cochrane</Link></li>
+              <li><Link href="/service-areas#northern-coverage" className="hover:text-white transition-colors">Kapuskasing</Link></li>
+              <li><Link href="/service-areas#northern-coverage" className="hover:text-white transition-colors">Hearst</Link></li>
+              <li><Link href="/service-areas#gta-coverage" className="hover:text-white transition-colors">Toronto / GTA</Link></li>
+              <li><Link href="/service-areas#northern-coverage" className="hover:text-white transition-colors">Longlac</Link></li>
             </ul>
           </div>
 

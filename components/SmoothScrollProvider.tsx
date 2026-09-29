@@ -1,10 +1,14 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 import { getGSAP } from "@/lib/gsap";
 
 export function SmoothScrollProvider({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
+  const lenisRef = useRef<Lenis | null>(null);
+
   useEffect(() => {
     const { gsap, ScrollTrigger } = getGSAP();
 
@@ -19,6 +23,7 @@ export function SmoothScrollProvider({ children }: { children: React.ReactNode }
       touchMultiplier: 1.8,
       infinite: false,
     });
+    lenisRef.current = lenis;
 
     // Synchronize Lenis scroll events with GSAP ScrollTrigger
     lenis.on("scroll", () => {
@@ -32,7 +37,7 @@ export function SmoothScrollProvider({ children }: { children: React.ReactNode }
     gsap.ticker.add(updateTicker);
     gsap.ticker.lagSmoothing(0);
 
-    // Intercept in-page anchor links for buttery smooth scroll
+    // Intercept in-page anchor links for smooth scroll
     const handleAnchorClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement | null;
       const anchor = target?.closest("a");
@@ -54,8 +59,22 @@ export function SmoothScrollProvider({ children }: { children: React.ReactNode }
       document.removeEventListener("click", handleAnchorClick);
       gsap.ticker.remove(updateTicker);
       lenis.destroy();
+      lenisRef.current = null;
     };
   }, []);
+
+  // Whenever route (pathname) changes, reset scroll to top immediately if no anchor hash is specified
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const hash = window.location.hash;
+      if (!hash) {
+        window.scrollTo(0, 0);
+        if (lenisRef.current) {
+          lenisRef.current.scrollTo(0, { immediate: true });
+        }
+      }
+    }
+  }, [pathname]);
 
   return <>{children}</>;
 }
