@@ -3,6 +3,7 @@ import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { ServiceHighlights } from "@/components/sections/ServiceHighlights";
 import { TwiceWeeklyRoute } from "@/components/sections/TwiceWeeklyRoute";
+import { CoverageTeaser } from "@/components/sections/CoverageTeaser";
 import { WhoWeServe } from "@/components/WhoWeServe";
 import { HowItWorks } from "@/components/HowItWorks";
 import { QuoteForm } from "@/components/QuoteForm";
@@ -48,6 +49,9 @@ export default async function HomePage() {
 
       {/* Special Twice-Weekly Route (North Bay ↔ Hearst) */}
       <TwiceWeeklyRoute phone={contact.phone} />
+
+      {/* Connecting North & South (Coverage Preview) */}
+      <CoverageTeaser />
 
       {/* Who We Serve */}
       <WhoWeServe />
