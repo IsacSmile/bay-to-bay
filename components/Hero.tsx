@@ -254,14 +254,16 @@ export async function Hero({
 
           </div>
 
-          {/* Footer Brand Slogan Bar */}
-          <div className="mt-10 pt-6 border-t border-slate-200/70 flex items-center justify-center gap-3 text-[11px] sm:text-xs font-black tracking-widest uppercase text-slate-500">
-            <span>NORTHERN PEOPLE</span>
-            <Trees className="w-4 h-4 text-[#10B981]" />
-            <span>STRONGER COMMUNITIES</span>
-            <Trees className="w-4 h-4 text-[#10B981]" />
-            <span>A BRIGHTER TOMORROW</span>
-          </div>
+          {/* Footer Brand Slogan Bar - Shown on Homepage only */}
+          {!isServicesPage && (
+            <div className="mt-10 pt-6 border-t border-slate-200/70 flex items-center justify-center gap-3 text-[11px] sm:text-xs font-black tracking-widest uppercase text-slate-500">
+              <span>NORTHERN PEOPLE</span>
+              <Trees className="w-4 h-4 text-[#10B981]" />
+              <span>STRONGER COMMUNITIES</span>
+              <Trees className="w-4 h-4 text-[#10B981]" />
+              <span>A BRIGHTER TOMORROW</span>
+            </div>
+          )}
 
         </div>
       </section>

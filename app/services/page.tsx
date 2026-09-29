@@ -3,15 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   Package,
-  Clock,
-  ShieldCheck,
   CheckCircle2,
   Truck,
   ArrowRight,
   FileText,
   Activity,
-  ThermometerSnowflake,
-  PhoneCall,
   MapPin,
 } from "lucide-react";
 import { AnnouncementBar } from "@/components/AnnouncementBar";
@@ -150,33 +146,6 @@ const DETAILED_SERVICES = [
   },
 ];
 
-const SERVICE_CAPABILITIES = [
-  {
-    icon: Clock,
-    title: "12-Hour Priority Corridors",
-    description:
-      "Fast regional transit along Highway 11 connecting North Bay through Hearst and Longlac.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Verified Chain of Custody",
-    description:
-      "Every parcel is logged, tracked, and signed for by the verified recipient upon delivery.",
-  },
-  {
-    icon: ThermometerSnowflake,
-    title: "Temperature-Conscious Care",
-    description:
-      "Climate-controlled cabins designed to safeguard pharmaceuticals, specimens, and sensitive goods.",
-  },
-  {
-    icon: PhoneCall,
-    title: "Direct Regional Dispatch",
-    description:
-      "Direct line to dispatch who know Northern Ontario roads, weather, and communities.",
-  },
-];
-
 export default async function ServicesPage() {
   const announcement = await getAnnouncementData();
   const contact = await getContactData();
@@ -203,36 +172,7 @@ export default async function ServicesPage() {
         isServicesPage
       />
 
-      {/* 2. Key Capabilities / Guarantee Badges */}
-      <section className="w-full bg-[#F6F9FC] py-8 sm:py-12 border-b border-slate-200/80">
-        <div className="max-w-[1350px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            {SERVICE_CAPABILITIES.map((cap, i) => {
-              const Icon = cap.icon;
-              return (
-                <div
-                  key={i}
-                  className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs flex items-start gap-3.5"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-[#EAF5FC] text-[#0088FF] flex items-center justify-center shrink-0">
-                    <Icon className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-extrabold text-[#071A2E] leading-snug">
-                      {cap.title}
-                    </h3>
-                    <p className="text-xs text-slate-500 font-normal leading-relaxed mt-1">
-                      {cap.description}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* 3. Detailed Services Sections Showcase */}
+      {/* Detailed Services Sections Showcase */}
       <section className="w-full py-16 sm:py-24">
         <div className="max-w-[1350px] mx-auto px-4 sm:px-6 lg:px-8">
           
