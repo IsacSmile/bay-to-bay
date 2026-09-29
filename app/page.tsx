@@ -4,7 +4,6 @@ import { Hero } from "@/components/Hero";
 import { ServiceHighlights } from "@/components/sections/ServiceHighlights";
 import { TwiceWeeklyRoute } from "@/components/sections/TwiceWeeklyRoute";
 import { ServicesGrid } from "@/components/services/ServicesGrid";
-import { BusinessSolutions } from "@/components/BusinessSolutions";
 import { WhoWeServe } from "@/components/WhoWeServe";
 import { WhyUs } from "@/components/WhyUs";
 import { HowItWorks } from "@/components/HowItWorks";
@@ -59,9 +58,6 @@ export default async function HomePage() {
 
       {/* Delivery Solutions — Services Grid */}
       <ServicesGrid />
-
-      {/* Business Solutions */}
-      <BusinessSolutions />
 
       {/* Who We Serve */}
       <WhoWeServe />

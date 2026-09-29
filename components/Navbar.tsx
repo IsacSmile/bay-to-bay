@@ -6,7 +6,7 @@ import {
   X,
   ChevronRight,
   Package,
-  Building2,
+  MapPin,
   Info,
   HelpCircle,
   Mail,
@@ -80,10 +80,10 @@ export const Navbar: React.FC<NavbarProps> = ({ phone = "705-978-3001" }) => {
       hasArrow: true,
     },
     {
-      title: "Business Solutions",
-      subtitle: "Logistics partner for Northern Ontario",
-      href: "#business-solutions",
-      icon: Building2,
+      title: "Route Schedule",
+      subtitle: "Twice-weekly North Bay ↔ Hearst",
+      href: "#route",
+      icon: MapPin,
       hasArrow: true,
     },
     {

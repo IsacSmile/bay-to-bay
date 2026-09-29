@@ -175,7 +175,7 @@ export const TwiceWeeklyRoute: React.FC<TwiceWeeklyRouteProps> = ({
   const telLink = `tel:${phone.replace(/[^0-9]/g, "")}`;
 
   return (
-    <section className="w-full bg-[#062E57] py-14 sm:py-18 lg:py-22 text-white overflow-hidden">
+    <section id="route" className="w-full bg-[#062E57] py-14 sm:py-18 lg:py-22 text-white overflow-hidden">
       <div className="max-w-[1350px] mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* 1. Header Block */}
