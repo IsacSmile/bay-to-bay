@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   Menu,
   X,
@@ -71,32 +73,35 @@ export const Navbar: React.FC<NavbarProps> = ({ phone = "705-978-3001" }) => {
     badge?: string;
   }
 
+  const pathname = usePathname();
+  const isServices = pathname === "/services";
+
   const menuItems: MenuItem[] = [
     {
       title: "Services",
       subtitle: "Delivery solutions & small goods",
-      href: "#services",
+      href: "/services",
       icon: Package,
       hasArrow: true,
     },
     {
       title: "Route Schedule",
       subtitle: "Twice-weekly North Bay ↔ Hearst",
-      href: "#route",
+      href: isServices ? "/#route" : "#route",
       icon: MapPin,
       hasArrow: true,
     },
     {
       title: "About",
       subtitle: "About Bay to Bay Express",
-      href: "#about",
+      href: isServices ? "/#about" : "#about",
       icon: Info,
       hasArrow: true,
     },
     {
       title: "FAQ",
       subtitle: "Common questions & answers",
-      href: "#faq",
+      href: isServices ? "/#faq" : "#faq",
       icon: HelpCircle,
       hasArrow: true,
     },
@@ -114,7 +119,7 @@ export const Navbar: React.FC<NavbarProps> = ({ phone = "705-978-3001" }) => {
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         
         {/* Left: Brand Logo & Wordmark */}
-        <a
+        <Link
           href="/"
           onClick={closeMenu}
           className="flex items-center gap-3 shrink-0 group focus:outline-none"
@@ -152,24 +157,32 @@ export const Navbar: React.FC<NavbarProps> = ({ phone = "705-978-3001" }) => {
               NORTHERN ONTARIO COURIER
             </span>
           </div>
-        </a>
+        </Link>
 
         {/* Center: Navigation Link Set (Desktop) */}
         <nav className="hidden lg:flex items-center gap-7 text-sm font-bold text-slate-700">
-          <a
+          <Link
             href="/"
-            className="text-[#0088FF] font-extrabold border-b-2 border-[#0088FF] pb-1"
+            className={
+              !isServices
+                ? "text-[#0088FF] font-extrabold border-b-2 border-[#0088FF] pb-1"
+                : "hover:text-[#0088FF] transition-colors py-1"
+            }
           >
             Home
-          </a>
-          <a
-            href="#services"
-            className="hover:text-[#0088FF] transition-colors py-1"
+          </Link>
+          <Link
+            href="/services"
+            className={
+              isServices
+                ? "text-[#0088FF] font-extrabold border-b-2 border-[#0088FF] pb-1"
+                : "hover:text-[#0088FF] transition-colors py-1"
+            }
           >
             Services
-          </a>
+          </Link>
           <a
-            href="#about"
+            href={isServices ? "/#about" : "#about"}
             className="hover:text-[#0088FF] transition-colors py-1"
           >
             About

@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowRight, Plus, FileText, Package, Truck, Trees } from "lucide-react";
 import { getHeroData } from "@/lib/prisma";
 import { SnowfallEffect } from "@/components/hero/SnowfallEffect";
@@ -74,13 +75,13 @@ export async function Hero() {
                 <ArrowRight className="w-4 h-4" />
               </a>
 
-              <a
-                href="#services"
+              <Link
+                href="/services"
                 className="border border-white/40 bg-slate-900/30 backdrop-blur-xs hover:bg-white/10 text-white font-extrabold text-sm sm:text-base px-6 sm:px-7 py-3.5 rounded-xl inline-flex items-center gap-2 transition-all duration-200"
               >
                 <span>Explore Services</span>
                 <ArrowRight className="w-4 h-4" />
-              </a>
+              </Link>
             </div>
 
             {/* Bottom Slogan Badge */}
@@ -123,8 +124,8 @@ export async function Hero() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 lg:gap-6">
             
             {/* Card 1: Medical & Pharmacy */}
-            <a
-              href="#services"
+            <Link
+              href="/services#medical"
               className="bg-white rounded-2xl p-3.5 sm:p-6 border border-slate-200/80 shadow-[0_4px_20px_rgba(7,26,46,0.04)] hover:shadow-[0_8px_30px_rgba(7,26,46,0.08)] hover:border-slate-300 transition-all duration-300 flex flex-row sm:flex-col items-center sm:items-start justify-between gap-3.5 sm:gap-0 group"
             >
               <div className="flex items-center sm:block gap-3.5 min-w-0">
@@ -145,11 +146,11 @@ export async function Hero() {
                   <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 </div>
               </div>
-            </a>
+            </Link>
 
             {/* Card 2: Documents */}
-            <a
-              href="#services"
+            <Link
+              href="/services#documents"
               className="bg-white rounded-2xl p-3.5 sm:p-6 border border-slate-200/80 shadow-[0_4px_20px_rgba(7,26,46,0.04)] hover:shadow-[0_8px_30px_rgba(7,26,46,0.08)] hover:border-slate-300 transition-all duration-300 flex flex-row sm:flex-col items-center sm:items-start justify-between gap-3.5 sm:gap-0 group"
             >
               <div className="flex items-center sm:block gap-3.5 min-w-0">
@@ -170,11 +171,11 @@ export async function Hero() {
                   <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 </div>
               </div>
-            </a>
+            </Link>
 
             {/* Card 3: Retail & Small Goods */}
-            <a
-              href="#services"
+            <Link
+              href="/services#retail"
               className="bg-white rounded-2xl p-3.5 sm:p-6 border border-slate-200/80 shadow-[0_4px_20px_rgba(7,26,46,0.04)] hover:shadow-[0_8px_30px_rgba(7,26,46,0.08)] hover:border-slate-300 transition-all duration-300 flex flex-row sm:flex-col items-center sm:items-start justify-between gap-3.5 sm:gap-0 group"
             >
               <div className="flex items-center sm:block gap-3.5 min-w-0">
@@ -195,11 +196,11 @@ export async function Hero() {
                   <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 </div>
               </div>
-            </a>
+            </Link>
 
             {/* Card 4: Dedicated Delivery */}
-            <a
-              href="#services"
+            <Link
+              href="/services#dedicated"
               className="bg-white rounded-2xl p-3.5 sm:p-6 border border-slate-200/80 shadow-[0_4px_20px_rgba(7,26,46,0.04)] hover:shadow-[0_8px_30px_rgba(7,26,46,0.08)] hover:border-slate-300 transition-all duration-300 flex flex-row sm:flex-col items-center sm:items-start justify-between gap-3.5 sm:gap-0 group"
             >
               <div className="flex items-center sm:block gap-3.5 min-w-0">
@@ -220,7 +221,7 @@ export async function Hero() {
                   <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 </div>
               </div>
-            </a>
+            </Link>
 
           </div>
 
