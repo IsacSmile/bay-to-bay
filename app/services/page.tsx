@@ -1,15 +1,7 @@
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  Package,
-  CheckCircle2,
-  Truck,
-  ArrowRight,
-  FileText,
-  Activity,
-  MapPin,
-} from "lucide-react";
+import { Check } from "lucide-react";
 import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
@@ -37,114 +29,95 @@ export const metadata: Metadata = {
   },
 };
 
-const DETAILED_SERVICES = [
+const SERVICE_OFFERINGS = [
   {
-    id: "medical",
-    badge: "TIME-SENSITIVE HEALTHCARE",
-    badgeColor: "bg-emerald-500/15 text-emerald-700 border-emerald-300/40",
-    title: "Medical & Pharmacy Courier",
-    tagline: "Safe, rapid delivery for clinics, pharmacies, laboratories, and regional hospitals.",
+    number: "01",
+    tag: "01 / MEDICAL & PHARMACY",
+    title: "Care for the essentials.",
     description:
-      "Healthcare deliveries demand precision, speed, and strict protocols. Our drivers are trained in handling sensitive pharmaceuticals, prescription medications, lab specimens, and clinical supplies. We provide secure, temperature-conscious transport connecting medical hubs from North Bay across Northern Ontario.",
+      "Medicine and pharmacy supplies, sample-delivery enquiries and blood-work reports. Tell us any packaging, temperature or special handling requirements so we can confirm suitability before booking.",
+    features: ["Careful handling", "Clear communication", "Proof of delivery"],
+    action: "Ask about medical & pharmacy",
     imageUrl: "/services/medical-pharmacy.jpg",
-    icon: Activity,
-    accentColor: "#059669",
-    features: [
-      "Temperature-conscious transport for pharmaceuticals, vaccines & biologics",
-      "Urgent diagnostic samples, laboratory specimens & biopsy materials",
-      "Tamper-evident chain of custody & privacy compliance",
-      "Scheduled restock runs for community pharmacies & regional clinics",
-      "Priority 12-hour delivery on eligible Northern Ontario corridors*",
-      "Direct recipient handoff with digital signature capture",
-    ],
-    cargoTypes: [
-      "Prescription medicines",
-      "Pathology & blood samples",
-      "Diagnostic equipment",
-      "Surgical & dental supplies",
-      "Urgent patient records",
-    ],
+    alt: "Medicine and pharmacy supply delivery packages",
+    imageLeft: true,
   },
   {
-    id: "documents",
-    badge: "CONFIDENTIAL & COMPLIANT",
-    badgeColor: "bg-sky-500/15 text-sky-800 border-sky-300/40",
-    title: "Legal & Sensitive Documents",
-    tagline: "Chain-of-custody delivery for law firms, accounting practices, and corporate registries.",
+    number: "02",
+    tag: "02 / DOCUMENTS & LEGAL PAPERS",
+    title: "Important papers. Personal attention.",
     description:
-      "When electronic transmission is insufficient and physical signatures or original hard copies are mandatory, Bay to Bay Express delivers peace of mind. We specialize in real estate closings, court filings, tender submissions, and confidential corporate records with direct hand-to-hand delivery.",
+      "Secure delivery enquiries for legal papers, demand drafts and banking documents. Contact us separately to confirm arrangements for banknote (cash) transfers.",
+    features: ["Careful handling", "Clear communication", "Proof of delivery"],
+    action: "Ask about documents & legal papers",
     imageUrl: "/services/documents.jpg",
-    icon: FileText,
-    accentColor: "#0284C7",
-    features: [
-      "Real estate closing packages, deed transfers & mortgage documentation",
-      "Court filings, litigation briefs & confidential dispute materials",
-      "Water-resistant, tamper-evident document security pouches",
-      "Direct recipient identity verification at point of delivery",
-      "Immediate digital proof of delivery (POD) sent to dispatch and sender",
-      "Strict confidentiality agreements signed by all couriers",
-    ],
-    cargoTypes: [
-      "Court briefs & filings",
-      "Real estate closing packages",
-      "Notarized legal contracts",
-      "Sealed commercial tenders",
-      "Confidential HR & audit records",
-    ],
+    alt: "Confidential legal papers and documents",
+    imageLeft: false,
   },
   {
-    id: "retail",
-    badge: "COMMERCE & SUPPLY CHAIN",
-    badgeColor: "bg-blue-500/15 text-blue-800 border-blue-300/40",
-    title: "Retail & Small Goods Distribution",
-    tagline: "Dependable parcel and inventory fulfillment connecting Northern Ontario businesses.",
+    number: "03",
+    tag: "03 / RETAIL & SMALL GOODS",
+    title: "A connection for local business.",
     description:
-      "Keep your shelves stocked and your online customers satisfied. From boutique storefronts to automotive repair shops and industrial suppliers, we provide scheduled regional linehauls that keep commerce moving smoothly along the Highway 11 corridor without the exorbitant fees of major national carriers.",
+      "From store-to-store parcels to small goods for individuals, we help keep your deliveries moving across the North and the GTA.",
+    features: ["Careful handling", "Clear communication", "Proof of delivery"],
+    action: "Ask about retail & small goods",
     imageUrl: "/services/retail-goods.jpg",
-    icon: Package,
-    accentColor: "#0070F3",
-    features: [
-      "Store-to-store stock transfers & inventory rebalancing",
-      "Last-mile commercial parcel fulfillment for Northern Ontario customers",
-      "Automotive parts, industrial hardware, and urgent machinery components",
-      "Fragile goods care with specialized strapping, padding & blankets",
-      "Convenient consolidation and scheduled drop-offs for retail locations",
-      "Transparent flat-rate and route-based pricing",
-    ],
-    cargoTypes: [
-      "B2B retail merchandise",
-      "Automotive & machinery parts",
-      "Electronics & hardware",
-      "Store inventory replenishment",
-      "E-commerce packages",
-    ],
+    alt: "Retail merchandise and parcels for local businesses",
+    imageLeft: true,
   },
   {
-    id: "dedicated",
-    badge: "EXCLUSIVE FLEET ACCESS",
-    badgeColor: "bg-indigo-500/15 text-indigo-800 border-indigo-300/40",
-    title: "Dedicated & Scheduled Fleet Delivery",
-    tagline: "Custom recurring runs or point-to-point dedicated vehicle dispatch on your schedule.",
+    number: "04",
+    tag: "04 / DEDICATED DELIVERY",
+    title: "Your shipment. A dedicated journey.",
     description:
-      "For organizations that require guaranteed vehicle capacity or predictable recurring routes. Whether you need a dedicated van every Tuesday and Thursday or emergency point-to-point dispatch for critical industrial components, we tailor an exclusive delivery solution around your timetable.",
+      "Direct service with no shared load when booked as a dedicated delivery. Our scheduled North Bay–Hearst runs leave North Bay on Tuesdays and Thursdays, returning from Hearst on Wednesdays and Fridays. Ask which service best suits your shipment.",
+    features: ["Careful handling", "Clear communication", "Proof of delivery"],
+    action: "Ask about dedicated delivery",
     imageUrl: "/services/delivery-van.jpg",
-    icon: Truck,
-    accentColor: "#4F46E5",
-    features: [
-      "Exclusive vehicle hire: direct origin-to-destination with zero co-mingling",
-      "Custom recurring routes (daily, twice-weekly, or monthly contract runs)",
-      "High-security freight with dedicated driver assignment",
-      "Emergency expedited dispatch for critical downtime situations",
-      "Full corridor coverage: North Bay, Temiskaming Shores, Kirkland Lake, Timmins, Cochrane, Kapuskasing, Hearst & Longlac",
-      "Personalized dispatch coordination and live trip updates",
-    ],
-    cargoTypes: [
-      "Time-critical manufacturing components",
-      "Exclusive bulk goods",
-      "Regular multi-stop supply runs",
-      "High-value proprietary equipment",
-      "Scheduled inter-office transfers",
-    ],
+    alt: "Dedicated delivery van route across Northern Ontario",
+    imageLeft: false,
+  },
+];
+
+const SIMPLE_STEPS = [
+  {
+    step: "01",
+    title: "Tell us the details",
+    description: "Share your pickup, destination and package requirements.",
+  },
+  {
+    step: "02",
+    title: "Confirm your quote",
+    description: "We confirm availability, price and delivery arrangements.",
+  },
+  {
+    step: "03",
+    title: "Ready for pickup",
+    description: "Prepare your goods for the agreed pickup window.",
+  },
+  {
+    step: "04",
+    title: "Delivered with care",
+    description: "Receive communication and proof of delivery.",
+  },
+];
+
+const TIME_SENSITIVE_CARDS = [
+  {
+    title: "Medicine & pharmacy",
+    description:
+      "Ask about urgent medicine delivery along the North Bay–Hearst route. Share any special handling needs before booking.",
+  },
+  {
+    title: "Samples & blood-work reports",
+    description:
+      "Enquire about sample delivery and the secure transfer of blood-work reports. Sample type, packaging, temperature and handling requirements must be confirmed before acceptance.",
+  },
+  {
+    title: "Legal & banking documents",
+    description:
+      "Enquire about legal papers, demand drafts and banking documents. Banknote (cash) transfers require a separate discussion and confirmation before booking.",
   },
 ];
 
@@ -153,7 +126,6 @@ export default async function ServicesPage() {
   const contact = await getContactData();
   const quoteContent = await getQuoteFormSectionData();
   const quoteCtaContent = await getQuoteCtaData();
-  const telLink = `tel:${contact.phone.replace(/[^0-9]/g, "")}`;
 
   return (
     <div className="min-h-screen flex flex-col bg-[#F6F9FC]">
@@ -180,188 +152,170 @@ export default async function ServicesPage() {
       {/* Special Twice-Weekly Route (North Bay ↔ Hearst) */}
       <TwiceWeeklyRoute phone={contact.phone} />
 
-      {/* Detailed Services Sections Showcase */}
-      <section id="services-list" className="w-full py-16 sm:py-24 scroll-mt-16">
-        <div className="max-w-[1350px] mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Re-designed Services Showcase: Handled with care. Connected with purpose. */}
+      <section id="services-list" className="w-full bg-white py-16 sm:py-20 lg:py-24 scroll-mt-16">
+        <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
           
-          {/* Section Introduction */}
-          <div className="text-center max-w-2xl mx-auto mb-16 sm:mb-20">
-            <span className="text-xs font-black tracking-widest text-[#0088FF] uppercase block mb-2">
-              OUR COMPLETE SERVICE SUITE
+          {/* Main Section Header */}
+          <div className="mb-14 sm:mb-18 lg:mb-20">
+            <span className="text-[#059669] text-xs font-black tracking-widest uppercase block mb-3">
+              FIND YOUR DELIVERY SERVICE
             </span>
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-[44px] font-black text-[#071A2E] tracking-tight leading-tight">
-              Tailored Logistics for Every Industry
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-[44px] font-black text-[#071A2E] tracking-tight leading-[1.12]">
+              Handled with care.<br />
+              Connected with purpose.
             </h2>
-            <p className="mt-3 text-slate-600 text-sm sm:text-base font-normal leading-relaxed">
-              Explore our core courier categories below. Each service is fully customizable to your
-              business&apos;s schedule, volume, and compliance standards.
-            </p>
           </div>
 
-          {/* Detailed Service Cards List */}
-          <div className="space-y-12 sm:space-y-16">
-            {DETAILED_SERVICES.map((service, index) => {
-              const isEven = index % 2 === 0;
+          {/* 4 Alternating Service Showcase Rows */}
+          <div className="space-y-16 sm:space-y-20 lg:space-y-24">
+            {SERVICE_OFFERINGS.map((service, index) => {
+              const isImageLeft = service.imageLeft;
 
               return (
-                <article
-                  key={service.id}
-                  id={service.id}
-                  className="scroll-mt-24 bg-white rounded-3xl border border-slate-200/90 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
+                <div
+                  key={index}
+                  className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center"
                 >
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 items-stretch">
-                    
-                    {/* Image Column */}
-                    <div
-                      className={`lg:col-span-5 relative min-h-[280px] sm:min-h-[340px] lg:min-h-full bg-slate-900 overflow-hidden ${
-                        isEven ? "lg:order-1" : "lg:order-2"
-                      }`}
-                    >
+                  {/* Image Column */}
+                  <div
+                    className={`lg:col-span-6 w-full ${
+                      isImageLeft ? "lg:order-1 order-1" : "lg:order-2 order-1"
+                    }`}
+                  >
+                    <div className="relative aspect-[4/3] w-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-md border border-slate-100 group">
                       <Image
                         src={service.imageUrl}
-                        alt={service.title}
+                        alt={service.alt}
                         fill
-                        sizes="(max-width: 1024px) 100vw, 42vw"
-                        className="object-cover object-center transition-transform duration-700 hover:scale-105"
+                        sizes="(max-width: 1024px) 100vw, 50vw"
+                        className="object-cover object-center transition-transform duration-500 group-hover:scale-103"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent lg:hidden pointer-events-none" />
-                    </div>
-
-                    {/* Content Column */}
-                    <div
-                      className={`lg:col-span-7 p-6 sm:p-8 lg:p-10 flex flex-col justify-between ${
-                        isEven ? "lg:order-2" : "lg:order-1"
-                      }`}
-                    >
-                      <div>
-                        {/* Eyebrow Badge */}
-                        <div className="flex items-center gap-2 mb-3">
-                          <span
-                            className={`inline-block px-3 py-1 rounded-full text-[10px] sm:text-[11px] font-extrabold tracking-wider border uppercase ${service.badgeColor}`}
-                          >
-                            {service.badge}
-                          </span>
-                        </div>
-
-                        {/* Title & Tagline */}
-                        <h3 className="font-display text-2xl sm:text-3xl font-black text-[#071A2E] tracking-tight mb-2">
-                          {service.title}
-                        </h3>
-                        <p className="text-sm sm:text-base font-semibold text-[#0088FF] mb-4">
-                          {service.tagline}
-                        </p>
-
-                        {/* Full Description */}
-                        <p className="text-slate-600 text-xs sm:text-sm lg:text-[15px] leading-relaxed font-normal mb-6">
-                          {service.description}
-                        </p>
-
-                        {/* Key Capabilities Checklist */}
-                        <div className="mb-6">
-                          <h4 className="text-xs font-black tracking-wider text-slate-800 uppercase mb-3">
-                            SERVICE SPECIFICATIONS & CAPABILITIES
-                          </h4>
-                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                            {service.features.map((feature, fIndex) => (
-                              <div
-                                key={fIndex}
-                                className="flex items-start gap-2 text-xs sm:text-sm text-slate-700 leading-snug"
-                              >
-                                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                                <span>{feature}</span>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-
-                        {/* Typical Cargo Handled Tags */}
-                        <div className="mb-8">
-                          <h4 className="text-[11px] font-bold tracking-wider text-slate-500 uppercase mb-2">
-                            FREQUENTLY TRANSPORTED CARGO:
-                          </h4>
-                          <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                            {service.cargoTypes.map((cargo, cIndex) => (
-                              <span
-                                key={cIndex}
-                                className="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-medium border border-slate-200/70"
-                              >
-                                {cargo}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Action Row */}
-                      <div className="pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                        <div className="flex items-center gap-2 text-xs font-medium text-slate-500">
-                          <MapPin className="w-4 h-4 text-[#0088FF]" />
-                          <span>Eligible on North Bay ↔ Hearst scheduled corridor</span>
-                        </div>
-
-                        <a
-                          href="#quote"
-                          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#0088FF] hover:bg-[#0077EE] text-white text-xs sm:text-sm font-extrabold px-5 py-2.5 rounded-xl shadow-xs transition-colors shrink-0"
-                        >
-                          <span>Request Quote for This Service</span>
-                          <ArrowRight className="w-4 h-4" />
-                        </a>
-                      </div>
-
                     </div>
                   </div>
-                </article>
+
+                  {/* Content Column */}
+                  <div
+                    className={`lg:col-span-6 flex flex-col justify-center ${
+                      isImageLeft ? "lg:order-2 order-2" : "lg:order-1 order-2"
+                    }`}
+                  >
+                    <span className="text-[#059669] text-xs font-black tracking-widest uppercase mb-2 block">
+                      {service.tag}
+                    </span>
+                    <h3 className="font-display text-2xl sm:text-3xl lg:text-[34px] font-black text-[#071A2E] tracking-tight leading-snug mb-3.5">
+                      {service.title}
+                    </h3>
+                    <p className="text-slate-600 text-xs sm:text-sm lg:text-[15px] font-normal leading-relaxed mb-4 max-w-xl">
+                      {service.description}
+                    </p>
+
+                    {/* Features checklist */}
+                    <div className="flex flex-wrap items-center gap-x-4 sm:gap-x-5 gap-y-2 text-xs font-bold text-[#059669] mb-5">
+                      {service.features.map((feature, fIdx) => (
+                        <span key={fIdx} className="inline-flex items-center gap-1.5">
+                          <Check className="w-3.5 h-3.5 stroke-[3] shrink-0" />
+                          <span>{feature}</span>
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Action link */}
+                    <a
+                      href="#quote"
+                      className="text-[#0284C7] hover:text-[#006ED6] font-bold text-xs sm:text-sm inline-flex items-center gap-1 group transition-colors self-start"
+                    >
+                      <span>{service.action}</span>
+                      <span className="transition-transform group-hover:translate-x-1">→</span>
+                    </a>
+                  </div>
+                </div>
               );
             })}
           </div>
 
-        </div>
-      </section>
+          {/* Simple From Start to Finish: 4 Steps */}
+          <div className="mt-24 sm:mt-32 pt-16 sm:pt-20 border-t border-slate-100">
+            <span className="text-[#059669] text-xs font-black tracking-widest uppercase block mb-2">
+              SIMPLE FROM START TO FINISH
+            </span>
+            <h3 className="font-display text-2xl sm:text-3xl lg:text-[36px] font-black text-[#071A2E] tracking-tight mb-10 sm:mb-12">
+              From your door to theirs.
+            </h3>
 
-      {/* 4. Twice-Weekly Corridor Highlight Banner */}
-      <section className="w-full bg-[#062E57] text-white py-14 sm:py-18">
-        <div className="max-w-[1350px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 bg-white/5 border border-white/10 rounded-3xl p-6 sm:p-10 backdrop-blur-xs">
-            <div className="max-w-2xl">
-              <span className="text-[#38BDF8] text-xs font-black tracking-widest uppercase block mb-2">
-                SCHEDULED HIGHWAY 11 RUNS
-              </span>
-              <h3 className="font-display text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight leading-tight">
-                Our Special Twice-Weekly Route: North Bay ↔ Hearst
-              </h3>
-              <p className="mt-3 text-slate-300 text-xs sm:text-sm lg:text-[15px] font-normal leading-relaxed">
-                Connect your shipments along our established regional run stopping through
-                Temiskaming Shores, Kirkland Lake, Matheson, Timmins, Cochrane, Kapuskasing,
-                Hearst, and Longlac. Scheduled northbound runs with return service the following day.
-              </p>
-            </div>
-
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 shrink-0">
-              <Link
-                href="/#route"
-                className="bg-[#0088FF] hover:bg-[#0077EE] text-white font-extrabold text-xs sm:text-sm px-6 py-3.5 rounded-xl shadow-md transition-all inline-flex items-center gap-2"
-              >
-                <span>View Route Timeline & Schedule</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
+              {SIMPLE_STEPS.map((step, idx) => (
+                <div key={idx}>
+                  <span className="text-3xl sm:text-4xl font-black text-[#7DD3FC] block mb-2 font-display">
+                    {step.step}
+                  </span>
+                  <h4 className="font-bold text-base sm:text-lg text-[#071A2E] mb-2 leading-snug">
+                    {step.title}
+                  </h4>
+                  <p className="text-slate-500 text-xs sm:text-sm font-normal leading-relaxed">
+                    {step.description}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
+
+          {/* When Timing Matters: 3 Cards */}
+          <div className="mt-20 sm:mt-28">
+            <span className="text-[#059669] text-xs font-black tracking-widest uppercase block mb-2">
+              WHEN TIMING MATTERS
+            </span>
+            <h3 className="font-display text-2xl sm:text-3xl lg:text-[36px] font-black text-[#071A2E] tracking-tight mb-8 sm:mb-10">
+              For your time-sensitive deliveries.
+            </h3>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6">
+              {TIME_SENSITIVE_CARDS.map((card, cIdx) => (
+                <div
+                  key={cIdx}
+                  className="bg-[#F0F7FB] rounded-xl p-5 sm:p-6 border-l-4 border-[#059669] shadow-xs"
+                >
+                  <h4 className="font-bold text-base sm:text-lg text-[#071A2E] mb-2 leading-snug">
+                    {card.title}
+                  </h4>
+                  <p className="text-slate-600 text-xs sm:text-[13px] font-normal leading-relaxed">
+                    {card.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <p className="text-slate-400 text-[11px] sm:text-xs font-normal mt-5 leading-normal">
+              Tell us the type of shipment when requesting a quote. Please do not enter patient details, account numbers or other sensitive information in the form.
+            </p>
+
+            <div className="mt-4">
+              <a
+                href="#quote"
+                className="text-[#0284C7] hover:text-[#006ED6] font-bold text-xs sm:text-sm inline-flex items-center gap-1 group transition-colors"
+              >
+                <span>Discuss your delivery</span>
+                <span className="transition-transform group-hover:translate-x-1">→</span>
+              </a>
+            </div>
+          </div>
+
         </div>
       </section>
 
-      {/* 5. Quote Request Form */}
+      {/* Quote Request Form */}
       <div id="quote" className="scroll-mt-20">
         <QuoteForm content={quoteContent} contact={contact} />
       </div>
 
-      {/* 6. Quote Call-to-Action Strip */}
+      {/* Quote Call-to-Action Strip */}
       <QuoteCTA
         content={quoteCtaContent}
         phone={contact.phone}
         email={contact.email || undefined}
       />
 
-      {/* 7. Footer */}
+      {/* Footer */}
       <Footer phone={contact.phone} email={contact.email || undefined} />
     </div>
   );
