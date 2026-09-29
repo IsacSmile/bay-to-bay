@@ -4,15 +4,14 @@ import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { ServiceHighlights } from "@/components/sections/ServiceHighlights";
 import { TwiceWeeklyRoute } from "@/components/sections/TwiceWeeklyRoute";
+import { ServiceAreasCoverage } from "@/components/sections/ServiceAreasCoverage";
 import { QuoteForm } from "@/components/QuoteForm";
-import { QuoteCTA } from "@/components/sections/QuoteCTA";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
 import {
   getAnnouncementData,
   getContactData,
   getQuoteFormSectionData,
-  getQuoteCtaData,
 } from "@/lib/prisma";
 
 export const metadata: Metadata = {
@@ -31,7 +30,6 @@ export default async function ServiceAreasPage() {
   const announcement = await getAnnouncementData();
   const contact = await getContactData();
   const quoteContent = await getQuoteFormSectionData();
-  const quoteCtaContent = await getQuoteCtaData();
 
   return (
     <div className="min-h-screen flex flex-col bg-[#F6F9FC]">
@@ -65,17 +63,13 @@ export default async function ServiceAreasPage() {
       {/* Special Twice-Weekly Route (North Bay ↔ Hearst) */}
       <TwiceWeeklyRoute phone={contact.phone} />
 
+      {/* Explore Our Coverage, Our Offices & Delivery CTA Banner */}
+      <ServiceAreasCoverage phone={contact.phone} />
+
       {/* Quote Request Form */}
       <div id="quote" className="scroll-mt-20">
         <QuoteForm content={quoteContent} contact={contact} />
       </div>
-
-      {/* Quote Call-to-Action Strip */}
-      <QuoteCTA
-        content={quoteCtaContent}
-        phone={contact.phone}
-        email={contact.email || undefined}
-      />
 
       {/* Footer */}
       <Footer phone={contact.phone} email={contact.email || undefined} />
