@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 54" width="120" height="54" fill="none">
+  <defs>
+    <linearGradient id="vanBody" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="100%" stop-color="#F1F5F9" />
+    </linearGradient>
+    <linearGradient id="wave1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0284C7" />
+      <stop offset="100%" stop-color="#38BDF8" />
+    </linearGradient>
+  </defs>
+  <!-- Van Body -->
+  <path d="M12 36 L12 12 Q12 8 16 8 L82 8 Q86 8 89 11 L103 24 Q106 27 107 31 L108 36 L12 36 Z" fill="url(#vanBody)" stroke="#CBD5E1" stroke-width="1" />
+  <!-- Front Bumper & Grill -->
+  <path d="M104 31 L109 32 Q111 33 111 36 L111 39 L100 39" fill="#334155" />
+  <rect x="104" y="34" width="5" height="2" rx="1" fill="#F59E0B" />
+  <!-- Headlight -->
+  <path d="M98 25 L106 29 L104 31 L97 28 Z" fill="#FDE047" opacity="0.9" />
+  <!-- Windshield and Front Window -->
+  <path d="M87 11 L100 23 L87 23 Z" fill="#1E293B" />
+  <rect x="72" y="11" width="13" height="12" rx="1" fill="#1E293B" />
+  <path d="M87 11 L100 23 L87 23 Z" fill="#38BDF8" opacity="0.35" />
+  <rect x="72" y="11" width="13" height="12" rx="1" fill="#38BDF8" opacity="0.2" />
+  <!-- Rear Cargo Area Lines -->
+  <line x1="42" y1="8" x2="42" y2="36" stroke="#E2E8F0" stroke-width="1" />
+  <line x1="68" y1="8" x2="68" y2="36" stroke="#CBD5E1" stroke-width="1" />
+  <!-- Rear Light -->
+  <rect x="11" y="18" width="2" height="9" rx="1" fill="#EF4444" />
+  <!-- Brand Logo & Decal -->
+  <g transform="translate(20, 12) scale(0.65)">
+    <!-- Two Green Trees -->
+    <path d="M7 2L2 10H5L1 17H7V22H9V17H15L11 10H14L9 2H7Z" fill="#059669" />
+    <path d="M15 5L11 12H13.5L10 18H15V22H17V18H21L17.5 12H20L15 5Z" fill="#10B981" />
+    <text x="24" y="10" font-family="sans-serif" font-size="8" font-weight="900" fill="#071A2E">BAY TO BAY</text>
+    <text x="24" y="18" font-family="sans-serif" font-size="6" font-weight="800" fill="#0284C7">EXPRESS</text>
+  </g>
+  <!-- Swoosh Wave on lower body -->
+  <path d="M16 32 C30 26 48 35 70 28 C85 24 95 29 100 32 L100 36 L16 36 Z" fill="url(#wave1)" opacity="0.85" />
+  <!-- Undercarriage -->
+  <rect x="10" y="36" width="98" height="3" fill="#1E293B" />
+  <!-- Wheels -->
+  <!-- Rear Wheel -->
+  <circle cx="28" cy="38" r="9" fill="#0F172A" />
+  <circle cx="28" cy="38" r="5.5" fill="#94A3B8" />
+  <circle cx="28" cy="38" r="2.5" fill="#0F172A" />
+  <!-- Front Wheel -->
+  <circle cx="90" cy="38" r="9" fill="#0F172A" />
+  <circle cx="90" cy="38" r="5.5" fill="#94A3B8" />
+  <circle cx="90" cy="38" r="2.5" fill="#0F172A" />
+</svg>
