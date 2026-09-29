@@ -108,6 +108,14 @@ export async function Hero({
                 </Link>
               )}
             </div>
+
+            {/* Bottom Slogan Badge - Shown on Homepage, hidden on Services Page */}
+            {!isServicesPage && (
+              <div className="inline-flex max-w-full items-center gap-2 text-[10px] xs:text-[11px] sm:text-xs xl:text-sm font-bold tracking-wider text-slate-300 uppercase bg-slate-900/40 px-3.5 py-1.5 rounded-full border border-white/10 backdrop-blur-xs shadow-xs">
+                <Trees className="w-4 h-4 text-[#10B981] shrink-0" />
+                <span className="whitespace-nowrap overflow-hidden text-ellipsis">SAME COMMUNITIES. A STRONGER NORTHERN ONTARIO.</span>
+              </div>
+            )}
           </div>
         </div>
 
