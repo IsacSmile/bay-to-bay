@@ -102,7 +102,6 @@ export const TwiceWeeklyRoute: React.FC<TwiceWeeklyRouteProps> = ({
   const [activeStopIndex, setActiveStopIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [vanLeft, setVanLeft] = useState<number | null>(null);
-  const [isMounted, setIsMounted] = useState(false);
 
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -115,24 +114,45 @@ export const TwiceWeeklyRoute: React.FC<TwiceWeeklyRouteProps> = ({
     if (stopEl && trackEl) {
       const trackRect = trackEl.getBoundingClientRect();
       const stopRect = stopEl.getBoundingClientRect();
-      const center = stopRect.left - trackRect.left + stopRect.width / 2;
-      setVanLeft(center);
+      if (trackRect.width > 0 && stopRect.width > 0) {
+        const center = stopRect.left - trackRect.left + stopRect.width / 2;
+        if (center > 0) {
+          setVanLeft(center);
+          return;
+        }
+      }
+
+      // Fallback if getBoundingClientRect has 0 width
+      if (stopEl.offsetLeft > 0) {
+        setVanLeft(stopEl.offsetLeft + stopEl.offsetWidth / 2 + 16);
+      }
     }
   };
 
   useEffect(() => {
-    setIsMounted(true);
     updatePosition(activeStopIndex);
 
-    const t1 = setTimeout(() => updatePosition(activeStopIndex), 60);
-    const t2 = setTimeout(() => updatePosition(activeStopIndex), 200);
+    const t1 = setTimeout(() => updatePosition(activeStopIndex), 50);
+    const t2 = setTimeout(() => updatePosition(activeStopIndex), 150);
+    const t3 = setTimeout(() => updatePosition(activeStopIndex), 400);
 
     const handleResize = () => updatePosition(activeStopIndex);
     window.addEventListener("resize", handleResize);
+
+    let observer: ResizeObserver | null = null;
+    if (typeof ResizeObserver !== "undefined" && trackRef.current) {
+      observer = new ResizeObserver(() => {
+        updatePosition(activeStopIndex);
+      });
+      observer.observe(trackRef.current);
+    }
+
     return () => {
       clearTimeout(t1);
       clearTimeout(t2);
+      clearTimeout(t3);
       window.removeEventListener("resize", handleResize);
+      if (observer) observer.disconnect();
     };
   }, [activeStopIndex]);
 
@@ -153,6 +173,7 @@ export const TwiceWeeklyRoute: React.FC<TwiceWeeklyRouteProps> = ({
   const handleStopClick = (index: number) => {
     setIsPlaying(false);
     setActiveStopIndex(index);
+    updatePosition(index);
     centerStopInView(index);
   };
 
@@ -163,6 +184,7 @@ export const TwiceWeeklyRoute: React.FC<TwiceWeeklyRouteProps> = ({
     const timer = setInterval(() => {
       setActiveStopIndex((prev) => {
         const next = (prev + 1) % ROUTE_STOPS.length;
+        updatePosition(next);
         centerStopInView(next);
         return next;
       });
@@ -244,23 +266,24 @@ export const TwiceWeeklyRoute: React.FC<TwiceWeeklyRouteProps> = ({
               >
                 {/* Smooth Moving Van Indicator */}
                 <div
-                  className={`absolute top-1 sm:top-2 z-30 pointer-events-none transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] ${
-                    isMounted && vanLeft !== null ? "opacity-100" : "opacity-0"
-                  }`}
+                  className="absolute top-1 sm:top-2 z-30 pointer-events-none transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]"
                   style={{
                     left:
                       vanLeft !== null
                         ? `${vanLeft}px`
-                        : `${(activeStopIndex / (ROUTE_STOPS.length - 1)) * 100}%`,
+                        : `calc(40px + ${(activeStopIndex / (ROUTE_STOPS.length - 1)) * 100}% - ${(activeStopIndex / (ROUTE_STOPS.length - 1)) * 80}px)`,
                     transform: "translateX(-50%)",
                   }}
                 >
-                  <img
-                    src="/route-van.webp"
-                    alt="Bay to Bay Express Delivery Van"
-                    draggable={false}
-                    className="w-20 sm:w-24 md:w-26 h-auto drop-shadow-md select-none object-contain pointer-events-none"
-                  />
+                  <picture>
+                    <source srcSet="/route-van.webp" type="image/webp" />
+                    <img
+                      src="/route-van.png"
+                      alt="Bay to Bay Express Delivery Van"
+                      draggable={false}
+                      className="w-20 sm:w-24 md:w-28 h-auto drop-shadow-md select-none object-contain pointer-events-none"
+                    />
+                  </picture>
                 </div>
 
                 {/* Timeline stops & connecting line */}
