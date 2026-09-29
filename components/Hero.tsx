@@ -8,15 +8,31 @@ import { SnowfallEffect } from "@/components/hero/SnowfallEffect";
 interface HeroProps {
   headingLine1?: string;
   headingLine2Accent?: string;
+  headingLine2Color?: string;
   subtext?: string;
   isServicesPage?: boolean;
+  isServiceAreasPage?: boolean;
+  bgImage?: string;
+  bgImageAlt?: string;
+  badgeText?: string;
+  hideGreenBar?: boolean;
+  exploreHref?: string;
+  exploreText?: string;
 }
 
 export async function Hero({
   headingLine1,
   headingLine2Accent,
+  headingLine2Color,
   subtext,
   isServicesPage = false,
+  isServiceAreasPage = false,
+  bgImage = "/hero-bg.jpg",
+  bgImageAlt = "Bay to Bay Express delivery van on Northern Ontario highway",
+  badgeText,
+  hideGreenBar = false,
+  exploreHref,
+  exploreText,
 }: HeroProps = {}) {
   const heroData = await getHeroData();
 
@@ -31,8 +47,8 @@ export async function Hero({
         {/* Background Photo */}
         <div className="absolute inset-0 z-0 select-none pointer-events-none">
           <Image
-            src="/hero-bg.jpg"
-            alt="Bay to Bay Express delivery van on Northern Ontario highway"
+            src={bgImage}
+            alt={bgImageAlt}
             fill
             priority
             sizes="100vw"
@@ -54,14 +70,14 @@ export async function Hero({
           <div className="max-w-2xl text-white">
             
             {/* Top Slogan Badge - Shown only on Homepage Hero section top of heading */}
-            {!isServicesPage && (
+            {!isServicesPage && !isServiceAreasPage && (
               <div className="inline-flex max-w-full items-center gap-2 text-[10px] xs:text-[11px] sm:text-xs xl:text-sm font-bold tracking-wider text-slate-200 uppercase bg-slate-900/50 px-3.5 py-1.5 rounded-full border border-white/15 backdrop-blur-xs shadow-xs mb-5 sm:mb-6">
                 <Trees className="w-4 h-4 text-[#10B981] shrink-0" />
                 <span className="whitespace-nowrap overflow-hidden text-ellipsis">SAME COMMUNITIES. A STRONGER NORTHERN ONTARIO.</span>
               </div>
             )}
 
-            {/* Breadcrumb / Slug Navigation - Shown on Services Page Hero section top of heading */}
+            {/* Breadcrumb / Slug Navigation - Shown on Services Page */}
             {isServicesPage && (
               <nav aria-label="Breadcrumb" className="mb-5 sm:mb-6">
                 <ol className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-300 bg-slate-900/50 px-4 py-1.5 rounded-full border border-white/15 backdrop-blur-xs shadow-xs">
@@ -84,6 +100,36 @@ export async function Hero({
               </nav>
             )}
 
+            {/* Breadcrumb / Slug Navigation - Shown on Service Areas Page */}
+            {isServiceAreasPage && (
+              <nav aria-label="Breadcrumb" className="mb-4 sm:mb-5">
+                <ol className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-300 bg-slate-900/50 px-4 py-1.5 rounded-full border border-white/15 backdrop-blur-xs shadow-xs">
+                  <li className="inline-flex items-center">
+                    <Link
+                      href="/"
+                      className="text-slate-300 hover:text-white transition-colors inline-flex items-center gap-1.5 group"
+                    >
+                      <Home className="w-3.5 h-3.5 text-[#38BDF8] group-hover:text-white transition-colors" />
+                      <span>Home</span>
+                    </Link>
+                  </li>
+                  <li className="text-slate-400 select-none" aria-hidden="true">
+                    <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
+                  </li>
+                  <li className="text-[#38BDF8] font-bold" aria-current="page">
+                    Service Areas
+                  </li>
+                </ol>
+              </nav>
+            )}
+
+            {/* Custom Uppercase Badge (matches the user's screenshot "BAY TO BAY EXPRESS") */}
+            {badgeText && (
+              <span className="text-xs sm:text-sm font-black tracking-[0.2em] text-slate-200 uppercase block mb-3 sm:mb-4">
+                {badgeText}
+              </span>
+            )}
+
             {/* H1 Main Headline */}
             <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl xl:text-[68px] font-black tracking-tight leading-[1.08] text-white">
               <span className="block text-white">
@@ -92,7 +138,7 @@ export async function Hero({
                     ? heroData.headingLine1
                     : "Small Goods Delivery")}
               </span>
-              <span className="block text-[#25A8E8]">
+              <span className={`block ${headingLine2Color || "text-[#25A8E8]"}`}>
                 {headingLine2Accent ||
                   (heroData.headingLine3Accent && heroData.headingLine3Accent !== "Delivered."
                     ? heroData.headingLine3Accent
@@ -101,7 +147,9 @@ export async function Hero({
             </h1>
 
             {/* Vibrant Green Underline Bar */}
-            <div className="w-20 sm:w-24 h-1.5 bg-[#10B981] rounded-full my-4 sm:my-5" />
+            {!hideGreenBar && (
+              <div className="w-20 sm:w-24 h-1.5 bg-[#10B981] rounded-full my-4 sm:my-5" />
+            )}
 
             {/* Subhead Tagline / Mini Paragraph */}
             <p className="text-xl sm:text-2xl font-bold text-white/95 tracking-tight mb-6 sm:mb-8">
@@ -121,7 +169,15 @@ export async function Hero({
                 <ArrowRight className="w-4 h-4" />
               </a>
 
-              {isServicesPage ? (
+              {exploreHref ? (
+                <a
+                  href={exploreHref}
+                  className="border border-white/40 bg-slate-900/30 backdrop-blur-xs hover:bg-white/10 text-white font-extrabold text-sm sm:text-base px-6 sm:px-7 py-3.5 rounded-xl inline-flex items-center gap-2 transition-all duration-200"
+                >
+                  <span>{exploreText || "Explore"}</span>
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+              ) : isServicesPage ? (
                 <a
                   href="#services-list"
                   className="border border-white/40 bg-slate-900/30 backdrop-blur-xs hover:bg-white/10 text-white font-extrabold text-sm sm:text-base px-6 sm:px-7 py-3.5 rounded-xl inline-flex items-center gap-2 transition-all duration-200"

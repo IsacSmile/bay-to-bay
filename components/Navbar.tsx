@@ -15,6 +15,7 @@ import {
   Phone,
   ArrowUpRight,
   Trees,
+  Truck,
 } from "lucide-react";
 
 interface NavbarProps {
@@ -75,6 +76,8 @@ export const Navbar: React.FC<NavbarProps> = ({ phone = "705-978-3001" }) => {
 
   const pathname = usePathname();
   const isServices = pathname === "/services";
+  const isServiceAreas = pathname === "/service-areas" || pathname === "/services-areas";
+  const isSubPage = pathname !== "/";
 
   const menuItems: MenuItem[] = [
     {
@@ -85,23 +88,30 @@ export const Navbar: React.FC<NavbarProps> = ({ phone = "705-978-3001" }) => {
       hasArrow: true,
     },
     {
+      title: "Service Areas",
+      subtitle: "Northern Ontario & GTA coverage",
+      href: "/service-areas",
+      icon: MapPin,
+      hasArrow: true,
+    },
+    {
       title: "Route Schedule",
       subtitle: "Twice-weekly North Bay ↔ Hearst",
-      href: isServices ? "/#route" : "#route",
-      icon: MapPin,
+      href: isSubPage ? "/#route" : "#route",
+      icon: Truck,
       hasArrow: true,
     },
     {
       title: "About",
       subtitle: "About Bay to Bay Express",
-      href: isServices ? "/#about" : "#about",
+      href: isSubPage ? "/#about" : "#about",
       icon: Info,
       hasArrow: true,
     },
     {
       title: "FAQ",
       subtitle: "Common questions & answers",
-      href: isServices ? "/#faq" : "#faq",
+      href: isSubPage ? "/#faq" : "#faq",
       icon: HelpCircle,
       hasArrow: true,
     },
@@ -164,7 +174,7 @@ export const Navbar: React.FC<NavbarProps> = ({ phone = "705-978-3001" }) => {
           <Link
             href="/"
             className={
-              !isServices
+              pathname === "/"
                 ? "text-[#0088FF] font-extrabold border-b-2 border-[#0088FF] pb-1"
                 : "hover:text-[#0088FF] transition-colors py-1"
             }
@@ -181,8 +191,18 @@ export const Navbar: React.FC<NavbarProps> = ({ phone = "705-978-3001" }) => {
           >
             Services
           </Link>
+          <Link
+            href="/service-areas"
+            className={
+              isServiceAreas
+                ? "text-[#0088FF] font-extrabold border-b-2 border-[#0088FF] pb-1"
+                : "hover:text-[#0088FF] transition-colors py-1"
+            }
+          >
+            Service Areas
+          </Link>
           <a
-            href={isServices ? "/#about" : "#about"}
+            href={isSubPage ? "/#about" : "#about"}
             className="hover:text-[#0088FF] transition-colors py-1"
           >
             About

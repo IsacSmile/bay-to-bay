@@ -93,6 +93,11 @@ export const Footer: React.FC<FooterProps> = ({
                 </a>
               </li>
               <li>
+                <a href="/service-areas" className="hover:text-white transition-colors">
+                  Service Areas
+                </a>
+              </li>
+              <li>
                 <a href="/#route" className="hover:text-white transition-colors">
                   Twice-Weekly Route
                 </a>
@@ -117,17 +122,22 @@ export const Footer: React.FC<FooterProps> = ({
 
           {/* Service Areas (4 cols) */}
           <div className="lg:col-span-4">
-            <h4 className="font-extrabold text-white uppercase text-xs tracking-widest mb-4">
-              Service Areas
-            </h4>
+            <a
+              href="/service-areas"
+              className="inline-flex items-center gap-1.5 font-extrabold text-white uppercase text-xs tracking-widest mb-4 hover:text-[#0088FF] transition-colors group"
+            >
+              <span>Service Areas</span>
+              <span className="transition-transform group-hover:translate-x-1">→</span>
+            </a>
             <ul className="grid grid-cols-2 gap-2 text-slate-300 text-xs sm:text-sm font-normal">
-              <li>North Bay</li>
-              <li>Kirkland Lake</li>
-              <li>Timmins</li>
-              <li>Cochrane</li>
-              <li>Kapuskasing</li>
-              <li>Hearst</li>
-              <li>Longlac</li>
+              <li><a href="/service-areas" className="hover:text-white transition-colors">North Bay</a></li>
+              <li><a href="/service-areas" className="hover:text-white transition-colors">Kirkland Lake</a></li>
+              <li><a href="/service-areas" className="hover:text-white transition-colors">Timmins</a></li>
+              <li><a href="/service-areas" className="hover:text-white transition-colors">Cochrane</a></li>
+              <li><a href="/service-areas" className="hover:text-white transition-colors">Kapuskasing</a></li>
+              <li><a href="/service-areas" className="hover:text-white transition-colors">Hearst</a></li>
+              <li><a href="/service-areas" className="hover:text-white transition-colors">Toronto / GTA</a></li>
+              <li><a href="/service-areas" className="hover:text-white transition-colors">Longlac</a></li>
             </ul>
           </div>
 
