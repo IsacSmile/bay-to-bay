@@ -5,7 +5,19 @@ import { ArrowRight, Plus, FileText, Package, Truck, Trees } from "lucide-react"
 import { getHeroData } from "@/lib/prisma";
 import { SnowfallEffect } from "@/components/hero/SnowfallEffect";
 
-export async function Hero() {
+interface HeroProps {
+  headingLine1?: string;
+  headingLine2Accent?: string;
+  subtext?: string;
+  isServicesPage?: boolean;
+}
+
+export async function Hero({
+  headingLine1,
+  headingLine2Accent,
+  subtext,
+  isServicesPage = false,
+}: HeroProps = {}) {
   const heroData = await getHeroData();
 
   return (
@@ -44,25 +56,28 @@ export async function Hero() {
             {/* H1 Main Headline */}
             <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl xl:text-[68px] font-black tracking-tight leading-[1.08] text-white">
               <span className="block text-white">
-                {heroData.headingLine1 && heroData.headingLine1 !== "Reliable."
-                  ? heroData.headingLine1
-                  : "Small Goods Delivery"}
+                {headingLine1 ||
+                  (heroData.headingLine1 && heroData.headingLine1 !== "Reliable."
+                    ? heroData.headingLine1
+                    : "Small Goods Delivery")}
               </span>
               <span className="block text-[#25A8E8]">
-                {heroData.headingLine3Accent && heroData.headingLine3Accent !== "Delivered."
-                  ? heroData.headingLine3Accent
-                  : "Across Northern Ontario & the GTA"}
+                {headingLine2Accent ||
+                  (heroData.headingLine3Accent && heroData.headingLine3Accent !== "Delivered."
+                    ? heroData.headingLine3Accent
+                    : "Across Northern Ontario & the GTA")}
               </span>
             </h1>
 
             {/* Vibrant Green Underline Bar */}
             <div className="w-20 sm:w-24 h-1.5 bg-[#10B981] rounded-full my-4 sm:my-5" />
 
-            {/* Subhead Tagline */}
+            {/* Subhead Tagline / Mini Paragraph */}
             <p className="text-xl sm:text-2xl font-bold text-white/95 tracking-tight mb-6 sm:mb-8">
-              {heroData.subtext && heroData.subtext.includes("Small goods")
-                ? "Reliable. Dedicated. Delivered."
-                : heroData.subtext || "Reliable. Dedicated. Delivered."}
+              {subtext ||
+                (heroData.subtext && heroData.subtext.includes("Small goods")
+                  ? "Reliable. Dedicated. Delivered."
+                  : heroData.subtext || "Reliable. Dedicated. Delivered.")}
             </p>
 
             {/* Primary & Secondary Call to Actions */}
@@ -75,13 +90,23 @@ export async function Hero() {
                 <ArrowRight className="w-4 h-4" />
               </a>
 
-              <Link
-                href="/services"
-                className="border border-white/40 bg-slate-900/30 backdrop-blur-xs hover:bg-white/10 text-white font-extrabold text-sm sm:text-base px-6 sm:px-7 py-3.5 rounded-xl inline-flex items-center gap-2 transition-all duration-200"
-              >
-                <span>Explore Services</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
+              {isServicesPage ? (
+                <a
+                  href="#services-list"
+                  className="border border-white/40 bg-slate-900/30 backdrop-blur-xs hover:bg-white/10 text-white font-extrabold text-sm sm:text-base px-6 sm:px-7 py-3.5 rounded-xl inline-flex items-center gap-2 transition-all duration-200"
+                >
+                  <span>Explore Services</span>
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+              ) : (
+                <Link
+                  href="/services"
+                  className="border border-white/40 bg-slate-900/30 backdrop-blur-xs hover:bg-white/10 text-white font-extrabold text-sm sm:text-base px-6 sm:px-7 py-3.5 rounded-xl inline-flex items-center gap-2 transition-all duration-200"
+                >
+                  <span>Explore Services</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              )}
             </div>
 
             {/* Bottom Slogan Badge */}
@@ -117,7 +142,10 @@ export async function Hero() {
       </section>
 
       {/* 2. Services Teaser Strip directly under Hero */}
-      <section className="relative z-20 w-full bg-[#F6F9FC] pt-2 pb-12 sm:pb-16 border-b border-slate-200/60">
+      <section
+        id="services-list"
+        className="relative z-20 w-full bg-[#F6F9FC] pt-2 pb-12 sm:pb-16 border-b border-slate-200/60 scroll-mt-20"
+      >
         <div className="max-w-[1350px] mx-auto px-4 sm:px-6 lg:px-8">
           
           {/* 4 Feature Teaser Cards Grid */}
@@ -125,7 +153,7 @@ export async function Hero() {
             
             {/* Card 1: Medical & Pharmacy */}
             <Link
-              href="/services#medical"
+              href={isServicesPage ? "#medical" : "/services#medical"}
               className="bg-white rounded-2xl p-3.5 sm:p-6 border border-slate-200/80 shadow-[0_4px_20px_rgba(7,26,46,0.04)] hover:shadow-[0_8px_30px_rgba(7,26,46,0.08)] hover:border-slate-300 transition-all duration-300 flex flex-row sm:flex-col items-center sm:items-start justify-between gap-3.5 sm:gap-0 group"
             >
               <div className="flex items-center sm:block gap-3.5 min-w-0">
@@ -150,7 +178,7 @@ export async function Hero() {
 
             {/* Card 2: Documents */}
             <Link
-              href="/services#documents"
+              href={isServicesPage ? "#documents" : "/services#documents"}
               className="bg-white rounded-2xl p-3.5 sm:p-6 border border-slate-200/80 shadow-[0_4px_20px_rgba(7,26,46,0.04)] hover:shadow-[0_8px_30px_rgba(7,26,46,0.08)] hover:border-slate-300 transition-all duration-300 flex flex-row sm:flex-col items-center sm:items-start justify-between gap-3.5 sm:gap-0 group"
             >
               <div className="flex items-center sm:block gap-3.5 min-w-0">
@@ -175,7 +203,7 @@ export async function Hero() {
 
             {/* Card 3: Retail & Small Goods */}
             <Link
-              href="/services#retail"
+              href={isServicesPage ? "#retail" : "/services#retail"}
               className="bg-white rounded-2xl p-3.5 sm:p-6 border border-slate-200/80 shadow-[0_4px_20px_rgba(7,26,46,0.04)] hover:shadow-[0_8px_30px_rgba(7,26,46,0.08)] hover:border-slate-300 transition-all duration-300 flex flex-row sm:flex-col items-center sm:items-start justify-between gap-3.5 sm:gap-0 group"
             >
               <div className="flex items-center sm:block gap-3.5 min-w-0">
@@ -200,7 +228,7 @@ export async function Hero() {
 
             {/* Card 4: Dedicated Delivery */}
             <Link
-              href="/services#dedicated"
+              href={isServicesPage ? "#dedicated" : "/services#dedicated"}
               className="bg-white rounded-2xl p-3.5 sm:p-6 border border-slate-200/80 shadow-[0_4px_20px_rgba(7,26,46,0.04)] hover:shadow-[0_8px_30px_rgba(7,26,46,0.08)] hover:border-slate-300 transition-all duration-300 flex flex-row sm:flex-col items-center sm:items-start justify-between gap-3.5 sm:gap-0 group"
             >
               <div className="flex items-center sm:block gap-3.5 min-w-0">
