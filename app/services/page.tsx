@@ -243,13 +243,13 @@ export default async function ServicesPage() {
               From your door to theirs.
             </h3>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-5 sm:gap-x-8 lg:gap-x-10 gap-y-9 sm:gap-y-12 lg:gap-y-10">
               {SIMPLE_STEPS.map((step, idx) => (
                 <div key={idx}>
-                  <span className="text-3xl sm:text-4xl font-black text-[#7DD3FC] block mb-2 font-display">
+                  <span className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#8ec5e7] block mb-2 sm:mb-2.5 font-display">
                     {step.step}
                   </span>
-                  <h4 className="font-bold text-base sm:text-lg text-[#071A2E] mb-2 leading-snug">
+                  <h4 className="font-bold text-[15px] sm:text-lg text-[#071A2E] mb-1.5 sm:mb-2 leading-snug">
                     {step.title}
                   </h4>
                   <p className="text-slate-500 text-xs sm:text-sm font-normal leading-relaxed">
