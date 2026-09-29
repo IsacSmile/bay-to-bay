@@ -5,7 +5,6 @@ import { ServiceHighlights } from "@/components/sections/ServiceHighlights";
 import { TwiceWeeklyRoute } from "@/components/sections/TwiceWeeklyRoute";
 import { ServicesGrid } from "@/components/services/ServicesGrid";
 import { WhoWeServe } from "@/components/WhoWeServe";
-import { WhyUs } from "@/components/WhyUs";
 import { HowItWorks } from "@/components/HowItWorks";
 import { QuoteForm } from "@/components/QuoteForm";
 import { About } from "@/components/About";
@@ -61,9 +60,6 @@ export default async function HomePage() {
 
       {/* Who We Serve */}
       <WhoWeServe />
-
-      {/* Why Bay to Bay */}
-      <WhyUs />
 
       {/* How It Works */}
       <HowItWorks />
