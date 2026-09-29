@@ -10,6 +10,7 @@ interface HeroProps {
   headingLine2Accent?: string;
   headingLine2Color?: string;
   subtext?: string;
+  subtextClassName?: string;
   isServicesPage?: boolean;
   isServiceAreasPage?: boolean;
   bgImage?: string;
@@ -25,6 +26,7 @@ export async function Hero({
   headingLine2Accent,
   headingLine2Color,
   subtext,
+  subtextClassName,
   isServicesPage = false,
   isServiceAreasPage = false,
   bgImage = "/hero-bg.jpg",
@@ -125,7 +127,7 @@ export async function Hero({
 
             {/* Custom Uppercase Badge (matches the user's screenshot "BAY TO BAY EXPRESS") */}
             {badgeText && (
-              <span className="text-xs sm:text-sm font-black tracking-[0.2em] text-slate-200 uppercase block mb-3 sm:mb-4">
+              <span className="text-[11px] sm:text-xs font-semibold tracking-[0.25em] text-slate-300 uppercase block mb-3 sm:mb-4">
                 {badgeText}
               </span>
             )}
@@ -152,12 +154,18 @@ export async function Hero({
             )}
 
             {/* Subhead Tagline / Mini Paragraph */}
-            <p className="text-xl sm:text-2xl font-bold text-white/95 tracking-tight mb-6 sm:mb-8">
-              {subtext ||
-                (heroData.subtext && heroData.subtext.includes("Small goods")
-                  ? "Reliable. Dedicated. Delivered."
-                  : heroData.subtext || "Reliable. Dedicated. Delivered.")}
-            </p>
+            {isServiceAreasPage ? (
+              <p className={subtextClassName || "text-sm sm:text-base lg:text-[17px] font-normal text-slate-200/90 leading-relaxed max-w-xl mb-6 sm:mb-8 mt-3 sm:mt-4"}>
+                {subtext}
+              </p>
+            ) : (
+              <p className={subtextClassName || "text-xl sm:text-2xl font-bold text-white/95 tracking-tight mb-6 sm:mb-8"}>
+                {subtext ||
+                  (heroData.subtext && heroData.subtext.includes("Small goods")
+                    ? "Reliable. Dedicated. Delivered."
+                    : heroData.subtext || "Reliable. Dedicated. Delivered.")}
+              </p>
+            )}
 
             {/* Primary & Secondary Call to Actions */}
             <div className="flex flex-wrap items-center gap-3 sm:gap-4 mb-8 sm:mb-10">
