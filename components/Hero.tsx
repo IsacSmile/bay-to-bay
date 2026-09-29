@@ -53,6 +53,14 @@ export async function Hero({
         <div className="relative z-10 max-w-[1350px] mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div className="max-w-2xl text-white">
             
+            {/* Top Slogan Badge - Shown only on Homepage Hero section top of heading */}
+            {!isServicesPage && (
+              <div className="inline-flex max-w-full items-center gap-2 text-[10px] xs:text-[11px] sm:text-xs xl:text-sm font-bold tracking-wider text-slate-200 uppercase bg-slate-900/50 px-3.5 py-1.5 rounded-full border border-white/15 backdrop-blur-xs shadow-xs mb-5 sm:mb-6">
+                <Trees className="w-4 h-4 text-[#10B981] shrink-0" />
+                <span className="whitespace-nowrap overflow-hidden text-ellipsis">SAME COMMUNITIES. A STRONGER NORTHERN ONTARIO.</span>
+              </div>
+            )}
+
             {/* H1 Main Headline */}
             <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl xl:text-[68px] font-black tracking-tight leading-[1.08] text-white">
               <span className="block text-white">
@@ -108,14 +116,6 @@ export async function Hero({
                 </Link>
               )}
             </div>
-
-            {/* Bottom Slogan Badge - Shown on Homepage, hidden on Services Page */}
-            {!isServicesPage && (
-              <div className="inline-flex max-w-full items-center gap-2 text-[10px] xs:text-[11px] sm:text-xs xl:text-sm font-bold tracking-wider text-slate-300 uppercase bg-slate-900/40 px-3.5 py-1.5 rounded-full border border-white/10 backdrop-blur-xs shadow-xs">
-                <Trees className="w-4 h-4 text-[#10B981] shrink-0" />
-                <span className="whitespace-nowrap overflow-hidden text-ellipsis">SAME COMMUNITIES. A STRONGER NORTHERN ONTARIO.</span>
-              </div>
-            )}
           </div>
         </div>
 
