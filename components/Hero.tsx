@@ -13,6 +13,7 @@ interface HeroProps {
   subtextClassName?: string;
   isServicesPage?: boolean;
   isServiceAreasPage?: boolean;
+  headingNowrap?: boolean;
   bgImage?: string;
   bgImageAlt?: string;
   badgeText?: string;
@@ -29,6 +30,7 @@ export async function Hero({
   subtextClassName,
   isServicesPage = false,
   isServiceAreasPage = false,
+  headingNowrap = false,
   bgImage = "/hero-bg.jpg",
   bgImageAlt = "Bay to Bay Express delivery van on Northern Ontario highway",
   badgeText,
@@ -69,7 +71,7 @@ export async function Hero({
 
         {/* Hero Content Block */}
         <div className="relative z-10 max-w-[1350px] mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="max-w-2xl text-white">
+          <div className={`${isServiceAreasPage ? "max-w-3xl lg:max-w-4xl xl:max-w-5xl" : "max-w-2xl lg:max-w-3xl"} text-white`}>
             
             {/* Top Slogan Badge - Shown only on Homepage Hero section top of heading */}
             {!isServicesPage && !isServiceAreasPage && (
@@ -132,15 +134,29 @@ export async function Hero({
               </span>
             )}
 
-            {/* H1 Main Headline */}
-            <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl xl:text-[68px] font-black tracking-tight leading-[1.08] text-white">
-              <span className="block text-white">
+            {/* H1 Main Headline - Strict 2-line layout */}
+            <h1
+              className={`font-display font-black tracking-tight leading-[1.08] text-white ${
+                isServiceAreasPage
+                  ? "text-[clamp(24px,5.2vw,62px)]"
+                  : "text-4xl sm:text-5xl lg:text-6xl xl:text-[68px]"
+              }`}
+            >
+              <span
+                className={`block text-white ${
+                  isServiceAreasPage || headingNowrap ? "whitespace-nowrap" : ""
+                }`}
+              >
                 {headingLine1 ||
                   (heroData.headingLine1 && heroData.headingLine1 !== "Reliable."
                     ? heroData.headingLine1
                     : "Small Goods Delivery")}
               </span>
-              <span className={`block ${headingLine2Color || "text-[#25A8E8]"}`}>
+              <span
+                className={`block ${headingLine2Color || "text-[#25A8E8]"} ${
+                  isServiceAreasPage || headingNowrap ? "whitespace-nowrap" : ""
+                }`}
+              >
                 {headingLine2Accent ||
                   (heroData.headingLine3Accent && heroData.headingLine3Accent !== "Delivered."
                     ? heroData.headingLine3Accent
