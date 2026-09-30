@@ -49,6 +49,17 @@ export const ContactForm: React.FC<ContactFormProps> = ({
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [isPrivacyModalOpen, setIsPrivacyModalOpen] = useState(false);
+  const [submittedSummary, setSubmittedSummary] = useState<{
+    id?: string;
+    fullName: string;
+    email: string;
+    pickupLocation: string;
+    deliveryLocation: string;
+    preferredDate: string;
+    frequency: string;
+    service?: string;
+    preferredRun?: string;
+  } | null>(null);
 
   // Fetch admin services dynamically on mount
   useEffect(() => {
@@ -125,6 +136,17 @@ export const ContactForm: React.FC<ContactFormProps> = ({
 
       const data = await res.json();
       if (res.ok && data.success) {
+        setSubmittedSummary({
+          id: data.id,
+          fullName: formData.fullName,
+          email: formData.email,
+          pickupLocation: formData.pickupLocation,
+          deliveryLocation: formData.deliveryLocation,
+          preferredDate: formData.preferredDate,
+          frequency: formData.frequency,
+          service: formData.service,
+          preferredRun: formData.preferredRun,
+        });
         setSubmitStatus("success");
       } else {
         setSubmitStatus("error");
@@ -151,6 +173,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
       preferredRun: "Other route / please advise",
       website_hp: "",
     });
+    setSubmittedSummary(null);
     setSubmitStatus("idle");
     setErrorMessage(null);
   };
@@ -182,24 +205,152 @@ export const ContactForm: React.FC<ContactFormProps> = ({
             {/* Left Column: Form Card (~60%) */}
             <div className="lg:col-span-7 bg-white rounded-3xl p-6 sm:p-9 border border-slate-200/90 shadow-xs">
               {submitStatus === "success" ? (
-                <div className="text-center py-12 px-4 space-y-4">
-                  <div className="w-16 h-16 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center mx-auto border border-emerald-100 shadow-xs">
-                    <CheckCircle2 className="w-8 h-8" />
+                <div className="py-6 sm:py-8 px-1 sm:px-2 space-y-6 animate-in fade-in zoom-in-95 duration-300">
+                  {/* Top Status & Badge */}
+                  <div className="text-center space-y-3">
+                    <div className="relative inline-flex items-center justify-center">
+                      <div className="w-16 h-16 rounded-2xl bg-emerald-50 text-emerald-600 border border-emerald-200/90 flex items-center justify-center shadow-xs">
+                        <CheckCircle2 className="w-9 h-9 stroke-[2.2]" />
+                      </div>
+                      <span className="absolute -top-1 -right-1 flex h-4 w-4">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-4 w-4 bg-emerald-500"></span>
+                      </span>
+                    </div>
+
+                    <div>
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200/80 mb-2">
+                        <span>Dispatch Request Confirmed</span>
+                        {submittedSummary?.id && (
+                          <span className="text-emerald-900/60 font-mono text-[11px]">
+                            • #{submittedSummary.id.slice(0, 8).toUpperCase()}
+                          </span>
+                        )}
+                      </span>
+                      <h3 className="text-2xl sm:text-3xl font-black text-[#071A2E] tracking-tight">
+                        Quote Request Received!
+                      </h3>
+                      <p className="text-slate-600 text-sm sm:text-base max-w-lg mx-auto mt-2 leading-relaxed">
+                        Thank you, <span className="font-bold text-[#071A2E]">{submittedSummary?.fullName || formData.fullName}</span>. We&apos;ve logged your shipment in our dispatch queue and sent your details to our route planners.
+                      </p>
+                    </div>
                   </div>
-                  <h3 className="text-2xl font-black text-[#071A2E] tracking-tight">
-                    Quote Request Received!
-                  </h3>
-                  <p className="text-slate-600 text-sm sm:text-base max-w-md mx-auto leading-relaxed">
-                    Thank you, <span className="font-bold text-[#071A2E]">{formData.fullName}</span>. We have received your request and notified our dispatch team. We will review your shipment details and get back to you promptly.
-                  </p>
-                  <div className="pt-4">
+
+                  {/* Shipment Summary Box */}
+                  {submittedSummary && (
+                    <div className="bg-[#F8FAFC] rounded-2xl p-4 sm:p-5 border border-slate-200/80 space-y-3.5">
+                      <div className="flex items-center justify-between border-b border-slate-200/70 pb-2.5 text-xs">
+                        <span className="font-extrabold uppercase tracking-wider text-slate-400">
+                          Shipment Overview
+                        </span>
+                        <span className="font-semibold text-slate-600">
+                          {submittedSummary.email}
+                        </span>
+                      </div>
+
+                      {/* Route Row */}
+                      <div className="bg-white p-3 rounded-xl border border-slate-200/70 flex items-center justify-between text-xs sm:text-sm font-bold text-slate-900 shadow-2xs">
+                        <div className="flex items-center gap-2">
+                          <MapPin className="w-4 h-4 text-[#0088FF] shrink-0" />
+                          <span>{submittedSummary.pickupLocation}</span>
+                        </div>
+                        <span className="text-slate-400 text-xs px-2">→</span>
+                        <div className="flex items-center gap-2 text-right">
+                          <span>{submittedSummary.deliveryLocation}</span>
+                        </div>
+                      </div>
+
+                      {/* Details Grid */}
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 pt-1 text-xs">
+                        <div className="bg-white p-2.5 rounded-xl border border-slate-200/70 shadow-2xs">
+                          <span className="text-slate-400 text-[10px] uppercase font-bold block mb-0.5">
+                            Target Date
+                          </span>
+                          <span className="font-bold text-slate-800">
+                            {submittedSummary.preferredDate}
+                          </span>
+                        </div>
+                        <div className="bg-white p-2.5 rounded-xl border border-slate-200/70 shadow-2xs">
+                          <span className="text-slate-400 text-[10px] uppercase font-bold block mb-0.5">
+                            Frequency
+                          </span>
+                          <span className="font-bold text-slate-800">
+                            {submittedSummary.frequency}
+                          </span>
+                        </div>
+                        <div className="bg-white p-2.5 rounded-xl border border-slate-200/70 shadow-2xs col-span-2 sm:col-span-1">
+                          <span className="text-slate-400 text-[10px] uppercase font-bold block mb-0.5">
+                            Service Type
+                          </span>
+                          <span className="font-bold text-[#0088FF] truncate block">
+                            {submittedSummary.service || "Standard Freight"}
+                          </span>
+                        </div>
+                      </div>
+
+                      {submittedSummary.preferredRun && submittedSummary.preferredRun !== "Other route / please advise" && (
+                        <div className="text-[11px] text-slate-600 bg-sky-50/70 border border-sky-100 rounded-xl px-3 py-2 font-medium flex items-center gap-1.5">
+                          <span className="font-bold text-[#071A2E]">Requested Run:</span>
+                          <span>{submittedSummary.preferredRun}</span>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {/* What to Expect Next */}
+                  <div className="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/70 space-y-3">
+                    <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-500">
+                      What happens next
+                    </h4>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                      <div className="flex items-start gap-2.5">
+                        <div className="w-5 h-5 rounded-full bg-sky-50 text-[#0088FF] font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5 border border-sky-200">
+                          1
+                        </div>
+                        <div>
+                          <p className="font-bold text-slate-800">Route Review</p>
+                          <p className="text-slate-500 text-[11px] mt-0.5 leading-snug">Checking van capacity & run timing.</p>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-2.5">
+                        <div className="w-5 h-5 rounded-full bg-sky-50 text-[#0088FF] font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5 border border-sky-200">
+                          2
+                        </div>
+                        <div>
+                          <p className="font-bold text-slate-800">Quote & Window</p>
+                          <p className="text-slate-500 text-[11px] mt-0.5 leading-snug">We confirm availability and pricing directly.</p>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-2.5">
+                        <div className="w-5 h-5 rounded-full bg-sky-50 text-[#0088FF] font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5 border border-sky-200">
+                          3
+                        </div>
+                        <div>
+                          <p className="font-bold text-slate-800">Locked In</p>
+                          <p className="text-slate-500 text-[11px] mt-0.5 leading-snug">Pickup scheduled upon your approval.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
                     <button
                       type="button"
                       onClick={handleResetForm}
-                      className="px-6 py-3 rounded-xl bg-[#0088FF] hover:bg-[#0077EE] text-white font-bold text-sm shadow-xs transition-colors cursor-pointer"
+                      className="w-full sm:w-auto px-6 py-3 rounded-xl bg-[#0088FF] hover:bg-[#0077EE] active:scale-95 text-white font-bold text-sm shadow-xs transition-all flex items-center justify-center gap-2 cursor-pointer"
                     >
-                      Submit Another Request
+                      <span>Submit Another Request</span>
+                      <ArrowRight className="w-4 h-4" />
                     </button>
+
+                    <a
+                      href={telLink}
+                      className="w-full sm:w-auto px-5 py-3 rounded-xl border border-slate-200 hover:bg-slate-50 active:scale-95 text-slate-700 font-bold text-sm transition-all flex items-center justify-center gap-2"
+                    >
+                      <Phone className="w-4 h-4 text-[#0088FF]" />
+                      <span>Urgent? Call {phone}</span>
+                    </a>
                   </div>
                 </div>
               ) : (
