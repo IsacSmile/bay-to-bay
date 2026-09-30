@@ -66,6 +66,11 @@ export const Footer: React.FC<FooterProps> = ({
                   </Link>
                 </li>
                 <li>
+                  <Link href="/contact" className="hover:text-white transition-colors">
+                    Contact us
+                  </Link>
+                </li>
+                <li>
                   <Link href="/#faq" className="hover:text-white transition-colors">
                     Frequently asked questions
                   </Link>
@@ -96,12 +101,12 @@ export const Footer: React.FC<FooterProps> = ({
                   </a>
                 </p>
                 <p>
-                  <a
-                    href="#quote"
+                  <Link
+                    href="/contact"
                     className="hover:text-white transition-colors inline-block"
                   >
                     Request a quote
-                  </a>
+                  </Link>
                 </p>
               </div>
             </div>

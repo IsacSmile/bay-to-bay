@@ -79,6 +79,7 @@ export const Navbar: React.FC<NavbarProps> = ({ phone = "705-978-3001" }) => {
   const isServices = pathname === "/services";
   const isServiceAreas = pathname === "/service-areas" || pathname === "/services-areas";
   const isAbout = pathname === "/about" || pathname === "/about-us";
+  const isContact = pathname === "/contact";
   const isSubPage = pathname !== "/";
 
   const menuItems: MenuItem[] = [
@@ -120,7 +121,7 @@ export const Navbar: React.FC<NavbarProps> = ({ phone = "705-978-3001" }) => {
     {
       title: "Contact",
       subtitle: "Get in touch with our dispatch",
-      href: "#quote",
+      href: "/contact",
       icon: Mail,
       hasArrow: true,
     },
@@ -188,12 +189,16 @@ export const Navbar: React.FC<NavbarProps> = ({ phone = "705-978-3001" }) => {
           >
             About
           </Link>
-          <a
-            href="#quote"
-            className="hover:text-[#0088FF] transition-colors py-1"
+          <Link
+            href="/contact"
+            className={
+              isContact
+                ? "text-[#0088FF] font-extrabold border-b-2 border-[#0088FF] pb-1"
+                : "hover:text-[#0088FF] transition-colors py-1"
+            }
           >
             Contact
-          </a>
+          </Link>
         </nav>
 
         {/* Right: Actions + Corner Tagline Block */}

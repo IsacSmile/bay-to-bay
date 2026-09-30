@@ -65,12 +65,19 @@ export async function POST(req: Request) {
 
     const data = validationResult.data;
 
+    // Combine service and preferredRun into cargo and additionalInfo details
+    const selectedService = data.service || data.typeOfGoods || null;
+    let fullAdditionalInfo = data.additionalInfo || "";
+    if (data.preferredRun && data.preferredRun.trim() !== "") {
+      fullAdditionalInfo = `Preferred Run: ${data.preferredRun}\n\n${fullAdditionalInfo}`;
+    }
+
     // 4. Prisma Database Insertion
     const newQuote = await (prisma as any).quoteRequest.create({
       data: {
         fullName: data.fullName,
         companyName: data.companyName || null,
-        phone: data.phone,
+        phone: data.phone && data.phone.trim() !== "" ? data.phone : "Not provided",
         email: data.email,
         pickupLocation: data.pickupLocation,
         deliveryLocation: data.deliveryLocation,
@@ -78,8 +85,8 @@ export async function POST(req: Request) {
         frequency: data.frequency,
         packageCount: data.packageCount || null,
         approxWeight: data.approxWeight || null,
-        typeOfGoods: data.typeOfGoods || null,
-        additionalInfo: data.additionalInfo || null,
+        typeOfGoods: selectedService,
+        additionalInfo: fullAdditionalInfo || null,
         status: "new",
       },
     });
