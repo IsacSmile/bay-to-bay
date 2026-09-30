@@ -10,6 +10,16 @@ export function SmoothScrollProvider({ children }: { children: React.ReactNode }
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
+    // Completely disable and remove Lenis when on admin routes so native mouse wheel scroll works flawlessly
+    if (pathname?.startsWith("/admin")) {
+      if (lenisRef.current) {
+        lenisRef.current.destroy();
+        lenisRef.current = null;
+      }
+      document.documentElement.classList.remove("lenis", "lenis-smooth", "lenis-scrolling", "lenis-stopped");
+      return;
+    }
+
     const { gsap, ScrollTrigger } = getGSAP();
 
     // Initialize Lenis smooth scroll engine
@@ -60,8 +70,9 @@ export function SmoothScrollProvider({ children }: { children: React.ReactNode }
       gsap.ticker.remove(updateTicker);
       lenis.destroy();
       lenisRef.current = null;
+      document.documentElement.classList.remove("lenis", "lenis-smooth", "lenis-scrolling", "lenis-stopped");
     };
-  }, []);
+  }, [pathname]);
 
   // Whenever route (pathname) changes, reset scroll to top immediately if no anchor hash is specified
   useEffect(() => {

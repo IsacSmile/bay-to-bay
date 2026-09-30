@@ -125,7 +125,10 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
   ];
 
   return (
-    <div className="flex h-screen w-full bg-[#F6F9FC] overflow-hidden text-slate-800">
+    <div
+      className="flex h-screen w-full bg-[#F6F9FC] overflow-hidden text-slate-800"
+      data-lenis-prevent
+    >
       
       {/* Mobile Top Bar (< md) */}
       <div className="md:hidden fixed top-0 left-0 right-0 z-40 bg-[#071A2E] text-white px-4 py-3 flex items-center justify-between shadow-md border-b border-slate-800">
@@ -185,7 +188,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
         </div>
 
         {/* Sidebar Navigation Items */}
-        <div className="px-3 py-6 space-y-1.5 flex-1 overflow-y-auto">
+        <div className="px-3 py-6 space-y-1.5 flex-1 overflow-y-auto overscroll-contain" data-lenis-prevent>
           <span className="px-3 text-[10px] font-black tracking-widest text-slate-400 uppercase block mb-2">
             MANAGEMENT TABS
           </span>
@@ -268,7 +271,11 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       </aside>
 
       {/* Main Content Area */}
-      <main className="flex-1 min-w-0 h-screen overflow-y-auto pt-14 md:pt-0">
+      <main
+        className="flex-1 min-w-0 h-screen overflow-y-auto pt-14 md:pt-0 overscroll-contain"
+        data-lenis-prevent
+        tabIndex={0}
+      >
         {children}
       </main>
 
