@@ -35,21 +35,13 @@ const MONTH_NAMES = [
 ];
 
 const SNOWFLAKES = [
-  { left: "3%", size: 14, duration: "4.2s", delay: "0s", opacity: 0.85, char: "❄" },
-  { left: "10%", size: 8, duration: "5.5s", delay: "1.0s", opacity: 0.9, char: "•" },
-  { left: "20%", size: 16, duration: "3.8s", delay: "0.3s", opacity: 0.75, char: "❄" },
-  { left: "31%", size: 9, duration: "4.9s", delay: "1.8s", opacity: 0.85, char: "•" },
-  { left: "42%", size: 15, duration: "4.0s", delay: "1.2s", opacity: 0.8, char: "❄" },
-  { left: "53%", size: 8, duration: "5.8s", delay: "0.1s", opacity: 0.9, char: "•" },
-  { left: "64%", size: 16, duration: "3.5s", delay: "2.2s", opacity: 0.85, char: "❄" },
-  { left: "76%", size: 10, duration: "4.6s", delay: "0.7s", opacity: 0.9, char: "•" },
-  { left: "87%", size: 14, duration: "5.1s", delay: "0.4s", opacity: 0.8, char: "❄" },
-  { left: "95%", size: 8, duration: "4.3s", delay: "2.7s", opacity: 0.9, char: "•" },
-  { left: "15%", size: 12, duration: "3.9s", delay: "2.9s", opacity: 0.8, char: "❄" },
-  { left: "37%", size: 14, duration: "4.7s", delay: "3.1s", opacity: 0.75, char: "❄" },
-  { left: "58%", size: 9, duration: "4.1s", delay: "2.5s", opacity: 0.9, char: "•" },
-  { left: "70%", size: 15, duration: "4.5s", delay: "3.4s", opacity: 0.8, char: "❄" },
-  { left: "83%", size: 8, duration: "5.2s", delay: "1.6s", opacity: 0.85, char: "•" },
+  { left: "4%", size: 9, duration: "4.5s", delay: "0s", opacity: 0.5, char: "❄" },
+  { left: "16%", size: 6, duration: "5.5s", delay: "1.0s", opacity: 0.6, char: "•" },
+  { left: "29%", size: 10, duration: "4.0s", delay: "0.3s", opacity: 0.5, char: "❄" },
+  { left: "45%", size: 6, duration: "5.0s", delay: "1.8s", opacity: 0.6, char: "•" },
+  { left: "62%", size: 9, duration: "4.2s", delay: "1.2s", opacity: 0.5, char: "❄" },
+  { left: "78%", size: 6, duration: "5.8s", delay: "0.1s", opacity: 0.6, char: "•" },
+  { left: "91%", size: 10, duration: "3.8s", delay: "2.2s", opacity: 0.5, char: "❄" },
 ];
 
 export const DatePicker: React.FC<DatePickerProps> = ({
@@ -235,24 +227,24 @@ export const DatePicker: React.FC<DatePickerProps> = ({
 
       {/* Popover Calendar */}
       {isOpen && (
-        <div className="absolute top-full left-0 mt-2 z-50 w-full sm:w-[320px] bg-white rounded-2xl border border-slate-200 shadow-xl p-4 animate-in fade-in zoom-in-95 duration-150 overflow-hidden">
+        <div className="absolute top-full left-0 mt-1.5 z-50 w-full sm:w-[268px] bg-white rounded-xl border border-slate-200/90 shadow-lg p-3 animate-in fade-in zoom-in-95 duration-150 overflow-hidden">
           
           {/* Animated Snowfall Layer */}
-          <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none z-0">
+          <div className="absolute inset-0 rounded-xl overflow-hidden pointer-events-none z-0">
             <style>{`
               @keyframes calendarSnowfall {
                 0% {
-                  transform: translateY(-12px) translateX(0) rotate(0deg);
+                  transform: translateY(-8px) translateX(0) rotate(0deg);
                   opacity: 0;
                 }
                 20% {
-                  opacity: 0.95;
+                  opacity: 0.9;
                 }
                 80% {
-                  opacity: 0.95;
+                  opacity: 0.9;
                 }
                 100% {
-                  transform: translateY(340px) translateX(16px) rotate(360deg);
+                  transform: translateY(280px) translateX(12px) rotate(360deg);
                   opacity: 0;
                 }
               }
@@ -261,7 +253,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
               <span
                 key={idx}
                 aria-hidden="true"
-                className="absolute text-[#0088FF]/50 select-none leading-none pointer-events-none drop-shadow-2xs"
+                className="absolute text-[#0088FF]/40 select-none leading-none pointer-events-none drop-shadow-2xs"
                 style={{
                   left: flake.left,
                   top: 0,
@@ -279,59 +271,59 @@ export const DatePicker: React.FC<DatePickerProps> = ({
           {/* Calendar Interactive Content (z-10) */}
           <div className="relative z-10">
             {/* Header Controls */}
-            <div className="flex items-center justify-between mb-3 pb-2 border-b border-slate-100">
+            <div className="flex items-center justify-between mb-2 pb-1.5 border-b border-slate-100">
               <button
                 type="button"
                 onClick={handlePrevMonth}
-                className="p-1.5 rounded-lg hover:bg-slate-100 text-slate-600 hover:text-slate-900 transition-colors cursor-pointer"
+                className="p-1 rounded-md hover:bg-slate-100 text-slate-500 hover:text-slate-800 transition-colors cursor-pointer"
                 title="Previous month"
               >
-                <ChevronLeft className="w-4 h-4" />
+                <ChevronLeft className="w-3.5 h-3.5" />
               </button>
-              <span className="font-extrabold text-sm text-[#071A2E] tracking-tight">
+              <span className="font-bold text-xs sm:text-[13px] text-[#071A2E] tracking-tight">
                 {MONTH_NAMES[viewMonth]} {viewYear}
               </span>
               <button
                 type="button"
                 onClick={handleNextMonth}
-                className="p-1.5 rounded-lg hover:bg-slate-100 text-slate-600 hover:text-slate-900 transition-colors cursor-pointer"
+                className="p-1 rounded-md hover:bg-slate-100 text-slate-500 hover:text-slate-800 transition-colors cursor-pointer"
                 title="Next month"
               >
-                <ChevronRight className="w-4 h-4" />
+                <ChevronRight className="w-3.5 h-3.5" />
               </button>
             </div>
 
             {/* Quick Select Chips */}
-            <div className="flex items-center gap-1.5 mb-3 overflow-x-auto pb-1 scrollbar-none">
+            <div className="flex items-center gap-1 mb-2 overflow-x-auto pb-0.5 scrollbar-none">
               <button
                 type="button"
                 onClick={() => handleQuickSelect("today")}
-                className="px-2.5 py-1 rounded-lg text-[11px] font-bold bg-slate-100 hover:bg-[#0088FF]/15 text-slate-700 hover:text-[#0088FF] transition-colors whitespace-nowrap cursor-pointer backdrop-blur-xs"
+                className="px-2 py-0.5 rounded-md text-[10px] font-semibold bg-slate-100 hover:bg-[#0088FF]/15 text-slate-700 hover:text-[#0088FF] transition-colors whitespace-nowrap cursor-pointer"
               >
                 Today
               </button>
               <button
                 type="button"
                 onClick={() => handleQuickSelect("tomorrow")}
-                className="px-2.5 py-1 rounded-lg text-[11px] font-bold bg-slate-100 hover:bg-[#0088FF]/15 text-slate-700 hover:text-[#0088FF] transition-colors whitespace-nowrap cursor-pointer backdrop-blur-xs"
+                className="px-2 py-0.5 rounded-md text-[10px] font-semibold bg-slate-100 hover:bg-[#0088FF]/15 text-slate-700 hover:text-[#0088FF] transition-colors whitespace-nowrap cursor-pointer"
               >
                 Tomorrow
               </button>
               <button
                 type="button"
                 onClick={() => handleQuickSelect("nextMonday")}
-                className="px-2.5 py-1 rounded-lg text-[11px] font-bold bg-slate-100 hover:bg-[#0088FF]/15 text-slate-700 hover:text-[#0088FF] transition-colors whitespace-nowrap cursor-pointer backdrop-blur-xs"
+                className="px-2 py-0.5 rounded-md text-[10px] font-semibold bg-slate-100 hover:bg-[#0088FF]/15 text-slate-700 hover:text-[#0088FF] transition-colors whitespace-nowrap cursor-pointer"
               >
                 Next Mon
               </button>
             </div>
 
             {/* Days of Week Header */}
-            <div className="grid grid-cols-7 gap-1 text-center mb-1">
+            <div className="grid grid-cols-7 gap-0.5 text-center mb-0.5">
               {DAYS_OF_WEEK.map((d) => (
                 <span
                   key={d}
-                  className="text-[11px] font-bold text-slate-400 uppercase tracking-wider py-1"
+                  className="text-[10px] font-bold text-slate-400 uppercase tracking-wider py-0.5"
                 >
                   {d}
                 </span>
@@ -339,10 +331,10 @@ export const DatePicker: React.FC<DatePickerProps> = ({
             </div>
 
             {/* Days Grid */}
-            <div className="grid grid-cols-7 gap-1 text-center">
+            <div className="grid grid-cols-7 gap-0.5 text-center">
               {/* Empty slots before first day of month */}
               {Array.from({ length: firstDayOfMonth }).map((_, i) => (
-                <div key={`empty-${i}`} className="h-8" />
+                <div key={`empty-${i}`} className="h-7 w-7" />
               ))}
 
               {/* Days of the month */}
@@ -359,11 +351,11 @@ export const DatePicker: React.FC<DatePickerProps> = ({
                     type="button"
                     disabled={isDisabled}
                     onClick={() => handleSelectDate(dateStr)}
-                    className={`h-8 rounded-xl text-xs font-semibold flex items-center justify-center transition-all duration-150 ${
+                    className={`h-7 w-7 sm:h-7.5 sm:w-7.5 mx-auto rounded-lg text-[11px] font-semibold flex items-center justify-center transition-all duration-150 ${
                       isDisabled
-                        ? "text-slate-300 cursor-not-allowed opacity-40 select-none"
+                        ? "text-slate-300 cursor-not-allowed opacity-35 select-none"
                         : isSelected
-                        ? "bg-[#0088FF] text-white font-extrabold shadow-sm scale-105"
+                        ? "bg-[#0088FF] text-white font-bold shadow-xs scale-105"
                         : isToday
                         ? "border border-[#0088FF]/60 text-[#0088FF] font-bold hover:bg-[#0088FF]/10 cursor-pointer"
                         : "text-slate-700 hover:bg-[#0088FF]/10 hover:text-[#0088FF] cursor-pointer"
@@ -376,12 +368,12 @@ export const DatePicker: React.FC<DatePickerProps> = ({
             </div>
 
             {/* Bottom Footer Note */}
-            <div className="mt-3 pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400">
+            <div className="mt-2 pt-1.5 border-t border-slate-100 flex items-center justify-between text-[10px] text-slate-400">
               <span>Pickup available Mon-Fri</span>
               <button
                 type="button"
                 onClick={() => setIsOpen(false)}
-                className="font-bold text-[#0088FF] hover:underline cursor-pointer"
+                className="font-bold text-[#0088FF] hover:underline cursor-pointer text-[10px]"
               >
                 Done
               </button>
