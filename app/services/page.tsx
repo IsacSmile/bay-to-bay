@@ -5,7 +5,6 @@ import { Check } from "lucide-react";
 import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
-import { ServiceHighlights } from "@/components/sections/ServiceHighlights";
 import { TwiceWeeklyRoute } from "@/components/sections/TwiceWeeklyRoute";
 import { QuoteCTA } from "@/components/sections/QuoteCTA";
 import { Footer } from "@/components/Footer";
@@ -142,9 +141,6 @@ export default async function ServicesPage() {
         subtext="Delivery services for the people and businesses that keep Ontario moving."
         isServicesPage
       />
-
-      {/* Service Highlights Bar */}
-      <ServiceHighlights />
 
       {/* Special Twice-Weekly Route (North Bay ↔ Hearst) */}
       <TwiceWeeklyRoute phone={contact.phone} />
