@@ -3,7 +3,7 @@ import { z } from "zod";
 export const QuoteFormSchema = z.object({
   fullName: z
     .string()
-    .min(2, "Full name is required"),
+    .min(1, "Full name is required"),
   companyName: z.string().optional().or(z.literal("")),
   phone: z.string().optional().or(z.literal("")),
   email: z
@@ -11,10 +11,10 @@ export const QuoteFormSchema = z.object({
     .email("Please enter a valid email address (e.g. name@company.ca)"),
   pickupLocation: z
     .string()
-    .min(2, "Pickup town or postal code is required"),
+    .min(1, "Pickup town or postal code is required"),
   deliveryLocation: z
     .string()
-    .min(2, "Delivery town or postal code is required"),
+    .min(1, "Delivery town or postal code is required"),
   preferredDate: z
     .string()
     .min(1, "Preferred pickup date is required"),
@@ -26,8 +26,9 @@ export const QuoteFormSchema = z.object({
   preferredRun: z.string().optional().or(z.literal("")),
   additionalInfo: z
     .string()
-    .min(2, "Package details are required"),
-  website_hp: z.string().optional().or(z.literal("")), // Honeypot field
+    .optional()
+    .or(z.literal("")),
+  website_hp: z.string().optional().or(z.literal("")),
 });
 
 export type QuoteFormData = z.infer<typeof QuoteFormSchema>;

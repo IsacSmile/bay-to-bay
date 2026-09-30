@@ -162,6 +162,13 @@ export default function AdminQuotesPage() {
 
   useEffect(() => {
     fetchData();
+
+    // Auto-poll every 5 seconds for new quotes
+    const interval = setInterval(() => {
+      fetchSilent();
+    }, 5000);
+
+    return () => clearInterval(interval);
   }, [statusFilter]);
 
   // Reset pagination when search or status filter changes
@@ -183,13 +190,33 @@ export default function AdminQuotesPage() {
     }
   }, [quotes]);
 
+  const fetchSilent = async () => {
+    try {
+      const query = statusFilter !== "all" ? `?status=${statusFilter}&_t=${Date.now()}` : `?_t=${Date.now()}`;
+      const res = await fetch(`/api/admin/quotes${query}`, {
+        cache: "no-store",
+        headers: { "Cache-Control": "no-cache", "Pragma": "no-cache" },
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setQuotes(data);
+      }
+    } catch {
+      // Background poll failure is silent
+    }
+  };
+
   const fetchData = async () => {
     setLoading(true);
     setFetchError(null);
     try {
+      const query = statusFilter !== "all" ? `?status=${statusFilter}&_t=${Date.now()}` : `?_t=${Date.now()}`;
       const [quotesRes, sectionRes] = await Promise.all([
-        fetch(`/api/admin/quotes${statusFilter !== "all" ? `?status=${statusFilter}` : ""}`),
-        fetch("/api/admin/quotes/section"),
+        fetch(`/api/admin/quotes${query}`, {
+          cache: "no-store",
+          headers: { "Cache-Control": "no-cache", "Pragma": "no-cache" },
+        }),
+        fetch(`/api/admin/quotes/section?_t=${Date.now()}`, { cache: "no-store" }),
       ]);
 
       if (quotesRes.ok) {
@@ -420,6 +447,16 @@ export default function AdminQuotesPage() {
           </div>
 
           <div className="flex items-center gap-2">
+            <button
+              onClick={() => fetchData()}
+              disabled={loading}
+              className="px-3 py-1.5 rounded-lg border border-slate-200/80 bg-white hover:bg-slate-50 text-slate-700 text-xs font-semibold flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer active:scale-95"
+              title="Refresh submissions list"
+            >
+              <RefreshCw className={`w-3.5 h-3.5 text-slate-500 ${loading ? "animate-spin text-[#0088FF]" : ""}`} />
+              <span>Refresh</span>
+            </button>
+
             <button
               onClick={handleExportCSV}
               disabled={filteredQuotes.length === 0}

@@ -7,9 +7,19 @@ import { sendQuoteNotification } from "@/lib/email";
 // Simple in-memory rate-limiter map: IP -> array of timestamps
 const rateLimitMap = new Map<string, number[]>();
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000; // 10 minutes
-const MAX_REQUESTS_PER_WINDOW = 5;
+const MAX_REQUESTS_PER_WINDOW = 50;
 
 function isRateLimited(ip: string): boolean {
+  // Never rate-limit localhost or private IPs
+  if (
+    ip === "127.0.0.1" ||
+    ip === "::1" ||
+    ip === "localhost" ||
+    process.env.NODE_ENV !== "production"
+  ) {
+    return false;
+  }
+
   const now = Date.now();
   const timestamps = rateLimitMap.get(ip) || [];
   
@@ -41,12 +51,6 @@ export async function POST(req: Request) {
     }
 
     const body = await req.json();
-
-    // 2. Honeypot Bot Protection: if honeypot field is filled, pretend to succeed silently
-    if (body.website_hp && String(body.website_hp).trim() !== "") {
-      console.warn("Honeypot triggered by bot submission, silently ignoring.");
-      return NextResponse.json({ success: true });
-    }
 
     // 3. Server-side Zod validation
     const validationResult = QuoteFormSchema.safeParse(body);

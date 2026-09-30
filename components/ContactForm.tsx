@@ -204,18 +204,6 @@ export const ContactForm: React.FC<ContactFormProps> = ({
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5" noValidate>
-                  
-                  {/* Honeypot anti-spam input */}
-                  <input
-                    type="text"
-                    name="website_hp"
-                    tabIndex={-1}
-                    autoComplete="off"
-                    value={formData.website_hp}
-                    onChange={(e) => setFormData({ ...formData, website_hp: e.target.value })}
-                    className="sr-only"
-                    aria-hidden="true"
-                  />
 
                   {/* Feedback Error Alert */}
                   {errorMessage && (

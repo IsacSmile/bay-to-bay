@@ -2,6 +2,9 @@ import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 // GET /api/admin/quotes - List all quote requests, ordered by `createdAt: desc`
 export async function GET(req: Request) {
   try {
@@ -14,7 +17,13 @@ export async function GET(req: Request) {
       where,
       orderBy: { createdAt: "desc" },
     });
-    return NextResponse.json(quotes);
+    return NextResponse.json(quotes, {
+      headers: {
+        "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+        "Pragma": "no-cache",
+        "Expires": "0",
+      },
+    });
   } catch (error) {
     console.error("Failed to fetch quote requests:", error);
     return NextResponse.json(
