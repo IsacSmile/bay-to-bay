@@ -6,6 +6,7 @@ import { TwiceWeeklyRoute } from "@/components/sections/TwiceWeeklyRoute";
 import { CoverageTeaser } from "@/components/sections/CoverageTeaser";
 import { HowItWorks } from "@/components/HowItWorks";
 import { QuoteForm } from "@/components/QuoteForm";
+import { SeasonsCommitment } from "@/components/sections/SeasonsCommitment";
 import { FAQ } from "@/components/FAQ";
 import { QuoteCTA } from "@/components/sections/QuoteCTA";
 import { Footer } from "@/components/Footer";
@@ -57,6 +58,9 @@ export default async function HomePage() {
 
       {/* Quote Request Form */}
       <QuoteForm content={quoteContent} contact={contact} />
+
+      {/* Rooted in Ontario - Every season, The same commitment banner */}
+      <SeasonsCommitment />
 
       {/* FAQ Section */}
       <FAQ content={faqContent} items={faqItems} />
