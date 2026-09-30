@@ -667,10 +667,9 @@ async function main() {
   await (prisma as any).quoteCtaContent.upsert({
     where: { id: "default" },
     update: {
-      eyebrow: "LET'S MOVE YOUR BUSINESS FORWARD",
-      heading: "Your route starts here.",
-      description:
-        "Call or email Bay to Bay Express to discuss a delivery, recurring route, or pharmacy supply shipment.",
+      eyebrow: "YOUR GOODS. OUR COMMITMENT.",
+      heading: "Let’s get your delivery moving.",
+      description: "Tell us where it needs to go. We’ll confirm the details.",
       phoneText: "705-978-3001",
       emailLabel: "Email us",
       emailAddress: "baytobayexpress@gmail.com",
@@ -678,10 +677,9 @@ async function main() {
     },
     create: {
       id: "default",
-      eyebrow: "LET'S MOVE YOUR BUSINESS FORWARD",
-      heading: "Your route starts here.",
-      description:
-        "Call or email Bay to Bay Express to discuss a delivery, recurring route, or pharmacy supply shipment.",
+      eyebrow: "YOUR GOODS. OUR COMMITMENT.",
+      heading: "Let’s get your delivery moving.",
+      description: "Tell us where it needs to go. We’ll confirm the details.",
       phoneText: "705-978-3001",
       emailLabel: "Email us",
       emailAddress: "baytobayexpress@gmail.com",

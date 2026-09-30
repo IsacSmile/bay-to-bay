@@ -590,36 +590,6 @@ export const ServiceAreasCoverage: React.FC<ServiceAreasCoverageProps> = ({
 
         </div>
       </section>
-
-
-      {/* ========================================================
-          SECTION 3: DELIVERY CTA STRIP (Let's get your delivery moving)
-         ======================================================== */}
-      <section className="w-full bg-[#062B54] text-white py-12 sm:py-14 border-t border-slate-800/60">
-        <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-            <div>
-              <span className="text-[#4A8EF4] text-xs font-black tracking-widest uppercase block mb-2">
-                YOUR GOODS. OUR COMMITMENT.
-              </span>
-              <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight">
-                Let’s get your delivery moving.
-              </h2>
-              <p className="text-slate-300 text-xs sm:text-sm font-normal mt-1.5 leading-relaxed">
-                Tell us where it needs to go. We’ll confirm the details.
-              </p>
-            </div>
-
-            <a
-              href="#quote"
-              className="bg-[#007DF2] hover:bg-[#006ED6] text-white font-bold text-sm px-6 py-3.5 rounded-lg shadow-sm inline-flex items-center justify-center gap-2 transition-colors shrink-0 self-start md:self-center"
-            >
-              <span>Request a Quote</span>
-              <span>→</span>
-            </a>
-          </div>
-        </div>
-      </section>
     </div>
   );
 };

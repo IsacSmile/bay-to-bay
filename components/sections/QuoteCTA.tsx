@@ -1,105 +1,52 @@
 import React from "react";
-import Image from "next/image";
-import { Phone, Mail } from "lucide-react";
-import { EyebrowLabel } from "@/components/ui/EyebrowLabel";
+import Link from "next/link";
 import { QuoteCtaData, DEFAULT_QUOTE_CTA } from "@/lib/prisma";
-import { SnowfallEffect } from "@/components/hero/SnowfallEffect";
 
 export interface QuoteCTAProps {
   content?: QuoteCtaData;
+  buttonHref?: string;
   phone?: string;
   email?: string;
 }
 
-export const QuoteCTA: React.FC<QuoteCTAProps> = ({ content, phone, email }) => {
+export const QuoteCTA: React.FC<QuoteCTAProps> = ({
+  content,
+  buttonHref = "#quote",
+}) => {
   const data: QuoteCtaData = content || DEFAULT_QUOTE_CTA;
-  const activePhone = phone || data.phoneText || "705-978-3001";
-  const activeEmail = email || data.emailAddress || "baytobayexpress@gmail.com";
-  const telLink = `tel:${activePhone.replace(/[^\d+]/g, "")}`;
-  const mailtoLink = `mailto:${activeEmail}`;
+  const eyebrow = data.eyebrow || "YOUR GOODS. OUR COMMITMENT.";
+  const heading = data.heading || "Let’s get your delivery moving.";
+  const description =
+    data.description || "Tell us where it needs to go. We’ll confirm the details.";
 
   return (
     <section
       id="quote-cta"
-      className="w-full bg-[#05172A] text-white py-14 sm:py-16 lg:py-20 relative overflow-hidden border-t border-slate-800/80"
+      className="w-full bg-[#062B54] text-white py-12 sm:py-14 border-t border-slate-800/60"
     >
-      {/* Animated Snowfall Effect Overlay */}
-      <SnowfallEffect />
-
-      {/* Background Curved Vector Arc Pattern (matching reference image) */}
-      <svg
-        className="absolute inset-0 w-full h-full pointer-events-none opacity-25 z-0"
-        viewBox="0 0 1440 320"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        preserveAspectRatio="none"
-      >
-        <path
-          d="M-100 350 C400 150 900 100 1540 220"
-          stroke="#00A8FF"
-          strokeWidth="1.5"
-          strokeDasharray="4 4"
-        />
-        <path
-          d="M-50 380 C450 180 950 120 1590 240"
-          stroke="#00A8FF"
-          strokeWidth="1"
-        />
-      </svg>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          
-          {/* Left Content Block */}
-          <div className="lg:col-span-6 space-y-3 sm:space-y-4">
-            <EyebrowLabel text={data.eyebrow} />
-
-            <h2 className="text-3xl sm:text-4xl lg:text-[44px] xl:text-[48px] font-black tracking-tight text-white leading-[1.1]">
-              {data.heading}
+      <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+          {/* Left Text Block */}
+          <div>
+            <span className="text-[#4A8EF4] text-xs font-black tracking-widest uppercase block mb-2">
+              {eyebrow}
+            </span>
+            <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight">
+              {heading}
             </h2>
-
-            <p className="text-slate-300 text-xs sm:text-sm lg:text-[15px] leading-relaxed max-w-lg font-normal">
-              {data.description}
+            <p className="text-slate-300 text-xs sm:text-sm font-normal mt-1.5 leading-relaxed">
+              {description}
             </p>
           </div>
 
-          {/* Right Action Controls & Brand Mark */}
-          <div className="lg:col-span-6 flex flex-wrap items-center justify-start lg:justify-end gap-3 sm:gap-4 pt-2 lg:pt-0">
-            
-            {/* Glowing Cyan Phone Button */}
-            <a
-              href={telLink}
-              className="inline-flex items-center gap-2.5 px-5 py-2.5 sm:px-6 sm:py-3 rounded-full bg-[#00A8FF] hover:bg-[#0096E6] text-[#05172A] font-extrabold text-xs sm:text-sm tracking-tight transition-all duration-200 shadow-[0_0_22px_rgba(0,168,255,0.45)] hover:shadow-[0_0_30px_rgba(0,168,255,0.65)] hover:scale-[1.02] cursor-pointer"
-            >
-              <Phone className="w-4 h-4 text-[#05172A] shrink-0" />
-              <span>{activePhone}</span>
-            </a>
-
-            {/* Dark Outlined Email Button */}
-            <a
-              href={mailtoLink}
-              className="inline-flex items-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 rounded-full bg-[#09223D]/90 hover:bg-[#0C2B4E] border border-slate-700/80 hover:border-slate-500 text-white font-bold text-xs sm:text-sm transition-all duration-200 shadow-xs hover:scale-[1.02] cursor-pointer"
-            >
-              <Mail className="w-4 h-4 text-slate-300 shrink-0" />
-              <span>{data.emailLabel || "Email us"}</span>
-            </a>
-
-            {/* Vertical Divider */}
-            <div className="hidden sm:block w-[1px] h-9 bg-slate-700/60 mx-1 shrink-0" />
-
-            {/* Brand Logo & Text */}
-            <div className="flex items-center pl-1 sm:pl-0">
-              <Image
-                src="/approved-logo.png"
-                alt="Bay to Bay Express Inc. Northern Ontario Courier Service"
-                width={160}
-                height={32}
-                className="h-8 w-auto object-contain bg-white/95 rounded-lg px-2.5 py-0.5 shrink-0"
-              />
-            </div>
-
-          </div>
-
+          {/* Right Action Button */}
+          <Link
+            href={buttonHref}
+            className="bg-[#007DF2] hover:bg-[#006ED6] text-white font-bold text-sm px-6 py-3.5 rounded-lg shadow-xs inline-flex items-center justify-center gap-2 transition-all duration-150 shrink-0 self-start md:self-center cursor-pointer"
+          >
+            <span>Request a Quote</span>
+            <span className="text-base leading-none">→</span>
+          </Link>
         </div>
       </div>
     </section>

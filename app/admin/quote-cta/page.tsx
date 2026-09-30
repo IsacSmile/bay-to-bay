@@ -15,10 +15,9 @@ interface QuoteCtaContent {
 
 export default function AdminQuoteCtaPage() {
   const [content, setContent] = useState<QuoteCtaContent>({
-    eyebrow: "LET'S MOVE YOUR BUSINESS FORWARD",
-    heading: "Your route starts here.",
-    description:
-      "Call or email Bay to Bay Express to discuss a delivery, recurring route, or pharmacy supply shipment.",
+    eyebrow: "YOUR GOODS. OUR COMMITMENT.",
+    heading: "Let’s get your delivery moving.",
+    description: "Tell us where it needs to go. We’ll confirm the details.",
     phoneText: "705-978-3001",
     emailLabel: "Email us",
     emailAddress: "baytobayexpress@gmail.com",
@@ -41,11 +40,10 @@ export default function AdminQuoteCtaPage() {
         const data = await res.json();
         if (data) {
           setContent({
-            eyebrow: data.eyebrow || "LET'S MOVE YOUR BUSINESS FORWARD",
-            heading: data.heading || "Your route starts here.",
+            eyebrow: data.eyebrow || "YOUR GOODS. OUR COMMITMENT.",
+            heading: data.heading || "Let’s get your delivery moving.",
             description:
-              data.description ||
-              "Call or email Bay to Bay Express to discuss a delivery, recurring route, or pharmacy supply shipment.",
+              data.description || "Tell us where it needs to go. We’ll confirm the details.",
             phoneText: data.phoneText || "705-978-3001",
             emailLabel: data.emailLabel || "Email us",
             emailAddress: data.emailAddress || "baytobayexpress@gmail.com",

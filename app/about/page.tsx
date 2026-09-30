@@ -3,8 +3,9 @@ import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { Navbar } from "@/components/Navbar";
 import { AboutContent } from "@/components/sections/AboutContent";
 import { Footer } from "@/components/Footer";
+import { QuoteCTA } from "@/components/sections/QuoteCTA";
 import { JsonLd } from "@/components/JsonLd";
-import { getAnnouncementData, getContactData } from "@/lib/prisma";
+import { getAnnouncementData, getContactData, getQuoteCtaData } from "@/lib/prisma";
 
 export const metadata: Metadata = {
   title: "About Us | Bay to Bay Express Inc.",
@@ -21,6 +22,7 @@ export const metadata: Metadata = {
 export default async function AboutPage() {
   const announcement = await getAnnouncementData();
   const contact = await getContactData();
+  const quoteCtaContent = await getQuoteCtaData();
 
   return (
     <div className="min-h-screen flex flex-col bg-[#F6F9FC]">
@@ -37,6 +39,9 @@ export default async function AboutPage() {
       <main className="flex-1">
         <AboutContent phone={contact.phone} />
       </main>
+
+      {/* Quote Call-to-Action Strip */}
+      <QuoteCTA content={quoteCtaContent} buttonHref="/#quote" />
 
       {/* Footer */}
       <Footer phone={contact.phone} email={contact.email || undefined} />

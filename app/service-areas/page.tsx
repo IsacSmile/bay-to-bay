@@ -7,10 +7,12 @@ import { TwiceWeeklyRoute } from "@/components/sections/TwiceWeeklyRoute";
 import { ServiceAreasCoverage } from "@/components/sections/ServiceAreasCoverage";
 import { QuoteForm } from "@/components/QuoteForm";
 import { Footer } from "@/components/Footer";
+import { QuoteCTA } from "@/components/sections/QuoteCTA";
 import { JsonLd } from "@/components/JsonLd";
 import {
   getAnnouncementData,
   getContactData,
+  getQuoteCtaData,
   getQuoteFormSectionData,
   getRegionsData,
 } from "@/lib/prisma";
@@ -30,6 +32,7 @@ export const metadata: Metadata = {
 export default async function ServiceAreasPage() {
   const announcement = await getAnnouncementData();
   const contact = await getContactData();
+  const quoteCtaContent = await getQuoteCtaData();
   const quoteContent = await getQuoteFormSectionData();
   const regions = await getRegionsData();
 
@@ -72,6 +75,9 @@ export default async function ServiceAreasPage() {
       <div id="quote" className="scroll-mt-20">
         <QuoteForm content={quoteContent} contact={contact} />
       </div>
+
+      {/* Quote Call-to-Action Strip */}
+      <QuoteCTA content={quoteCtaContent} buttonHref="#quote" />
 
       {/* Footer */}
       <Footer phone={contact.phone} email={contact.email || undefined} />
