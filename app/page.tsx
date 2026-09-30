@@ -4,7 +4,6 @@ import { Hero } from "@/components/Hero";
 import { ServiceHighlights } from "@/components/sections/ServiceHighlights";
 import { TwiceWeeklyRoute } from "@/components/sections/TwiceWeeklyRoute";
 import { CoverageTeaser } from "@/components/sections/CoverageTeaser";
-import { WhoWeServe } from "@/components/WhoWeServe";
 import { HowItWorks } from "@/components/HowItWorks";
 import { QuoteForm } from "@/components/QuoteForm";
 import { FAQ } from "@/components/FAQ";
@@ -52,9 +51,6 @@ export default async function HomePage() {
 
       {/* Connecting North & South (Coverage Preview) */}
       <CoverageTeaser />
-
-      {/* Who We Serve */}
-      <WhoWeServe />
 
       {/* How It Works */}
       <HowItWorks />
