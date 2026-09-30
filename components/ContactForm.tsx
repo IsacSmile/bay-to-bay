@@ -185,22 +185,26 @@ export const ContactForm: React.FC<ContactFormProps> = ({
 
   return (
     <>
+      {/* ========================================================
+          HERO SECTION: LET'S TALK DELIVERY / REQUEST A QUOTE
+         ======================================================== */}
+      <section className="w-full bg-[#EBF4FA] border-b border-[#D5E5F2] pt-14 sm:pt-16 lg:pt-20 pb-14 sm:pb-16 lg:pb-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <span className="text-[#486581] text-xs sm:text-[13px] font-extrabold tracking-[0.16em] uppercase block mb-3">
+            LET&apos;S TALK DELIVERY
+          </span>
+          <h1 className="font-display text-4xl sm:text-5xl lg:text-[56px] font-black text-[#071A2E] tracking-tight leading-[1.08] mb-3.5">
+            Request a quote
+          </h1>
+          <p className="text-slate-600 text-sm sm:text-base lg:text-[17px] font-normal leading-relaxed max-w-2xl">
+            Tell us about your shipment. We&apos;ll review the details and confirm availability and pricing.
+          </p>
+        </div>
+      </section>
+
+      {/* Main 2-Column Form & Details Section */}
       <div className="w-full bg-[#F6F9FC] py-12 sm:py-16 lg:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          {/* Page Top Header */}
-          <div className="mb-10 sm:mb-12">
-            <span className="text-[#0284C7] text-xs font-black tracking-widest uppercase block mb-2">
-              LET&apos;S TALK DELIVERY
-            </span>
-            <h1 className="font-display text-3xl sm:text-4xl lg:text-[44px] font-black text-[#071A2E] tracking-tight leading-tight">
-              Request a quote
-            </h1>
-            <p className="text-slate-600 text-sm sm:text-base font-normal mt-2 max-w-2xl leading-relaxed">
-              Tell us about your shipment. We&apos;ll review the details and confirm availability and pricing.
-            </p>
-          </div>
-
           {/* Main 2-Column Layout */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-14 items-start">
             
