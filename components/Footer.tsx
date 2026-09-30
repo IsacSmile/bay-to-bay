@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { PrivacyEnquiriesModal } from "@/components/PrivacyEnquiriesModal";
+import { FooterSnowfall } from "@/components/footer/FooterSnowfall";
 
 interface FooterProps {
   phone?: string;
@@ -20,6 +21,9 @@ export const Footer: React.FC<FooterProps> = ({
   return (
     <>
       <footer id="contact" className="relative bg-[#06203B] text-slate-300 text-sm border-t border-[#092D52] overflow-hidden">
+        {/* Gentle atmospheric snowfall effect */}
+        <FooterSnowfall />
+
         <div className="relative z-10 max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 pt-14 sm:pt-16 pb-10 sm:pb-12">
           
           {/* Main 4-Column Grid */}
@@ -73,6 +77,11 @@ export const Footer: React.FC<FooterProps> = ({
                 <li>
                   <Link href="/#faq" className="hover:text-white transition-colors">
                     Frequently asked questions
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/admin" className="hover:text-white transition-colors">
+                    Admin panel
                   </Link>
                 </li>
               </ul>
@@ -154,7 +163,7 @@ export const Footer: React.FC<FooterProps> = ({
               </p>
             </div>
 
-            <div className="shrink-0">
+            <div className="shrink-0 flex items-center gap-3 sm:gap-4 flex-wrap">
               <button
                 type="button"
                 onClick={() => setIsPrivacyModalOpen(true)}
@@ -162,6 +171,17 @@ export const Footer: React.FC<FooterProps> = ({
               >
                 Privacy &amp; enquiries
               </button>
+              <span className="text-slate-600 hidden sm:inline" aria-hidden="true">•</span>
+              <Link
+                href="/admin"
+                className="text-slate-400 hover:text-white transition-colors text-xs inline-flex items-center gap-1.5"
+                title="Admin Panel"
+              >
+                <svg className="w-3.5 h-3.5 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+                <span>Admin Login</span>
+              </Link>
             </div>
           </div>
 
