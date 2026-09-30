@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Phone, Mail, MapPin, ArrowRight, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
 import { PrivacyEnquiriesModal } from "@/components/PrivacyEnquiriesModal";
+import { CustomSelect } from "@/components/ui/CustomSelect";
 
 export interface ContactFormProps {
   phone?: string;
@@ -497,17 +498,12 @@ export const ContactForm: React.FC<ContactFormProps> = ({
                       <label className="block text-xs font-bold text-slate-800 mb-1.5">
                         Delivery frequency
                       </label>
-                      <select
+                      <CustomSelect
                         value={formData.frequency}
-                        onChange={(e) => setFormData({ ...formData, frequency: e.target.value })}
-                        className="w-full px-3.5 py-2.5 sm:py-3 rounded-xl border border-slate-300 text-sm font-medium text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0088FF]/30 focus:border-[#0088FF] transition-all bg-white cursor-pointer"
-                      >
-                        {FREQUENCY_OPTIONS.map((opt) => (
-                          <option key={opt} value={opt}>
-                            {opt}
-                          </option>
-                        ))}
-                      </select>
+                        onChange={(val) => setFormData({ ...formData, frequency: val })}
+                        options={FREQUENCY_OPTIONS}
+                        placeholder="Select frequency"
+                      />
                     </div>
                   </div>
 
@@ -524,19 +520,16 @@ export const ContactForm: React.FC<ContactFormProps> = ({
                         </span>
                       )}
                     </div>
-                    <select
+                    <CustomSelect
                       value={formData.service}
-                      onFocus={handleServicesDropdownOpen}
-                      onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                      className="w-full px-3.5 py-2.5 sm:py-3 rounded-xl border border-slate-300 text-sm font-medium text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0088FF]/30 focus:border-[#0088FF] transition-all bg-white cursor-pointer"
-                    >
-                      <option value="">Please select</option>
-                      {services.map((svc) => (
-                        <option key={svc.id || svc.title} value={svc.title}>
-                          {svc.title}
-                        </option>
-                      ))}
-                    </select>
+                      onChange={(val) => setFormData({ ...formData, service: val })}
+                      onOpen={handleServicesDropdownOpen}
+                      options={[
+                        { value: "", label: "Please select" },
+                        ...services.map((svc) => ({ value: svc.title, label: svc.title })),
+                      ]}
+                      placeholder="Please select"
+                    />
                   </div>
 
                   {/* Row 6: Package Details */}
@@ -567,17 +560,12 @@ export const ContactForm: React.FC<ContactFormProps> = ({
                     <label className="block text-xs font-bold text-slate-800 mb-1.5">
                       Preferred North Bay–Hearst run
                     </label>
-                    <select
+                    <CustomSelect
                       value={formData.preferredRun}
-                      onChange={(e) => setFormData({ ...formData, preferredRun: e.target.value })}
-                      className="w-full px-3.5 py-2.5 sm:py-3 rounded-xl border border-slate-300 text-sm font-medium text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0088FF]/30 focus:border-[#0088FF] transition-all bg-white cursor-pointer"
-                    >
-                      {RUN_OPTIONS.map((opt) => (
-                        <option key={opt} value={opt}>
-                          {opt}
-                        </option>
-                      ))}
-                    </select>
+                      onChange={(val) => setFormData({ ...formData, preferredRun: val })}
+                      options={RUN_OPTIONS}
+                      placeholder="Choose a run"
+                    />
                     <p className="text-[11px] sm:text-xs text-slate-500 mt-1.5 font-normal">
                       Choose a matching preferred date above. Availability and pickup times are confirmed with your quote.
                     </p>
