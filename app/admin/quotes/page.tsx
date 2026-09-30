@@ -373,7 +373,7 @@ export default function AdminQuotesPage() {
 
   // Copy contact info string helper
   const handleCopyContact = (q: QuoteRequestItem) => {
-    const text = `Customer: ${q.fullName}\nCompany: ${q.companyName || "N/A"}\nPhone: ${q.phone}\nEmail: ${q.email}\nRoute: ${q.pickupLocation} -> ${q.deliveryLocation}\nPickup Date: ${q.preferredDate}`;
+    const text = `Customer: ${q.fullName}\nCompany: ${q.companyName || "N/A"}\nPhone: ${q.phone}\nEmail: ${q.email}\nRoute: ${q.pickupLocation} -> ${q.deliveryLocation}\nPickup Date: ${q.preferredDate}\nFrequency: ${q.frequency}${q.typeOfGoods ? `\nService: ${q.typeOfGoods}` : ""}${q.additionalInfo ? `\n\nDetails:\n${q.additionalInfo}` : ""}`;
     navigator.clipboard.writeText(text);
     setCopiedInfo(true);
     setTimeout(() => setCopiedInfo(false), 2500);
@@ -628,6 +628,11 @@ export default function AdminQuotesPage() {
                           <p className="text-[11px] text-slate-500 font-normal">
                             {item.companyName || "Personal Shipment"}
                           </p>
+                          {item.typeOfGoods && (
+                            <span className="inline-block mt-0.5 text-[11px] font-semibold text-[#0088FF]">
+                              Service: {item.typeOfGoods}
+                            </span>
+                          )}
                         </div>
                         <span className="text-[10px] font-medium text-slate-400">
                           {new Date(item.createdAt).toLocaleDateString("en-CA", {
@@ -727,6 +732,11 @@ export default function AdminQuotesPage() {
                                 <div className="text-slate-500 text-xs font-normal">
                                   {item.companyName || "Personal Shipment"}
                                 </div>
+                                {item.typeOfGoods && (
+                                  <div className="text-[#0088FF] text-[11px] font-semibold mt-0.5">
+                                    Service: {item.typeOfGoods}
+                                  </div>
+                                )}
                               </div>
                             </div>
                           </td>
@@ -1064,9 +1074,13 @@ export default function AdminQuotesPage() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-slate-800">
                     <div className="flex items-center gap-2 font-medium">
                       <Phone className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-                      <a href={`tel:${selectedQuote.phone}`} className="hover:underline hover:text-brand-blue">
-                        {selectedQuote.phone}
-                      </a>
+                      {selectedQuote.phone && selectedQuote.phone !== "Not provided" ? (
+                        <a href={`tel:${selectedQuote.phone}`} className="hover:underline hover:text-brand-blue">
+                          {selectedQuote.phone}
+                        </a>
+                      ) : (
+                        <span className="text-slate-400 italic">No phone provided</span>
+                      )}
                     </div>
                     <div className="flex items-center gap-2 font-medium">
                       <Mail className="w-3.5 h-3.5 text-slate-400 shrink-0" />
@@ -1109,7 +1123,7 @@ export default function AdminQuotesPage() {
                 {/* Cargo Details */}
                 <div className="bg-slate-50/70 p-3.5 rounded-xl border border-slate-100 space-y-2">
                   <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">
-                    Cargo Specifications
+                    Cargo & Service Details
                   </span>
                   <div className="grid grid-cols-3 gap-2">
                     <div>
@@ -1125,8 +1139,8 @@ export default function AdminQuotesPage() {
                       </span>
                     </div>
                     <div>
-                      <span className="text-slate-400 text-[11px] block">Type of Goods</span>
-                      <span className="font-semibold text-slate-800 truncate block">
+                      <span className="text-slate-400 text-[11px] block">Service / Goods</span>
+                      <span className="font-semibold text-slate-800 truncate block" title={selectedQuote.typeOfGoods || undefined}>
                         {selectedQuote.typeOfGoods || "N/A"}
                       </span>
                     </div>

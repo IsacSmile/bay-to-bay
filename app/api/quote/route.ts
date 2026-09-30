@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { QuoteFormSchema } from "@/lib/schemas/quote";
 import { sendQuoteNotification } from "@/lib/email";
@@ -96,6 +97,12 @@ export async function POST(req: Request) {
       await sendQuoteNotification(newQuote);
     } catch (emailErr) {
       console.error("[Quote API]: Non-fatal error in sendQuoteNotification:", emailErr);
+    }
+
+    try {
+      revalidatePath("/admin/quotes");
+    } catch (revalidateErr) {
+      // Ignore if called in non-page context
     }
 
     return NextResponse.json({ success: true, id: newQuote.id }, { status: 201 });
