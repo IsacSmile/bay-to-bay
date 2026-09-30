@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { Navbar } from "@/components/Navbar";
 import { ContactForm } from "@/components/ContactForm";
+import { OurOffices } from "@/components/sections/OurOffices";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
 import {
@@ -50,6 +51,9 @@ export default async function ContactPage() {
           email={contact.email || undefined}
           initialServices={formattedServices}
         />
+
+        {/* Our Offices (North Bay & Hearst) */}
+        <OurOffices phone={contact.phone} />
       </main>
 
 
