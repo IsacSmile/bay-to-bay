@@ -80,7 +80,7 @@ export const Footer: React.FC<FooterProps> = ({
                   </Link>
                 </li>
                 <li>
-                  <Link href="/admin" className="hover:text-white transition-colors">
+                  <Link href="/admin" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
                     Admin panel
                   </Link>
                 </li>
@@ -174,6 +174,8 @@ export const Footer: React.FC<FooterProps> = ({
               <span className="text-slate-600 hidden sm:inline" aria-hidden="true">•</span>
               <Link
                 href="/admin"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-slate-400 hover:text-white transition-colors text-xs inline-flex items-center gap-1.5"
                 title="Admin Panel"
               >
