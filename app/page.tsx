@@ -59,11 +59,11 @@ export default async function HomePage() {
       {/* Quote Request Form */}
       <QuoteForm content={quoteContent} contact={contact} />
 
-      {/* Rooted in Ontario - Every season, The same commitment banner */}
-      <SeasonsCommitment />
-
       {/* FAQ Section */}
       <FAQ content={faqContent} items={faqItems} />
+
+      {/* Rooted in Ontario - Every season, The same commitment banner */}
+      <SeasonsCommitment />
 
       {/* Quote Call-to-Action */}
       <QuoteCTA content={quoteCtaContent} phone={contact.phone} email={contact.email || undefined} />
