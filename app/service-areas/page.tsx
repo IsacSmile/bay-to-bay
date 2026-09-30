@@ -12,6 +12,7 @@ import {
   getAnnouncementData,
   getContactData,
   getQuoteFormSectionData,
+  getRegionsData,
 } from "@/lib/prisma";
 
 export const metadata: Metadata = {
@@ -30,6 +31,7 @@ export default async function ServiceAreasPage() {
   const announcement = await getAnnouncementData();
   const contact = await getContactData();
   const quoteContent = await getQuoteFormSectionData();
+  const regions = await getRegionsData();
 
   return (
     <div className="min-h-screen flex flex-col bg-[#F6F9FC]">
@@ -64,7 +66,7 @@ export default async function ServiceAreasPage() {
       <TwiceWeeklyRoute phone={contact.phone} />
 
       {/* Explore Our Coverage, Our Offices & Delivery CTA Banner */}
-      <ServiceAreasCoverage phone={contact.phone} />
+      <ServiceAreasCoverage phone={contact.phone} regions={regions} />
 
       {/* Quote Request Form */}
       <div id="quote" className="scroll-mt-20">

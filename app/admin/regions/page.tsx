@@ -237,7 +237,7 @@ export default function AdminRegionsPage() {
   };
 
   const handleDeleteStop = async (regionId: string, stopId: string, stopName: string) => {
-    if (!confirm(`Remove "${stopName}" from this region's route stops?`)) return;
+    if (!confirm(`Remove "${stopName}" from this region's service communities / stops?`)) return;
 
     setSaving(true);
     try {
@@ -245,13 +245,13 @@ export default function AdminRegionsPage() {
         method: "DELETE",
       });
       if (res.ok) {
-        setMessage({ type: "success", text: "Route stop removed" });
+        setMessage({ type: "success", text: `Location "${stopName}" removed successfully!` });
         fetchRegions();
       } else {
-        setMessage({ type: "error", text: "Failed to remove route stop" });
+        setMessage({ type: "error", text: "Failed to remove location" });
       }
     } catch (e) {
-      setMessage({ type: "error", text: "Error removing route stop" });
+      setMessage({ type: "error", text: "Error removing location" });
     } finally {
       setSaving(false);
     }
@@ -400,21 +400,21 @@ export default function AdminRegionsPage() {
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-brand-blue">
                         <MapPin className="w-4 h-4" />
-                        <span>Nested Route Stops ({region.stops.length})</span>
+                        <span>Service Communities &amp; Stops ({region.stops.length})</span>
                       </div>
 
                       <button
                         onClick={() => handleOpenStopModal(region.id)}
-                        className="inline-flex items-center gap-1.5 bg-brand-blue hover:bg-[#0878D1] text-white text-xs font-extrabold px-3 py-1.5 rounded-lg transition-colors"
+                        className="inline-flex items-center gap-1.5 bg-brand-blue hover:bg-[#0878D1] text-white text-xs font-extrabold px-3 py-1.5 rounded-lg transition-colors cursor-pointer"
                       >
                         <Plus className="w-3.5 h-3.5" />
-                        <span>Add Stop</span>
+                        <span>Add Location</span>
                       </button>
                     </div>
 
                     {region.stops.length === 0 ? (
                       <div className="p-6 text-center border-2 border-dashed border-slate-200 rounded-xl text-xs text-slate-400">
-                        No route stops added to this region yet.
+                        No service community locations added to this region yet. Click "+ Add Location" to add one.
                       </div>
                     ) : (
                       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
@@ -599,7 +599,7 @@ export default function AdminRegionsPage() {
           <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-5">
             <div className="flex items-center justify-between border-b pb-3">
               <h3 className="text-lg font-black text-[#071A2E]">
-                {editingStop ? "Edit Route Stop" : "Add Route Stop"}
+                {editingStop ? "Edit Location / Community" : "Add Location / Community"}
               </h3>
               <button
                 onClick={() => setShowStopModal(false)}
@@ -689,7 +689,7 @@ export default function AdminRegionsPage() {
                   disabled={saving}
                   className="px-5 py-2 text-xs font-black text-white bg-brand-blue hover:bg-[#0878D1] rounded-xl shadow-xs"
                 >
-                  {saving ? "Saving..." : "Save Stop"}
+                  {saving ? "Saving..." : editingStop ? "Update Location" : "Add Location"}
                 </button>
               </div>
             </form>

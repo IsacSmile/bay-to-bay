@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { ArrowUpRight, ArrowRight, MapPin, ZoomIn, ZoomOut, Phone } from "lucide-react";
+import { RegionItemData, DEFAULT_REGIONS } from "@/lib/prisma";
 
 interface CommunityItem {
   name: string;
@@ -11,52 +12,107 @@ interface CommunityItem {
   region: "northern" | "gta";
 }
 
-const ALL_COMMUNITIES: CommunityItem[] = [
-  // Northern Ontario (Green dots along Hwy 11 corridor & North)
-  { name: "Longlac", x: 44.0, y: 28.2, region: "northern" },
-  { name: "Hearst", x: 48.5, y: 28.9, region: "northern" },
-  { name: "Kapuskasing", x: 50.5, y: 31.0, region: "northern" },
-  { name: "Timmins", x: 52.6, y: 33.0, region: "northern" },
-  { name: "Cochrane", x: 52.4, y: 35.9, region: "northern" },
-  { name: "Kirkland Lake", x: 54.3, y: 39.8, region: "northern" },
-  { name: "Sudbury", x: 52.8, y: 51.1, region: "northern" },
-  { name: "North Bay", x: 55.2, y: 52.3, region: "northern" },
-  { name: "Parry Sound", x: 54.3, y: 58.9, region: "northern" },
+const KNOWN_COORDINATES: Record<string, { x: number; y: number }> = {
+  // Northern Ontario
+  "Longlac": { x: 44.0, y: 28.2 },
+  "Hearst": { x: 48.5, y: 28.9 },
+  "Kapuskasing": { x: 50.5, y: 31.0 },
+  "Timmins": { x: 52.6, y: 33.0 },
+  "Cochrane": { x: 52.4, y: 35.9 },
+  "Kirkland Lake": { x: 54.3, y: 39.8 },
+  "Sudbury": { x: 52.8, y: 51.1 },
+  "North Bay": { x: 55.2, y: 52.3 },
+  "Parry Sound": { x: 54.3, y: 58.9 },
 
-  // GTA & Surrounding (Blue dots clustered around Lake Ontario)
-  { name: "Newmarket", x: 55.0, y: 65.5, region: "gta" },
-  { name: "Richmond Hill", x: 55.2, y: 66.8, region: "gta" },
-  { name: "Vaughan", x: 54.8, y: 67.5, region: "gta" },
-  { name: "Markham", x: 55.8, y: 67.8, region: "gta" },
-  { name: "Pickering", x: 56.5, y: 68.2, region: "gta" },
-  { name: "Ajax", x: 57.0, y: 68.5, region: "gta" },
-  { name: "Whitby", x: 57.5, y: 68.5, region: "gta" },
-  { name: "Oshawa", x: 58.0, y: 68.6, region: "gta" },
-  { name: "Brampton", x: 54.0, y: 68.5, region: "gta" },
-  { name: "Toronto", x: 55.3, y: 69.4, region: "gta" },
-  { name: "Mississauga", x: 54.5, y: 70.5, region: "gta" },
-  { name: "Oakville", x: 53.8, y: 71.8, region: "gta" },
-  { name: "Burlington", x: 53.2, y: 72.8, region: "gta" },
-  { name: "Hamilton", x: 52.5, y: 73.5, region: "gta" },
-];
-
-// Balanced two-column lists matching the user's reference image exactly
-const NORTHERN_COL1 = ["North Bay", "Timmins", "Kapuskasing", "Longlac", "Sudbury"];
-const NORTHERN_COL2 = ["Kirkland Lake", "Cochrane", "Hearst", "Parry Sound"];
-
-const GTA_COL1 = ["Toronto", "Brampton", "Markham", "Oakville", "Oshawa", "Ajax", "Hamilton"];
-const GTA_COL2 = ["Mississauga", "Vaughan", "Richmond Hill", "Burlington", "Pickering", "Whitby", "Newmarket"];
+  // GTA & Surrounding
+  "Newmarket": { x: 55.0, y: 65.5 },
+  "Richmond Hill": { x: 55.2, y: 66.8 },
+  "Vaughan": { x: 54.8, y: 67.5 },
+  "Markham": { x: 55.8, y: 67.8 },
+  "Pickering": { x: 56.5, y: 68.2 },
+  "Ajax": { x: 57.0, y: 68.5 },
+  "Whitby": { x: 57.5, y: 68.5 },
+  "Oshawa": { x: 58.0, y: 68.6 },
+  "Brampton": { x: 54.0, y: 68.5 },
+  "Toronto": { x: 55.3, y: 69.4 },
+  "Mississauga": { x: 54.5, y: 70.5 },
+  "Oakville": { x: 53.8, y: 71.8 },
+  "Burlington": { x: 53.2, y: 72.8 },
+  "Hamilton": { x: 52.5, y: 73.5 },
+};
 
 interface ServiceAreasCoverageProps {
   phone?: string;
+  regions?: RegionItemData[];
 }
 
 export const ServiceAreasCoverage: React.FC<ServiceAreasCoverageProps> = ({
   phone = "705-978-3001",
+  regions,
 }) => {
   const [filter, setFilter] = useState<"all" | "northern" | "gta">("all");
   const [activeCommunity, setActiveCommunity] = useState<string | null>(null);
   const [zoomLevel, setZoomLevel] = useState<number>(1);
+
+  // Dynamic Region Resolution
+  const northernRegion =
+    regions?.find(
+      (r) =>
+        r.slug === "northern-ontario" ||
+        r.name.toLowerCase().includes("northern")
+    ) || DEFAULT_REGIONS[0];
+
+  const gtaRegion =
+    regions?.find(
+      (r) =>
+        r.slug === "gta-surrounding-areas" ||
+        r.name.toLowerCase().includes("gta")
+    ) || DEFAULT_REGIONS[1];
+
+  const northernStops =
+    northernRegion?.stops && northernRegion.stops.length > 0
+      ? northernRegion.stops
+      : DEFAULT_REGIONS[0].stops;
+
+  const gtaStops =
+    gtaRegion?.stops && gtaRegion.stops.length > 0
+      ? gtaRegion.stops
+      : DEFAULT_REGIONS[1].stops;
+
+  // Dynamically split into two balanced columns
+  const northernCol1 = northernStops.slice(0, Math.ceil(northernStops.length / 2));
+  const northernCol2 = northernStops.slice(Math.ceil(northernStops.length / 2));
+
+  const gtaCol1 = gtaStops.slice(0, Math.ceil(gtaStops.length / 2));
+  const gtaCol2 = gtaStops.slice(Math.ceil(gtaStops.length / 2));
+
+  // Dynamic Map Markers
+  const allCommunities: CommunityItem[] = [
+    ...northernStops.map((s) => ({
+      name: s.name,
+      x:
+        typeof s.xPercent === "number" && s.xPercent > 0
+          ? s.xPercent
+          : (KNOWN_COORDINATES[s.name]?.x ?? 52.0),
+      y:
+        typeof s.yPercent === "number" && s.yPercent > 0
+          ? s.yPercent
+          : (KNOWN_COORDINATES[s.name]?.y ?? 45.0),
+      region: "northern" as const,
+    })),
+    ...gtaStops.map((s) => ({
+      name: s.name,
+      x:
+        typeof s.xPercent === "number" && s.xPercent > 0
+          ? s.xPercent
+          : (KNOWN_COORDINATES[s.name]?.x ?? 55.0),
+      y:
+        typeof s.yPercent === "number" && s.yPercent > 0
+          ? s.yPercent
+          : (KNOWN_COORDINATES[s.name]?.y ?? 68.0),
+      region: "gta" as const,
+    })),
+  ];
 
   // Auto-scroll and auto-filter when navigated via hash (e.g. #gta-coverage or #northern-coverage)
   React.useEffect(() => {
@@ -94,7 +150,7 @@ export const ServiceAreasCoverage: React.FC<ServiceAreasCoverageProps> = ({
     return () => window.removeEventListener("hashchange", handleHash);
   }, []);
 
-  const visibleMarkers = ALL_COMMUNITIES.filter((item) => {
+  const visibleMarkers = allCommunities.filter((item) => {
     if (filter === "all") return true;
     return item.region === filter;
   });
@@ -290,20 +346,20 @@ export const ServiceAreasCoverage: React.FC<ServiceAreasCoverageProps> = ({
                   OUR SERVICE COMMUNITIES
                 </span>
                 <h3 className="font-display text-2xl sm:text-[26px] font-black text-[#071A2E] tracking-tight mb-6">
-                  Northern Ontario
+                  {northernRegion.name}
                 </h3>
 
                 <div className="grid grid-cols-2 gap-x-6 gap-y-3.5 text-xs sm:text-sm font-bold text-[#071A2E]">
                   {/* Left Column */}
                   <div className="flex flex-col gap-3.5">
-                    {NORTHERN_COL1.map((city) => (
+                    {northernCol1.map((stop) => (
                       <a
-                        key={city}
+                        key={stop.id || stop.name}
                         href="#quote"
-                        onClick={() => setActiveCommunity(city)}
+                        onClick={() => setActiveCommunity(stop.name)}
                         className="group flex items-center justify-between py-1 border-b border-slate-100 hover:text-[#0088FF] transition-colors"
                       >
-                        <span>{city}</span>
+                        <span>{stop.name}</span>
                         <ArrowUpRight className="w-3.5 h-3.5 text-[#0088FF] opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
                       </a>
                     ))}
@@ -311,14 +367,14 @@ export const ServiceAreasCoverage: React.FC<ServiceAreasCoverageProps> = ({
 
                   {/* Right Column */}
                   <div className="flex flex-col gap-3.5">
-                    {NORTHERN_COL2.map((city) => (
+                    {northernCol2.map((stop) => (
                       <a
-                        key={city}
+                        key={stop.id || stop.name}
                         href="#quote"
-                        onClick={() => setActiveCommunity(city)}
+                        onClick={() => setActiveCommunity(stop.name)}
                         className="group flex items-center justify-between py-1 border-b border-slate-100 hover:text-[#0088FF] transition-colors"
                       >
-                        <span>{city}</span>
+                        <span>{stop.name}</span>
                         <ArrowUpRight className="w-3.5 h-3.5 text-[#0088FF] opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
                       </a>
                     ))}
@@ -346,20 +402,20 @@ export const ServiceAreasCoverage: React.FC<ServiceAreasCoverageProps> = ({
                   OUR SERVICE COMMUNITIES
                 </span>
                 <h3 className="font-display text-2xl sm:text-[26px] font-black text-[#071A2E] tracking-tight mb-6">
-                  GTA &amp; Surrounding Areas
+                  {gtaRegion.name}
                 </h3>
 
                 <div className="grid grid-cols-2 gap-x-6 gap-y-3.5 text-xs sm:text-sm font-bold text-[#071A2E]">
                   {/* Left Column */}
                   <div className="flex flex-col gap-3.5">
-                    {GTA_COL1.map((city) => (
+                    {gtaCol1.map((stop) => (
                       <a
-                        key={city}
+                        key={stop.id || stop.name}
                         href="#quote"
-                        onClick={() => setActiveCommunity(city)}
+                        onClick={() => setActiveCommunity(stop.name)}
                         className="group flex items-center justify-between py-1 border-b border-slate-100 hover:text-[#0088FF] transition-colors"
                       >
-                        <span>{city}</span>
+                        <span>{stop.name}</span>
                         <ArrowUpRight className="w-3.5 h-3.5 text-[#0088FF] opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
                       </a>
                     ))}
@@ -367,14 +423,14 @@ export const ServiceAreasCoverage: React.FC<ServiceAreasCoverageProps> = ({
 
                   {/* Right Column */}
                   <div className="flex flex-col gap-3.5">
-                    {GTA_COL2.map((city) => (
+                    {gtaCol2.map((stop) => (
                       <a
-                        key={city}
+                        key={stop.id || stop.name}
                         href="#quote"
-                        onClick={() => setActiveCommunity(city)}
+                        onClick={() => setActiveCommunity(stop.name)}
                         className="group flex items-center justify-between py-1 border-b border-slate-100 hover:text-[#0088FF] transition-colors"
                       >
-                        <span>{city}</span>
+                        <span>{stop.name}</span>
                         <ArrowUpRight className="w-3.5 h-3.5 text-[#0088FF] opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
                       </a>
                     ))}

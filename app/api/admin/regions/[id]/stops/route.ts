@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 
 export async function POST(
@@ -8,33 +9,46 @@ export async function POST(
   try {
     const regionId = params.id;
     const body = await req.json();
-    const { stopNumber, name, isStart, isEnd, order, xPercent, yPercent } = body;
+    const { name, isStart, isEnd, xPercent, yPercent } = body;
 
-    if (!stopNumber || !name) {
+    if (!name || !name.trim()) {
       return NextResponse.json(
-        { error: "stopNumber and name are required" },
+        { error: "Location / Community name is required" },
         { status: 400 }
       );
     }
+
+    const currentCount = await (prisma as any).heroRouteStop.count({
+      where: { regionId },
+    });
+
+    const nextOrder = body.order ? Number(body.order) : currentCount + 1;
+    const stopNumber = body.stopNumber || String(nextOrder).padStart(2, "0");
 
     const stop = await (prisma as any).heroRouteStop.create({
       data: {
         routeId: "default",
         regionId,
         stopNumber,
-        name,
+        name: name.trim(),
         isStart: !!isStart,
         isEnd: !!isEnd,
-        order: Number(order) || 1,
-        xPercent: typeof xPercent === "number" ? xPercent : 0,
-        yPercent: typeof yPercent === "number" ? yPercent : 0,
+        order: nextOrder,
+        xPercent: typeof xPercent === "number" ? xPercent : 50,
+        yPercent: typeof yPercent === "number" ? yPercent : 50,
       },
     });
+
+    try {
+      revalidatePath("/service-areas");
+      revalidatePath("/");
+      revalidatePath("/admin/regions");
+    } catch (e) {}
 
     return NextResponse.json(stop, { status: 201 });
   } catch (error) {
     console.error("POST /api/admin/regions/[id]/stops error:", error);
-    return NextResponse.json({ error: "Failed to create route stop" }, { status: 500 });
+    return NextResponse.json({ error: "Failed to create location / stop" }, { status: 500 });
   }
 }
 
@@ -54,7 +68,7 @@ export async function PUT(
       where: { id: stopId },
       data: {
         ...(stopNumber !== undefined && { stopNumber }),
-        ...(name !== undefined && { name }),
+        ...(name !== undefined && { name: name.trim() }),
         ...(isStart !== undefined && { isStart }),
         ...(isEnd !== undefined && { isEnd }),
         ...(order !== undefined && { order: Number(order) }),
@@ -63,10 +77,16 @@ export async function PUT(
       },
     });
 
+    try {
+      revalidatePath("/service-areas");
+      revalidatePath("/");
+      revalidatePath("/admin/regions");
+    } catch (e) {}
+
     return NextResponse.json(updatedStop);
   } catch (error) {
     console.error("PUT /api/admin/regions/[id]/stops error:", error);
-    return NextResponse.json({ error: "Failed to update route stop" }, { status: 500 });
+    return NextResponse.json({ error: "Failed to update location / stop" }, { status: 500 });
   }
 }
 
@@ -86,9 +106,15 @@ export async function DELETE(
       where: { id: stopId },
     });
 
+    try {
+      revalidatePath("/service-areas");
+      revalidatePath("/");
+      revalidatePath("/admin/regions");
+    } catch (e) {}
+
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("DELETE /api/admin/regions/[id]/stops error:", error);
-    return NextResponse.json({ error: "Failed to delete route stop" }, { status: 500 });
+    return NextResponse.json({ error: "Failed to delete location / stop" }, { status: 500 });
   }
 }
