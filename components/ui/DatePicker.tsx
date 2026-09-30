@@ -189,17 +189,17 @@ export const DatePicker: React.FC<DatePickerProps> = ({
   return (
     <div
       ref={containerRef}
-      className={`relative w-full ${isOpen ? "z-40" : "z-10"} ${className}`}
+      className={`relative w-full ${isOpen ? "z-50" : "z-20"} ${className}`}
     >
-      {/* Trigger Box */}
+      {/* Trigger Box - Click anywhere to open calendar */}
       <div
         onClick={() => setIsOpen(!isOpen)}
-        className={`w-full px-3.5 py-2.5 sm:py-3 rounded-xl border text-sm font-medium bg-white flex items-center justify-between cursor-pointer transition-all duration-150 select-none ${
+        className={`w-full px-3.5 py-2.5 sm:py-3 rounded-xl border text-sm font-medium bg-white flex items-center justify-between cursor-pointer transition-all duration-150 select-none shadow-2xs ${
           error
-            ? "border-rose-400 focus:border-rose-500 ring-1 ring-rose-200 text-rose-900"
+            ? "border-rose-400 focus:border-rose-500 ring-2 ring-rose-200 text-rose-900"
             : isOpen
-            ? "border-brand-blue ring-2 ring-brand-blue/30 text-slate-900 shadow-xs"
-            : "border-slate-200/90 hover:border-slate-300 text-slate-800"
+            ? "border-[#0088FF] ring-2 ring-[#0088FF]/25 text-slate-900 shadow-xs"
+            : "border-slate-300 hover:border-slate-400 text-slate-800"
         }`}
         tabIndex={0}
         onKeyDown={(e) => {
@@ -215,7 +215,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
         <span className={value ? "text-slate-900 font-semibold" : "text-slate-400 font-normal"}>
           {value ? getFormattedDisplayDate(value) : placeholder}
         </span>
-        <div className="flex items-center gap-1.5 shrink-0 text-slate-400 group-hover:text-brand-blue transition-colors">
+        <div className="flex items-center gap-1.5 shrink-0 text-slate-400">
           {value && (
             <button
               type="button"
@@ -229,7 +229,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
               <X className="w-3.5 h-3.5" />
             </button>
           )}
-          <CalendarIcon className={`w-4 h-4 transition-colors ${isOpen || value ? "text-brand-blue" : "text-slate-400"}`} />
+          <CalendarIcon className={`w-4 h-4 transition-colors ${isOpen || value ? "text-[#0088FF]" : "text-slate-400"}`} />
         </div>
       </div>
 
@@ -261,7 +261,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
               <span
                 key={idx}
                 aria-hidden="true"
-                className="absolute text-brand-blue/70 select-none leading-none pointer-events-none drop-shadow-2xs"
+                className="absolute text-[#0088FF]/50 select-none leading-none pointer-events-none drop-shadow-2xs"
                 style={{
                   left: flake.left,
                   top: 0,
@@ -283,7 +283,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
               <button
                 type="button"
                 onClick={handlePrevMonth}
-                className="p-1.5 rounded-lg hover:bg-slate-100/90 text-slate-600 hover:text-slate-900 transition-colors cursor-pointer"
+                className="p-1.5 rounded-lg hover:bg-slate-100 text-slate-600 hover:text-slate-900 transition-colors cursor-pointer"
                 title="Previous month"
               >
                 <ChevronLeft className="w-4 h-4" />
@@ -294,7 +294,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
               <button
                 type="button"
                 onClick={handleNextMonth}
-                className="p-1.5 rounded-lg hover:bg-slate-100/90 text-slate-600 hover:text-slate-900 transition-colors cursor-pointer"
+                className="p-1.5 rounded-lg hover:bg-slate-100 text-slate-600 hover:text-slate-900 transition-colors cursor-pointer"
                 title="Next month"
               >
                 <ChevronRight className="w-4 h-4" />
@@ -306,21 +306,21 @@ export const DatePicker: React.FC<DatePickerProps> = ({
               <button
                 type="button"
                 onClick={() => handleQuickSelect("today")}
-                className="px-2.5 py-1 rounded-lg text-[11px] font-bold bg-slate-100/90 hover:bg-brand-blue/15 text-slate-700 hover:text-brand-blue transition-colors whitespace-nowrap cursor-pointer backdrop-blur-xs"
+                className="px-2.5 py-1 rounded-lg text-[11px] font-bold bg-slate-100 hover:bg-[#0088FF]/15 text-slate-700 hover:text-[#0088FF] transition-colors whitespace-nowrap cursor-pointer backdrop-blur-xs"
               >
                 Today
               </button>
               <button
                 type="button"
                 onClick={() => handleQuickSelect("tomorrow")}
-                className="px-2.5 py-1 rounded-lg text-[11px] font-bold bg-slate-100/90 hover:bg-brand-blue/15 text-slate-700 hover:text-brand-blue transition-colors whitespace-nowrap cursor-pointer backdrop-blur-xs"
+                className="px-2.5 py-1 rounded-lg text-[11px] font-bold bg-slate-100 hover:bg-[#0088FF]/15 text-slate-700 hover:text-[#0088FF] transition-colors whitespace-nowrap cursor-pointer backdrop-blur-xs"
               >
                 Tomorrow
               </button>
               <button
                 type="button"
                 onClick={() => handleQuickSelect("nextMonday")}
-                className="px-2.5 py-1 rounded-lg text-[11px] font-bold bg-slate-100/90 hover:bg-brand-blue/15 text-slate-700 hover:text-brand-blue transition-colors whitespace-nowrap cursor-pointer backdrop-blur-xs"
+                className="px-2.5 py-1 rounded-lg text-[11px] font-bold bg-slate-100 hover:bg-[#0088FF]/15 text-slate-700 hover:text-[#0088FF] transition-colors whitespace-nowrap cursor-pointer backdrop-blur-xs"
               >
                 Next Mon
               </button>
@@ -363,10 +363,10 @@ export const DatePicker: React.FC<DatePickerProps> = ({
                       isDisabled
                         ? "text-slate-300 cursor-not-allowed opacity-40 select-none"
                         : isSelected
-                        ? "bg-brand-blue text-white font-extrabold shadow-sm scale-105"
+                        ? "bg-[#0088FF] text-white font-extrabold shadow-sm scale-105"
                         : isToday
-                        ? "border border-brand-blue/60 text-brand-blue font-bold hover:bg-brand-blue/10 cursor-pointer"
-                        : "text-slate-700 hover:bg-blue-50/80 hover:text-brand-blue cursor-pointer"
+                        ? "border border-[#0088FF]/60 text-[#0088FF] font-bold hover:bg-[#0088FF]/10 cursor-pointer"
+                        : "text-slate-700 hover:bg-[#0088FF]/10 hover:text-[#0088FF] cursor-pointer"
                     }`}
                   >
                     {day}
@@ -381,7 +381,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
               <button
                 type="button"
                 onClick={() => setIsOpen(false)}
-                className="font-bold text-slate-500 hover:text-slate-800 transition-colors cursor-pointer"
+                className="font-bold text-[#0088FF] hover:underline cursor-pointer"
               >
                 Done
               </button>

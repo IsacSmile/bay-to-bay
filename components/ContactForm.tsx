@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Phone, Mail, MapPin, ArrowRight, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
 import { PrivacyEnquiriesModal } from "@/components/PrivacyEnquiriesModal";
 import { CustomSelect } from "@/components/ui/CustomSelect";
+import { DatePicker } from "@/components/ui/DatePicker";
 
 export interface ContactFormProps {
   phone?: string;
@@ -477,17 +478,14 @@ export const ContactForm: React.FC<ContactFormProps> = ({
                       <label className="block text-xs font-bold text-slate-800 mb-1.5">
                         Preferred date <span className="text-[#0088FF]">*</span>
                       </label>
-                      <input
-                        type="date"
-                        required
+                      <DatePicker
                         value={formData.preferredDate}
-                        onChange={(e) => {
-                          setFormData({ ...formData, preferredDate: e.target.value });
+                        onChange={(val) => {
+                          setFormData({ ...formData, preferredDate: val });
                           if (fieldErrors.preferredDate) setFieldErrors({ ...fieldErrors, preferredDate: "" });
                         }}
-                        className={`w-full px-3.5 py-2.5 sm:py-3 rounded-xl border text-sm font-medium text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0088FF]/30 transition-all bg-white ${
-                          fieldErrors.preferredDate ? "border-rose-400 bg-rose-50/20" : "border-slate-300 focus:border-[#0088FF]"
-                        }`}
+                        error={fieldErrors.preferredDate}
+                        placeholder="Select preferred date"
                       />
                       {fieldErrors.preferredDate && (
                         <p className="text-xs text-rose-600 mt-1 font-medium">{fieldErrors.preferredDate}</p>
