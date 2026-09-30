@@ -5,6 +5,7 @@ import { ServiceHighlights } from "@/components/sections/ServiceHighlights";
 import { TwiceWeeklyRoute } from "@/components/sections/TwiceWeeklyRoute";
 import { CoverageTeaser } from "@/components/sections/CoverageTeaser";
 import { HowItWorks } from "@/components/HowItWorks";
+import { OurOffices } from "@/components/sections/OurOffices";
 import { QuoteForm } from "@/components/QuoteForm";
 import { SeasonsCommitment } from "@/components/sections/SeasonsCommitment";
 import { FAQ } from "@/components/FAQ";
@@ -55,6 +56,9 @@ export default async function HomePage() {
 
       {/* How It Works */}
       <HowItWorks />
+
+      {/* Our Offices (North Bay & Hearst) */}
+      <OurOffices phone={contact.phone} />
 
       {/* Quote Request Form */}
       <QuoteForm content={quoteContent} contact={contact} />
