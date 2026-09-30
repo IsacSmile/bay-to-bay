@@ -25,6 +25,13 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://baytobayexpress.com"),
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+    shortcut: "/icon.svg",
+    apple: "/icon.svg",
+  },
   title: {
     default: "Northern Ontario Courier & Delivery Services | Bay to Bay Express",
     template: "%s | Bay to Bay Express Inc.",

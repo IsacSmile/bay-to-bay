@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06203B" />
+      <stop offset="100%" stop-color="#083058" />
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00A8FF" />
+      <stop offset="100%" stop-color="#0066FF" />
+    </linearGradient>
+    <linearGradient id="cyan" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38BDF8" />
+      <stop offset="100%" stop-color="#7DD3FC" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Rounded Squircle Background -->
+  <rect width="512" height="512" rx="112" fill="url(#bg)" />
+
+  <!-- Subtle Inner Border Frame -->
+  <rect x="12" y="12" width="488" height="488" rx="100" fill="none" stroke="#0088FF" stroke-opacity="0.25" stroke-width="8" />
+
+  <!-- Speed Trail Motion Lines -->
+  <path d="M70 216 H170" stroke="url(#cyan)" stroke-width="18" stroke-linecap="round" opacity="0.6" />
+  <path d="M45 256 H155" stroke="url(#accent)" stroke-width="22" stroke-linecap="round" />
+  <path d="M80 296 H175" stroke="url(#cyan)" stroke-width="18" stroke-linecap="round" opacity="0.6" />
+
+  <!-- Main Express Delivery Van Silhouette -->
+  <g filter="url(#glow)">
+    <!-- Main Body Base -->
+    <path d="M175 170 H335 C345 170 355 175 362 184 L415 248 C422 256 426 266 426 277 V330 C426 342 416 352 404 352 H175 C163 352 153 342 153 330 V192 C153 180 163 170 175 170 Z" fill="#FFFFFF" />
+
+    <!-- Front Windshield -->
+    <path d="M342 192 H328 V252 H395 L358 204 C354 198 348 192 342 192 Z" fill="url(#bg)" />
+
+    <!-- Side Window Accent -->
+    <path d="M265 192 H314 V252 H265 V192 Z" fill="url(#bg)" />
+
+    <!-- Express Forward Arrow Motif on Side Door -->
+    <path d="M195 210 L235 240 L195 270 V252 H175 V228 H195 V210 Z" fill="url(#accent)" />
+
+    <!-- Wheels Base -->
+    <!-- Rear Wheel -->
+    <circle cx="230" cy="352" r="42" fill="#06203B" stroke="#FFFFFF" stroke-width="8" />
+    <circle cx="230" cy="352" r="18" fill="url(#accent)" />
+
+    <!-- Front Wheel -->
+    <circle cx="360" cy="352" r="42" fill="#06203B" stroke="#FFFFFF" stroke-width="8" />
+    <circle cx="360" cy="352" r="18" fill="url(#accent)" />
+  </g>
+
+  <!-- Glowing Headlight Beam -->
+  <path d="M426 290 L475 282 V314 L426 306 Z" fill="url(#cyan)" opacity="0.85" />
+</svg>
