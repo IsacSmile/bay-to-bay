@@ -2,7 +2,6 @@ import { Metadata } from "next";
 import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
-import { ServiceHighlights } from "@/components/sections/ServiceHighlights";
 import { TwiceWeeklyRoute } from "@/components/sections/TwiceWeeklyRoute";
 import { ServiceAreasCoverage } from "@/components/sections/ServiceAreasCoverage";
 import { Footer } from "@/components/Footer";
@@ -58,9 +57,6 @@ export default async function ServiceAreasPage() {
         exploreHref="#route"
         exploreText="View Route Schedule"
       />
-
-      {/* Service Highlights Bar */}
-      <ServiceHighlights />
 
       {/* Special Twice-Weekly Route (North Bay ↔ Hearst) */}
       <TwiceWeeklyRoute phone={contact.phone} />
