@@ -139,9 +139,9 @@ export const Navbar: React.FC<NavbarProps> = ({ phone = "705-978-3001" }) => {
           <Image
             src="/approved-logo.png"
             alt="Bay to Bay Express Inc. Northern Ontario Courier"
-            width={240}
-            height={44}
-            className="h-10 sm:h-12 w-auto object-contain"
+            width={288}
+            height={58}
+            className="h-12 sm:h-[58px] w-auto object-contain"
             priority
           />
         </Link>
@@ -258,9 +258,9 @@ export const Navbar: React.FC<NavbarProps> = ({ phone = "705-978-3001" }) => {
                 <Image
                   src="/approved-logo.png"
                   alt="Bay to Bay Express Inc."
-                  width={180}
-                  height={34}
-                  className="h-8 w-auto object-contain"
+                  width={216}
+                  height={40}
+                  className="h-[38px] w-auto object-contain"
                 />
               </Link>
 
