@@ -7,14 +7,12 @@ import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { ServiceHighlights } from "@/components/sections/ServiceHighlights";
 import { TwiceWeeklyRoute } from "@/components/sections/TwiceWeeklyRoute";
-import { QuoteForm } from "@/components/QuoteForm";
 import { QuoteCTA } from "@/components/sections/QuoteCTA";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
 import {
   getAnnouncementData,
   getContactData,
-  getQuoteFormSectionData,
   getQuoteCtaData,
 } from "@/lib/prisma";
 
@@ -124,7 +122,6 @@ const TIME_SENSITIVE_CARDS = [
 export default async function ServicesPage() {
   const announcement = await getAnnouncementData();
   const contact = await getContactData();
-  const quoteContent = await getQuoteFormSectionData();
   const quoteCtaContent = await getQuoteCtaData();
 
   return (
@@ -222,7 +219,7 @@ export default async function ServicesPage() {
 
                     {/* Action link */}
                     <a
-                      href="#quote"
+                      href="/#quote"
                       className="text-[#0284C7] hover:text-[#006ED6] font-bold text-xs sm:text-sm inline-flex items-center gap-1 group transition-colors self-start"
                     >
                       <span>{service.action}</span>
@@ -291,7 +288,7 @@ export default async function ServicesPage() {
 
             <div className="mt-4">
               <a
-                href="#quote"
+                href="/#quote"
                 className="text-[#0284C7] hover:text-[#006ED6] font-bold text-xs sm:text-sm inline-flex items-center gap-1 group transition-colors"
               >
                 <span>Discuss your delivery</span>
@@ -303,14 +300,10 @@ export default async function ServicesPage() {
         </div>
       </section>
 
-      {/* Quote Request Form */}
-      <div id="quote" className="scroll-mt-20">
-        <QuoteForm content={quoteContent} contact={contact} />
-      </div>
-
       {/* Quote Call-to-Action Strip */}
       <QuoteCTA
         content={quoteCtaContent}
+        buttonHref="/#quote"
         phone={contact.phone}
         email={contact.email || undefined}
       />
