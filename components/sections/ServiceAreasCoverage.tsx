@@ -355,7 +355,7 @@ export const ServiceAreasCoverage: React.FC<ServiceAreasCoverageProps> = ({
                     {northernCol1.map((stop) => (
                       <a
                         key={stop.id || stop.name}
-                        href="#quote"
+                        href="/#quote"
                         onClick={() => setActiveCommunity(stop.name)}
                         className="group flex items-center justify-between py-1 border-b border-slate-100 hover:text-[#0088FF] transition-colors"
                       >
@@ -370,7 +370,7 @@ export const ServiceAreasCoverage: React.FC<ServiceAreasCoverageProps> = ({
                     {northernCol2.map((stop) => (
                       <a
                         key={stop.id || stop.name}
-                        href="#quote"
+                        href="/#quote"
                         onClick={() => setActiveCommunity(stop.name)}
                         className="group flex items-center justify-between py-1 border-b border-slate-100 hover:text-[#0088FF] transition-colors"
                       >
@@ -411,7 +411,7 @@ export const ServiceAreasCoverage: React.FC<ServiceAreasCoverageProps> = ({
                     {gtaCol1.map((stop) => (
                       <a
                         key={stop.id || stop.name}
-                        href="#quote"
+                        href="/#quote"
                         onClick={() => setActiveCommunity(stop.name)}
                         className="group flex items-center justify-between py-1 border-b border-slate-100 hover:text-[#0088FF] transition-colors"
                       >
@@ -426,7 +426,7 @@ export const ServiceAreasCoverage: React.FC<ServiceAreasCoverageProps> = ({
                     {gtaCol2.map((stop) => (
                       <a
                         key={stop.id || stop.name}
-                        href="#quote"
+                        href="/#quote"
                         onClick={() => setActiveCommunity(stop.name)}
                         className="group flex items-center justify-between py-1 border-b border-slate-100 hover:text-[#0088FF] transition-colors"
                       >
@@ -453,7 +453,7 @@ export const ServiceAreasCoverage: React.FC<ServiceAreasCoverageProps> = ({
             </div>
 
             <a
-              href="#quote"
+              href="/#quote"
               className="bg-[#0088FF] hover:bg-[#0077EE] text-white font-extrabold text-sm px-6 py-3.5 rounded-xl shadow-xs inline-flex items-center justify-center gap-2 transition-colors shrink-0"
             >
               <span>Check Your Route</span>
