@@ -88,22 +88,14 @@ export const QuoteCTA: React.FC<QuoteCTAProps> = ({ content, phone, email }) => 
             <div className="hidden sm:block w-[1px] h-9 bg-slate-700/60 mx-1 shrink-0" />
 
             {/* Brand Logo & Text */}
-            <div className="flex items-center gap-2.5 pl-1 sm:pl-0">
+            <div className="flex items-center pl-1 sm:pl-0">
               <Image
-                src="/bay-to-bay-logo.webp"
+                src="/approved-logo.png"
                 alt="Bay to Bay Express Inc. Northern Ontario Courier Service"
-                width={32}
+                width={160}
                 height={32}
-                className="h-8 w-8 object-contain shrink-0"
+                className="h-8 w-auto object-contain bg-white/95 rounded-lg px-2.5 py-0.5 shrink-0"
               />
-              <div className="flex flex-col text-left">
-                <span className="text-white font-extrabold text-xs sm:text-[13px] tracking-tight leading-none">
-                  Bay to Bay
-                </span>
-                <span className="text-[9px] font-black tracking-widest text-sky-400 uppercase leading-none mt-0.5">
-                  EXPRESS INC.
-                </span>
-              </div>
             </div>
 
           </div>

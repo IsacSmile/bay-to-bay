@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
   Menu,
@@ -133,41 +134,16 @@ export const Navbar: React.FC<NavbarProps> = ({ phone = "705-978-3001" }) => {
         <Link
           href="/"
           onClick={closeMenu}
-          className="flex items-center gap-3 shrink-0 group focus:outline-none"
+          className="flex items-center shrink-0 group focus:outline-none py-1"
         >
-          {/* Logo Mark: Two Pine Trees + Blue Wave Graphic */}
-          <div className="relative w-10 h-10 sm:w-11 sm:h-11 shrink-0 flex items-center justify-center">
-            {/* 2 Pine Trees SVG */}
-            <svg
-              className="w-8 h-8 text-[#059669]"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-            >
-              {/* Left Tree */}
-              <path d="M7 2L2 10H5L1 17H7V22H9V17H15L11 10H14L9 2H7Z" />
-              {/* Right Tree */}
-              <path d="M15 5L11 12H13.5L10 18H15V22H17V18H21L17.5 12H20L15 5Z" opacity="0.9" />
-            </svg>
-            {/* Blue Wave graphic underneath */}
-            <svg
-              className="absolute -bottom-1 left-0 w-full h-3 text-[#0088FF]"
-              viewBox="0 0 40 12"
-              fill="currentColor"
-            >
-              <path d="M0 6C10 1 20 11 30 5C35 2 38 4 40 6V12H0V6Z" />
-            </svg>
-          </div>
-
-          {/* Wordmark */}
-          <div className="flex flex-col">
-            <span className="font-extrabold text-[#071A2E] text-lg sm:text-xl leading-tight tracking-tight flex items-center gap-1">
-              <span>Bay to Bay</span>
-              <span className="text-[#0088FF] text-xs font-black tracking-widest uppercase">EXPRESS INC.</span>
-            </span>
-            <span className="text-[10px] sm:text-[11px] font-black text-slate-500 uppercase tracking-[0.18em] leading-none mt-0.5">
-              NORTHERN ONTARIO COURIER
-            </span>
-          </div>
+          <Image
+            src="/approved-logo.png"
+            alt="Bay to Bay Express Inc. Northern Ontario Courier"
+            width={240}
+            height={44}
+            className="h-10 sm:h-12 w-auto object-contain"
+            priority
+          />
         </Link>
 
         {/* Center: Navigation Link Set (Desktop) */}
@@ -278,24 +254,15 @@ export const Navbar: React.FC<NavbarProps> = ({ phone = "705-978-3001" }) => {
             
             {/* Top White Pill Capsule Header */}
             <div className="w-full bg-[#F4F6F8] rounded-full px-5 py-3 flex items-center justify-between shadow-xl">
-              <div className="flex items-center gap-2.5">
-                {/* Logo Wave Icon */}
-                <svg
-                  className="w-7 h-7 text-[#0088FF]"
-                  viewBox="0 0 40 24"
-                  fill="currentColor"
-                >
-                  <path d="M0 12C10 2 20 22 30 10C35 4 38 8 40 12C30 22 20 2 10 14C5 20 2 16 0 12Z" />
-                </svg>
-                <div className="flex flex-col">
-                  <span className="font-extrabold text-[#071A2E] text-lg leading-none tracking-tight">
-                    Bay to Bay
-                  </span>
-                  <span className="text-[9px] font-black text-[#0088FF] tracking-widest uppercase mt-0.5">
-                    EXPRESS INC.
-                  </span>
-                </div>
-              </div>
+              <Link href="/" onClick={closeMenu} className="flex items-center">
+                <Image
+                  src="/approved-logo.png"
+                  alt="Bay to Bay Express Inc."
+                  width={180}
+                  height={34}
+                  className="h-8 w-auto object-contain"
+                />
+              </Link>
 
               {/* Close Button Circle */}
               <button

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { Play, Pause, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 interface RouteStop {
   id: string;
@@ -100,7 +100,6 @@ export const TwiceWeeklyRoute: React.FC<TwiceWeeklyRouteProps> = ({
   phone = "705-978-3001",
 }) => {
   const [activeStopIndex, setActiveStopIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
   const [vanLeft, setVanLeft] = useState<number | null>(null);
 
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -171,16 +170,13 @@ export const TwiceWeeklyRoute: React.FC<TwiceWeeklyRouteProps> = ({
   };
 
   const handleStopClick = (index: number) => {
-    setIsPlaying(false);
     setActiveStopIndex(index);
     updatePosition(index);
     centerStopInView(index);
   };
 
-  // Auto-play animation loop
+  // Auto-play infinite loop animation
   useEffect(() => {
-    if (!isPlaying) return;
-
     const timer = setInterval(() => {
       setActiveStopIndex((prev) => {
         const next = (prev + 1) % ROUTE_STOPS.length;
@@ -191,7 +187,7 @@ export const TwiceWeeklyRoute: React.FC<TwiceWeeklyRouteProps> = ({
     }, 1800);
 
     return () => clearInterval(timer);
-  }, [isPlaying]);
+  }, []);
 
   const activeStop = ROUTE_STOPS[activeStopIndex];
   const telLink = `tel:${phone.replace(/[^0-9]/g, "")}`;
@@ -221,7 +217,7 @@ export const TwiceWeeklyRoute: React.FC<TwiceWeeklyRouteProps> = ({
         <div className="bg-white rounded-3xl p-6 sm:p-8 lg:p-10 shadow-2xl text-[#071A2E]">
           
           {/* Header row of card */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-8 sm:pb-10 border-b border-slate-100">
+          <div className="pb-8 sm:pb-10 border-b border-slate-100">
             <div>
               <span className="text-[#059669] text-xs font-black tracking-widest uppercase block mb-1">
                 STOPS ALONG THE WAY
@@ -233,25 +229,6 @@ export const TwiceWeeklyRoute: React.FC<TwiceWeeklyRouteProps> = ({
                 Select a stop to plan your delivery. On smaller screens, swipe to see the full route.
               </p>
             </div>
-
-            {/* Play Route Animation Button */}
-            <button
-              type="button"
-              onClick={() => setIsPlaying((prev) => !prev)}
-              className="inline-flex items-center gap-2 px-4.5 py-2 rounded-full border border-[#BAE6FD] bg-[#EAF5FC] text-[#0284C7] hover:bg-[#DDF0FB] hover:text-[#0369A1] text-xs sm:text-sm font-bold transition-all shadow-2xs shrink-0 self-start sm:self-center cursor-pointer"
-            >
-              {isPlaying ? (
-                <>
-                  <Pause className="w-3.5 h-3.5 fill-current" />
-                  <span>Pause animation</span>
-                </>
-              ) : (
-                <>
-                  <Play className="w-3.5 h-3.5 fill-current" />
-                  <span>Play route animation</span>
-                </>
-              )}
-            </button>
           </div>
 
           {/* 3. Interactive Route Timeline */}

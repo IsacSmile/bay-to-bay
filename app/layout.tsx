@@ -70,9 +70,9 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/bay-to-bay-logo.webp",
-        width: 1200,
-        height: 630,
+        url: "/approved-logo.png",
+        width: 505,
+        height: 91,
         alt: "Bay to Bay Express Inc. Northern Ontario Courier Service",
       },
     ],
@@ -82,7 +82,7 @@ export const metadata: Metadata = {
     title: "Northern Ontario Courier Services | Bay to Bay Express",
     description:
       "Scheduled & dedicated small goods delivery connecting North Bay, Kirkland Lake, Timmins, Cochrane, Kapuskasing, Hearst & Longlac.",
-    images: ["/bay-to-bay-logo.webp"],
+    images: ["/approved-logo.png"],
   },
   robots: {
     index: true,

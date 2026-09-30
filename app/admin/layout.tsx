@@ -131,16 +131,13 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       <div className="md:hidden fixed top-0 left-0 right-0 z-40 bg-[#071A2E] text-white px-4 py-3 flex items-center justify-between shadow-md border-b border-slate-800">
         <div className="flex items-center gap-2.5">
           <Image
-            src="/bay-to-bay-logo.webp"
+            src="/approved-logo.png"
             alt="Bay to Bay Express Inc."
-            width={32}
+            width={160}
             height={32}
-            className="h-8 w-8 object-contain shrink-0"
+            className="h-8 w-auto object-contain bg-white/95 rounded-lg px-2 py-0.5 shrink-0"
           />
           <div>
-            <span className="text-xs font-black tracking-widest text-brand-blue uppercase block leading-none">
-              BAY TO BAY
-            </span>
             <span className="text-[11px] font-bold text-slate-300">Admin Control Panel</span>
           </div>
         </div>
@@ -170,20 +167,15 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       >
         {/* Sidebar Header */}
         <div className="p-6 border-b border-slate-800/80">
-          <div className="flex items-center gap-3 mb-3">
+          <div className="mb-3">
             <Image
-              src="/bay-to-bay-logo.webp"
+              src="/approved-logo.png"
               alt="Bay to Bay Express Inc."
-              width={36}
+              width={180}
               height={36}
-              className="h-9 w-9 object-contain shrink-0"
+              className="h-9 w-auto object-contain bg-white/95 rounded-xl px-2.5 py-1 shrink-0 mb-2"
             />
-            <div>
-              <span className="text-[11px] font-black tracking-widest text-brand-blue uppercase block leading-none mb-0.5">
-                BAY TO BAY LOGISTICS
-              </span>
-              <h2 className="text-sm font-extrabold text-white">Admin Control Panel</h2>
-            </div>
+            <h2 className="text-xs font-bold text-slate-400">Admin Control Panel</h2>
           </div>
 
           <div className="flex items-center gap-2 bg-slate-800/70 border border-slate-700/60 px-3 py-1.5 rounded-xl text-[11px] text-slate-300 font-bold">

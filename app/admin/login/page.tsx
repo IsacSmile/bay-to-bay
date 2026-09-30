@@ -163,13 +163,13 @@ export default function AdminLoginPage() {
         
         {/* Top Logo & Title Header */}
         <div className="text-center space-y-3">
-          <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-slate-50 border border-slate-200/80 shadow-xs">
+          <div className="inline-flex items-center justify-center px-4 py-2 rounded-2xl bg-slate-50 border border-slate-200/80 shadow-xs">
             <Image
-              src="/bay-to-bay-logo.webp"
+              src="/approved-logo.png"
               alt="Bay to Bay Express Inc."
-              width={40}
+              width={200}
               height={40}
-              className="h-8 w-8 sm:h-10 sm:w-10 object-contain"
+              className="h-9 sm:h-10 w-auto object-contain"
               priority
             />
           </div>

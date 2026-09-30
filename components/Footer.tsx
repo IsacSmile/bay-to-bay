@@ -32,22 +32,14 @@ export const Footer: React.FC<FooterProps> = ({
             
             {/* Brand Info & Taglines (5 cols) */}
             <div className="lg:col-span-5 space-y-4">
-              <Link href="/" className="flex items-center gap-3 shrink-0">
+              <Link href="/" className="inline-flex items-center shrink-0">
                 <Image
-                  src="/bay-to-bay-logo.webp"
+                  src="/approved-logo.png"
                   alt="Bay to Bay Express Inc. Northern Ontario Courier & Small Goods Delivery"
-                  width={42}
+                  width={220}
                   height={42}
-                  className="h-10 w-10 object-contain"
+                  className="h-10 sm:h-11 w-auto object-contain bg-white/95 rounded-xl px-3 py-1 shadow-xs"
                 />
-                <div>
-                  <div className="font-black text-white text-xl leading-tight">
-                    Bay to Bay
-                  </div>
-                  <div className="text-[10px] font-black text-brand-bright uppercase tracking-widest leading-none mt-0.5">
-                    EXPRESS INC.
-                  </div>
-                </div>
               </Link>
 
               {/* Tagline & Subhead */}
