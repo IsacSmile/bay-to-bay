@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import {
   getHowItWorksSectionData,
@@ -39,13 +40,13 @@ export async function HowItWorks() {
 
             {/* CTA Link */}
             <div>
-              <a
-                href="#quote"
+              <Link
+                href="/contact"
                 className="inline-flex items-center gap-2 text-brand-blue font-extrabold text-sm sm:text-base hover:text-[#0878D1] transition-colors group"
               >
                 <span>{content.ctaText}</span>
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </a>
+              </Link>
             </div>
           </div>
 

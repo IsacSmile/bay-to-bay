@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowUpRight, ArrowRight, MapPin, ZoomIn, ZoomOut, Phone } from "lucide-react";
 import { RegionItemData, DEFAULT_REGIONS } from "@/lib/prisma";
 
@@ -353,30 +354,30 @@ export const ServiceAreasCoverage: React.FC<ServiceAreasCoverageProps> = ({
                   {/* Left Column */}
                   <div className="flex flex-col gap-3.5">
                     {northernCol1.map((stop) => (
-                      <a
+                      <Link
                         key={stop.id || stop.name}
-                        href="/#quote"
+                        href="/contact"
                         onClick={() => setActiveCommunity(stop.name)}
                         className="group flex items-center justify-between py-1 border-b border-slate-100 hover:text-[#0088FF] transition-colors"
                       >
                         <span>{stop.name}</span>
                         <ArrowUpRight className="w-3.5 h-3.5 text-[#0088FF] opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-                      </a>
+                      </Link>
                     ))}
                   </div>
 
                   {/* Right Column */}
                   <div className="flex flex-col gap-3.5">
                     {northernCol2.map((stop) => (
-                      <a
+                      <Link
                         key={stop.id || stop.name}
-                        href="/#quote"
+                        href="/contact"
                         onClick={() => setActiveCommunity(stop.name)}
                         className="group flex items-center justify-between py-1 border-b border-slate-100 hover:text-[#0088FF] transition-colors"
                       >
                         <span>{stop.name}</span>
                         <ArrowUpRight className="w-3.5 h-3.5 text-[#0088FF] opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 </div>
@@ -409,30 +410,30 @@ export const ServiceAreasCoverage: React.FC<ServiceAreasCoverageProps> = ({
                   {/* Left Column */}
                   <div className="flex flex-col gap-3.5">
                     {gtaCol1.map((stop) => (
-                      <a
+                      <Link
                         key={stop.id || stop.name}
-                        href="/#quote"
+                        href="/contact"
                         onClick={() => setActiveCommunity(stop.name)}
                         className="group flex items-center justify-between py-1 border-b border-slate-100 hover:text-[#0088FF] transition-colors"
                       >
                         <span>{stop.name}</span>
                         <ArrowUpRight className="w-3.5 h-3.5 text-[#0088FF] opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-                      </a>
+                      </Link>
                     ))}
                   </div>
 
                   {/* Right Column */}
                   <div className="flex flex-col gap-3.5">
                     {gtaCol2.map((stop) => (
-                      <a
+                      <Link
                         key={stop.id || stop.name}
-                        href="/#quote"
+                        href="/contact"
                         onClick={() => setActiveCommunity(stop.name)}
                         className="group flex items-center justify-between py-1 border-b border-slate-100 hover:text-[#0088FF] transition-colors"
                       >
                         <span>{stop.name}</span>
                         <ArrowUpRight className="w-3.5 h-3.5 text-[#0088FF] opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 </div>
@@ -452,13 +453,13 @@ export const ServiceAreasCoverage: React.FC<ServiceAreasCoverageProps> = ({
               </p>
             </div>
 
-            <a
-              href="/#quote"
+            <Link
+              href="/contact"
               className="bg-[#0088FF] hover:bg-[#0077EE] text-white font-extrabold text-sm px-6 py-3.5 rounded-xl shadow-xs inline-flex items-center justify-center gap-2 transition-colors shrink-0"
             >
               <span>Check Your Route</span>
               <ArrowRight className="w-4 h-4" />
-            </a>
+            </Link>
           </div>
 
         </div>

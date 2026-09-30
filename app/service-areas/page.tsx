@@ -65,7 +65,7 @@ export default async function ServiceAreasPage() {
       <ServiceAreasCoverage phone={contact.phone} regions={regions} />
 
       {/* Quote Call-to-Action Strip */}
-      <QuoteCTA content={quoteCtaContent} buttonHref="/#quote" />
+      <QuoteCTA content={quoteCtaContent} buttonHref="/contact" />
 
       {/* Footer */}
       <Footer phone={contact.phone} email={contact.email || undefined} />

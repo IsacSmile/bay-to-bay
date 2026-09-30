@@ -185,13 +185,13 @@ export async function Hero({
 
             {/* Primary & Secondary Call to Actions */}
             <div className="flex flex-wrap items-center gap-3 sm:gap-4 mb-8 sm:mb-10">
-              <a
-                href="#quote"
+              <Link
+                href="/contact"
                 className="bg-[#0088FF] hover:bg-[#0077EE] text-white font-extrabold text-sm sm:text-base px-6 sm:px-7 py-3.5 rounded-xl inline-flex items-center gap-2 shadow-lg shadow-blue-500/25 transition-all duration-200 transform hover:-translate-y-0.5"
               >
                 <span>Request a Quote</span>
                 <ArrowRight className="w-4 h-4" />
-              </a>
+              </Link>
 
               {exploreHref ? (
                 <a

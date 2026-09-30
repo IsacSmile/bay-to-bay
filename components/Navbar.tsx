@@ -205,12 +205,12 @@ export const Navbar: React.FC<NavbarProps> = ({ phone = "705-978-3001" }) => {
         <div className="flex items-center gap-4 sm:gap-6">
           
           {/* Primary CTA Button */}
-          <a
-            href="#quote"
+          <Link
+            href="/contact"
             className="hidden sm:inline-flex bg-[#0088FF] hover:bg-[#0077EE] text-white font-extrabold text-sm px-5 py-2.5 rounded-lg shadow-xs transition-colors items-center gap-1.5"
           >
             <span>Request a Quote</span>
-          </a>
+          </Link>
 
           {/* Rightmost Corner Tagline Block (Desktop) */}
           <div className="hidden xl:flex items-center gap-2 pl-5 border-l border-slate-200">
@@ -341,8 +341,8 @@ export const Navbar: React.FC<NavbarProps> = ({ phone = "705-978-3001" }) => {
               </div>
 
               {/* Primary CTA Button */}
-              <a
-                href="#quote"
+              <Link
+                href="/contact"
                 onClick={closeMenu}
                 className="w-full py-3.5 bg-[#007DF2] hover:bg-[#0070DC] active:scale-[0.99] text-white font-extrabold text-base rounded-full flex items-center justify-center gap-2.5 shadow-lg shadow-sky-950/50 transition-all cursor-pointer mt-1"
               >
@@ -350,7 +350,7 @@ export const Navbar: React.FC<NavbarProps> = ({ phone = "705-978-3001" }) => {
                 <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center text-white shrink-0">
                   <ArrowUpRight className="w-4 h-4" />
                 </div>
-              </a>
+              </Link>
 
             </div>
 

@@ -125,13 +125,13 @@ export const AboutContent: React.FC<AboutContentProps> = ({
               </p>
             </div>
 
-            <a
-              href="/#quote"
+            <Link
+              href="/contact"
               className="bg-[#0088FF] hover:bg-[#0077EE] text-white font-bold text-sm sm:text-base px-7 py-3.5 sm:py-4 rounded-xl shadow-md inline-flex items-center justify-center gap-2 transition-all duration-150 shrink-0 self-start sm:self-center cursor-pointer hover:shadow-lg active:scale-95"
             >
               <span>Discuss Your Route</span>
               <span className="text-base leading-none">→</span>
-            </a>
+            </Link>
           </div>
         </div>
       </section>

@@ -214,13 +214,13 @@ export default async function ServicesPage() {
                     </div>
 
                     {/* Action link */}
-                    <a
-                      href="/#quote"
+                    <Link
+                      href="/contact"
                       className="text-[#0284C7] hover:text-[#006ED6] font-bold text-xs sm:text-sm inline-flex items-center gap-1 group transition-colors self-start"
                     >
                       <span>{service.action}</span>
                       <span className="transition-transform group-hover:translate-x-1">→</span>
-                    </a>
+                    </Link>
                   </div>
                 </div>
               );
@@ -283,13 +283,13 @@ export default async function ServicesPage() {
             </p>
 
             <div className="mt-4">
-              <a
-                href="/#quote"
+              <Link
+                href="/contact"
                 className="text-[#0284C7] hover:text-[#006ED6] font-bold text-xs sm:text-sm inline-flex items-center gap-1 group transition-colors"
               >
                 <span>Discuss your delivery</span>
                 <span className="transition-transform group-hover:translate-x-1">→</span>
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -299,7 +299,7 @@ export default async function ServicesPage() {
       {/* Quote Call-to-Action Strip */}
       <QuoteCTA
         content={quoteCtaContent}
-        buttonHref="/#quote"
+        buttonHref="/contact"
         phone={contact.phone}
         email={contact.email || undefined}
       />

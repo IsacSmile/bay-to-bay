@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 interface RouteStop {
@@ -333,13 +334,13 @@ export const TwiceWeeklyRoute: React.FC<TwiceWeeklyRouteProps> = ({
               </p>
             </div>
 
-            <a
-              href="#quote"
+            <Link
+              href="/contact"
               className="bg-[#007EF4] hover:bg-[#006ED6] text-white font-bold text-xs sm:text-sm px-6 py-3 rounded-xl shadow-md shadow-blue-500/20 transition-all inline-flex items-center justify-center gap-1.5 shrink-0 self-start sm:self-center"
             >
               <span>Enquire about this stop</span>
               <ArrowRight className="w-4 h-4" />
-            </a>
+            </Link>
           </div>
 
           {/* Disclaimer Note */}
@@ -372,12 +373,12 @@ export const TwiceWeeklyRoute: React.FC<TwiceWeeklyRouteProps> = ({
                 <p className="text-slate-500 text-xs sm:text-sm font-normal mt-1 mb-4">
                   {run.type}
                 </p>
-                <a
-                  href="#quote"
+                <Link
+                  href="/contact"
                   className="text-[#007EF4] hover:text-[#006ED6] text-xs sm:text-sm font-bold inline-flex items-center gap-1 group transition-colors"
                 >
                   <span>{run.action}</span>
-                </a>
+                </Link>
               </div>
             );
           })}

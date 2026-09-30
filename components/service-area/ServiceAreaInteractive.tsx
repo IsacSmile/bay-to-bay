@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import { MapPin, ArrowRight, Clock, Truck, ShieldCheck, Sparkles, AlertCircle } from "lucide-react";
 import { RegionItemData, ServiceAreaData } from "@/lib/prisma";
 import { RouteMap } from "@/components/service-area/RouteMap";
@@ -135,13 +136,13 @@ export const ServiceAreaInteractive: React.FC<ServiceAreaInteractiveProps> = ({
           )}
 
           {/* CTA Link */}
-          <a
-            href="#quote"
+          <Link
+            href="/contact"
             className="mt-6 sm:mt-7 inline-flex items-center gap-2 text-sm sm:text-base font-extrabold text-brand-blue hover:text-[#0878D1] transition-colors group"
           >
             <span>Ask about a custom run in this region</span>
             <ArrowRight className="w-4 h-4 text-brand-blue group-hover:translate-x-1 transition-transform" />
-          </a>
+          </Link>
         </div>
 
         {/* Right Column: Dynamic Map or Placeholder Card */}

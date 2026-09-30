@@ -11,7 +11,7 @@ export interface QuoteCTAProps {
 
 export const QuoteCTA: React.FC<QuoteCTAProps> = ({
   content,
-  buttonHref = "#quote",
+  buttonHref = "/contact",
 }) => {
   const data: QuoteCtaData = content || DEFAULT_QUOTE_CTA;
   const eyebrow = data.eyebrow || "YOUR GOODS. OUR COMMITMENT.";

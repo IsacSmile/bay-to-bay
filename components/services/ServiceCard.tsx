@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { ServiceItemData } from "@/lib/prisma";
 
@@ -64,13 +65,13 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
         </div>
 
         {/* Learn More Link with Arrow */}
-        <a
-          href="#quote"
+        <Link
+          href="/contact"
           className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-extrabold text-brand-blue hover:text-sky-700 transition-colors pt-1 group/link"
         >
           <span>Learn more</span>
           <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
-        </a>
+        </Link>
       </div>
     </div>
   );

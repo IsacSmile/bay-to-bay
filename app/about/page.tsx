@@ -41,7 +41,7 @@ export default async function AboutPage() {
       </main>
 
       {/* Quote Call-to-Action Strip */}
-      <QuoteCTA content={quoteCtaContent} buttonHref="/#quote" />
+      <QuoteCTA content={quoteCtaContent} buttonHref="/contact" />
 
       {/* Footer */}
       <Footer phone={contact.phone} email={contact.email || undefined} />
