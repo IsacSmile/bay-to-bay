@@ -445,23 +445,23 @@ async function main() {
 
   const defaultSteps = [
     {
-      title: "Request a quote",
-      description: "Tell us what you need delivered.",
+      title: "Tell us the details",
+      description: "Share your pickup, destination and package requirements.",
       order: 1,
     },
     {
-      title: "Schedule",
-      description: "We confirm the pickup, delivery, and service requirements.",
+      title: "Confirm your quote",
+      description: "We confirm availability, price and delivery arrangements.",
       order: 2,
     },
     {
-      title: "Pickup",
-      description: "Your shipment is collected according to the agreed schedule.",
+      title: "Ready for pickup",
+      description: "Prepare your goods for the agreed pickup window.",
       order: 3,
     },
     {
-      title: "Delivery",
-      description: "Your goods are delivered to the destination.",
+      title: "Delivered with care",
+      description: "Receive communication and proof of delivery.",
       order: 4,
     },
   ];
