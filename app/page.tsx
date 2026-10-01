@@ -1,4 +1,3 @@
-import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { ServiceHighlights } from "@/components/sections/ServiceHighlights";
@@ -7,32 +6,22 @@ import { CoverageTeaser } from "@/components/sections/CoverageTeaser";
 import { HowItWorks } from "@/components/HowItWorks";
 import { OurOffices } from "@/components/sections/OurOffices";
 import { SeasonsCommitment } from "@/components/sections/SeasonsCommitment";
-import { FAQ } from "@/components/FAQ";
 import { QuoteCTA } from "@/components/sections/QuoteCTA";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
 import {
-  getAnnouncementData,
   getContactData,
-  getFaqContentData,
-  getFaqItemsData,
   getQuoteCtaData,
 } from "@/lib/prisma";
 
 export default async function HomePage() {
-  const announcement = await getAnnouncementData();
   const contact = await getContactData();
-  const faqContent = await getFaqContentData();
-  const faqItems = await getFaqItemsData();
   const quoteCtaContent = await getQuoteCtaData();
 
   return (
     <div className="min-h-screen flex flex-col bg-[#F6F9FC]">
       {/* Search Engine JSON-LD Structured Data */}
       <JsonLd />
-
-      {/* Top Announcement Bar */}
-      <AnnouncementBar items={announcement.items} />
 
       {/* Sticky Main Header */}
       <Navbar phone={contact.phone} />
@@ -56,9 +45,6 @@ export default async function HomePage() {
 
       {/* Our Offices (North Bay & Hearst) */}
       <OurOffices phone={contact.phone} />
-
-      {/* FAQ Section */}
-      <FAQ content={faqContent} items={faqItems} />
 
       {/* Rooted in Ontario - Every season, The same commitment banner */}
       <SeasonsCommitment />

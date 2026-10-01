@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { TwiceWeeklyRoute } from "@/components/sections/TwiceWeeklyRoute";
@@ -8,7 +7,6 @@ import { Footer } from "@/components/Footer";
 import { QuoteCTA } from "@/components/sections/QuoteCTA";
 import { JsonLd } from "@/components/JsonLd";
 import {
-  getAnnouncementData,
   getContactData,
   getQuoteCtaData,
   getRegionsData,
@@ -27,7 +25,6 @@ export const metadata: Metadata = {
 };
 
 export default async function ServiceAreasPage() {
-  const announcement = await getAnnouncementData();
   const contact = await getContactData();
   const quoteCtaContent = await getQuoteCtaData();
   const regions = await getRegionsData();
@@ -36,9 +33,6 @@ export default async function ServiceAreasPage() {
     <div className="min-h-screen flex flex-col bg-[#F6F9FC]">
       {/* Search Engine JSON-LD Structured Data */}
       <JsonLd />
-
-      {/* Top Announcement Bar */}
-      <AnnouncementBar items={announcement.items} />
 
       {/* Sticky Main Header */}
       <Navbar phone={contact.phone} />

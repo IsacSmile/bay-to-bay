@@ -5,112 +5,6 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Mail, Lock, Eye, EyeOff, ArrowRight, ShieldCheck, RefreshCw, AlertCircle } from "lucide-react";
 
-// Canvas-based Light Snowfall Effect with gentle 6-pointed snowflake crystals (❄) & soft dots
-function HeavySnowfallEffect() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    let animationFrameId: number;
-    let width = (canvas.width = window.innerWidth);
-    let height = (canvas.height = window.innerHeight);
-
-    const handleResize = () => {
-      if (!canvas) return;
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-    };
-    window.addEventListener("resize", handleResize);
-
-    const symbols = ["❄", "❅", "❆"];
-    const colors = [
-      "rgba(56, 189, 248, ",   // #38bdf8 sky blue
-      "rgba(2, 132, 199, ",    // #0284c7 deep ice blue
-      "rgba(147, 197, 253, ",  // #93c5fd pastel sky blue
-      "rgba(125, 211, 252, ",  // #7dd3fc cyan ice blue
-    ];
-
-    // Light snowfall density: 45 subtle particles total
-    const totalParticles = 45;
-    const particles = Array.from({ length: totalParticles }).map(() => {
-      const isFlake = Math.random() > 0.6; // ~40% crystal flakes, 60% gentle dots
-      const colorBase = colors[Math.floor(Math.random() * colors.length)];
-      const opacity = Math.random() * 0.35 + 0.25; // Soft subtle opacity (0.25 to 0.6)
-
-      return {
-        isFlake,
-        symbol: symbols[Math.floor(Math.random() * symbols.length)],
-        x: Math.random() * width,
-        y: Math.random() * height,
-        size: isFlake ? Math.random() * 8 + 10 : Math.random() * 2 + 1.2, // size 10-18px for flakes, 1.2-3.2px for dots
-        speedY: isFlake ? Math.random() * 1.0 + 0.6 : Math.random() * 1.2 + 0.5, // Slow gentle falling
-        speedX: Math.random() * 0.8 - 0.4,
-        rotation: Math.random() * Math.PI * 2,
-        rotSpeed: (Math.random() * 0.015 - 0.0075),
-        swingAngle: Math.random() * Math.PI * 2,
-        swingSpeed: Math.random() * 0.015 + 0.008,
-        color: `${colorBase}${opacity})`,
-      };
-    });
-
-    const render = () => {
-      ctx.clearRect(0, 0, width, height);
-
-      particles.forEach((p) => {
-        p.y += p.speedY;
-        p.swingAngle += p.swingSpeed;
-        p.x += Math.sin(p.swingAngle) * 0.6 + p.speedX;
-
-        if (p.isFlake) {
-          p.rotation += p.rotSpeed;
-        }
-
-        // Wrap around canvas screen
-        if (p.y > height + 20) {
-          p.y = -20;
-          p.x = Math.random() * width;
-        }
-        if (p.x > width + 20) p.x = -20;
-        if (p.x < -20) p.x = width + 20;
-
-        if (p.isFlake) {
-          // Draw rotated snowflake crystal glyph (❄)
-          ctx.save();
-          ctx.translate(p.x, p.y);
-          ctx.rotate(p.rotation);
-          ctx.font = `${p.size}px "Segoe UI Symbol", "Apple Color Emoji", Arial, sans-serif`;
-          ctx.fillStyle = p.color;
-          ctx.textAlign = "center";
-          ctx.textBaseline = "middle";
-          ctx.fillText(p.symbol, 0, 0);
-          ctx.restore();
-        } else {
-          // Draw soft ice blue dot
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-          ctx.fillStyle = p.color;
-          ctx.fill();
-        }
-      });
-
-      animationFrameId = requestAnimationFrame(render);
-    };
-
-    render();
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-      cancelAnimationFrame(animationFrameId);
-    };
-  }, []);
-
-  return <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none z-0" />;
-}
-
 export default function AdminLoginPage() {
   const router = useRouter();
   const [email, setEmail] = useState("");
@@ -150,10 +44,6 @@ export default function AdminLoginPage() {
 
   return (
     <div className="min-h-[100dvh] w-full bg-white flex flex-col items-center justify-center p-4 sm:p-6 relative overflow-hidden text-slate-800 font-sans selection:bg-brand-blue selection:text-white">
-      
-      {/* Heavy Snowfall Canvas Overlay */}
-      <HeavySnowfallEffect />
-
       {/* Soft Ambient Ice Glows */}
       <div className="absolute top-1/4 -left-32 w-80 h-80 sm:w-96 sm:h-96 bg-sky-100/60 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-1/4 -right-32 w-80 h-80 sm:w-96 sm:h-96 bg-blue-100/60 rounded-full blur-3xl pointer-events-none" />

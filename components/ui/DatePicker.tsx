@@ -34,16 +34,6 @@ const MONTH_NAMES = [
   "December",
 ];
 
-const SNOWFLAKES = [
-  { left: "4%", size: 9, duration: "4.5s", delay: "0s", opacity: 0.5, char: "❄" },
-  { left: "16%", size: 6, duration: "5.5s", delay: "1.0s", opacity: 0.6, char: "•" },
-  { left: "29%", size: 10, duration: "4.0s", delay: "0.3s", opacity: 0.5, char: "❄" },
-  { left: "45%", size: 6, duration: "5.0s", delay: "1.8s", opacity: 0.6, char: "•" },
-  { left: "62%", size: 9, duration: "4.2s", delay: "1.2s", opacity: 0.5, char: "❄" },
-  { left: "78%", size: 6, duration: "5.8s", delay: "0.1s", opacity: 0.6, char: "•" },
-  { left: "91%", size: 10, duration: "3.8s", delay: "2.2s", opacity: 0.5, char: "❄" },
-];
-
 export const DatePicker: React.FC<DatePickerProps> = ({
   value = "",
   onChange,
@@ -228,47 +218,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
       {/* Popover Calendar */}
       {isOpen && (
         <div className="absolute top-full left-0 mt-1.5 z-50 w-full sm:w-[268px] bg-white rounded-xl border border-slate-200/90 shadow-lg p-3 animate-in fade-in zoom-in-95 duration-150 overflow-hidden">
-          
-          {/* Animated Snowfall Layer */}
-          <div className="absolute inset-0 rounded-xl overflow-hidden pointer-events-none z-0">
-            <style>{`
-              @keyframes calendarSnowfall {
-                0% {
-                  transform: translateY(-8px) translateX(0) rotate(0deg);
-                  opacity: 0;
-                }
-                20% {
-                  opacity: 0.9;
-                }
-                80% {
-                  opacity: 0.9;
-                }
-                100% {
-                  transform: translateY(280px) translateX(12px) rotate(360deg);
-                  opacity: 0;
-                }
-              }
-            `}</style>
-            {SNOWFLAKES.map((flake, idx) => (
-              <span
-                key={idx}
-                aria-hidden="true"
-                className="absolute text-[#0088FF]/40 select-none leading-none pointer-events-none drop-shadow-2xs"
-                style={{
-                  left: flake.left,
-                  top: 0,
-                  fontSize: `${flake.size}px`,
-                  opacity: flake.opacity,
-                  animation: `calendarSnowfall ${flake.duration} linear infinite`,
-                  animationDelay: flake.delay,
-                }}
-              >
-                {flake.char}
-              </span>
-            ))}
-          </div>
-
-          {/* Calendar Interactive Content (z-10) */}
+          {/* Calendar Interactive Content */}
           <div className="relative z-10">
             {/* Header Controls */}
             <div className="flex items-center justify-between mb-2 pb-1.5 border-b border-slate-100">

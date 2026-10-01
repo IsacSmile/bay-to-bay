@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { PrivacyEnquiriesModal } from "@/components/PrivacyEnquiriesModal";
-import { FooterSnowfall } from "@/components/footer/FooterSnowfall";
 
 interface FooterProps {
   phone?: string;
@@ -21,9 +20,6 @@ export const Footer: React.FC<FooterProps> = ({
   return (
     <>
       <footer id="contact" className="relative bg-[#06203B] text-slate-300 text-sm border-t border-[#092D52] overflow-hidden">
-        {/* Gentle atmospheric snowfall effect */}
-        <FooterSnowfall />
-
         <div className="relative z-10 max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 pt-14 sm:pt-16 pb-10 sm:pb-12">
           
           {/* Main 4-Column Grid */}
@@ -72,11 +68,6 @@ export const Footer: React.FC<FooterProps> = ({
                 <li>
                   <Link href="/contact" className="hover:text-white transition-colors">
                     Contact us
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/#faq" className="hover:text-white transition-colors">
-                    Frequently asked questions
                   </Link>
                 </li>
                 <li>

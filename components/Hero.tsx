@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Plus, FileText, Package, Truck, Trees, Home, ChevronRight } from "lucide-react";
 import { getHeroData } from "@/lib/prisma";
-import { SnowfallEffect } from "@/components/hero/SnowfallEffect";
 
 interface HeroProps {
   headingLine1?: string;
@@ -44,10 +43,6 @@ export async function Hero({
     <div className="relative w-full bg-[#071A2E]">
       {/* 1. Main Hero Container with Scrim & Photo */}
       <section className="relative w-full min-h-[580px] sm:min-h-[640px] lg:min-h-[680px] flex items-center pt-28 sm:pt-32 lg:pt-36 pb-20 sm:pb-24 overflow-hidden">
-        
-        {/* Animated Snowfall Effect Overlay */}
-        <SnowfallEffect />
-
         {/* Background Photo */}
         <div className="absolute inset-0 z-0 select-none pointer-events-none">
           <Image
@@ -73,14 +68,6 @@ export async function Hero({
         <div className="relative z-10 max-w-[1350px] mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div className={`${isServiceAreasPage ? "max-w-3xl lg:max-w-4xl xl:max-w-5xl" : "max-w-2xl lg:max-w-3xl"} text-white`}>
             
-            {/* Top Slogan Badge - Shown only on Homepage Hero section top of heading */}
-            {!isServicesPage && !isServiceAreasPage && (
-              <div className="inline-flex max-w-full items-center gap-2 text-[10px] xs:text-[11px] sm:text-xs xl:text-sm font-bold tracking-wider text-slate-200 uppercase bg-slate-900/50 px-3.5 py-1.5 rounded-full border border-white/15 backdrop-blur-xs shadow-xs mb-5 sm:mb-6">
-                <Trees className="w-4 h-4 text-[#10B981] shrink-0" />
-                <span className="whitespace-nowrap overflow-hidden text-ellipsis">SAME COMMUNITIES. A STRONGER NORTHERN ONTARIO.</span>
-              </div>
-            )}
-
             {/* Breadcrumb / Slug Navigation - Shown on Services Page */}
             {isServicesPage && (
               <nav aria-label="Breadcrumb" className="mb-5 sm:mb-6">
@@ -170,12 +157,12 @@ export async function Hero({
             )}
 
             {/* Subhead Tagline / Mini Paragraph */}
-            {isServiceAreasPage ? (
+            {isServiceAreasPage || isServicesPage ? (
               <p className={subtextClassName || "text-sm sm:text-base lg:text-[17px] font-normal text-slate-200/90 leading-relaxed max-w-xl mb-6 sm:mb-8 mt-3 sm:mt-4"}>
                 {subtext}
               </p>
             ) : (
-              <p className={subtextClassName || "text-xl sm:text-2xl font-bold text-white/95 tracking-tight mb-6 sm:mb-8"}>
+              <p className={subtextClassName || "text-xl sm:text-2xl font-medium text-white/95 tracking-tight mb-6 sm:mb-8"}>
                 {subtext ||
                   (heroData.subtext && heroData.subtext.includes("Small goods")
                     ? "Reliable. Dedicated. Delivered."
@@ -183,42 +170,36 @@ export async function Hero({
               </p>
             )}
 
-            {/* Primary & Secondary Call to Actions */}
-            <div className="flex flex-wrap items-center gap-3 sm:gap-4 mb-8 sm:mb-10">
-              <Link
-                href="/contact"
-                className="bg-[#0088FF] hover:bg-[#0077EE] text-white font-extrabold text-sm sm:text-base px-6 sm:px-7 py-3.5 rounded-xl inline-flex items-center gap-2 shadow-lg shadow-blue-500/25 transition-all duration-200 transform hover:-translate-y-0.5"
-              >
-                <span>Request a Quote</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-
-              {exploreHref ? (
-                <a
-                  href={exploreHref}
-                  className="border border-white/40 bg-slate-900/30 backdrop-blur-xs hover:bg-white/10 text-white font-extrabold text-sm sm:text-base px-6 sm:px-7 py-3.5 rounded-xl inline-flex items-center gap-2 transition-all duration-200"
-                >
-                  <span>{exploreText || "Explore"}</span>
-                  <ArrowRight className="w-4 h-4" />
-                </a>
-              ) : isServicesPage ? (
-                <a
-                  href="#services-list"
-                  className="border border-white/40 bg-slate-900/30 backdrop-blur-xs hover:bg-white/10 text-white font-extrabold text-sm sm:text-base px-6 sm:px-7 py-3.5 rounded-xl inline-flex items-center gap-2 transition-all duration-200"
-                >
-                  <span>Explore Services</span>
-                  <ArrowRight className="w-4 h-4" />
-                </a>
-              ) : (
+            {/* Primary & Secondary Call to Actions - Hidden on Services & Service Areas pages */}
+            {!isServicesPage && !isServiceAreasPage && (
+              <div className="flex flex-wrap items-center gap-3 sm:gap-4 mb-8 sm:mb-10">
                 <Link
-                  href="/services"
-                  className="border border-white/40 bg-slate-900/30 backdrop-blur-xs hover:bg-white/10 text-white font-extrabold text-sm sm:text-base px-6 sm:px-7 py-3.5 rounded-xl inline-flex items-center gap-2 transition-all duration-200"
+                  href="/contact"
+                  className="bg-[#0088FF] hover:bg-[#0077EE] text-white font-extrabold text-sm sm:text-base px-6 sm:px-7 py-3.5 rounded-xl inline-flex items-center gap-2 shadow-lg shadow-blue-500/25 transition-all duration-200 transform hover:-translate-y-0.5"
                 >
-                  <span>Explore Services</span>
+                  <span>Request a Quote</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
-              )}
-            </div>
+
+                {exploreHref ? (
+                  <a
+                    href={exploreHref}
+                    className="border border-white/40 bg-slate-900/30 backdrop-blur-xs hover:bg-white/10 text-white font-extrabold text-sm sm:text-base px-6 sm:px-7 py-3.5 rounded-xl inline-flex items-center gap-2 transition-all duration-200"
+                  >
+                    <span>{exploreText || "Explore"}</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </a>
+                ) : (
+                  <Link
+                    href="/services"
+                    className="border border-white/40 bg-slate-900/30 backdrop-blur-xs hover:bg-white/10 text-white font-extrabold text-sm sm:text-base px-6 sm:px-7 py-3.5 rounded-xl inline-flex items-center gap-2 transition-all duration-200"
+                  >
+                    <span>Explore Services</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                )}
+              </div>
+            )}
           </div>
         </div>
 

@@ -2,7 +2,6 @@
 
 import React from "react";
 import Image from "next/image";
-import { SnowfallEffect } from "@/components/hero/SnowfallEffect";
 
 export interface SeasonsCommitmentProps {
   eyebrow?: string;
@@ -38,9 +37,6 @@ export const SeasonsCommitment: React.FC<SeasonsCommitmentProps> = ({
         {/* Mobile Full Subtle Dark Scrim */}
         <div className="absolute inset-0 bg-slate-950/45 sm:hidden pointer-events-none" />
       </div>
-
-      {/* Gentle Snowfall Infinite Loop Animation */}
-      <SnowfallEffect enabled={true} />
 
       {/* Content Container */}
       <div className="relative z-10 w-full max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">

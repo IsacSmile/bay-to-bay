@@ -2,7 +2,6 @@ import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Check } from "lucide-react";
-import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { TwiceWeeklyRoute } from "@/components/sections/TwiceWeeklyRoute";
@@ -10,7 +9,6 @@ import { QuoteCTA } from "@/components/sections/QuoteCTA";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
 import {
-  getAnnouncementData,
   getContactData,
   getQuoteCtaData,
 } from "@/lib/prisma";
@@ -119,7 +117,6 @@ const TIME_SENSITIVE_CARDS = [
 ];
 
 export default async function ServicesPage() {
-  const announcement = await getAnnouncementData();
   const contact = await getContactData();
   const quoteCtaContent = await getQuoteCtaData();
 
@@ -127,9 +124,6 @@ export default async function ServicesPage() {
     <div className="min-h-screen flex flex-col bg-[#F6F9FC]">
       {/* Search Engine JSON-LD Structured Data */}
       <JsonLd />
-
-      {/* Top Announcement Bar */}
-      <AnnouncementBar items={announcement.items} />
 
       {/* Sticky Main Header */}
       <Navbar phone={contact.phone} />

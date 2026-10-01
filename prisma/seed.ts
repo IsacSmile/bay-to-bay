@@ -200,11 +200,11 @@ async function main() {
   await prisma.themeSettings.upsert({
     where: { id: "default" },
     update: {
-      snowfallEnabled: true,
+      snowfallEnabled: false,
     },
     create: {
       id: "default",
-      snowfallEnabled: true,
+      snowfallEnabled: false,
     },
   });
 
@@ -425,17 +425,17 @@ async function main() {
   await (prisma as any).howItWorksContent.upsert({
     where: { id: "default" },
     update: {
-      eyebrow: "HOW IT WORKS",
-      headingPrimary: "Simple.",
-      headingAccent: "Reliable. Delivered.",
+      eyebrow: "SIMPLE FROM START TO FINISH",
+      headingPrimary: "From your door to theirs.",
+      headingAccent: "",
       description: "A straightforward process from first conversation to final drop-off.",
       ctaText: "Start your delivery →",
     },
     create: {
       id: "default",
-      eyebrow: "HOW IT WORKS",
-      headingPrimary: "Simple.",
-      headingAccent: "Reliable. Delivered.",
+      eyebrow: "SIMPLE FROM START TO FINISH",
+      headingPrimary: "From your door to theirs.",
+      headingAccent: "",
       description: "A straightforward process from first conversation to final drop-off.",
       ctaText: "Start your delivery →",
     },

@@ -7,8 +7,6 @@ import { usePathname, useRouter } from "next/navigation";
 import {
   Inbox,
   Truck,
-  Building2,
-  Award,
   ListOrdered,
   ArrowLeft,
   Menu,
@@ -18,7 +16,6 @@ import {
   ChevronRight,
   LayoutDashboard,
   Info,
-  HelpCircle,
   Megaphone,
   LogOut,
 } from "lucide-react";
@@ -88,11 +85,6 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       icon: Info,
     },
     {
-      label: "FAQ Section",
-      href: "/admin/faq",
-      icon: HelpCircle,
-    },
-    {
       label: "Service Regions",
       href: "/admin/regions",
       icon: Truck,
@@ -101,16 +93,6 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       label: "Our Services",
       href: "/admin/services",
       icon: ListOrdered,
-    },
-    {
-      label: "Who We Serve",
-      href: "/admin/industries",
-      icon: Building2,
-    },
-    {
-      label: "Why Us (Reasons)",
-      href: "/admin/why-us",
-      icon: Award,
     },
     {
       label: "How It Works",

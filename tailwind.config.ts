@@ -35,20 +35,8 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: [
-          "var(--font-plus-jakarta)",
-          "Plus Jakarta Sans",
-          "ui-sans-serif",
-          "system-ui",
-          "sans-serif",
-        ],
-        display: [
-          "var(--font-space-grotesk)",
-          "Space Grotesk",
-          "var(--font-plus-jakarta)",
-          "Plus Jakarta Sans",
-          "sans-serif",
-        ],
+        sans: ["Arial", "Helvetica", "sans-serif"],
+        display: ["Arial", "Helvetica", "sans-serif"],
       },
       borderRadius: {
         btn: "12px",

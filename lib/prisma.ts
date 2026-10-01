@@ -433,7 +433,7 @@ export function hexToRgb(hex: string): { r: number; g: number; b: number } {
 export async function getThemeSettings(): Promise<ThemeSettingsData> {
   const defaultOverlay = "#071f3b"; // navy-900
   if (!isDatabaseConfigured()) {
-    return { snowfallEnabled: true, overlayColor: defaultOverlay };
+    return { snowfallEnabled: false, overlayColor: defaultOverlay };
   }
 
   try {
@@ -445,19 +445,18 @@ export async function getThemeSettings(): Promise<ThemeSettingsData> {
     if (settings) {
       const raw = settings as unknown as Record<string, unknown>;
       return {
-        snowfallEnabled: settings.snowfallEnabled ?? true,
+        snowfallEnabled: settings.snowfallEnabled ?? false,
         overlayColor: (raw.overlayColor as string) || (raw.overlay_color as string) || defaultOverlay,
       };
     }
   } catch (error) {
     console.warn("Failed to fetch theme settings from DB, using defaults.", error);
   }
-  return { snowfallEnabled: true, overlayColor: defaultOverlay };
+  return { snowfallEnabled: false, overlayColor: defaultOverlay };
 }
 
 export async function getSnowfallEnabled(): Promise<boolean> {
-  const theme = await getThemeSettings();
-  return theme.snowfallEnabled;
+  return false;
 }
 
 // Services Section Types & Data
@@ -853,9 +852,9 @@ export interface HowItWorksStepData {
 }
 
 export const DEFAULT_HOW_IT_WORKS_SECTION: HowItWorksSectionData = {
-  eyebrow: "HOW IT WORKS",
-  headingPrimary: "Simple.",
-  headingAccent: "Reliable. Delivered.",
+  eyebrow: "SIMPLE FROM START TO FINISH",
+  headingPrimary: "From your door to theirs.",
+  headingAccent: "",
   description: "A straightforward process from first conversation to final drop-off.",
   ctaText: "Start your delivery →",
 };

@@ -33,9 +33,9 @@ interface SectionContent {
 export default function AdminHowItWorksPage() {
   const [steps, setSteps] = useState<StepItem[]>([]);
   const [sectionContent, setSectionContent] = useState<SectionContent>({
-    eyebrow: "HOW IT WORKS",
-    headingPrimary: "Simple.",
-    headingAccent: "Reliable. Delivered.",
+    eyebrow: "SIMPLE FROM START TO FINISH",
+    headingPrimary: "From your door to theirs.",
+    headingAccent: "",
     description: "A straightforward process from first conversation to final drop-off.",
     ctaText: "Start your delivery →",
   });

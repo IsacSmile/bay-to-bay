@@ -1,20 +1,7 @@
 import type { Metadata, Viewport } from "next";
-import { Space_Grotesk, Plus_Jakarta_Sans } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { SmoothScrollProvider } from "@/components/SmoothScrollProvider";
-
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-space-grotesk",
-  display: "swap",
-});
-
-const plusJakartaSans = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  variable: "--font-plus-jakarta",
-  display: "swap",
-});
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -110,10 +97,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      className={`${spaceGrotesk.variable} ${plusJakartaSans.variable}`}
-    >
+    <html lang="en">
       <head>
         <Script id="microsoft-clarity" strategy="afterInteractive">
           {`
@@ -125,7 +109,7 @@ export default function RootLayout({
           `}
         </Script>
       </head>
-      <body className="min-h-screen bg-[#F6F9FC] text-[#12263A] antialiased flex flex-col font-sans">
+      <body className="min-h-screen bg-[#F6F9FC] text-[#12263A] antialiased flex flex-col">
         <SmoothScrollProvider>
           {children}
         </SmoothScrollProvider>
