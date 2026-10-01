@@ -39,10 +39,10 @@ export const TargetServices: React.FC = () => {
           <span className="text-xs font-extrabold tracking-widest text-brand-blue uppercase block mb-2">
             Who We Serve
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#071A2E] tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#071A2E] tracking-[0.015em]">
             Tailored for Northern Ontario Businesses
           </h2>
-          <p className="text-base sm:text-lg text-slate-600 mt-3 leading-relaxed">
+          <p className="text-base sm:text-[18px] lg:text-[19px] text-slate-600 mt-3 leading-relaxed">
             Dependable transportation solutions built for the unique logistics demands of regional commerce and industry.
           </p>
         </div>
@@ -59,10 +59,10 @@ export const TargetServices: React.FC = () => {
                 <div className="w-10 h-10 rounded-btn bg-brand-soft text-brand-blue flex items-center justify-center mb-4">
                   <Icon className="w-5 h-5" />
                 </div>
-                <h3 className="text-lg font-bold text-[#071A2E] mb-2 tracking-tight">
+                <h3 className="text-lg sm:text-xl font-bold text-[#071A2E] mb-2 tracking-[0.01em]">
                   {item.title}
                 </h3>
-                <p className="text-sm text-slate-600 leading-relaxed font-normal">
+                <p className="text-base sm:text-[17px] text-slate-600 leading-relaxed font-normal">
                   {item.description}
                 </p>
               </div>

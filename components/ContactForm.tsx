@@ -193,10 +193,10 @@ export const ContactForm: React.FC<ContactFormProps> = ({
           <span className="text-[#486581] text-xs sm:text-[13px] font-extrabold tracking-[0.16em] uppercase block mb-3">
             LET&apos;S TALK DELIVERY
           </span>
-          <h1 className="font-display text-4xl sm:text-5xl lg:text-[56px] font-black text-[#071A2E] tracking-tight leading-[1.08] mb-3.5">
+          <h1 className="font-display text-4xl sm:text-5xl lg:text-[56px] font-black text-[#071A2E] tracking-[0.015em] leading-[1.08] mb-3.5">
             Request a quote
           </h1>
-          <p className="text-slate-600 text-sm sm:text-base lg:text-[17px] font-normal leading-relaxed max-w-2xl">
+          <p className="text-slate-600 text-base sm:text-[18px] lg:text-[19px] font-normal leading-relaxed max-w-2xl">
             Tell us about your shipment. We&apos;ll review the details and confirm availability and pricing.
           </p>
         </div>
@@ -233,10 +233,10 @@ export const ContactForm: React.FC<ContactFormProps> = ({
                           </span>
                         )}
                       </span>
-                      <h3 className="text-2xl sm:text-3xl font-black text-[#071A2E] tracking-tight">
+                      <h3 className="text-2xl sm:text-3xl font-black text-[#071A2E] tracking-[0.015em]">
                         Quote Request Received!
                       </h3>
-                      <p className="text-slate-600 text-sm sm:text-base max-w-lg mx-auto mt-2 leading-relaxed">
+                      <p className="text-slate-600 text-base sm:text-[18px] max-w-lg mx-auto mt-2 leading-relaxed">
                         Thank you, <span className="font-bold text-[#071A2E]">{submittedSummary?.fullName || formData.fullName}</span>. We&apos;ve logged your shipment in our dispatch queue and sent your details to our route planners.
                       </p>
                     </div>
@@ -631,15 +631,15 @@ export const ContactForm: React.FC<ContactFormProps> = ({
               {/* North Bay ↔ Hearst Card */}
               <div className="bg-[#EDF6FD] rounded-3xl p-6 sm:p-8 border border-[#CFE5F8] shadow-xs space-y-5">
                 <div>
-                  <h3 className="font-display text-xl sm:text-2xl font-black text-[#071A2E] tracking-tight">
+                  <h3 className="font-display text-xl sm:text-2xl font-black text-[#071A2E] tracking-[0.015em]">
                     North Bay ↔ Hearst
                   </h3>
-                  <p className="text-xs sm:text-[13px] text-slate-600 leading-relaxed mt-2.5">
+                  <p className="text-sm sm:text-base lg:text-[17px] text-slate-600 leading-relaxed mt-2.5">
                     <span className="font-bold text-[#071A2E]">Stops:</span> North Bay · Temiskaming Shores · Kirkland Lake · Matheson · Timmins · Cochrane · Kapuskasing · Hearst · Longlac. Confirm your stop and timing with us when booking.
                   </p>
                 </div>
 
-                <div className="space-y-3 py-4 border-y border-[#D6EAF8] text-xs sm:text-sm">
+                <div className="space-y-3 py-4 border-y border-[#D6EAF8] text-sm sm:text-base">
                   <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
                     <span className="font-bold text-[#071A2E]">Tuesday &amp; Thursday:</span>
                     <span className="text-slate-600 font-medium">North Bay to Hearst</span>
@@ -651,12 +651,12 @@ export const ContactForm: React.FC<ContactFormProps> = ({
                 </div>
 
                 <div className="pt-1 space-y-1.5">
-                  <p className="text-xs text-slate-600 font-medium">
+                  <p className="text-sm sm:text-base text-slate-600 font-medium">
                     Urgent shipment? Call to confirm the next available pickup.
                   </p>
                   <a
                     href={telLink}
-                    className="font-black text-2xl sm:text-3xl text-[#0088FF] hover:text-[#0077EE] transition-colors block tracking-tight"
+                    className="font-black text-2xl sm:text-3xl text-[#0088FF] hover:text-[#0077EE] transition-colors block tracking-[0.01em]"
                   >
                     {phone}
                   </a>
@@ -669,16 +669,16 @@ export const ContactForm: React.FC<ContactFormProps> = ({
                   <Phone className="w-5 h-5" />
                 </div>
                 <div className="space-y-1">
-                  <h4 className="font-bold text-sm sm:text-base text-[#071A2E]">
+                  <h4 className="font-bold text-base sm:text-lg lg:text-[19px] text-[#071A2E] tracking-[0.01em]">
                     Give us a call
                   </h4>
                   <a
                     href={telLink}
-                    className="font-bold text-sm sm:text-base text-[#0088FF] hover:underline block"
+                    className="font-bold text-base sm:text-lg text-[#0088FF] hover:underline block"
                   >
                     {phone}
                   </a>
-                  <p className="text-xs text-slate-500 leading-relaxed pt-0.5">
+                  <p className="text-sm sm:text-base text-slate-500 leading-relaxed pt-0.5">
                     Discuss your route or delivery requirements directly.
                   </p>
                 </div>
@@ -690,12 +690,12 @@ export const ContactForm: React.FC<ContactFormProps> = ({
                   <Mail className="w-5 h-5" />
                 </div>
                 <div className="space-y-1">
-                  <h4 className="font-bold text-sm sm:text-base text-[#071A2E]">
+                  <h4 className="font-bold text-base sm:text-lg lg:text-[19px] text-[#071A2E] tracking-[0.01em]">
                     Send an email
                   </h4>
                   <a
                     href={mailtoLink}
-                    className="font-bold text-xs sm:text-sm text-[#0088FF] hover:underline break-all block"
+                    className="font-bold text-sm sm:text-base text-[#0088FF] hover:underline break-all block"
                   >
                     {email}
                   </a>
@@ -708,16 +708,16 @@ export const ContactForm: React.FC<ContactFormProps> = ({
                   <MapPin className="w-5 h-5" />
                 </div>
                 <div className="space-y-2 flex-1">
-                  <h4 className="font-bold text-sm sm:text-base text-[#071A2E]">
+                  <h4 className="font-bold text-base sm:text-lg lg:text-[19px] text-[#071A2E] tracking-[0.01em]">
                     Serving Northern Ontario and the GTA
                   </h4>
-                  <p className="text-xs sm:text-[13px] text-slate-600 leading-relaxed">
+                  <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
                     North Bay, Kirkland Lake, Timmins, Cochrane, Kapuskasing, Hearst, Longlac, Parry Sound, Sudbury. We also serve the GTA and surrounding areas, including Toronto, Mississauga, Brampton, Vaughan, Markham, Richmond Hill, Oakville, Burlington, Oshawa, Pickering, Ajax, Whitby, Hamilton, Newmarket.
                   </p>
                   <div className="pt-1">
                     <Link
                       href="/service-areas"
-                      className="inline-flex items-center gap-1.5 text-[#0284C7] hover:text-[#006ED6] font-bold text-xs sm:text-sm transition-colors group"
+                      className="inline-flex items-center gap-1.5 text-[#0284C7] hover:text-[#006ED6] font-bold text-sm sm:text-base transition-colors group"
                     >
                       <span>View service areas</span>
                       <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -728,10 +728,10 @@ export const ContactForm: React.FC<ContactFormProps> = ({
 
               {/* Contact Item 4: What happens next? */}
               <div className="p-5 sm:p-6 rounded-2xl bg-[#F8FAFC] border border-slate-200/80 shadow-2xs">
-                <h4 className="font-display font-black text-sm sm:text-base text-[#071A2E] mb-1.5">
+                <h4 className="font-display font-black text-base sm:text-lg lg:text-[19px] text-[#071A2E] mb-1.5 tracking-[0.01em]">
                   What happens next?
                 </h4>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+                <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
                   We review your shipment and confirm the price, availability, pickup details and delivery window with you.
                 </p>
               </div>

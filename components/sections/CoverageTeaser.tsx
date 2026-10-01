@@ -13,14 +13,14 @@ export const CoverageTeaser: React.FC = () => {
             <span className="text-[#059669] text-xs font-black tracking-widest uppercase block mb-2.5">
               CONNECTING NORTH &amp; SOUTH
             </span>
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-[44px] font-black text-[#071A2E] tracking-tight leading-[1.12]">
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-[44px] font-black text-[#071A2E] tracking-[0.015em] leading-[1.14]">
               One connection.
               <br />
               More communities.
             </h2>
           </div>
 
-          <p className="text-slate-600 text-sm sm:text-base font-normal leading-relaxed max-w-md lg:mb-1">
+          <p className="text-slate-600 text-base sm:text-lg lg:text-[19px] font-normal leading-relaxed max-w-lg lg:mb-1">
             From Northern Ontario to the GTA, your goods are in good hands. Explore our
             communities and plan your next delivery.
           </p>
@@ -51,16 +51,16 @@ export const CoverageTeaser: React.FC = () => {
             />
             {/* Text Overlay */}
             <div className="relative z-20 h-full p-6 sm:p-8 lg:p-9 flex flex-col justify-end text-white">
-              <span className="text-slate-300 text-[11px] sm:text-xs font-bold tracking-widest uppercase block mb-1.5">
+              <span className="text-slate-300 text-xs sm:text-[13px] font-bold tracking-widest uppercase block mb-1.5">
                 LAKES. FORESTS. COMMUNITIES.
               </span>
-              <h3 className="font-display text-2xl sm:text-3xl lg:text-[32px] font-black text-white tracking-tight mb-2">
+              <h3 className="font-display text-2xl sm:text-3xl lg:text-[34px] font-black text-white tracking-[0.015em] mb-2">
                 Northern Ontario
               </h3>
-              <p className="text-slate-200 text-xs sm:text-sm font-normal leading-relaxed mb-4 max-w-sm">
+              <p className="text-slate-100 text-base sm:text-[18px] lg:text-[19px] font-normal leading-relaxed mb-4 max-w-md">
                 From North Bay and Sudbury to Hearst and Longlac.
               </p>
-              <span className="inline-flex items-center gap-1.5 text-white font-bold text-xs sm:text-sm group-hover:text-[#38BDF8] transition-colors">
+              <span className="inline-flex items-center gap-1.5 text-white font-bold text-base sm:text-lg group-hover:text-[#38BDF8] transition-colors">
                 <span>Explore northern coverage</span>
                 <span className="transition-transform group-hover:translate-x-1">→</span>
               </span>
@@ -89,16 +89,16 @@ export const CoverageTeaser: React.FC = () => {
             />
             {/* Text Overlay */}
             <div className="relative z-20 h-full p-6 sm:p-8 lg:p-9 flex flex-col justify-end text-white">
-              <span className="text-slate-300 text-[11px] sm:text-xs font-bold tracking-widest uppercase block mb-1.5">
+              <span className="text-slate-300 text-xs sm:text-[13px] font-bold tracking-widest uppercase block mb-1.5">
                 CITY STREETS. LOCAL CONNECTIONS.
               </span>
-              <h3 className="font-display text-2xl sm:text-3xl lg:text-[32px] font-black text-white tracking-tight mb-2">
+              <h3 className="font-display text-2xl sm:text-3xl lg:text-[34px] font-black text-white tracking-[0.015em] mb-2">
                 GTA &amp; Surrounding Areas
               </h3>
-              <p className="text-slate-200 text-xs sm:text-sm font-normal leading-relaxed mb-4 max-w-sm">
+              <p className="text-slate-100 text-base sm:text-[18px] lg:text-[19px] font-normal leading-relaxed mb-4 max-w-md">
                 Toronto, Mississauga, Hamilton and communities across the region.
               </p>
-              <span className="inline-flex items-center gap-1.5 text-white font-bold text-xs sm:text-sm group-hover:text-[#38BDF8] transition-colors">
+              <span className="inline-flex items-center gap-1.5 text-white font-bold text-base sm:text-lg group-hover:text-[#38BDF8] transition-colors">
                 <span>Explore southern coverage</span>
                 <span className="transition-transform group-hover:translate-x-1">→</span>
               </span>
@@ -108,7 +108,7 @@ export const CoverageTeaser: React.FC = () => {
         </div>
 
         {/* Disclaimer Footnote */}
-        <p className="text-slate-500 text-xs sm:text-[13px] font-normal mt-4 sm:mt-5 leading-normal">
+        <p className="text-slate-500 text-xs sm:text-sm font-normal mt-5 leading-normal">
           *Delivery windows and scheduled service are confirmed for your route before booking.
         </p>
 

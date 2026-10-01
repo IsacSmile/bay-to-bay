@@ -21,10 +21,10 @@ export const RouteCoverage: React.FC = () => {
           <span className="text-xs font-extrabold tracking-widest text-brand-blue uppercase block mb-2">
             Highway 11 Corridor
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#071A2E] tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#071A2E] tracking-[0.015em]">
             Connecting Northern Ontario
           </h2>
-          <p className="text-base sm:text-lg text-slate-600 mt-3 leading-relaxed">
+          <p className="text-base sm:text-[18px] lg:text-[19px] text-slate-600 mt-3 leading-relaxed">
             Scheduled twice-weekly courier runs connecting key industrial, retail, and municipal centers across the region.
           </p>
         </div>
@@ -33,11 +33,11 @@ export const RouteCoverage: React.FC = () => {
         <div className="bg-white rounded-container p-6 sm:p-8 lg:p-10 border border-slate-200/80 shadow-card">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-8 pb-6 border-b border-slate-100">
             <div>
-              <h3 className="text-xl font-bold text-[#071A2E] flex items-center gap-2">
+              <h3 className="text-xl sm:text-2xl font-bold text-[#071A2E] tracking-[0.01em] flex items-center gap-2">
                 <Truck className="w-5 h-5 text-brand-blue" />
                 <span>North Bay → Hearst & Longlac Route</span>
               </h3>
-              <p className="text-xs sm:text-sm text-slate-500 mt-1">
+              <p className="text-sm sm:text-base text-slate-600 mt-1.5 font-normal">
                 Twice-weekly scheduled departures connecting all 7 primary communities along Highway 11.
               </p>
             </div>
@@ -76,13 +76,13 @@ export const RouteCoverage: React.FC = () => {
                     {/* Community Info */}
                     <div className="flex-1 lg:flex-none">
                       <div
-                        className={`text-sm tracking-tight ${
+                        className={`text-sm sm:text-base tracking-[0.01em] ${
                           isFirst || isLast ? "font-extrabold text-[#071A2E]" : "font-bold text-slate-700"
                         }`}
                       >
                         {stop.name}
                       </div>
-                      <div className="text-[11px] text-slate-500 font-medium mt-0.5">
+                      <div className="text-xs text-slate-500 font-medium mt-0.5">
                         {stop.role}
                       </div>
                     </div>
@@ -93,16 +93,16 @@ export const RouteCoverage: React.FC = () => {
           </div>
 
           {/* Route Highlights Footer Grid */}
-          <div className="mt-10 pt-6 border-t border-slate-100 grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
-            <div className="flex items-center gap-2.5 p-3 rounded-btn bg-[#F6F9FC]">
+          <div className="mt-10 pt-6 border-t border-slate-100 grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm sm:text-base">
+            <div className="flex items-center gap-2.5 p-3.5 rounded-btn bg-[#F6F9FC]">
               <Check className="w-4 h-4 text-brand-blue shrink-0" />
               <span className="font-semibold text-slate-700">Dedicated express cargo space</span>
             </div>
-            <div className="flex items-center gap-2.5 p-3 rounded-btn bg-[#F6F9FC]">
+            <div className="flex items-center gap-2.5 p-3.5 rounded-btn bg-[#F6F9FC]">
               <Check className="w-4 h-4 text-brand-blue shrink-0" />
               <span className="font-semibold text-slate-700">Door-to-door commercial drop-off</span>
             </div>
-            <div className="flex items-center gap-2.5 p-3 rounded-btn bg-[#F6F9FC]">
+            <div className="flex items-center gap-2.5 p-3.5 rounded-btn bg-[#F6F9FC]">
               <Check className="w-4 h-4 text-brand-blue shrink-0" />
               <span className="font-semibold text-slate-700">Regular recurring freight contracts</span>
             </div>

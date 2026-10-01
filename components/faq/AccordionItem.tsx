@@ -33,7 +33,7 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
             fontFamily:
               'var(--font-space-grotesk), "Space Grotesk", var(--font-plus-jakarta), "Plus Jakarta Sans", sans-serif',
           }}
-          className="font-bold text-[#071A2E] text-base sm:text-lg lg:text-[17px] leading-snug group-hover:text-brand-blue transition-colors"
+          className="font-bold text-[#071A2E] text-lg sm:text-xl lg:text-[20px] tracking-[0.01em] leading-snug group-hover:text-brand-blue transition-colors"
         >
           {item.question}
         </span>
@@ -58,7 +58,7 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
               fontFamily:
                 'var(--font-space-grotesk), "Space Grotesk", var(--font-plus-jakarta), "Plus Jakarta Sans", sans-serif',
             }}
-            className="text-slate-600 text-xs sm:text-sm sm:text-[15px] leading-relaxed pb-5 pr-4 whitespace-pre-line font-normal"
+            className="text-slate-600 text-base sm:text-[17px] lg:text-[18px] leading-relaxed pb-5 pr-4 whitespace-pre-line font-normal"
           >
             {item.answer}
           </p>

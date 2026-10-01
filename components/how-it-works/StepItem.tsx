@@ -18,17 +18,17 @@ export const StepItem: React.FC<StepItemProps> = ({
   return (
     <div className={`flex flex-col ${className}`.trim()}>
       {/* Big Light-Blue Step Number */}
-      <div className="text-3xl sm:text-4xl font-extrabold text-[#6BA3E8] tracking-tight leading-none mb-3.5 sm:mb-4 select-none">
+      <div className="text-3xl sm:text-4xl font-extrabold text-[#6BA3E8] tracking-[0.01em] leading-none mb-3.5 sm:mb-4 select-none">
         {numberLabel}
       </div>
 
       {/* Title */}
-      <h3 className="text-base sm:text-lg font-bold text-[#071A2E] tracking-tight leading-snug mb-2">
+      <h3 className="text-lg sm:text-xl lg:text-[22px] font-bold text-[#071A2E] tracking-[0.01em] leading-snug mb-2">
         {title}
       </h3>
 
       {/* Description */}
-      <p className="text-xs sm:text-sm text-slate-500 font-normal leading-relaxed">
+      <p className="text-base sm:text-[18px] text-slate-600 font-normal leading-relaxed">
         {description}
       </p>
     </div>

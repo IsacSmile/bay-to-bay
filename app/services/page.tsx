@@ -148,7 +148,7 @@ export default async function ServicesPage() {
             <span className="text-[#059669] text-xs font-black tracking-widest uppercase block mb-3">
               FIND YOUR DELIVERY SERVICE
             </span>
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-[44px] font-black text-[#071A2E] tracking-tight leading-[1.12]">
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-[44px] font-black text-[#071A2E] tracking-[0.015em] leading-[1.14]">
               Handled with care.<br />
               Connected with purpose.
             </h2>
@@ -187,21 +187,21 @@ export default async function ServicesPage() {
                       isImageLeft ? "lg:order-2 order-2" : "lg:order-1 order-2"
                     }`}
                   >
-                    <span className="text-[#059669] text-xs font-black tracking-widest uppercase mb-2 block">
+                    <span className="text-[#059669] text-xs sm:text-[13px] font-black tracking-widest uppercase mb-2.5 block">
                       {service.tag}
                     </span>
-                    <h3 className="font-display text-2xl sm:text-3xl lg:text-[34px] font-black text-[#071A2E] tracking-tight leading-snug mb-3.5">
+                    <h3 className="font-display text-2xl sm:text-3xl lg:text-[34px] font-black text-[#071A2E] tracking-[0.015em] leading-snug mb-3.5">
                       {service.title}
                     </h3>
-                    <p className="text-slate-600 text-xs sm:text-sm lg:text-[15px] font-normal leading-relaxed mb-4 max-w-xl">
+                    <p className="text-slate-600 text-base sm:text-[18px] lg:text-[19px] font-normal leading-relaxed mb-5 max-w-2xl">
                       {service.description}
                     </p>
 
                     {/* Features checklist */}
-                    <div className="flex flex-wrap items-center gap-x-4 sm:gap-x-5 gap-y-2 text-xs font-bold text-[#059669] mb-5">
+                    <div className="flex flex-wrap items-center gap-x-6 gap-y-2.5 text-sm sm:text-base font-bold text-[#059669] mb-6">
                       {service.features.map((feature, fIdx) => (
                         <span key={fIdx} className="inline-flex items-center gap-1.5">
-                          <Check className="w-3.5 h-3.5 stroke-[3] shrink-0" />
+                          <Check className="w-4 h-4 stroke-[3] shrink-0" />
                           <span>{feature}</span>
                         </span>
                       ))}
@@ -210,7 +210,7 @@ export default async function ServicesPage() {
                     {/* Action link */}
                     <Link
                       href="/contact"
-                      className="text-[#0284C7] hover:text-[#006ED6] font-bold text-xs sm:text-sm inline-flex items-center gap-1 group transition-colors self-start"
+                      className="text-[#0284C7] hover:text-[#006ED6] font-bold text-base sm:text-lg inline-flex items-center gap-1.5 group transition-colors self-start"
                     >
                       <span>{service.action}</span>
                       <span className="transition-transform group-hover:translate-x-1">→</span>
@@ -223,23 +223,23 @@ export default async function ServicesPage() {
 
           {/* Simple From Start to Finish: 4 Steps */}
           <div className="mt-24 sm:mt-32 pt-16 sm:pt-20 border-t border-slate-100">
-            <span className="text-[#059669] text-xs font-black tracking-widest uppercase block mb-2">
+            <span className="text-[#059669] text-xs sm:text-[13px] font-black tracking-widest uppercase block mb-2.5">
               SIMPLE FROM START TO FINISH
             </span>
-            <h3 className="font-display text-2xl sm:text-3xl lg:text-[36px] font-black text-[#071A2E] tracking-tight mb-10 sm:mb-12">
+            <h3 className="font-display text-2xl sm:text-3xl lg:text-[36px] font-black text-[#071A2E] tracking-[0.015em] mb-10 sm:mb-12">
               From your door to theirs.
             </h3>
 
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-5 sm:gap-x-8 lg:gap-x-10 gap-y-9 sm:gap-y-12 lg:gap-y-10">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-6 sm:gap-x-8 lg:gap-x-10 gap-y-9 sm:gap-y-12 lg:gap-y-10">
               {SIMPLE_STEPS.map((step, idx) => (
                 <div key={idx}>
-                  <span className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#8ec5e7] block mb-2 sm:mb-2.5 font-display">
+                  <span className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#79B4E8] block mb-2 sm:mb-2.5 font-display tracking-[0.01em]">
                     {step.step}
                   </span>
-                  <h4 className="font-bold text-[15px] sm:text-lg text-[#071A2E] mb-1.5 sm:mb-2 leading-snug">
+                  <h4 className="font-bold text-lg sm:text-xl lg:text-[22px] text-[#071A2E] mb-2 leading-snug tracking-[0.01em]">
                     {step.title}
                   </h4>
-                  <p className="text-slate-500 text-xs sm:text-sm font-normal leading-relaxed">
+                  <p className="text-slate-600 text-base sm:text-[18px] font-normal leading-relaxed">
                     {step.description}
                   </p>
                 </div>
@@ -249,10 +249,10 @@ export default async function ServicesPage() {
 
           {/* When Timing Matters: 3 Cards */}
           <div className="mt-20 sm:mt-28">
-            <span className="text-[#059669] text-xs font-black tracking-widest uppercase block mb-2">
+            <span className="text-[#059669] text-xs sm:text-[13px] font-black tracking-widest uppercase block mb-2.5">
               WHEN TIMING MATTERS
             </span>
-            <h3 className="font-display text-2xl sm:text-3xl lg:text-[36px] font-black text-[#071A2E] tracking-tight mb-8 sm:mb-10">
+            <h3 className="font-display text-2xl sm:text-3xl lg:text-[36px] font-black text-[#071A2E] tracking-[0.015em] mb-8 sm:mb-10">
               For your time-sensitive deliveries.
             </h3>
 
@@ -262,24 +262,24 @@ export default async function ServicesPage() {
                   key={cIdx}
                   className="bg-[#F0F7FB] rounded-xl p-5 sm:p-6 border-l-4 border-[#059669] shadow-xs"
                 >
-                  <h4 className="font-bold text-base sm:text-lg text-[#071A2E] mb-2 leading-snug">
+                  <h4 className="font-bold text-xl sm:text-[22px] text-[#071A2E] mb-2.5 leading-snug tracking-[0.01em]">
                     {card.title}
                   </h4>
-                  <p className="text-slate-600 text-xs sm:text-[13px] font-normal leading-relaxed">
+                  <p className="text-slate-600 text-base sm:text-[18px] font-normal leading-relaxed">
                     {card.description}
                   </p>
                 </div>
               ))}
             </div>
 
-            <p className="text-slate-400 text-[11px] sm:text-xs font-normal mt-5 leading-normal">
+            <p className="text-slate-500 text-sm sm:text-[15px] font-normal mt-5 leading-normal">
               Tell us the type of shipment when requesting a quote. Please do not enter patient details, account numbers or other sensitive information in the form.
             </p>
 
-            <div className="mt-4">
+            <div className="mt-5">
               <Link
                 href="/contact"
-                className="text-[#0284C7] hover:text-[#006ED6] font-bold text-xs sm:text-sm inline-flex items-center gap-1 group transition-colors"
+                className="text-[#0284C7] hover:text-[#006ED6] font-bold text-base sm:text-lg inline-flex items-center gap-1.5 group transition-colors"
               >
                 <span>Discuss your delivery</span>
                 <span className="transition-transform group-hover:translate-x-1">→</span>

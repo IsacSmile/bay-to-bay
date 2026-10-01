@@ -24,12 +24,12 @@ export const FAQ: React.FC<FAQProps> = ({ content, items = [] }) => {
           <div className="lg:col-span-5 space-y-4 sm:space-y-6">
             <EyebrowLabel text={data.eyebrow} />
 
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl xl:text-[62px] font-black tracking-tight text-[#071A2E] leading-[1.06]">
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl xl:text-[62px] font-black tracking-[0.015em] text-[#071A2E] leading-[1.06]">
               <span>{data.headingPrimary} </span>
               <span className="text-brand-blue block sm:inline">{data.headingAccent}</span>
             </h2>
 
-            <p className="text-slate-600 text-sm sm:text-base leading-relaxed max-w-md font-normal">
+            <p className="text-slate-600 text-base sm:text-[18px] lg:text-[19px] leading-relaxed max-w-md font-normal">
               {data.description}
             </p>
           </div>

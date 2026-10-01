@@ -20,7 +20,7 @@ export const AboutContent: React.FC<AboutContentProps> = ({
           <span className="text-[#059669] text-xs sm:text-sm font-black tracking-widest uppercase block mb-3.5">
             ABOUT BAY TO BAY
           </span>
-          <h1 className="font-display text-4xl sm:text-5xl lg:text-[56px] xl:text-[60px] font-black text-[#071A2E] tracking-tight leading-[1.08] sm:leading-[1.1]">
+          <h1 className="font-display text-4xl sm:text-5xl lg:text-[56px] xl:text-[60px] font-black text-[#071A2E] tracking-[0.015em] leading-[1.08] sm:leading-[1.1]">
             Local. Northern. Dependable.
           </h1>
           <p className="mt-4 sm:mt-5 text-base sm:text-lg lg:text-[21px] text-slate-600 font-normal leading-relaxed max-w-3xl">
@@ -41,20 +41,20 @@ export const AboutContent: React.FC<AboutContentProps> = ({
               <span className="text-[#059669] text-xs sm:text-sm font-black tracking-widest uppercase block">
                 BAY TO BAY EXPRESS INC.
               </span>
-              <h2 className="font-display text-3xl sm:text-4xl lg:text-[44px] font-black text-[#071A2E] tracking-tight leading-[1.12]">
+              <h2 className="font-display text-3xl sm:text-4xl lg:text-[44px] font-black text-[#071A2E] tracking-[0.015em] leading-[1.14]">
                 Delivering what matters
               </h2>
-              <p className="text-slate-600 text-sm sm:text-base lg:text-[17px] font-normal leading-relaxed">
+              <p className="text-slate-600 text-base sm:text-[18px] lg:text-[19px] font-normal leading-relaxed">
                 Businesses rely on the movement of everyday goods. A parcel, a document or an essential supply needs to reach the right place with care.
               </p>
-              <p className="text-slate-600 text-sm sm:text-base lg:text-[17px] font-normal leading-relaxed">
+              <p className="text-slate-600 text-base sm:text-[18px] lg:text-[19px] font-normal leading-relaxed">
                 Bay to Bay Express focuses on small-goods delivery across Northern Ontario and the GTA, with scheduled and dedicated arrangements for businesses and communities.
               </p>
               
               {/* Distinctive Quote Highlight */}
               <div className="pt-2 sm:pt-3">
                 <div className="border-l-[4px] border-[#0088FF] pl-4 sm:pl-5 py-1">
-                  <p className="font-black text-lg sm:text-xl lg:text-[22px] text-[#071A2E] tracking-tight">
+                  <p className="font-black text-lg sm:text-xl lg:text-[22px] text-[#071A2E] tracking-[0.01em]">
                     Your goods. Our commitment.
                   </p>
                 </div>
@@ -88,20 +88,20 @@ export const AboutContent: React.FC<AboutContentProps> = ({
             
             {/* Column 1: Our Purpose */}
             <div>
-              <h3 className="font-display text-2xl sm:text-3xl lg:text-[32px] font-black text-[#071A2E] tracking-tight mb-3">
+              <h3 className="font-display text-2xl sm:text-3xl lg:text-[32px] font-black text-[#071A2E] tracking-[0.015em] mb-3">
                 Our purpose
               </h3>
-              <p className="text-slate-600 text-sm sm:text-base lg:text-[17px] font-normal leading-relaxed max-w-xl">
+              <p className="text-slate-600 text-base sm:text-[18px] lg:text-[19px] font-normal leading-relaxed max-w-xl">
                 Help local businesses and communities stay connected through dependable small-goods delivery.
               </p>
             </div>
 
             {/* Column 2: Our Approach */}
             <div>
-              <h3 className="font-display text-2xl sm:text-3xl lg:text-[32px] font-black text-[#071A2E] tracking-tight mb-3">
+              <h3 className="font-display text-2xl sm:text-3xl lg:text-[32px] font-black text-[#071A2E] tracking-[0.015em] mb-3">
                 Our approach
               </h3>
-              <p className="text-slate-600 text-sm sm:text-base lg:text-[17px] font-normal leading-relaxed max-w-xl">
+              <p className="text-slate-600 text-base sm:text-[18px] lg:text-[19px] font-normal leading-relaxed max-w-xl">
                 Understand your shipment, agree on the arrangements and keep communication clear from pickup through delivery.
               </p>
             </div>
@@ -117,17 +117,17 @@ export const AboutContent: React.FC<AboutContentProps> = ({
         <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
             <div>
-              <h3 className="font-display text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-white tracking-tight leading-tight">
+              <h3 className="font-display text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-white tracking-[0.015em] leading-tight">
                 Need regular deliveries?
               </h3>
-              <p className="text-slate-300 text-sm sm:text-base lg:text-lg font-normal mt-2 leading-relaxed max-w-xl">
+              <p className="text-slate-200 text-base sm:text-[18px] lg:text-[19px] font-normal mt-2 leading-relaxed max-w-xl">
                 Let’s talk about a delivery arrangement that works for your business.
               </p>
             </div>
 
             <Link
               href="/contact"
-              className="bg-[#0088FF] hover:bg-[#0077EE] text-white font-bold text-sm sm:text-base px-7 py-3.5 sm:py-4 rounded-xl shadow-md inline-flex items-center justify-center gap-2 transition-all duration-150 shrink-0 self-start sm:self-center cursor-pointer hover:shadow-lg active:scale-95"
+              className="bg-[#0088FF] hover:bg-[#0077EE] text-white font-bold text-base sm:text-lg px-7 py-3.5 sm:py-4 rounded-xl shadow-md inline-flex items-center justify-center gap-2 transition-all duration-150 shrink-0 self-start sm:self-center cursor-pointer hover:shadow-lg active:scale-95"
             >
               <span>Discuss Your Route</span>
               <span className="text-base leading-none">→</span>
@@ -147,7 +147,7 @@ export const AboutContent: React.FC<AboutContentProps> = ({
             <span className="text-[#059669] text-xs sm:text-sm font-black tracking-widest uppercase block mb-3">
               LOCAL PRESENCE. A STRONGER CONNECTION.
             </span>
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-[46px] font-black text-[#071A2E] tracking-tight">
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-[46px] font-black text-[#071A2E] tracking-[0.02em]">
               Our offices
             </h2>
           </div>
@@ -175,10 +175,10 @@ export const AboutContent: React.FC<AboutContentProps> = ({
                 <span className="text-[#059669] text-xs sm:text-sm font-black tracking-widest uppercase block mb-1.5">
                   NORTH BAY OFFICE
                 </span>
-                <h3 className="font-display text-2xl sm:text-[28px] font-black text-[#071A2E] tracking-tight mb-2.5">
+                <h3 className="font-display text-2xl sm:text-[28px] font-black text-[#071A2E] tracking-[0.015em] mb-2.5">
                   North Bay
                 </h3>
-                <div className="text-slate-600 text-sm sm:text-base font-normal leading-relaxed mb-5">
+                <div className="text-slate-700 text-base sm:text-[18px] font-normal leading-relaxed mb-5">
                   <p>346 Oakwood Avenue</p>
                   <p>North Bay, ON P1B 5J2</p>
                 </div>
@@ -187,7 +187,7 @@ export const AboutContent: React.FC<AboutContentProps> = ({
                   href="https://www.google.com/maps/search/?api=1&query=346+Oakwood+Avenue+North+Bay+ON+P1B+5J2"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-[#0284C7] hover:text-[#006ED6] font-bold text-sm sm:text-base group transition-colors self-start mb-6"
+                  className="inline-flex items-center gap-1.5 text-[#0284C7] hover:text-[#006ED6] font-bold text-base sm:text-lg group transition-colors self-start mb-6"
                 >
                   <MapPin className="w-4 h-4" />
                   <span>View office location</span>
@@ -220,10 +220,10 @@ export const AboutContent: React.FC<AboutContentProps> = ({
                 <span className="text-[#059669] text-xs sm:text-sm font-black tracking-widest uppercase block mb-1.5">
                   HEARST OFFICE
                 </span>
-                <h3 className="font-display text-2xl sm:text-[28px] font-black text-[#071A2E] tracking-tight mb-2.5">
+                <h3 className="font-display text-2xl sm:text-[28px] font-black text-[#071A2E] tracking-[0.015em] mb-2.5">
                   Hearst
                 </h3>
-                <div className="text-slate-600 text-sm sm:text-base font-normal leading-relaxed mb-5">
+                <div className="text-slate-700 text-base sm:text-[18px] font-normal leading-relaxed mb-5">
                   <p>13 8th St</p>
                   <p>Hearst, ON P0L 1N0</p>
                 </div>
@@ -232,7 +232,7 @@ export const AboutContent: React.FC<AboutContentProps> = ({
                   href="https://www.google.com/maps/search/?api=1&query=13+8th+St+Hearst+ON+P0L+1N0"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-[#0284C7] hover:text-[#006ED6] font-bold text-sm sm:text-base group transition-colors self-start mb-6"
+                  className="inline-flex items-center gap-1.5 text-[#0284C7] hover:text-[#006ED6] font-bold text-base sm:text-lg group transition-colors self-start mb-6"
                 >
                   <MapPin className="w-4 h-4" />
                   <span>View office location</span>
@@ -248,12 +248,12 @@ export const AboutContent: React.FC<AboutContentProps> = ({
           </div>
 
           {/* Bottom Notes & Direct Phone Link */}
-          <div className="mt-8 text-sm sm:text-base text-slate-500 font-normal">
+          <div className="mt-8 text-base sm:text-[18px] text-slate-600 font-normal">
             <p>Please contact us to arrange a visit, pickup or drop-off.</p>
             <div className="mt-2.5">
               <a
                 href={`tel:${phone.replace(/[^0-9]/g, "")}`}
-                className="inline-flex items-center gap-1 text-[#0284C7] hover:text-[#006ED6] font-bold text-sm sm:text-base group transition-colors"
+                className="inline-flex items-center gap-1.5 text-[#0284C7] hover:text-[#006ED6] font-bold text-base sm:text-lg group transition-colors"
               >
                 <span>Talk to our team: {phone}</span>
                 <span className="transition-transform group-hover:translate-x-1">→</span>

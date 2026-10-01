@@ -203,12 +203,12 @@ export const TwiceWeeklyRoute: React.FC<TwiceWeeklyRouteProps> = ({
             <span className="text-[#38BDF8] text-xs sm:text-[13px] font-bold tracking-[0.16em] uppercase block mb-2">
               OUR SPECIAL TWICE-WEEKLY ROUTE
             </span>
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-[44px] font-black text-white tracking-tight leading-tight">
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-[44px] font-black text-white tracking-[0.015em] leading-tight">
               North Bay ↔ Hearst
             </h2>
           </div>
 
-          <p className="text-slate-300 text-xs sm:text-sm lg:text-[15px] font-normal leading-relaxed max-w-md lg:text-left">
+          <p className="text-slate-200 text-base sm:text-[18px] lg:text-[19px] font-normal leading-relaxed max-w-lg lg:text-left">
             Two northbound runs each week, with return service the following day.
             Plan time-sensitive deliveries in either direction.
           </p>
@@ -223,10 +223,10 @@ export const TwiceWeeklyRoute: React.FC<TwiceWeeklyRouteProps> = ({
               <span className="text-[#059669] text-xs font-black tracking-widest uppercase block mb-1">
                 STOPS ALONG THE WAY
               </span>
-              <h3 className="text-xl sm:text-2xl font-black text-[#071A2E] tracking-tight">
+              <h3 className="text-xl sm:text-2xl lg:text-[26px] font-black text-[#071A2E] tracking-[0.015em]">
                 Connecting communities, all the way to Longlac.
               </h3>
-              <p className="text-slate-500 text-xs sm:text-sm font-normal mt-1">
+              <p className="text-slate-600 text-base sm:text-[18px] font-normal mt-1.5">
                 Select a stop to plan your delivery. On smaller screens, swipe to see the full route.
               </p>
             </div>
@@ -326,17 +326,17 @@ export const TwiceWeeklyRoute: React.FC<TwiceWeeklyRouteProps> = ({
               <span className="text-[#059669] text-[11px] font-black tracking-widest uppercase block mb-1">
                 FEATURED STOP
               </span>
-              <h4 className="text-xl sm:text-2xl font-black text-[#071A2E] tracking-tight">
+              <h4 className="text-xl sm:text-2xl lg:text-[26px] font-black text-[#071A2E] tracking-[0.015em]">
                 {activeStop.name}
               </h4>
-              <p className="text-slate-600 text-xs sm:text-sm font-normal mt-1">
+              <p className="text-slate-700 text-base sm:text-[18px] font-normal mt-1.5">
                 {activeStop.description}
               </p>
             </div>
 
             <Link
               href="/contact"
-              className="bg-[#007EF4] hover:bg-[#006ED6] text-white font-bold text-xs sm:text-sm px-6 py-3 rounded-xl shadow-md shadow-blue-500/20 transition-all inline-flex items-center justify-center gap-1.5 shrink-0 self-start sm:self-center"
+              className="bg-[#007EF4] hover:bg-[#006ED6] text-white font-bold text-sm sm:text-base px-6 py-3 rounded-xl shadow-md shadow-blue-500/20 transition-all inline-flex items-center justify-center gap-1.5 shrink-0 self-start sm:self-center"
             >
               <span>Enquire about this stop</span>
               <ArrowRight className="w-4 h-4" />
@@ -344,7 +344,7 @@ export const TwiceWeeklyRoute: React.FC<TwiceWeeklyRouteProps> = ({
           </div>
 
           {/* Disclaimer Note */}
-          <p className="text-slate-400 text-[11px] sm:text-xs font-normal mt-4 leading-normal">
+          <p className="text-slate-400 text-xs sm:text-sm font-normal mt-4 leading-normal">
             Stop sequence illustration, not live vehicle tracking. Longlac is an additional stop beyond Hearst. Pickup and delivery times are confirmed when booking.
           </p>
 
@@ -367,15 +367,15 @@ export const TwiceWeeklyRoute: React.FC<TwiceWeeklyRouteProps> = ({
                 <span className="text-[#059669] text-[10px] font-black tracking-widest uppercase block mb-1.5">
                   {run.day}
                 </span>
-                <h4 className="text-base sm:text-lg font-black text-[#071A2E] tracking-tight leading-snug">
+                <h4 className="text-lg sm:text-xl lg:text-[22px] font-black text-[#071A2E] tracking-[0.01em] leading-snug">
                   {run.route}
                 </h4>
-                <p className="text-slate-500 text-xs sm:text-sm font-normal mt-1 mb-4">
+                <p className="text-slate-600 text-base sm:text-[18px] font-normal mt-1 mb-4">
                   {run.type}
                 </p>
                 <Link
                   href="/contact"
-                  className="text-[#007EF4] hover:text-[#006ED6] text-xs sm:text-sm font-bold inline-flex items-center gap-1 group transition-colors"
+                  className="text-[#007EF4] hover:text-[#006ED6] text-sm sm:text-base font-bold inline-flex items-center gap-1 group transition-colors"
                 >
                   <span>{run.action}</span>
                 </Link>
@@ -386,7 +386,7 @@ export const TwiceWeeklyRoute: React.FC<TwiceWeeklyRouteProps> = ({
 
         {/* 6. Bottom Call CTA Banner */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-6 mt-8 sm:mt-10 pt-4">
-          <p className="text-slate-300 text-xs sm:text-sm font-normal leading-relaxed max-w-2xl">
+          <p className="text-slate-200 text-base sm:text-[18px] lg:text-[19px] font-normal leading-relaxed max-w-2xl">
             For urgent medicine, sample and document enquiries, call to confirm the next available pickup, handling requirements and delivery window. Pickup cutoffs and availability are confirmed when booking.
           </p>
 

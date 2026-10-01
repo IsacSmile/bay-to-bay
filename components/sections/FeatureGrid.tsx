@@ -34,10 +34,10 @@ export const FeatureGrid: React.FC = () => {
           <span className="text-xs font-extrabold tracking-widest text-brand-blue uppercase block mb-2">
             Why Choose Bay to Bay
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#071A2E] tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#071A2E] tracking-[0.015em]">
             Delivery built around Northern Ontario
           </h2>
-          <p className="text-base sm:text-lg text-slate-600 mt-3 leading-relaxed">
+          <p className="text-base sm:text-[18px] lg:text-[19px] text-slate-600 mt-3 leading-relaxed">
             Purpose-built courier and freight solutions designed specifically for regional commercial logistics.
           </p>
         </div>
@@ -54,10 +54,10 @@ export const FeatureGrid: React.FC = () => {
                 <div className="w-12 h-12 rounded-btn bg-white border border-slate-200/80 flex items-center justify-center mb-5 text-brand-blue shadow-sm group-hover:bg-brand-blue group-hover:text-white transition-colors duration-200">
                   <Icon className="w-6 h-6" />
                 </div>
-                <h3 className="text-lg font-bold text-[#071A2E] mb-2 tracking-tight">
+                <h3 className="text-xl font-bold text-[#071A2E] mb-2 tracking-[0.01em]">
                   {feature.title}
                 </h3>
-                <p className="text-sm text-slate-600 leading-relaxed font-normal">
+                <p className="text-base sm:text-[18px] text-slate-600 leading-relaxed font-normal">
                   {feature.description}
                 </p>
               </div>

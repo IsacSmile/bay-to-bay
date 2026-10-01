@@ -177,10 +177,10 @@ export const ServiceAreasCoverage: React.FC<ServiceAreasCoverageProps> = ({
             <span className="text-[#059669] text-xs font-black tracking-widest uppercase block mb-2.5">
               EXPLORE OUR COVERAGE
             </span>
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-[44px] font-black text-[#071A2E] tracking-tight leading-[1.12]">
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-[44px] font-black text-[#071A2E] tracking-[0.015em] leading-[1.14]">
               Your next delivery starts here.
             </h2>
-            <p className="mt-3 text-sm sm:text-base text-slate-600 font-normal leading-relaxed max-w-2xl">
+            <p className="mt-3 text-base sm:text-[18px] lg:text-[19px] text-slate-600 font-normal leading-relaxed max-w-2xl">
               Choose a region or a community to explore the map. Pickup availability and delivery timing are confirmed with your quote.
             </p>
           </div>
@@ -346,7 +346,7 @@ export const ServiceAreasCoverage: React.FC<ServiceAreasCoverageProps> = ({
                 <span className="text-[#059669] text-xs font-black tracking-widest uppercase block mb-1.5">
                   OUR SERVICE COMMUNITIES
                 </span>
-                <h3 className="font-display text-2xl sm:text-[26px] font-black text-[#071A2E] tracking-tight mb-6">
+                <h3 className="font-display text-2xl sm:text-[26px] font-black text-[#071A2E] tracking-[0.015em] mb-6">
                   {northernRegion.name}
                 </h3>
 
@@ -402,7 +402,7 @@ export const ServiceAreasCoverage: React.FC<ServiceAreasCoverageProps> = ({
                 <span className="text-[#059669] text-xs font-black tracking-widest uppercase block mb-1.5">
                   OUR SERVICE COMMUNITIES
                 </span>
-                <h3 className="font-display text-2xl sm:text-[26px] font-black text-[#071A2E] tracking-tight mb-6">
+                <h3 className="font-display text-2xl sm:text-[26px] font-black text-[#071A2E] tracking-[0.015em] mb-6">
                   {gtaRegion.name}
                 </h3>
 
@@ -445,17 +445,17 @@ export const ServiceAreasCoverage: React.FC<ServiceAreasCoverageProps> = ({
           {/* Don't see your community? Callout */}
           <div className="mt-10 sm:mt-12 bg-[#EEF7FC] border border-[#D5EBF7] rounded-3xl p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-6 shadow-2xs">
             <div>
-              <h4 className="font-display text-xl sm:text-2xl font-black text-[#071A2E] tracking-tight">
+              <h4 className="font-display text-xl sm:text-2xl font-black text-[#071A2E] tracking-[0.015em]">
                 Don’t see your community?
               </h4>
-              <p className="text-slate-600 text-xs sm:text-sm font-normal mt-1 leading-relaxed max-w-xl">
+              <p className="text-slate-600 text-base sm:text-[18px] font-normal mt-1.5 leading-relaxed max-w-xl">
                 We also serve GTA regions beyond those listed. Ask us about your route.
               </p>
             </div>
 
             <Link
               href="/contact"
-              className="bg-[#0088FF] hover:bg-[#0077EE] text-white font-extrabold text-sm px-6 py-3.5 rounded-xl shadow-xs inline-flex items-center justify-center gap-2 transition-colors shrink-0"
+              className="bg-[#0088FF] hover:bg-[#0077EE] text-white font-extrabold text-sm sm:text-base px-6 py-3.5 rounded-xl shadow-xs inline-flex items-center justify-center gap-2 transition-colors shrink-0"
             >
               <span>Check Your Route</span>
               <ArrowRight className="w-4 h-4" />
@@ -477,7 +477,7 @@ export const ServiceAreasCoverage: React.FC<ServiceAreasCoverageProps> = ({
             <span className="text-[#059669] text-xs font-black tracking-widest uppercase block mb-3">
               LOCAL PRESENCE. A STRONGER CONNECTION.
             </span>
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-[42px] font-black text-[#071A2E] tracking-tight">
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-[42px] font-black text-[#071A2E] tracking-[0.02em]">
               Our offices
             </h2>
           </div>
@@ -504,10 +504,10 @@ export const ServiceAreasCoverage: React.FC<ServiceAreasCoverageProps> = ({
                 <span className="text-[#059669] text-xs font-black tracking-widest uppercase block mb-1">
                   NORTH BAY OFFICE
                 </span>
-                <h3 className="font-display text-2xl font-black text-[#071A2E] tracking-tight mb-2">
+                <h3 className="font-display text-2xl sm:text-[28px] font-black text-[#071A2E] tracking-[0.015em] mb-2">
                   North Bay
                 </h3>
-                <div className="text-slate-600 text-xs sm:text-sm font-normal leading-relaxed mb-5">
+                <div className="text-slate-700 text-base sm:text-[18px] font-normal leading-relaxed mb-5">
                   <p>346 Oakwood Avenue</p>
                   <p>North Bay, ON P1B 5J2</p>
                 </div>
@@ -516,14 +516,14 @@ export const ServiceAreasCoverage: React.FC<ServiceAreasCoverageProps> = ({
                   href="https://www.google.com/maps/search/?api=1&query=346+Oakwood+Avenue+North+Bay+ON+P1B+5J2"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-[#0284C7] hover:text-[#006ED6] font-bold text-xs sm:text-sm group transition-colors self-start mb-6"
+                  className="inline-flex items-center gap-1.5 text-[#0284C7] hover:text-[#006ED6] font-bold text-base sm:text-lg group transition-colors self-start mb-6"
                 >
-                  <MapPin className="w-3.5 h-3.5" />
+                  <MapPin className="w-4 h-4" />
                   <span>View office location</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </a>
 
-                <p className="text-slate-400 text-[11px] font-normal mt-auto border-t border-slate-100 pt-3">
+                <p className="text-slate-400 text-xs sm:text-sm font-normal mt-auto border-t border-slate-100 pt-3">
                   City photo: Earl Andrew / Wikimedia Commons (public domain)
                 </p>
               </div>
@@ -548,10 +548,10 @@ export const ServiceAreasCoverage: React.FC<ServiceAreasCoverageProps> = ({
                 <span className="text-[#059669] text-xs font-black tracking-widest uppercase block mb-1">
                   HEARST OFFICE
                 </span>
-                <h3 className="font-display text-2xl font-black text-[#071A2E] tracking-tight mb-2">
+                <h3 className="font-display text-2xl sm:text-[28px] font-black text-[#071A2E] tracking-[0.015em] mb-2">
                   Hearst
                 </h3>
-                <div className="text-slate-600 text-xs sm:text-sm font-normal leading-relaxed mb-5">
+                <div className="text-slate-700 text-base sm:text-[18px] font-normal leading-relaxed mb-5">
                   <p>13 8th St</p>
                   <p>Hearst, ON P0L 1N0</p>
                 </div>
@@ -560,14 +560,14 @@ export const ServiceAreasCoverage: React.FC<ServiceAreasCoverageProps> = ({
                   href="https://www.google.com/maps/search/?api=1&query=13+8th+St+Hearst+ON+P0L+1N0"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-[#0284C7] hover:text-[#006ED6] font-bold text-xs sm:text-sm group transition-colors self-start mb-6"
+                  className="inline-flex items-center gap-1.5 text-[#0284C7] hover:text-[#006ED6] font-bold text-base sm:text-lg group transition-colors self-start mb-6"
                 >
-                  <MapPin className="w-3.5 h-3.5" />
+                  <MapPin className="w-4 h-4" />
                   <span>View office location</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </a>
 
-                <p className="text-slate-400 text-[11px] font-normal mt-auto border-t border-slate-100 pt-3">
+                <p className="text-slate-400 text-xs sm:text-sm font-normal mt-auto border-t border-slate-100 pt-3">
                   City photo: Town of Hearst
                 </p>
               </div>
@@ -576,12 +576,12 @@ export const ServiceAreasCoverage: React.FC<ServiceAreasCoverageProps> = ({
           </div>
 
           {/* Bottom Notes & Direct Phone Link */}
-          <div className="mt-8 text-xs sm:text-sm text-slate-500 font-normal">
+          <div className="mt-8 text-base sm:text-[18px] text-slate-600 font-normal">
             <p>Please contact us to arrange a visit, pickup or drop-off.</p>
             <div className="mt-2.5">
               <a
                 href={`tel:${phone.replace(/[^0-9]/g, "")}`}
-                className="inline-flex items-center gap-1 text-[#0284C7] hover:text-[#006ED6] font-bold text-xs sm:text-sm group transition-colors"
+                className="inline-flex items-center gap-1.5 text-[#0284C7] hover:text-[#006ED6] font-bold text-base sm:text-[18px] group transition-colors"
               >
                 <span>Talk to our team: {phone}</span>
                 <span className="transition-transform group-hover:translate-x-1">→</span>

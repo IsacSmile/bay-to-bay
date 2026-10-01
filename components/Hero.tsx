@@ -123,7 +123,7 @@ export async function Hero({
 
             {/* H1 Main Headline - Strict 2-line layout */}
             <h1
-              className={`font-display font-black tracking-tight leading-[1.08] text-white ${
+              className={`font-display font-black tracking-[0.015em] leading-[1.1] text-white ${
                 isServiceAreasPage
                   ? "text-[clamp(24px,5.2vw,62px)]"
                   : "text-4xl sm:text-5xl lg:text-6xl xl:text-[68px]"
@@ -158,11 +158,11 @@ export async function Hero({
 
             {/* Subhead Tagline / Mini Paragraph */}
             {isServiceAreasPage || isServicesPage ? (
-              <p className={subtextClassName || "text-sm sm:text-base lg:text-[17px] font-normal text-slate-200/90 leading-relaxed max-w-xl mb-6 sm:mb-8 mt-3 sm:mt-4"}>
+              <p className={subtextClassName || "text-base sm:text-lg lg:text-[19px] font-normal text-slate-200 leading-relaxed max-w-xl mb-6 sm:mb-8 mt-3 sm:mt-4"}>
                 {subtext}
               </p>
             ) : (
-              <p className={subtextClassName || "text-xl sm:text-2xl font-medium text-white/95 tracking-tight mb-6 sm:mb-8"}>
+              <p className={subtextClassName || "text-xl sm:text-2xl font-medium text-white/95 tracking-[0.01em] mb-6 sm:mb-8"}>
                 {subtext ||
                   (heroData.subtext && heroData.subtext.includes("Small goods")
                     ? "Reliable. Dedicated. Delivered."
@@ -247,10 +247,10 @@ export async function Hero({
                   <Plus className="w-5 h-5 sm:w-6 sm:h-6 stroke-[3]" />
                 </div>
                 <div className="min-w-0">
-                  <h3 className="text-sm sm:text-lg font-extrabold text-[#071A2E] leading-snug sm:mb-2 group-hover:text-[#0088FF] transition-colors truncate sm:whitespace-normal">
+                  <h3 className="text-base sm:text-xl lg:text-[21px] font-extrabold text-[#071A2E] tracking-[0.01em] leading-snug sm:mb-2 group-hover:text-[#0088FF] transition-colors truncate sm:whitespace-normal">
                     Medical & Pharmacy
                   </h3>
-                  <p className="text-[11px] sm:text-xs lg:text-sm text-slate-500 font-normal leading-snug sm:leading-relaxed line-clamp-2 sm:line-clamp-none mt-0.5 sm:mt-0">
+                  <p className="text-sm sm:text-base lg:text-[16px] text-slate-600 font-normal leading-snug sm:leading-relaxed line-clamp-2 sm:line-clamp-none mt-1 sm:mt-1.5">
                     Time-sensitive delivery for healthcare and pharmacy needs across Northern Ontario.
                   </p>
                 </div>
@@ -272,10 +272,10 @@ export async function Hero({
                   <FileText className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
                 <div className="min-w-0">
-                  <h3 className="text-sm sm:text-lg font-extrabold text-[#071A2E] leading-snug sm:mb-2 group-hover:text-[#0088FF] transition-colors truncate sm:whitespace-normal">
+                  <h3 className="text-base sm:text-xl lg:text-[21px] font-extrabold text-[#071A2E] tracking-[0.01em] leading-snug sm:mb-2 group-hover:text-[#0088FF] transition-colors truncate sm:whitespace-normal">
                     Documents
                   </h3>
-                  <p className="text-[11px] sm:text-xs lg:text-sm text-slate-500 font-normal leading-snug sm:leading-relaxed line-clamp-2 sm:line-clamp-none mt-0.5 sm:mt-0">
+                  <p className="text-sm sm:text-base lg:text-[16px] text-slate-600 font-normal leading-snug sm:leading-relaxed line-clamp-2 sm:line-clamp-none mt-1 sm:mt-1.5">
                     Secure, reliable delivery for important documents and paperwork.
                   </p>
                 </div>
@@ -297,10 +297,10 @@ export async function Hero({
                   <Package className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
                 <div className="min-w-0">
-                  <h3 className="text-sm sm:text-lg font-extrabold text-[#071A2E] leading-snug sm:mb-2 group-hover:text-[#0088FF] transition-colors truncate sm:whitespace-normal">
+                  <h3 className="text-base sm:text-xl lg:text-[21px] font-extrabold text-[#071A2E] tracking-[0.01em] leading-snug sm:mb-2 group-hover:text-[#0088FF] transition-colors truncate sm:whitespace-normal">
                     Retail & Small Goods
                   </h3>
-                  <p className="text-[11px] sm:text-xs lg:text-sm text-slate-500 font-normal leading-snug sm:leading-relaxed line-clamp-2 sm:line-clamp-none mt-0.5 sm:mt-0">
+                  <p className="text-sm sm:text-base lg:text-[16px] text-slate-600 font-normal leading-snug sm:leading-relaxed line-clamp-2 sm:line-clamp-none mt-1 sm:mt-1.5">
                     Flexible delivery for businesses and individuals across the North.
                   </p>
                 </div>
@@ -322,10 +322,10 @@ export async function Hero({
                   <Truck className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
                 <div className="min-w-0">
-                  <h3 className="text-sm sm:text-lg font-extrabold text-[#071A2E] leading-snug sm:mb-2 group-hover:text-[#0088FF] transition-colors truncate sm:whitespace-normal">
+                  <h3 className="text-base sm:text-xl lg:text-[21px] font-extrabold text-[#071A2E] tracking-[0.01em] leading-snug sm:mb-2 group-hover:text-[#0088FF] transition-colors truncate sm:whitespace-normal">
                     Dedicated Delivery
                   </h3>
-                  <p className="text-[11px] sm:text-xs lg:text-sm text-slate-500 font-normal leading-snug sm:leading-relaxed line-clamp-2 sm:line-clamp-none mt-0.5 sm:mt-0">
+                  <p className="text-sm sm:text-base lg:text-[16px] text-slate-600 font-normal leading-snug sm:leading-relaxed line-clamp-2 sm:line-clamp-none mt-1 sm:mt-1.5">
                     Direct, dedicated service when it matters most.
                   </p>
                 </div>

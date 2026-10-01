@@ -39,17 +39,17 @@ export const Footer: React.FC<FooterProps> = ({
                 </div>
               </Link>
 
-              <p className="text-slate-300 text-xs sm:text-sm font-normal leading-relaxed max-w-xs">
+              <p className="text-slate-300 text-base sm:text-[18px] font-normal leading-relaxed max-w-sm">
                 Small goods delivery across Northern Ontario and the GTA. Connecting communities, delivering what matters.
               </p>
             </div>
 
             {/* Column 2: Explore */}
             <div>
-              <h4 className="font-bold text-white text-base tracking-tight mb-4">
+              <h4 className="font-bold text-white text-lg lg:text-xl tracking-[0.015em] mb-4">
                 Explore
               </h4>
-              <ul className="space-y-2.5 text-xs sm:text-sm font-normal text-slate-300">
+              <ul className="space-y-3 text-base sm:text-[17px] font-normal text-slate-300">
                 <li>
                   <Link href="/services" className="hover:text-white transition-colors">
                     Our services
@@ -80,10 +80,10 @@ export const Footer: React.FC<FooterProps> = ({
 
             {/* Column 3: Let's talk delivery */}
             <div>
-              <h4 className="font-bold text-white text-base tracking-tight mb-4">
+              <h4 className="font-bold text-white text-lg lg:text-xl tracking-[0.015em] mb-4">
                 Let&apos;s talk delivery
               </h4>
-              <div className="space-y-2.5 text-xs sm:text-sm font-normal text-slate-300">
+              <div className="space-y-3 text-base sm:text-[17px] font-normal text-slate-300">
                 <p>
                   <a
                     href={telLink}
@@ -113,24 +113,24 @@ export const Footer: React.FC<FooterProps> = ({
 
             {/* Column 4: Our offices */}
             <div>
-              <h4 className="font-bold text-white text-base tracking-tight mb-4">
+              <h4 className="font-bold text-white text-lg lg:text-xl tracking-[0.015em] mb-4">
                 Our offices
               </h4>
-              <div className="space-y-3.5 text-xs sm:text-sm text-slate-300 leading-snug">
+              <div className="space-y-3.5 text-base sm:text-[17px] text-slate-300 leading-snug">
                 <div>
-                  <p className="font-bold text-white text-xs sm:text-sm">North Bay</p>
-                  <p className="text-slate-300 mt-0.5">346 Oakwood Avenue</p>
-                  <p className="text-slate-300">North Bay, ON P1B 5J2</p>
+                  <p className="font-bold text-white text-base sm:text-[18px]">North Bay</p>
+                  <p className="text-slate-300 text-sm sm:text-base mt-0.5">346 Oakwood Avenue</p>
+                  <p className="text-slate-300 text-sm sm:text-base">North Bay, ON P1B 5J2</p>
                 </div>
                 <div>
-                  <p className="font-bold text-white text-xs sm:text-sm">Hearst</p>
-                  <p className="text-slate-300 mt-0.5">13 8th St</p>
-                  <p className="text-slate-300">Hearst, ON P0L 1N0</p>
+                  <p className="font-bold text-white text-base sm:text-[18px]">Hearst</p>
+                  <p className="text-slate-300 text-sm sm:text-base mt-0.5">13 8th St</p>
+                  <p className="text-slate-300 text-sm sm:text-base">Hearst, ON P0L 1N0</p>
                 </div>
                 <div className="pt-1">
                   <Link
                     href="/about"
-                    className="text-slate-300 hover:text-white text-xs sm:text-sm font-normal inline-flex items-center gap-1 underline underline-offset-4 transition-colors"
+                    className="text-slate-300 hover:text-white text-base font-normal inline-flex items-center gap-1 underline underline-offset-4 transition-colors"
                   >
                     <span>Office &amp; contact details</span>
                     <span>→</span>

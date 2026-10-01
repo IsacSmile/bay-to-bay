@@ -23,7 +23,7 @@ export async function HowItWorks() {
           </p>
 
           {/* Large Heading */}
-          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-black text-[#071A2E] tracking-tight">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-black text-[#071A2E] tracking-[0.015em] leading-[1.12]">
             {content.headingPrimary || "From your door to theirs."}
             {content.headingAccent && (
               <span className="text-brand-blue ml-2">{content.headingAccent}</span>

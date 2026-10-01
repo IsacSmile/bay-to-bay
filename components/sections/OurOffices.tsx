@@ -18,7 +18,7 @@ export const OurOffices: React.FC<OurOfficesProps> = ({
           <span className="text-[#059669] text-xs font-black tracking-widest uppercase block mb-3">
             LOCAL PRESENCE. A STRONGER CONNECTION.
           </span>
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-[42px] font-black text-[#071A2E] tracking-tight">
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-[42px] font-black text-[#071A2E] tracking-[0.02em]">
             Our offices
           </h2>
         </div>
@@ -43,13 +43,13 @@ export const OurOffices: React.FC<OurOfficesProps> = ({
             </div>
 
             <div className="p-6 sm:p-8 flex-1 flex flex-col">
-              <span className="text-[#059669] text-xs font-black tracking-widest uppercase block mb-1">
+              <span className="text-[#059669] text-xs sm:text-[13px] font-black tracking-widest uppercase block mb-1">
                 NORTH BAY OFFICE
               </span>
-              <h3 className="font-display text-2xl font-black text-[#071A2E] tracking-tight mb-2">
+              <h3 className="font-display text-2xl sm:text-[28px] font-black text-[#071A2E] tracking-[0.015em] mb-2">
                 North Bay
               </h3>
-              <div className="text-slate-600 text-xs sm:text-sm font-normal leading-relaxed mb-5">
+              <div className="text-slate-700 text-base sm:text-[18px] font-normal leading-relaxed mb-5">
                 <p>346 Oakwood Avenue</p>
                 <p>North Bay, ON P1B 5J2</p>
               </div>
@@ -58,14 +58,14 @@ export const OurOffices: React.FC<OurOfficesProps> = ({
                 href="https://www.google.com/maps/search/?api=1&query=346+Oakwood+Avenue+North+Bay+ON+P1B+5J2"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-[#0284C7] hover:text-[#006ED6] font-bold text-xs sm:text-sm group transition-colors self-start mb-6"
+                className="inline-flex items-center gap-1.5 text-[#0284C7] hover:text-[#006ED6] font-bold text-base sm:text-lg group transition-colors self-start mb-6"
               >
-                <MapPin className="w-3.5 h-3.5" />
+                <MapPin className="w-4 h-4" />
                 <span>View office location</span>
-                <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
 
-              <p className="text-slate-400 text-[11px] font-normal mt-auto border-t border-slate-100 pt-3">
+              <p className="text-slate-400 text-xs font-normal mt-auto border-t border-slate-100 pt-3">
                 City photo: Earl Andrew / Wikimedia Commons (public domain)
               </p>
             </div>
@@ -88,13 +88,13 @@ export const OurOffices: React.FC<OurOfficesProps> = ({
             </div>
 
             <div className="p-6 sm:p-8 flex-1 flex flex-col">
-              <span className="text-[#059669] text-xs font-black tracking-widest uppercase block mb-1">
+              <span className="text-[#059669] text-xs sm:text-[13px] font-black tracking-widest uppercase block mb-1">
                 HEARST OFFICE
               </span>
-              <h3 className="font-display text-2xl font-black text-[#071A2E] tracking-tight mb-2">
+              <h3 className="font-display text-2xl sm:text-[28px] font-black text-[#071A2E] tracking-[0.015em] mb-2">
                 Hearst
               </h3>
-              <div className="text-slate-600 text-xs sm:text-sm font-normal leading-relaxed mb-5">
+              <div className="text-slate-700 text-base sm:text-[18px] font-normal leading-relaxed mb-5">
                 <p>13 8th St</p>
                 <p>Hearst, ON P0L 1N0</p>
               </div>
@@ -103,14 +103,14 @@ export const OurOffices: React.FC<OurOfficesProps> = ({
                 href="https://www.google.com/maps/search/?api=1&query=13+8th+St+Hearst+ON+P0L+1N0"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-[#0284C7] hover:text-[#006ED6] font-bold text-xs sm:text-sm group transition-colors self-start mb-6"
+                className="inline-flex items-center gap-1.5 text-[#0284C7] hover:text-[#006ED6] font-bold text-base sm:text-lg group transition-colors self-start mb-6"
               >
-                <MapPin className="w-3.5 h-3.5" />
+                <MapPin className="w-4 h-4" />
                 <span>View office location</span>
-                <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
 
-              <p className="text-slate-400 text-[11px] font-normal mt-auto border-t border-slate-100 pt-3">
+              <p className="text-slate-400 text-xs font-normal mt-auto border-t border-slate-100 pt-3">
                 City photo: Town of Hearst
               </p>
             </div>
@@ -119,12 +119,12 @@ export const OurOffices: React.FC<OurOfficesProps> = ({
         </div>
 
         {/* Bottom Notes & Direct Phone Link */}
-        <div className="mt-8 text-xs sm:text-sm text-slate-500 font-normal">
+        <div className="mt-8 text-base sm:text-[18px] text-slate-600 font-normal">
           <p>Please contact us to arrange a visit, pickup or drop-off.</p>
           <div className="mt-2.5">
             <a
               href={`tel:${phone.replace(/[^0-9]/g, "")}`}
-              className="inline-flex items-center gap-1 text-[#0284C7] hover:text-[#006ED6] font-bold text-xs sm:text-sm group transition-colors"
+              className="inline-flex items-center gap-1.5 text-[#0284C7] hover:text-[#006ED6] font-bold text-base sm:text-lg group transition-colors"
             >
               <span>Talk to our team: {phone}</span>
               <span className="transition-transform group-hover:translate-x-1">→</span>

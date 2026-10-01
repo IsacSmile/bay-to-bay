@@ -31,10 +31,10 @@ export const QuoteCTA: React.FC<QuoteCTAProps> = ({
             <span className="text-[#4A8EF4] text-xs sm:text-sm font-black tracking-widest uppercase block mb-2.5">
               {eyebrow}
             </span>
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-[42px] xl:text-[46px] font-extrabold text-white tracking-tight leading-[1.15]">
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-[42px] xl:text-[46px] font-extrabold text-white tracking-[0.015em] leading-[1.15]">
               {heading}
             </h2>
-            <p className="text-slate-300 text-sm sm:text-base lg:text-lg font-normal mt-2.5 leading-relaxed max-w-2xl">
+            <p className="text-slate-200 text-base sm:text-[18px] lg:text-[19px] font-normal mt-2.5 leading-relaxed max-w-2xl">
               {description}
             </p>
           </div>

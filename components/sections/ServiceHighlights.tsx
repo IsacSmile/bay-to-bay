@@ -56,10 +56,10 @@ export const ServiceHighlights: React.FC = () => {
 
                 {/* Content Block */}
                 <div>
-                  <h3 className="text-sm sm:text-[15px] lg:text-base font-bold text-[#063572] leading-tight tracking-tight">
+                  <h3 className="text-base sm:text-lg lg:text-[19px] font-bold text-[#063572] leading-tight tracking-[0.01em]">
                     {item.title}
                   </h3>
-                  <p className="text-[11px] sm:text-xs lg:text-[13px] text-[#54748F] font-normal leading-normal mt-0.5 sm:mt-1">
+                  <p className="text-xs sm:text-sm lg:text-[15px] text-[#54748F] font-normal leading-normal mt-0.5 sm:mt-1">
                     {item.subtitle}
                   </p>
                 </div>

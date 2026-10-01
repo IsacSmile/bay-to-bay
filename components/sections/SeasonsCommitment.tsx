@@ -48,14 +48,14 @@ export const SeasonsCommitment: React.FC<SeasonsCommitmentProps> = ({
           </span>
 
           {/* Main Two-Line Large Bold Heading */}
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] xl:text-[58px] font-black text-white tracking-tight leading-[1.08] sm:leading-[1.12]">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] xl:text-[58px] font-black text-white tracking-[0.015em] leading-[1.12]">
             <span>{headingLine1}</span>
             <br />
             <span>{headingLine2}</span>
           </h2>
 
           {/* Description Paragraph */}
-          <p className="text-slate-100 text-sm sm:text-base md:text-lg lg:text-[19px] font-normal leading-relaxed max-w-xl pt-2">
+          <p className="text-slate-100 text-base sm:text-lg md:text-xl lg:text-[21px] font-normal leading-relaxed max-w-2xl pt-2">
             {subtext}
           </p>
 
